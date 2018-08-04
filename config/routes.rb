@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   ### URL DI DEFAULT ###
-  resources :gruops do
+  resources :groups do
     resources :events, except: [:show]
     resources :members, only: [:index]
     resources :messages, except: [:show, :new, :edit]
@@ -23,4 +23,6 @@ Rails.application.routes.draw do
   delete  '/logout',                                              to: 'sessions#destroy'
 
   get     '/gruops/:gruop_id/messages/pinned',                    to: 'messages#pinned', as: 'group_pinned_messages'
+
+  # Dov'è l'azione in cui viene creato/cancellato un membro? Da inserire!
 end
