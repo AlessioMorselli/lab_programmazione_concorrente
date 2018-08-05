@@ -11,6 +11,6 @@ class MembersController < ApplicationController
     end
 
     def member_params
-      params.require(:member).permit(:group_id, :user_id)
+      params.require(:member).permit(:group_id, :user_id, :admin)
     end
 end

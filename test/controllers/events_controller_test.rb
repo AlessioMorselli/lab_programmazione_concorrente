@@ -22,8 +22,9 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test "create" do
     assert_difference('Event.count') do
       post group_events_path(:group_1), params: { event: {
-        start_time: DateTime.now + 1.days,
-        end_time: DateTime.now + 1.days + 3.hours,
+        date: Date.tomorrow,
+        start_time: Time.now,
+        end_time: Time.now + 3.hours,
         place: "Aula studio - Secondo piano",
         description: "3 ore di studio di programmazione concorrente",
         groupo_id: 1

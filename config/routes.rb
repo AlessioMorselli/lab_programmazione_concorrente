@@ -4,10 +4,14 @@ Rails.application.routes.draw do
     resources :events, except: [:show]
     resources :members, only: [:index]
     resources :messages, except: [:show, :new, :edit]
-    resources :invitations, only: [:new, :create, :delete]
+    # Creare tre azioni diverse:
+    #   - Una per accettare l'invito
+    #   - Una per rifiutare l'invito
+    #   - Una per cancellare l'invito (solo amministratori)
+    resources :invitations, only: [:new, :create, :destroy]
   end
-  resources :courses, only: [:show, :index]
-  resources :degree, only: [:show]
+  resources :degree_courses, only: [:index, :show]
+  resources :degrees, only: [:show]
   resources :users, except: [:new, :create, :show] do
     resources :events, only: [:index, :show]
     resources :invitations, only: [:index]

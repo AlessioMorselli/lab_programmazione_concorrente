@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+    before_action :set_event, only: [:show, :edit, :update, :destroy]
     # GET group_events_path(group)
     # GET user_events_path(user)
     # DOMANDA: meglio fare due funzioni diverse del tipo group_index e user_index? --> può essere, adesso vedo
@@ -38,11 +39,11 @@ class EventsController < ApplicationController
     end
 
     private
-    def set_picture
+    def set_event
       @event = Event.find(params[:id])
     end
 
-    def picture_params
+    def event_params
       params.require(:event).permit(:start_time, :end_time, :place, :description, :groupo_id)
     end
 end

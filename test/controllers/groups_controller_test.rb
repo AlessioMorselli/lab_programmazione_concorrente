@@ -9,7 +9,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show" do
-    get group_path(1)
+    get group_path(:group_1)
     assert_response :success
   end
 
@@ -24,8 +24,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
         name: "I ciccioni",
         max_members: 10,
         private: True,
-        course_id: 2,
-        admin_id: 3
+        course_id: 2
         }
       }
     end
@@ -39,7 +38,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "update" do
-    group = groups(1)
+    group = groups(:group_1)
  
     patch group_path(group), params: { group: { name: "Nuovi ciccioni" } }
   
@@ -50,7 +49,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "delete" do
-    group = groups(1)
+    group = groups(:group_1)
     # TODO: devo verificare che vengano cancellati anche messaggi, eventi, membri e inviti
     assert_difference('Group.count') do
       delete group_path(group)

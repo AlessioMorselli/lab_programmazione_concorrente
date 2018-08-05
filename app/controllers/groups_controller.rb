@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
         # Restituisce tutti i gruppi, inserendovi anche dei parametri di ricerca (?)
     end
 
-    # GET group_path(@group)
+    # GET group_path(group)
     def show
         # Visualizza la chat di un gruppo, inclusi messaggi, eventi e membri (online ed offline)
     end
@@ -26,12 +26,12 @@ class GroupsController < ApplicationController
         # Visualizza la form per modificare un nuovo gruppo
     end
 
-    # PUT/PATCH group_path(@group)
+    # PUT/PATCH group_path(group)
     def update
         # Aggiorna le informazioni sul gruppo
     end
 
-    # DELETE group_path(@group)
+    # DELETE group_path(group)
     def destroy
         # Cancella un gruppo, compresi tutti i messaggi e gli eventi, nonché le relazioni
         # con le altre tabelle (inviti, membri)
@@ -43,6 +43,6 @@ class GroupsController < ApplicationController
     end
 
     def group_params
-      params.require(:group).permit(:name, :max_members, :private, :course_id, :admin_id)
+      params.require(:group).permit(:name, :max_members, :private, :course_id)
     end
 end
