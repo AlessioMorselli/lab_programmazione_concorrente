@@ -10,6 +10,7 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   timeout: 5000
   host: 0.0.0.0
   port: 5432
@@ -17,14 +18,11 @@ default: &default
 development:
   <<: *default
   database: <%= ENV['DATABASE_DEV'] %>
-  password: <%= ENV['DATABASE_DEV_PASSWORD'] %>
 
 test:
   <<: *default
   database: <%= ENV['DATABASE_TEST'] %>
-  password: <%= ENV['DATABASE_TEST_PASSWORD'] %>
 
 production:
   <<: *default
   database: <%= ENV['DATABASE_PROD'] %>
-  password: <%= ENV['DATABASE_PROD_PASSWORD'] %>
