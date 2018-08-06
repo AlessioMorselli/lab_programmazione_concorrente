@@ -1,0 +1,6 @@
+<% 250.times do |n| %>
+member_<%= n %>:
+  user_id: <%= Random.rand(49) + 1 %>
+  group_id: <%= Random.rand(99) + 1 %>
+  admin: True
+<% end %>

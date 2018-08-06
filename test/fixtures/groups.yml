@@ -9,3 +9,19 @@
 #
 # two: {}
 # column: value
+
+<% 50.times do |n| %>
+group_<%= n %>:
+  name: <%= "Gruppo #{n}" %>,
+  max_members: 10,
+  private: True,
+  course_id: null
+<% end %>
+
+<% 50.times do |n| %>
+group_<%= n + 50 %>:
+  name: <%= "Gruppo #{n + 50}" %>,
+  max_members: 10,
+  private: False,
+  course_id: null
+<% end %>

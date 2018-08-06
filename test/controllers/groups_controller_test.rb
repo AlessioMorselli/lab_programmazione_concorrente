@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class GroupsControllerTest < ActionDispatch::IntegrationTest
-  fixtures :groups, :members, :messages, :events, :users
+  fixtures :groups, :memberships, :users
 
   test "index" do
     get groups_path

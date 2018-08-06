@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 302) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "memberships", id: false, force: :cascade do |t|
+  create_table "members", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "group_id", null: false
     t.boolean "admin", default: false, null: false
