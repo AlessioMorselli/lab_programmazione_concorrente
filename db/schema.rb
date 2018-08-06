@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 203) do
+ActiveRecord::Schema.define(version: 302) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "courses", force: :cascade do |t|
@@ -55,6 +56,7 @@ ActiveRecord::Schema.define(version: 203) do
     t.string "name", null: false
     t.integer "max_members", limit: 2, default: -1, null: false
     t.boolean "private", default: false, null: false
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "course_id"
@@ -81,7 +83,7 @@ ActiveRecord::Schema.define(version: 203) do
     t.bigint "group_id", null: false
     t.text "text", default: "", null: false
     t.boolean "pinned", default: false, null: false
-    t.string "attachement"
+    t.binary "attachement"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
