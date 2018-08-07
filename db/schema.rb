@@ -41,10 +41,8 @@ ActiveRecord::Schema.define(version: 302) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.date "date", null: false
-    t.time "start_time", null: false
-    t.time "end_time", null: false
-    t.time "duration", null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
     t.string "place", default: "", null: false
     t.text "description", default: "", null: false
     t.datetime "created_at", null: false
