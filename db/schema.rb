@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 302) do
 
   create_table "degrees", force: :cascade do |t|
     t.string "name", null: false
+    t.integer "years", limit: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_degrees_on_name", unique: true
