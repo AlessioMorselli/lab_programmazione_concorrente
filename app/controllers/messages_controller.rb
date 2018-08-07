@@ -21,6 +21,11 @@ class MessagesController < ApplicationController
         # Cancella un messaggio dalla chat del grupp
     end
 
+    # GET group_pinned_messages(group)
+    def pinned
+        # Visualizza i messaggi pinnati di un gruppo
+    end
+
     private
     def set_message
       @message = Message.find(params[:id])

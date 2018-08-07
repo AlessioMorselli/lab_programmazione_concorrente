@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class MessagesControllerTest < ActionDispatch::IntegrationTest
-  fixtures :groups, :members, :messages, :users
+  fixtures :groups, :memberships, :messages, :users
 
   test "index" do
     get group_messages_path(:group_1)
@@ -33,5 +33,10 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Message.count') do
       delete group_message_path(:group_1, message)
     end
+  end
+
+  test "pinned" do
+    get group_pinned_messages(:group_1)
+    assert_response :success
   end
 end

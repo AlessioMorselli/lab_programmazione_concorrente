@@ -1,0 +1,6 @@
+<% 50.times do |n| %>
+student_<%= n %>:
+  user_id: <%= n %>
+  year: <%= Random.rand(3) + 1 %>
+  degree_id: <%= Random.rand(10) %>
+<% end %>

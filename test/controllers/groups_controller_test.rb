@@ -1,7 +1,9 @@
 require 'test_helper'
+include ActionDispatch::Routing::UrlFor
+include Rails.application.routes.url_helpers
 
 class GroupsControllerTest < ActionDispatch::IntegrationTest
-  fixtures :groups, :memberships, :users
+  fixtures :groups, :memberships, :users, :messages, :events
 
   test "index" do
     get groups_path
@@ -14,7 +16,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "new" do
-    get new_groups_path
+    get new_group_path
     assert_response :success
   end
 
@@ -23,8 +25,8 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
       post groups_path, params: { group: {
         name: "I ciccioni",
         max_members: 10,
-        private: True,
-        course_id: 2
+        private: true,
+        course_id: nil
         }
       }
     end
@@ -33,7 +35,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "edit" do
-    get edit_groups_path
+    get edit_group_path(:group_1)
     assert_response :success
   end
 

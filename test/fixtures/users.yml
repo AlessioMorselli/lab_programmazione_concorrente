@@ -1,6 +1,7 @@
 <% 50.times do |n| %>
 user_<%= n %>:
-  name: <%= "Utente #{n}" %>,
-  password: ciao,
-  emal: <%= "user_#{n}@unife.it" %>
+  id: <%= n %>
+  name: <%= "Utente #{n}" %>
+  password_digest: ciao
+  email: <%= "user_#{n}@unife.it" %>
 <% end %>

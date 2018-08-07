@@ -1,0 +1,6 @@
+<% 10.times do |n| %>
+degree_<%= n %>:
+  id: <%= n %>
+  name: <%= "Laurea #{n}" %>
+  years: 3
+<% end %>

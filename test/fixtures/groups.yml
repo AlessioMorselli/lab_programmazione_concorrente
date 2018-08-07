@@ -12,16 +12,17 @@
 
 <% 50.times do |n| %>
 group_<%= n %>:
-  name: <%= "Gruppo #{n}" %>,
-  max_members: 10,
-  private: True,
+  id: <%= n %>
+  name: <%= "Gruppo #{n}" %>
+  max_members: 10
+  private: TRUE
   course_id: null
 <% end %>
 
 <% 50.times do |n| %>
 group_<%= n + 50 %>:
-  name: <%= "Gruppo #{n + 50}" %>,
-  max_members: 10,
-  private: False,
+  name: <%= "Gruppo #{n + 50}" %>
+  max_members: 10
+  private: FALSE
   course_id: null
 <% end %>

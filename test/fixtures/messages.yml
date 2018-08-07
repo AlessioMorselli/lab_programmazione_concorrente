@@ -1,0 +1,9 @@
+<% 250.times do |n| %>
+message_<%= n %>:
+  id: <%= n %>
+  text: example
+  attachement: null
+  pinned: false
+  group_id: <%= Random.rand(100) %>
+  user_id: <%= Random.rand(50) %>
+<% end %>

@@ -1,0 +1,7 @@
+<% 75.times do |n| %>
+message_<%= n %>:
+  id: <%= n %>
+  year: <%= Random.rand(3) + 1 %>
+  degree_id: <%= Random.rand(10) %>
+  course_id: <%= Random.rand(30) %>
+<% end %>

@@ -15,9 +15,10 @@ class GroupsController < ApplicationController
             end
             @groups = Group.user_query(query) # Scope che cerca sia nel nome, che nel corso di un gruppo
         else
-            @groups = Group.suggested # Scope che restituisce 10 - 12 gruppi che potrebbero interessare
+            #@groups = Group.suggested # Scope che restituisce 10 - 12 gruppi che potrebbero interessare
                                       # all'utente loggato
-
+            @groups = Group.all
+        end
     end
 
     # GET group_path(group)
@@ -32,24 +33,24 @@ class GroupsController < ApplicationController
     # GET new_groups_path
     def new
         # Visualizza la form per creare un nuovo gruppo
-        @group = Group.new(group_params)
+        @group = Group.new
     end
 
     # POST groups_path
     def create
         # Salva il gruppo inviato nel DB
         @group = Group.new(group_params)
-        successful = False
+        successful = false
         
         Group.transaction do
             @group.save
 
             first_member = Membership.new
-            first_member.admin = True
+            first_member.admin = true
             first_member.user_id = current_user.id
             first_member.group_id = @group.id
             first_member.save
-            successful = True
+            successful = true
         end
 
         if successful
@@ -80,21 +81,7 @@ class GroupsController < ApplicationController
     def destroy
         # Cancella un gruppo, compresi tutti i messaggi e gli eventi, nonché le relazioni
         # con le altre tabelle (inviti, membri)
-        Group.transaction do
-            @group.messages.each do |m|
-                m.destroy
-            end
-            @group.memberships.each do |m|
-                m.destroy
-            end
-            @group.invitations.each do |i|
-                i.destroy
-            end
-            @group.events.each do |e|
-                e.destroy
-            end
-            @group.destroy
-        end
+        @group.destroy
 
         redirect_to groups_path
     end

@@ -1,6 +1,11 @@
 class InvitationsController < ApplicationController
     before_action :set_invitation, only: [:destroy]
 
+    # GET user_invitations_path(user)
+    def index
+        # Visualizza tutte gli inviti in sospeso da parte di un utente
+    end
+
     # GET new_group_invitation_path(group)
     def new
         # Visualizza la form per invitare un utente ad un gruppo

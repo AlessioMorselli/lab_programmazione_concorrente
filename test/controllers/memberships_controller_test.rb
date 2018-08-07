@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class membershipsControllerTest < ActionDispatch::IntegrationTest
+class MembershipsControllerTest < ActionDispatch::IntegrationTest
   fixtures :groups, :memberships, :users
 
   test "index" do

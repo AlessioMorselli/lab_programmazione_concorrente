@@ -3,6 +3,11 @@ require 'test_helper'
 class InvitationsControllerTest < ActionDispatch::IntegrationTest
   fixtures :groups, :users, :invitations
 
+  test "index" do
+    get user_invitations_path(:user_1)
+    assert_response :success
+  end
+
   test "new" do
     get new_group_invitation_path(:group_1)
     assert_response :success
