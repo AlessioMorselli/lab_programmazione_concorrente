@@ -3,4 +3,6 @@ degree_<%= n %>:
   id: <%= n %>
   name: <%= "Laurea #{n}" %>
   years: 3
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
 <% end %>

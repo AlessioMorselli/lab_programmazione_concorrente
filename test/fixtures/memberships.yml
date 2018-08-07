@@ -3,4 +3,6 @@ member_<%= n %>:
   user_id: <%= Random.rand(50) %>
   group_id: <%= Random.rand(100) %>
   admin: TRUE
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
 <% end %>

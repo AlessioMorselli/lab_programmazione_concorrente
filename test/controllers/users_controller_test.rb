@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  fixtures :users, :students, :memberships, :events, :groups
+  fixtures :users, :students, :memberships, :events, :groups, :degrees
 
   test "new" do
     get signup_path

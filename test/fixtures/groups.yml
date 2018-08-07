@@ -17,6 +17,8 @@ group_<%= n %>:
   max_members: 10
   private: TRUE
   course_id: null
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
 <% end %>
 
 <% 50.times do |n| %>
@@ -25,4 +27,6 @@ group_<%= n + 50 %>:
   max_members: 10
   private: FALSE
   course_id: null
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
 <% end %>

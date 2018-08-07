@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     #   - Una per cancellare l'invito (solo amministratori)
     resources :invitations, only: [:new, :create, :destroy]
   end
-  resources :degree_courses, only: [:index, :show]
+  resources :degrees_courses, only: [:index, :show]
   resources :degrees, only: [:show]
   resources :users, except: [:new, :create, :show] do
     resources :events, only: [:index, :show]
@@ -21,8 +21,6 @@ Rails.application.routes.draw do
   get     '/signup',                                              to: 'users#new'
   post    '/signup',                                              to: 'users#create'
 
-  # TODO: devo andare a vedere come gestire la sessione coi cookies in modo
-  # che un utente non debba riloggarsi ogni volta
   get     '/',                                                    to: 'sessions#new'
   get     '/login',                                               to: 'sessions#new'
   post    '/login',                                               to: 'sessions#create'

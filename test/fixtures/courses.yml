@@ -1,5 +1,7 @@
 <% 30.times do |n| %>
 message_<%= n %>:
   id: <%= n %>
-  name: <%= "Corso #{n}" %> 
+  name: <%= "Corso #{n}" %>
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
 <% end %>

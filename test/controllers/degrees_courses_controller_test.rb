@@ -1,7 +1,7 @@
 require 'test_helper'
 
-class DegreeCoursesControllerTest < ActionDispatch::IntegrationTest
-  fixtures :degrees, :courses, :degree_courses
+class DegreesCoursesControllerTest < ActionDispatch::IntegrationTest
+  fixtures :degrees, :courses, :degrees_courses
 
   test "index" do
     get degree_courses_path

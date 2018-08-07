@@ -1,7 +1,8 @@
 <% 75.times do |n| %>
-message_<%= n %>:
-  id: <%= n %>
+degrees_course_<%= n %>:
   year: <%= Random.rand(3) + 1 %>
   degree_id: <%= Random.rand(10) %>
   course_id: <%= Random.rand(30) %>
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
 <% end %>

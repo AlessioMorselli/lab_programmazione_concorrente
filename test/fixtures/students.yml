@@ -3,4 +3,6 @@ student_<%= n %>:
   user_id: <%= n %>
   year: <%= Random.rand(3) + 1 %>
   degree_id: <%= Random.rand(10) %>
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
 <% end %>

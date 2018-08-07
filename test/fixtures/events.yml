@@ -1,11 +1,14 @@
+<% st = (Time.now + (Random.rand(2)).hours) %>
+<% et = (Time.now + 3.hours) %>
+
 <% 250.times do |n| %>
 event_<%= n %>:
   id: <%= n %>
-  date: <%= (Date.today + Random.rand(15)).to_s %>
-  start_time: <%= (Time.now + (Random.rand(2)).hours).to_s %>
-  end_time: <%= (Time.now + 3.hours).to_s %>
-  duration: null
-  place: null
+  start_time: <%= st.to_s %>
+  end_time: <%= et.to_s %>
+  place: Aula
   description: null
   group_id: <%= Random.rand(100) %>
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
 <% end %>

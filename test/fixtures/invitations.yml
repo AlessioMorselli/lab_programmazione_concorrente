@@ -1,6 +1,7 @@
 <% 100.times do |n| %>
 invitation_<%= n %>:
-  id: <%= n %>
   group_id: <%= Random.rand(100) %>
   user_id: <%= Random.rand(50) %>
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
 <% end %>

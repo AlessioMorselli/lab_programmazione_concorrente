@@ -1,13 +1,14 @@
-class DegreeCoursesController < ApplicationController
-    before_action :set_degree_course, only: [:show]
+class DegreesCoursesController < ApplicationController
+    before_action :set_degree_course, only: [:show, :edit, :update, :destroy]
 
-    # GET degree_courses_path
+    # GET degrees_courses_path
     def index
         # Restituisce tutti i gruppi dei corsi di studio corrispondenti al proprio corso di laurea
         # e al proprio anno
+        
     end
 
-    # GET degree_course_path(degree_course)
+    # GET degrees_course_path(degree_course)
     def show
         # Visualizza la chat del gruppo del corrispondente corso di studio
     end
