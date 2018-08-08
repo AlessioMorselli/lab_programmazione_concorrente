@@ -27,7 +27,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
   test "delete" do
     invitation = invitations(:invitation_1)
-    assert_difference('Invitation.count') do
+    assert_difference('Invitation.count', -1) do
       delete group_invitation_path(:group_1, invitation)
     end
     

@@ -9,7 +9,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "create" do
-    assert_difference('Group.count') do
+    assert_difference('User.count') do
       post signup_path, params: { user: {
         name: "CoolName",
         password: "CoolPassword",
@@ -41,7 +41,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "delete" do
     user = users(:user_1)
-    assert_difference('User.count') do
+    assert_difference('User.count', -1) do
       delete user_path(user)
     end
     

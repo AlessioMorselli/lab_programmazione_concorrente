@@ -52,7 +52,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
   test "delete" do
     event = events(1)
-    assert_difference('Event.count') do
+    assert_difference('Event.count', -1) do
       delete group_event_path(:group_1, event)
     end
     

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   ### URL DI DEFAULT ###
   resources :groups do
     resources :events, except: [:show]
-    resources :memberships, only: [:index]
+    resources :memberships, only: [:index, :destroy]
     resources :messages, except: [:show, :new, :edit]
     # Creare tre azioni diverse:
     #   - Una per accettare l'invito

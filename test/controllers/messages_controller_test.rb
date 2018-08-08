@@ -30,7 +30,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "delete" do
     message = messages(:message_1)
-    assert_difference('Message.count') do
+    assert_difference('Message.count', -1) do
       delete group_message_path(:group_1, message)
     end
   end

@@ -17,8 +17,8 @@ class UsersController < ApplicationController
     # POST signup_path
     def create
         # Salva nel database un nuovo utente
-        user = User.new(user_params)
-        if user.save
+        @user = User.new(user_params)
+        if @user.save
             log_in user
             redirect_to groups_path
         else
@@ -34,11 +34,19 @@ class UsersController < ApplicationController
     # PUT/PATCH user_path(user)
     def update
         # Aggiorna le informazioni sul un utente
+        if @user.update
+            flash[:success] = 'Le tue informazioni sono state aggiornate'
+            redirect_to groups_path
+        else
+            render 'edit'
+        end
     end
 
     # DELETE group_path(group)
     def destroy
         # Cancella un utente dall'applicativo
+        @user.destroy
+        redirect_to login_path
     end
 
     private

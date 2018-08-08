@@ -53,7 +53,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   test "delete" do
     group = groups(:group_1)
     # TODO: devo verificare che vengano cancellati anche messaggi, eventi, membri e inviti
-    assert_difference('Group.count') do
+    assert_difference('Group.count', -1) do
       delete group_path(group)
     end
     
