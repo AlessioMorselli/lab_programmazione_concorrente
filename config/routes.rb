@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :degrees_courses, only: [:index, :show]
   resources :degrees, only: [:show]
   resources :users, except: [:new, :create, :show] do
-    resources :events, only: [:index, :show]
+    resources :events, only: [:show]
     resources :invitations, only: [:index]
   end
 
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   delete  '/logout',                                              to: 'sessions#destroy'
 
   get     '/groups/:group_id/messages/pinned',                    to: 'messages#pinned', as: 'group_pinned_messages'
+  get     '/users/:user_id/events',                               to: 'events#user_index', as: 'user_events'
 
   # Dov'è l'azione in cui viene creato/cancellato un membro? Da inserire!
   # Gestire la sessione in modo più sofisticato di così!

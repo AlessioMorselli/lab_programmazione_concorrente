@@ -15,9 +15,8 @@ class GroupsController < ApplicationController
             end
             @groups = Group.user_query(query) # Scope che cerca sia nel nome, che nel corso di un gruppo
         else
-            #@groups = Group.suggested # Scope che restituisce 10 - 12 gruppi che potrebbero interessare
+            @groups = Group.suggested # Scope che restituisce 10 - 12 gruppi che potrebbero interessare
                                       # all'utente loggato
-            @groups = Group.all
         end
     end
 
