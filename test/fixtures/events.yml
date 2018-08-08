@@ -7,7 +7,7 @@ event_<%= n %>:
   start_time: <%= st.to_s %>
   end_time: <%= et.to_s %>
   place: Aula
-  description: null
+  description: Evento bello
   group_id: <%= Random.rand(100) %>
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
