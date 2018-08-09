@@ -7,25 +7,25 @@ class InvitationsController < ApplicationController
         @invitations = current_user.invitations
     end
 
-    # GET new_group_invitation_path(group)
+    # GET new_group_invitation_path(group_uuid: group.uuid)
     def new
         # Visualizza la form per invitare un utente ad un gruppo
         @invitation = Invitation.new
     end
 
-    # POST group_invitations_path(group)
+    # POST group_invitations_path(group_uuid: group.uuid)
     def create
         # Salva l'invito nel db
         @invitation = Invitation.new(invitation_params)
         if @invitation.save
-            redirect_to group_path(@invitation.group)
+            redirect_to group_path(uuid: @invitation.group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono corrette'
             render 'new'
         end
     end
 
-    # DELETE group_invitation_path(group, invitation)
+    # DELETE group_invitation_path(group_uuid: group.uuid, user_id: user.id)
     def destroy
         # Cancella un invito ed esegue una delle due seguenti azioni:
         #   - se l'utente risponde affermativamente, viene aggiunto al gruppo

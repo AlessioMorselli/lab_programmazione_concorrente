@@ -20,13 +20,15 @@ class GroupsController < ApplicationController
         end
     end
 
-    # GET group_path(group)
+    # GET group_path(uuid: group.uuid)
     def show
         # Visualizza la chat di un gruppo, inclusi messaggi, eventi e membri (online ed offline)
-        @messages = @group.messages.recent # Scope che definisce di cercare solo i messaggi più recenti
-        @events = @group.events.this_month # Ho pensato che possiamo caricare solo gli eventi del mese,
+        #@messages = @group.messages.recent # Scope che definisce di cercare solo i messaggi più recenti
+        #@events = @group.events.this_month # Ho pensato che possiamo caricare solo gli eventi del mese,
                                            # quindi caricarne altri nel caso vengano richiesti
-        @memberships = @group.memberships
+        #@memberships = @group.memberships
+
+        render json: @group
     end
 
     # GET new_groups_path
@@ -53,7 +55,7 @@ class GroupsController < ApplicationController
         end
 
         if successful
-            redirect_to group_path(@group)
+            redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono valide'
             render 'new'
@@ -65,18 +67,18 @@ class GroupsController < ApplicationController
         # Visualizza la form per modificare un nuovo gruppo
     end
 
-    # PUT/PATCH group_path(group)
+    # PUT/PATCH group_path(uuid: group.uuid)
     def update
         # Aggiorna le informazioni sul gruppo
         if @group.update(group_params)
-            redirect_to group_path(@group)
+            redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:danger] = 'Le informazioni del gruppo non sono state aggiornate'
             render 'edit'
         end
     end
 
-    # DELETE group_path(group)
+    # DELETE group_path(uuid: group.uuid)
     def destroy
         # Cancella un gruppo, compresi tutti i messaggi e gli eventi, nonché le relazioni
         # con le altre tabelle (inviti, membri)
@@ -87,7 +89,7 @@ class GroupsController < ApplicationController
 
     private
     def set_group
-      @group = Group.find(params[:id])
+      @group = Group.find_by_uuid(params[:uuid])
     end
 
     def group_params

@@ -3,6 +3,10 @@ require 'test_helper'
 class UsersControllerTest < ActionDispatch::IntegrationTest
   fixtures :users, :students, :memberships, :events, :groups, :degrees
 
+  def setup
+    @user = users(:user_1)
+  end
+
   test "new" do
     get signup_path
     assert_response :success
@@ -24,25 +28,22 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "edit" do
-    get edit_user_path(:user_1)
+    get edit_user_path(@user)
     assert_response :success
   end
 
   test "update" do
-    user = users(:user_1)
- 
-    patch user_path(user), params: { user: { name: "NewName" } }
+    patch user_path(@user), params: { user: { name: "NewName" } }
   
     assert_redirected_to groups_path
 
-    user.reload
-    assert_equal "NewName", user.name
+    @user.reload
+    assert_equal "NewName", @user.name
   end
 
   test "delete" do
-    user = users(:user_1)
     assert_difference('User.count', -1) do
-      delete user_path(user)
+      delete user_path(@user)
     end
     
     assert_redirected_to login_path
