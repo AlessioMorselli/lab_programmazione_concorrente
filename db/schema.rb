@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 302) do
     t.index ["group_id", "user_id"], name: "index_memberships_on_group_id_and_user_id", unique: true
   end
 
-  create_table "messages", id: false, force: :cascade do |t|
+  create_table "messages", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "group_id", null: false
     t.text "text", default: "", null: false
