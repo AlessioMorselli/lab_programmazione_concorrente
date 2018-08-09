@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 302) do
     t.bigint "group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["group_id", "user_id"], name: "index_invitations_on_group_id_and_user_id", unique: true
   end
 
   create_table "memberships", id: false, force: :cascade do |t|
@@ -75,6 +76,7 @@ ActiveRecord::Schema.define(version: 302) do
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["group_id", "user_id"], name: "index_memberships_on_group_id_and_user_id", unique: true
   end
 
   create_table "messages", id: false, force: :cascade do |t|
