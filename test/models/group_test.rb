@@ -3,7 +3,7 @@ require 'test_helper'
 class GroupTest < ActiveSupport::TestCase
   fixtures :users
 
-  test "should save group if name is supplied" do
+  test "should save group if name and admin is supplied" do
     assert Group.new(name: "fake group").save
   end
 
@@ -48,6 +48,48 @@ class GroupTest < ActiveSupport::TestCase
     end
 
     assert_equal group.max_members, group.members.size
+  end
+
+  test "admin method should return the group's admin" do
+    group = Group.create(name: "fake group", max_members: 1)
+    membership = Membership.create(group_id: group.id, user_id: users(:user_1).id, admin: true)
+    assert_equal group.admin, users(:user_1)
+  end
+
+  test "should also delete all memberships when deleting group" do
+    group = Group.new(name: "fake group", max_members: 5)
+    group.save
+    group_id = group.id
+    group.members << users(:user_1)
+    group.members << users(:user_2)
+    group.members << users(:user_3)
+    assert Membership.all.where(group_id: group_id).size > 0
+    group.destroy
+    assert_equal Membership.all.where(group_id: group_id).size, 0
+  end
+
+  test "should also delete all messages when deleting group" do
+    group = Group.new(name: "fake group", max_members: 5)
+    group.save
+    group_id = group.id
+    Message.create(group_id: group_id, user_id: users(:user_1).id, text: "ciao")
+    Message.create(group_id: group_id, user_id: users(:user_2).id, text: "ciao")
+    Message.create(group_id: group_id, user_id: users(:user_3).id, text: "ciao")
+    assert Message.all.where(group_id: group_id).size > 0
+    group.destroy
+    assert_equal Message.all.where(group_id: group_id).size, 0
+  end
+
+  test "should also delete all invitations when deleting group" do
+    group = Group.new(name: "fake group", max_members: 5)
+    group.save
+    group_id = group.id
+    Invitation.create(group_id: group_id, user_id: users(:user_1).id)
+    Invitation.create(group_id: group_id, user_id: users(:user_2).id)
+    Invitation.create(group_id: group_id, user_id: users(:user_3).id)
+    assert Invitation.all.where(group_id: group_id).size > 0
+    group.destroy
+    assert_equal Invitation.all.where(group_id: group_id).size, 0
   end
 
 end
