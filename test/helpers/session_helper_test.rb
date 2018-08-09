@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SessionsHelperTest < ActionView::TestCase
+class SessionHelperTest < ActionView::TestCase
     fixtures :users
 
     def setup

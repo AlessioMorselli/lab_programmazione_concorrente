@@ -1,7 +1,16 @@
+<% ms = [] %>
+<% 50.times do |i| %>
+  <% 100.times do |j| %>
+    <% ms.push([i, j])%>
+  <% end %>
+<% end %>
+<% ms = ms.shuffle %>
+
 <% 250.times do |n| %>
-member_<%= n %>:
-  user_id: <%= Random.rand(50) %>
-  group_id: <%= Random.rand(100) %>
+<% m = ms.shift %>
+membership_<%= n %>:
+  user_id: <%= m[0] %>
+  group_id: <%= m[1] %>
   admin: TRUE
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>

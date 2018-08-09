@@ -22,6 +22,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   test "update" do
     message = messages(:message_1)
  
+    # TODO: non sapendo come fare il routing, questo test è da rivedere
     patch group_message_path(:group_1, message), params: { message: { text: "Messaggio modificato" } }
 
     message.reload
@@ -31,6 +32,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   test "delete" do
     message = messages(:message_1)
     assert_difference('Message.count', -1) do
+      # TODO: non sapendo come fare il routing, questo test è da rivedere
       delete group_message_path(:group_1, message)
     end
   end

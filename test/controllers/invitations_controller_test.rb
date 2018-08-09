@@ -3,6 +3,11 @@ require 'test_helper'
 class InvitationsControllerTest < ActionDispatch::IntegrationTest
   fixtures :groups, :users, :invitations
 
+  def setup
+    @user = users(:user_1)
+    log_in_as(@user)
+  end
+
   test "index" do
     get user_invitations_path(:user_1)
     assert_response :success
@@ -26,6 +31,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "delete" do
+    # TODO: non sapendo come fare il routing, questo test è da rivedere
     invitation = invitations(:invitation_1)
     assert_difference('Invitation.count', -1) do
       delete group_invitation_path(:group_1, invitation)

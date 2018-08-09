@@ -1,8 +1,17 @@
+<% dcs = [] %>
+<% 10.times do |i| %>
+  <% 30.times do |j| %>
+    <% dcs.push([i, j])%>
+  <% end %>
+<% end %>
+<% dcs = dcs.shuffle %>
+
 <% 75.times do |n| %>
+<% dc = dcs.shift %>
 degrees_course_<%= n %>:
   year: <%= Random.rand(3) + 1 %>
-  degree_id: <%= Random.rand(10) %>
-  course_id: <%= Random.rand(30) %>
+  degree_id: <%= dc[0] %>
+  course_id: <%= dc[1] %>
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
 <% end %>

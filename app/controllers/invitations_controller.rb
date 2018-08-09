@@ -36,10 +36,11 @@ class InvitationsController < ApplicationController
 
     private
     def set_invitation
-      @invitation = Invitation.find(params[:id])
+        group = Group.find(params[:group_id])
+        @invitation = Invitation.get_one(group, current_user)
     end
 
-    def group_params
-      params.require(:invitation).permit(:user_id, :group_id)
+    def invitation_params
+        params.require(:invitation).permit(:user_id, :group_id)
     end
 end

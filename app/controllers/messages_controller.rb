@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-    before_action :set_message, only: [:update, :destroy]
+    before_action :set_message, only: [:show, :edit, :update, :destroy]
 
     # GET group_messages_path(group)
     def index
@@ -41,10 +41,11 @@ class MessagesController < ApplicationController
 
     private
     def set_message
-      @message = Message.find(params[:id])
+        group = Group.find(params[:group_id])
+        @message = Message.get_one(group, current_user)
     end
 
     def message_params
-      params.require(:message).permit(:text, :attachement, :pinned, :group_id, :user_id)
+        params.require(:message).permit(:text, :attachement, :pinned, :group_id, :user_id)
     end
 end

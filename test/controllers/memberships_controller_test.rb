@@ -9,6 +9,7 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "delete" do
+    # TODO: non sapendo come fare il routing, questo test è da rivedere
     membership = memberships(:membership_1)
     assert_difference('Mambership.count', -1) do
       delete group_memberships(membership.group, membership)

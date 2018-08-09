@@ -5,6 +5,11 @@ include Rails.application.routes.url_helpers
 class GroupsControllerTest < ActionDispatch::IntegrationTest
   fixtures :groups, :memberships, :users, :messages, :events
 
+  def setup
+    @user = users(:user_1)
+    log_in_as(@user)
+  end
+
   test "index" do
     get groups_path
     assert_response :success

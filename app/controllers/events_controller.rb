@@ -31,7 +31,7 @@ class EventsController < ApplicationController
         # Salva nel db un nuovo evento
         @event = Event.new(event_params)
 
-        if event.save
+        if @event.save
             redirect_to group_path(@event.group)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono valide'

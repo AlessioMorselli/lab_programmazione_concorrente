@@ -1,5 +1,5 @@
 class MembershipsController < ApplicationController
-  before_action :set_invitation, only: [:show, :edit, :update, :destroy]
+  before_action :set_membership, only: [:show, :edit, :update, :destroy]
 
   # GET group_memberships(group)
   def index
@@ -17,8 +17,9 @@ class MembershipsController < ApplicationController
   end
 
   private
-  def set_memberships
-    @membership = Membership.find(params[:id])
+  def set_membership
+    group = Group.find(params[:group_id])
+    @membership = Membership.get_one(group, current_userS)
   end
 
   def membership_params

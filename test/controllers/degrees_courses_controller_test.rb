@@ -3,13 +3,13 @@ require 'test_helper'
 class DegreesCoursesControllerTest < ActionDispatch::IntegrationTest
   fixtures :degrees, :courses, :degrees_courses
 
-  test "index" do
-    get degree_courses_path
-    assert_response :success
+  def setup
+    @user = users(:user_1)
+    log_in_as(@user)
   end
 
-  test "show" do
-    get degree_course_path(:degree_course_1)
+  test "index" do
+    get degrees_courses_path
     assert_response :success
   end
 end
