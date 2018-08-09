@@ -8,6 +8,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:user_1)
     log_in_as(@user)
+    @group = groups(:group_1)
   end
 
   test "index" do
@@ -16,7 +17,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show" do
-    get group_path(:group_1)
+    get group_path(uuid: @group.uuid)
     assert_response :success
   end
 
@@ -36,30 +37,27 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
       }
     end
    
-    assert_redirected_to group_path(Group.last)
+    assert_redirected_to group_path(uuid: Group.last.uuid)
   end
 
   test "edit" do
-    get edit_group_path(:group_1)
+    get edit_group_path(uuid: @group.uuid)
     assert_response :success
   end
 
-  test "update" do
-    group = groups(:group_1)
- 
-    patch group_path(group), params: { group: { name: "Nuovi ciccioni" } }
+  test "update" do 
+    patch group_path(uuid: @group.uuid), params: { group: { name: "Nuovi ciccioni" } }
   
-    assert_redirected_to group_path(group)
+    assert_redirected_to group_path(uuid: @group.uuid)
     # Reload association to fetch updated data and assert that value is updated.
     group.reload
     assert_equal "Nuovi ciccioni", group.name
   end
 
   test "delete" do
-    group = groups(:group_1)
     # TODO: devo verificare che vengano cancellati anche messaggi, eventi, membri e inviti
     assert_difference('Group.count', -1) do
-      delete group_path(group)
+      delete group_path(uuid: @group.uuid)
     end
     
     assert_redirected_to groups_path

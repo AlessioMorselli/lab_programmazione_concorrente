@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-  ### URL DI DEFAULT ###
-  resources :groups do
+  ### URL RESTFUL ###
+  resources :groups, param: :uuid do
     resources :events, except: [:show]
-    resources :memberships, only: [:index, :destroy], key: :user_id
-    resources :messages, except: [:show, :new, :edit], key: :user_id
+    resources :memberships, only: [:index, :destroy], param: :user_id
+    resources :messages, except: [:show, :new, :edit]
     # Creare tre azioni diverse:
     #   - Una per accettare l'invito
     #   - Una per rifiutare l'invito
     #   - Una per cancellare l'invito (solo amministratori)
-    resources :invitations, only: [:new, :create, :destroy]
+    resources :invitations, only: [:new, :create, :destroy], param: :user_id
   end
   resources :degrees_courses, only: [:index]
   resources :degrees, only: [:show]
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :invitations, only: [:index]
   end
 
-  ### URL NON DI DEFAULT ###
+  ### URL NON RESTFUL ###
   get     '/signup',                                              to: 'users#new'
   post    '/signup',                                              to: 'users#create'
 
@@ -26,7 +26,8 @@ Rails.application.routes.draw do
   post    '/login',                                               to: 'session#create'
   delete  '/logout',                                              to: 'session#destroy'
 
-  get     '/groups/:group_id/messages/pinned',                    to: 'messages#pinned', as: 'group_pinned_messages'
+  get     '/groups/:group_uuid/messages/pinned',                  to: 'messages#pinned', as: 'group_pinned_messages'
+  
   get     '/users/:user_id/events',                               to: 'events#user_index', as: 'user_events'
 
   # Dov'è l'azione in cui viene creato/cancellato un membro? Da inserire!

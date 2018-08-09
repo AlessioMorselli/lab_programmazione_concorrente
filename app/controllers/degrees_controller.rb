@@ -12,7 +12,7 @@ class DegreesController < ApplicationController
       @degree = Degree.find(params[:id])
     end
 
-    def group_params
+    def degree_params
       params.require(:degree).permit(:name)
     end
 end

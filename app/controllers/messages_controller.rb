@@ -1,14 +1,14 @@
 class MessagesController < ApplicationController
     before_action :set_message, only: [:show, :edit, :update, :destroy]
 
-    # GET group_messages_path(group)
+    # GET group_messages_path(group_uuid: group.uuid)
     def index
         # Restituisce tutti i messaggi del gruppo, a partire da una certa data e ora
-        group = Group.find(params[:group_id])
+        group = Group.find_by_uuid(params[:group_uuid])
         @messages = group.messages.recent
     end
 
-    # POST group_messages_path(group)
+    # POST group_messages_path(group_uuid: group.uuid)
     def create
         # Il messaggio viene salvato nel db e visualizzato sulla chat
         @message = Message.new(message_params)
@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
         end
     end
 
-    # PUT/PATCH group_message_path(group, message)
+    # PUT/PATCH group_message_path(group_uuid: group.uuid, message)
     def update
         # Modifica il testo di un messaggio
         if !@message.update(message_params)
@@ -25,24 +25,24 @@ class MessagesController < ApplicationController
         end
     end
 
-    # DELETE group_message_path(group, message)
+    # DELETE group_message_path(group_uuid: group.uuid, message)
     def destroy
         # Cancella un messaggio dalla chat del gruppo
         @message.destroy
         flash.now[:success] = 'Il messaggio è stato eliminato'
     end
 
-    # GET group_pinned_messages(group)
+    # GET group_pinned_messages(group_uuid: group.uuid)
     def pinned
         # Visualizza i messaggi pinnati di un gruppo
-        group = Group.find(params[:group_id])
+        group = Group.find_by_uuid(params[:group_uuid])
         @pinned_messages = group.pinned_messages
     end
 
     private
     def set_message
-        group = Group.find(params[:group_id])
-        @message = Message.get_one(group, current_user)
+        group = Group.find_by_uuid(params[:group_uuid])
+        @message = Message.find(params[:id])
     end
 
     def message_params

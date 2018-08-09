@@ -42,7 +42,7 @@ class UsersController < ApplicationController
         end
     end
 
-    # DELETE group_path(group)
+    # DELETE user_path(user)
     def destroy
         # Cancella un utente dall'applicativo
         @user.destroy
