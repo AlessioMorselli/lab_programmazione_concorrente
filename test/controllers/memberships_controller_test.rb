@@ -4,7 +4,7 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
   fixtures :groups, :memberships, :users
 
   def setup
-    @membership = memberships(:membership)
+    @membership = memberships(:membership_1)
   end
 
   test "index" do

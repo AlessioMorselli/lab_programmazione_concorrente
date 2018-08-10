@@ -26,7 +26,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "update" do
     # TODO: non sapendo come fare il routing, questo test è da rivedere
-    patch group_message_path(group_uuid: @message.group.uuid, @message), params: { message: { text: "Messaggio modificato" } }
+    patch group_message_path(group_uuid: @message.group.uuid, id: @message.id), params: { message: { text: "Messaggio modificato" } }
 
     @message.reload
     assert_equal "Messaggio modificato", @message.text
@@ -34,8 +34,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "delete" do
     assert_difference('Message.count', -1) do
-      # TODO: non sapendo come fare il routing, questo test è da rivedere
-      delete group_message_path(group_uuid: @message.group.uuid, @message)
+      delete group_message_path(group_uuid: @message.group.uuid, id: @message.id)
     end
   end
 

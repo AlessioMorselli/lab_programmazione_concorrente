@@ -35,6 +35,7 @@ class GroupsController < ApplicationController
     def new
         # Visualizza la form per creare un nuovo gruppo
         @group = Group.new
+        render json: @group
     end
 
     # POST groups_path

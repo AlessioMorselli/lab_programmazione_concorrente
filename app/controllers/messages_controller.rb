@@ -5,7 +5,9 @@ class MessagesController < ApplicationController
     def index
         # Restituisce tutti i messaggi del gruppo, a partire da una certa data e ora
         group = Group.find_by_uuid(params[:group_uuid])
-        @messages = group.messages.recent
+        @messages = group.messages#.recent
+
+        render json: @messages
     end
 
     # POST group_messages_path(group_uuid: group.uuid)
@@ -37,11 +39,12 @@ class MessagesController < ApplicationController
         # Visualizza i messaggi pinnati di un gruppo
         group = Group.find_by_uuid(params[:group_uuid])
         @pinned_messages = group.pinned_messages
+
+        render json: @pinned_messages
     end
 
     private
     def set_message
-        group = Group.find_by_uuid(params[:group_uuid])
         @message = Message.find(params[:id])
     end
 

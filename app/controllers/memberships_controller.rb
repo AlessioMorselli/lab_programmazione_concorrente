@@ -7,6 +7,8 @@ class MembershipsController < ApplicationController
     # e chi è online in quel momento (forse, adesso vediamo)
     group = Group.find_by_uuid(params[:group_uuid])
     @members = group.memberships
+
+    render json: @members
   end
 
   # DELETE group_memberships(group_uuid: group.uuid, user_id: user.id)
@@ -18,7 +20,7 @@ class MembershipsController < ApplicationController
 
   private
   def set_membership
-    group = Group.find(params[:group_id])
+    group = Group.find_by_uuid(params[:group_uuid])
     @membership = Membership.get_one(group, current_user)
   end
 

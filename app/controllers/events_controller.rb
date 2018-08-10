@@ -5,14 +5,16 @@ class EventsController < ApplicationController
     def index
         # Visualizza tutti gli eventi di un gruppo
         group = Group.find_by_uuid(params[:group_uuid])
-        @events = group.events.this_month
+        @events = group.events#.this_month
+        render json: @events
     end
 
 
     # GET user_events_path(user)
     def user_index
         # Visualizza tutti gli eventi dei gruppi di cui fa parte l'utente
-        @events = current_user.groups.events.this_month
+        @events = current_user.groups.events#.this_month
+        render json: @events
     end
 
     # GET user_event_path(user, event)
@@ -24,6 +26,7 @@ class EventsController < ApplicationController
     def new
         # Mostra la form per creare un evento
         @event = Event.new
+        render json: @event
     end
 
     # POST group_events_path(group_uuid: group.uuid)
