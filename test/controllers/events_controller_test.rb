@@ -21,7 +21,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show" do
-    get user_event_path(@user, @event)
+    get user_event_path(@event.user, @event)
     assert_response :success
   end
 
@@ -45,28 +45,13 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to group_events_path(group_uuid: @group.uuid)
   end
 
-  test "should not create with wrong parameters" do
-    assert_difference('Event.count', 0) do
-      post group_events_path(group_uuid: @group.uuid), params: { event: {
-        start_time: DateTime.now,
-        end_time: DateTime.now - 3.hours,
-        place: "Aula studio - Secondo piano",
-        description: "3 ore di studio di programmazione concorrente",
-        group_id: 1
-        }
-      }
-    end
-
-    assert_template 'new'
-  end
-
   test "edit" do
-    get edit_group_event_path(group_uuid: @group.uuid, @event)
+    get edit_group_event_path(group_uuid: @group.uuid, id: @event.id)
     assert_response :success
   end
 
   test "update" do
-    patch group_event_path(group_uuid: @group.uuid, @event), params: { event: { place: "Aula studio - Secondo piano" } }
+    patch group_event_path(group_uuid: @group.uuid, id: @event.id), params: { event: { place: "Aula studio - Secondo piano" } }
   
     assert_redirected_to group_events_path(group_uuid: @group.uuid)
     event.reload
@@ -75,7 +60,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
   test "delete" do
     assert_difference('Event.count', -1) do
-      delete group_event_path(group_uuid: @group.uuid, @event)
+      delete group_event_path(group_uuid: @group.uuid, id: @event.id)
     end
     
     assert_redirected_to group_events_path(group_uuid: @group.uuid)

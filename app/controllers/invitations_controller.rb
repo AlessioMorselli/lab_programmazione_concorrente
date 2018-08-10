@@ -36,7 +36,7 @@ class InvitationsController < ApplicationController
 
     private
     def set_invitation
-        group = Group.find(params[:group_id])
+        group = Group.find_by_uuid(params[:group_uuid])
         @invitation = Invitation.get_one(group, current_user)
     end
 
