@@ -4,11 +4,8 @@ Rails.application.routes.draw do
     resources :events, except: [:show]
     resources :memberships, only: [:index, :destroy], param: :user_id
     resources :messages, except: [:show, :new, :edit]
-    # Creare tre azioni diverse:
-    #   - Una per accettare l'invito
-    #   - Una per rifiutare l'invito
-    #   - Una per cancellare l'invito (solo amministratori)
-    resources :invitations, only: [:new, :create, :destroy], param: :user_id
+    # L'azione destroy di invitation solo in caso di invito rifiutato
+    resources :invitations, only: [:show, :new, :create, :destroy]
   end
   resources :degrees_courses, only: [:index]
   resources :degrees, only: [:show]
@@ -30,5 +27,8 @@ Rails.application.routes.draw do
   
   get     '/users/:user_id/events',                               to: 'events#user_index', as: 'user_events'
 
-  # Dov'è l'azione in cui viene creato/cancellato un membro? Da inserire!
+  # L'utente accetta l'invito ed entra nel gruppo
+  get  '/groups/:group_uuid/invitations/:id/accept',      to: 'invitations#accept', as: 'group_accept_invitation'
+  # L'utente rifiuta l'invito e non entra nel gruppo
+  get  '/groups/:group_uuid/invitations/:id/refuse',      to: 'invitations#refuse', as: 'group_refuse_invitation'
 end
