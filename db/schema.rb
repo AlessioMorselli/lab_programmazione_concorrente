@@ -62,9 +62,11 @@ ActiveRecord::Schema.define(version: 400) do
     t.index ["course_id"], name: "index_groups_on_course_id"
   end
 
-  create_table "invitations", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "invitations", force: :cascade do |t|
+    t.bigint "user_id"
     t.bigint "group_id", null: false
+    t.string "url_string", null: false
+    t.datetime "expiration_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id", "user_id"], name: "index_invitations_on_group_id_and_user_id", unique: true
@@ -111,4 +113,6 @@ ActiveRecord::Schema.define(version: 400) do
   add_foreign_key "degrees_courses", "groups"
   add_foreign_key "events", "groups"
   add_foreign_key "groups", "courses"
+  add_foreign_key "invitations", "groups"
+  add_foreign_key "invitations", "users"
 end

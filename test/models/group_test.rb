@@ -92,9 +92,9 @@ class GroupTest < ActiveSupport::TestCase
   test "should also delete all invitations when deleting group" do
     @group.save
     group_id = @group.id
-    Invitation.create(group_id: group_id, user_id: users(:user_1).id)
-    Invitation.create(group_id: group_id, user_id: users(:user_2).id)
-    Invitation.create(group_id: group_id, user_id: users(:user_3).id)
+    Invitation.create(group_id: group_id, user_id: users(:user_1).id, url_string: "ciao")
+    Invitation.create(group_id: group_id, user_id: users(:user_2).id, url_string: "ciao")
+    Invitation.create(group_id: group_id, user_id: users(:user_3).id, url_string: "ciao")
     assert Invitation.all.where(group_id: group_id).size > 0
     @group.destroy
     assert_equal Invitation.all.where(group_id: group_id).size, 0

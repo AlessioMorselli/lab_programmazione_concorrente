@@ -1,7 +1,11 @@
 class CreateInvitations < ActiveRecord::Migration[5.2]
   def change
-    create_join_table :users, :groups, table_name: :invitations do |t|
-
+    create_table :invitations do |t|
+      t.bigint :user_id
+      t.bigint :group_id, null: false
+      t.string :url_string, null: false
+      t.datetime :expiration_date
+      
       t.timestamps
     end
   end
