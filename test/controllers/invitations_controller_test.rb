@@ -6,7 +6,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:user_1)
     log_in_as(@user)
-    @group = groups(:group_1)
+    @group = groups(:group_75)
     @invitation = invitations(:invitation_1)
     @public_invitation = invitations(:invitation_public_1)
   end

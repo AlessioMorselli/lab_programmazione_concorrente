@@ -5,6 +5,8 @@ class DegreesController < ApplicationController
     def show
       # Visualizza i corsi di studio (degree_courses) di un corso di laurea
       @degrees_courses = @degree.degrees_courses
+
+      render json: @degrees_courses
     end
 
     private

@@ -23,6 +23,7 @@ group_<%= n %>:
 
 <% 50.times do |n| %>
 group_<%= n + 50 %>:
+  id: <%= n + 50 %>
   name: <%= "Gruppo #{n + 50}" %>
   max_members: 10
   private: FALSE

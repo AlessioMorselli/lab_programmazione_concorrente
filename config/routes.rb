@@ -4,7 +4,6 @@ Rails.application.routes.draw do
     resources :events, except: [:show]
     resources :memberships, only: [:index, :destroy], param: :user_id
     resources :messages, except: [:show, :new, :edit]
-    # L'azione destroy di invitation solo in caso di invito rifiutato
     resources :invitations, only: [:show, :new, :create, :destroy]
   end
   resources :degrees_courses, only: [:index]
@@ -25,6 +24,7 @@ Rails.application.routes.draw do
 
   get     '/groups/:group_uuid/messages/pinned',                  to: 'messages#pinned', as: 'group_pinned_messages'
   
+  # Lista di tutti gli eventi dell'utente
   get     '/users/:user_id/events',                               to: 'events#user_index', as: 'user_events'
 
   # L'utente accetta l'invito ed entra nel gruppo

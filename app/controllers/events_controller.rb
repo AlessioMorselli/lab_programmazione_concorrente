@@ -20,6 +20,7 @@ class EventsController < ApplicationController
     # GET user_event_path(user, event)
     def show
         # Mostra la descrizione di un evento (magari su una finestrella)
+        render json: @event
     end
 
     # GET new_group_event_path(group_uuid: group.uuid)
@@ -34,7 +35,7 @@ class EventsController < ApplicationController
         # Salva nel db un nuovo evento
         @event = Event.new(event_params)
 
-        if @event.save
+        if @event.save!
             redirect_to group_path(uuid: @event.group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono valide'
@@ -42,15 +43,16 @@ class EventsController < ApplicationController
         end
     end
 
-    # GET edit_group_event_path(group_uuid: group.uuid, event)
+    # GET edit_group_event_path(group_uuid: group.uuid, id: event.id)
     def edit
         # Mostra la form per modificare un evento
+        render json: @event
     end
 
-    # PUT/PATCH group_event_path(group_uuid: group.uuid, event)
+    # PUT/PATCH group_event_path(group_uuid: group.uuid, id: event.id)
     def update
         # Salva nel db le modifiche ad un evento
-        if @event.update(event_params)
+        if @event.update!(event_params)
             redirect_to group_path(uuid: @event.group.uuid)
         else
             flash.now[:danger] = "Le informazioni dell'evento non sono state aggiornate"
@@ -58,7 +60,7 @@ class EventsController < ApplicationController
         end
     end
 
-    # DELETE group_event_path(group_uuid: group.uuid, event)
+    # DELETE group_event_path(group_uuid: group.uuid, id: event.id)
     def destroy
         # Elimina un evento
         group = @event.group

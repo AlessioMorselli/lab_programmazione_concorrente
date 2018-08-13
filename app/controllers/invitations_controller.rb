@@ -1,29 +1,32 @@
 class InvitationsController < ApplicationController
-    before_action :set_invitation, only: [:show, :edit, :update, :destroy]
+    before_action :set_invitation, only: [:show, :edit, :update, :destroy, :accept, :refuse]
 
     # GET user_invitations_path(user)
     def index
         # Visualizza tutte gli inviti in sospeso da parte di un utente
         @invitations = current_user.invitations
+        render json: @invitations
     end
 
     # GET group_invitation_path(group_uuid: group.uuid, id: invitation.id)
     def show
         # Mostra 2 scelte all'utente: accetta e rifiuta, rispettivamente 
         # corrispondenti alle azioni accept e refuse
+        render json: @invitation
     end
 
     # GET new_group_invitation_path(group_uuid: group.uuid)
     def new
         # Visualizza la form per invitare un utente ad un gruppo
         @invitation = Invitation.new
+        render json: @invitation
     end
 
     # POST group_invitations_path(group_uuid: group.uuid)
     def create
         # Salva l'invito nel db
         @invitation = Invitation.new(invitation_params)
-        if @invitation.save
+        if @invitation.save!
             redirect_to group_path(uuid: @invitation.group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono corrette'
@@ -44,18 +47,20 @@ class InvitationsController < ApplicationController
         #   - l'utente è aggiunto come membro del gruppo
         #   - l'invito perde di validità (se è destinato ad un utente specifico)
         group = @invitation.group
-        Invitation.transaction do
-            m = Membership.new
-            m.group_id = group.id
-            m.user_id = current_user.id
-            m.admin = false
-            m.save
-            if !@invitation.user_id.nil?
-                @invitation.destroy
-            end
-        end
 
-        redirect_to group_path(group_uuid: group.uuid)
+        @invitation.accepted(current_user)
+        # Invitation.transaction do
+        #     m = Membership.new
+        #     m.group_id = group.id
+        #     m.user_id = current_user.id
+        #     m.admin = false
+        #     m.save
+        #     if !@invitation.user_id.nil?
+        #         @invitation.destroy
+        #     end
+        # end
+
+        redirect_to group_path(uuid: group.uuid)
     end
 
     # GET group_refuse_invitation_path(group_uuid: group.uuid, id: invitation.id)

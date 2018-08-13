@@ -6,20 +6,24 @@ class UsersController < ApplicationController
     # GET users_path
     def index
         # Restituisce la lista di tutti gli utenti (solo a fine di development)
+        @users = User.all
+
+        render json: @users
     end
 
     # GET signup_path
     def new
         # Visualizza la form per l'iscrizione al sito
         @user = User.new
+        render json: @user
     end
 
     # POST signup_path
     def create
         # Salva nel database un nuovo utente
         @user = User.new(user_params)
-        if @user.save
-            log_in user
+        if @user.save!
+            log_in @user
             redirect_to groups_path
         else
             render 'new'
@@ -34,7 +38,7 @@ class UsersController < ApplicationController
     # PUT/PATCH user_path(user)
     def update
         # Aggiorna le informazioni sul un utente
-        if @user.update(user_params)
+        if @user.update!(user_params)
             flash[:success] = 'Le tue informazioni sono state aggiornate'
             redirect_to groups_path
         else

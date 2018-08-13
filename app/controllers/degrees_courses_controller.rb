@@ -12,6 +12,8 @@ class DegreesCoursesController < ApplicationController
         user_courses.each do |course|
             @user_courses_groups.push(course.group)
         end
+
+        render json: @user_courses_groups
     end
 
     # private
