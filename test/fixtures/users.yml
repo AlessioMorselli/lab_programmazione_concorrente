@@ -2,7 +2,7 @@
 user_<%= n %>:
   id: <%= n %>
   name: <%= "Utente #{n}" %>
-  password_digest: ciao
+  password_digest: $2a$10$JdrjoqkYH/dCFdEKYPLsfO6CsA7YAEIGCyKZwKlcVMNjIsHzVO1o6 # Password: ciaone
   email: <%= "user_#{n}@unife.it" %>
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>

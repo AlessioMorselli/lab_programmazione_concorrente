@@ -50,8 +50,8 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   
     assert_redirected_to group_path(uuid: @group.uuid)
     # Reload association to fetch updated data and assert that value is updated.
-    group.reload
-    assert_equal "Nuovi ciccioni", group.name
+    @group.reload
+    assert_equal "Nuovi ciccioni", @group.name
   end
 
   test "delete" do

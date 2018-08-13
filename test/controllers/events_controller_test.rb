@@ -21,7 +21,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show" do
-    get user_event_path(@event.user, @event)
+    get user_event_path(@user, @event)
     assert_response :success
   end
 

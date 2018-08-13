@@ -1,8 +1,6 @@
 class GroupsController < ApplicationController
     before_action :set_group, only: [:show, :edit, :update, :destroy]
 
-    # TODO: definire come devo restituire i dati a Mirko
-
     # GET groups_path
     def index
         # Restituisce tutti i gruppi, inserendovi anche dei parametri di ricerca (?)
@@ -23,15 +21,15 @@ class GroupsController < ApplicationController
     # GET group_path(uuid: group.uuid)
     def show
         # Visualizza la chat di un gruppo, inclusi messaggi, eventi e membri (online ed offline)
-        #@messages = @group.messages.recent # Scope che definisce di cercare solo i messaggi più recenti
-        #@events = @group.events.this_month # Ho pensato che possiamo caricare solo gli eventi del mese,
+        @messages = @group.messages#.recent # Scope che definisce di cercare solo i messaggi più recenti
+        @events = @group.events#.this_month # Ho pensato che possiamo caricare solo gli eventi del mese,
                                            # quindi caricarne altri nel caso vengano richiesti
-        #@memberships = @group.memberships
+        @memberships = @group.memberships
 
-        render json: @group
+        render json: {group: @group, messages: @messages, events: @events, memberships: @memberships}
     end
 
-    # GET new_groups_path
+    # GET new_group_path
     def new
         # Visualizza la form per creare un nuovo gruppo
         @group = Group.new
@@ -42,20 +40,8 @@ class GroupsController < ApplicationController
     def create
         # Salva il gruppo inviato nel DB
         @group = Group.new(group_params)
-        successful = false
-        
-        Group.transaction do
-            @group.save
 
-            first_member = Membership.new
-            first_member.admin = true
-            first_member.user_id = current_user.id
-            first_member.group_id = @group.id
-            first_member.save
-            successful = true
-        end
-
-        if successful
+        if @group.save_and_add_first_member(current_user)
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono valide'
@@ -63,15 +49,16 @@ class GroupsController < ApplicationController
         end
     end
 
-    # GET edit_groups_path
+    # GET edit_group_path(uuid: group.uuid)
     def edit
         # Visualizza la form per modificare un nuovo gruppo
+        render json: @group
     end
 
     # PUT/PATCH group_path(uuid: group.uuid)
     def update
         # Aggiorna le informazioni sul gruppo
-        if @group.update(group_params)
+        if @group.update!(group_params)
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:danger] = 'Le informazioni del gruppo non sono state aggiornate'
