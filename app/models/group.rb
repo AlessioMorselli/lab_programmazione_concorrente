@@ -36,6 +36,17 @@ class Group < ApplicationRecord
     
 
     def admin
-        memberships.admin.first.user
+        admin_membership = memberships.admin.first
+        admin_membership.user unless admin_membership.nil?
     end
+
+    def save_with_admin(user)
+        if self.new_record?
+            self.transaction do
+                self.save!
+                Membership.new(group_id: self.id, user_id: user.id, admin: true).save!
+            end
+        end
+    end
+
 end

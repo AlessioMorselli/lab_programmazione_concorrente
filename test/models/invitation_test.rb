@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class InvitationTest < ActiveSupport::TestCase
-  fixtures :invitations
+  fixtures :invitations, :users
 
   def setup
     @user = User.create(name: "name", email: "name@student.it", password: "password")
@@ -44,6 +44,38 @@ class InvitationTest < ActiveSupport::TestCase
     @invitation.expiration_date = 1.week.ago
     @invitation.save
     assert @invitation.expired?
+  end
+
+  test "accept should add the user to the group and not destroy the invitation if the invitation is for everyone and it's not expired" do
+    @invitation.user = nil
+    assert @invitation.save
+    @invitation.accept @user
+    assert @group.members.include?(@user)
+    assert Invitation.exists?(@invitation.id)
+  end
+
+  test "accept should add the user to the group and destroy the invitation if the invitation is private and it's not expired" do
+    assert @invitation.save
+    @invitation.accept
+    assert @group.members.include?(@user)
+    assert_not Invitation.exists?(@invitation.id)
+  end
+
+  test "accept should raise an exception if the invitation is expired" do
+    @invitation.expiration_date = Time.now - 1.hour
+    @invitation.save
+    assert_raises Exception do @invitation.accept(@user) end
+  end
+
+  test "accept should raise an exception if the invitation is for everyone and no user is passed" do
+    @invitation.user = nil
+    @invitation.save
+    assert_raises Exception do @invitation.accept end
+  end
+
+  test "accept should raise an exception if the invitation is for a user and a different user is passed" do
+    @invitation.save
+    assert_raises Exception do @invitation.accept(users(:user_2)) end
   end
 
 end

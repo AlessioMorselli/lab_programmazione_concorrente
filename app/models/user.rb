@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
     has_many :messages
 
-    has_many :invitations
+    has_many :invitations, :dependent => :delete_all
 
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }

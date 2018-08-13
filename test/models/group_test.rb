@@ -100,4 +100,15 @@ class GroupTest < ActiveSupport::TestCase
     assert_equal Invitation.all.where(group_id: group_id).size, 0
   end
 
+  test "save_with_admin should save the group and add the user as an admin" do
+    @group.save_with_admin(users(:user_1))
+    assert_equal @group.admin, users(:user_1)
+  end
+
+  test "save_with_admin should not save the group and add the admin if the group is not new" do
+    @group.save
+    @group.save_with_admin(users(:user_1))
+    assert_not_equal @group.admin, users(:user_1)
+  end
+
 end
