@@ -1,6 +1,3 @@
-class InvitationExpired < StandardError; end
-class CantAcceptInvite < StandardError; end
-
 class Invitation < ApplicationRecord
     belongs_to :user, optional: true
     belongs_to :group
@@ -17,13 +14,15 @@ class Invitation < ApplicationRecord
     end
 
     def accept(user = nil)
-        raise InvitationExpired if self.expired?
-        raise CantAcceptInvite("nessun user fornito") if self.user.nil? && user.nil?
-        raise CantAcceptInvite("gli user non coincidono") if self.user != user unless user.nil? || self.user.nil?
+        if self.expired? || (self.user.nil? && user.nil?) || (self.user != user unless user.nil? || self.user.nil?)
+            return false
+        end
 
         self.transaction do
             self.group.members << (self.user.nil? ? user : self.user)
             self.destroy unless self.user.nil?
         end
+
+        return true
     end
 end

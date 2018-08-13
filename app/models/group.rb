@@ -46,6 +46,10 @@ class Group < ApplicationRecord
                 self.save!
                 Membership.new(group_id: self.id, user_id: user.id, admin: true).save!
             end
+
+            return true
+        else
+            return false
         end
     end
 

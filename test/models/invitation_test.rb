@@ -64,18 +64,18 @@ class InvitationTest < ActiveSupport::TestCase
   test "accept should raise an exception if the invitation is expired" do
     @invitation.expiration_date = Time.now - 1.hour
     @invitation.save
-    assert_raises Exception do @invitation.accept(@user) end
+    assert_not @invitation.accept(@user)
   end
 
   test "accept should raise an exception if the invitation is for everyone and no user is passed" do
     @invitation.user = nil
     @invitation.save
-    assert_raises Exception do @invitation.accept end
+    assert_not @invitation.accept
   end
 
   test "accept should raise an exception if the invitation is for a user and a different user is passed" do
     @invitation.save
-    assert_raises Exception do @invitation.accept(users(:user_2)) end
+    assert_not @invitation.accept(users(:user_2))
   end
 
 end
