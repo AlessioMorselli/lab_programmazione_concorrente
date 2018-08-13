@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-    before_action :set_message, only: [:show, :edit, :update, :destroy]
+    before_action :set_message, only: [:show, :edit, :update, :destroy, :download_attachment]
 
     # GET group_messages_path(group_uuid: group.uuid)
     def index
@@ -14,7 +14,8 @@ class MessagesController < ApplicationController
     def create
         # Il messaggio viene salvato nel db e visualizzato sulla chat
         @message = Message.new(message_params)
-        if !@message.save!
+        @attachment = Attachment.new(attachment_params)
+        if !@message.save_with_attachment(@attachment)
             flash.now[:danger] = 'Il messaggio non è stato inviato'
         end
     end
@@ -49,6 +50,10 @@ class MessagesController < ApplicationController
     end
 
     def message_params
-        params.require(:message).permit(:text, :attachement, :pinned, :group_id, :user_id)
+        params.require(:message).permit(:text, :attachment_id, :pinned, :group_id, :user_id)
+    end
+
+    def attachment_params
+        params.require(:attachment).permit(:name, :type, :data)
     end
 end

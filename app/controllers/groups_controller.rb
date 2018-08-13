@@ -41,7 +41,7 @@ class GroupsController < ApplicationController
         # Salva il gruppo inviato nel DB
         @group = Group.new(group_params)
 
-        if @group.save_and_add_first_member(current_user)
+        if @group.save_with_admin(current_user)
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono valide'

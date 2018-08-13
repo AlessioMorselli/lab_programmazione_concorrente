@@ -17,7 +17,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show" do
-    get group_invitation_path(group_uuid: @invitation.group.uuid, id: @invitation.id)
+    get group_invitation_path(group_uuid: @invitation.group.uuid, url_string: @invitation.url_string)
     assert_response :success
   end
 
@@ -52,35 +52,35 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
   test "delete" do
     assert_difference('Invitation.count', -1) do
-      delete group_invitation_path(group_uuid: @invitation.group.uuid, id: @invitation.id)
+      delete group_invitation_path(group_uuid: @invitation.group.uuid, url_string: @invitation.url_string)
     end
   end
 
   test "accept_private" do
     assert_difference('Invitation.count', -1) do
       assert_difference('Membership.count', 1) do
-        get group_accept_invitation_path(group_uuid: @invitation.group.uuid, id: @invitation.id)
+        get group_accept_invitation_path(group_uuid: @invitation.group.uuid, url_string: @invitation.url_string)
       end
     end
   end
 
   test "refuse_private" do
     assert_difference('Invitation.count', -1) do
-      get group_refuse_invitation_path(group_uuid: @invitation.group.uuid, id: @invitation.id)
+      get group_refuse_invitation_path(group_uuid: @invitation.group.uuid, url_string: @invitation.url_string)
     end
   end
 
   test "accept_public" do
     assert_difference('Invitation.count', 0) do
       assert_difference('Membership.count', 1) do
-        get group_accept_invitation_path(group_uuid: @public_invitation.group.uuid, id: @public_invitation.id)
+        get group_accept_invitation_path(group_uuid: @public_invitation.group.uuid, url_string: @invitation.url_string)
       end
     end
   end
 
   test "refuse_public" do
     assert_difference('Invitation.count', 0) do
-      get group_refuse_invitation_path(group_uuid: @public_invitation.group.uuid, id: @public_invitation.id)
+      get group_refuse_invitation_path(group_uuid: @public_invitation.group.uuid, url_string: @invitation.url_string)
     end
   end
 end
