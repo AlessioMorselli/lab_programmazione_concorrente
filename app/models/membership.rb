@@ -5,4 +5,8 @@ class Membership < ApplicationRecord
     belongs_to :group
 
     validates_uniqueness_of :user_id, :scope => :group_id
+
+    def self.get_one(user, group)
+        find_by(user_id: user.id, group_id: group.id)
+    end
 end

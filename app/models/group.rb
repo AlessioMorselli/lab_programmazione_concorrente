@@ -1,6 +1,8 @@
 class MembersLimitExceeded < StandardError; end
 
 class Group < ApplicationRecord
+    scope :public, -> { where(private: false) }
+
     ### RELATIONS ###
     has_one :course
 
@@ -51,6 +53,11 @@ class Group < ApplicationRecord
         else
             return false
         end
+    end
+
+    # restituisce i gruppi il cui nome o il cui corso di studio associato include la query passata
+    def self.user_query(query)
+        distinct().joins("JOIN courses ON courses.id = groups.course_id").where("groups.name LIKE ? OR courses.name LIKE ?", "%#{query}%", "%#{query}%")
     end
 
 end
