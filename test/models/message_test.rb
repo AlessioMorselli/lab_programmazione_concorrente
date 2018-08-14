@@ -18,6 +18,9 @@ class UserTest < ActiveSupport::TestCase
         msg.user_id = users(:user_1).id
         msg.save
     end
+
+    @attachement = Attachement.new(name: "ciao", mime_type: "type", data: "data")
+    @attachement.save
   end
 
   test "should not save if text and attachement are not supplied" do
@@ -36,12 +39,12 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should save if only attachement is supplied" do
-    message = Message.new(attachement: 1, group_id: @group.id, user_id: users(:user_1).id)
+    message = Message.new(attachement_id: @attachement.id, group_id: @group.id, user_id: users(:user_1).id)
     assert message.save
   end
 
   test "should save if both text and attachement are supplied" do
-    message = Message.new(text: "ciao", attachement: 1, group_id: @group.id, user_id: users(:user_1).id)
+    message = Message.new(text: "ciao", attachement_id: @attachement.id, group_id: @group.id, user_id: users(:user_1).id)
     assert message.save
   end
 
