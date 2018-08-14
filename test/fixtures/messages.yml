@@ -1,7 +1,7 @@
 <% 250.times do |n| %>
 message_<%= n %>:
   text: example
-  attachement_id: null
+  attachment_id: null
   pinned: false
   group_id: <%= Random.rand(100) %>
   user_id: <%= Random.rand(50) %>
@@ -12,7 +12,7 @@ message_<%= n %>:
 <% 10.times do |n| %>
 message_with_attachments_<%= n %>:
   text: this is a message with an attachment
-  attachement_id: <%= n %>
+  attachment_id: <%= n %>
   pinned: false
   group_id: <%= Random.rand(100) %>
   user_id: <%= Random.rand(50) %>

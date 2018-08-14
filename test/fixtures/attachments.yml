@@ -2,6 +2,6 @@
 attachment_<%= n %>:
   id: <%= n %>
   name: <%= "immagine_#{n}.jpg" %>
-  type: image/jpeg
-  data: null
+  mime_type: image/jpeg
+  data: qualcosa
 <% end %>

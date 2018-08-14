@@ -1,6 +1,6 @@
-class CreateAttachements < ActiveRecord::Migration[5.2]
+class CreateAttachments < ActiveRecord::Migration[5.2]
     def change
-      create_table :attachements do |t|
+      create_table :attachments do |t|
         t.string :name, :null => false
         t.string :mime_type, :null => false
         t.binary :data, :null => false

@@ -6,11 +6,11 @@ class Message < ApplicationRecord
     
     belongs_to :user
     belongs_to :group
-    has_one :attachement
+    has_one :attachment
 
-    validate :text_or_attachement_must_be_present
+    validate :text_or_attachment_must_be_present
 
-    def text_or_attachement_must_be_present
+    def text_or_attachment_must_be_present
         unless text.present? || attachement_id.present?
             errors.add(:message, "Text or attachement must be present")
         end

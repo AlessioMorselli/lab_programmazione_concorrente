@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 400) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "attachements", force: :cascade do |t|
+  create_table "attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "mime_type", null: false
     t.binary "data", null: false
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(version: 400) do
     t.boolean "pinned", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "attachement_id"
-    t.index ["attachement_id"], name: "index_messages_on_attachement_id"
+    t.bigint "attachment_id"
+    t.index ["attachment_id"], name: "index_messages_on_attachment_id"
   end
 
   create_table "students", id: false, force: :cascade do |t|
@@ -124,5 +124,5 @@ ActiveRecord::Schema.define(version: 400) do
   add_foreign_key "groups", "courses"
   add_foreign_key "invitations", "groups"
   add_foreign_key "invitations", "users"
-  add_foreign_key "messages", "attachements"
+  add_foreign_key "messages", "attachments"
 end

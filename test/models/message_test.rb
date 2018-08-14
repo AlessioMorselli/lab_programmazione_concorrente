@@ -1,11 +1,11 @@
 require 'test_helper'
 
-class UserTest < ActiveSupport::TestCase
+class MessageTest < ActiveSupport::TestCase
   fixtures :users
 
   def setup
     @group = Group.new(name: "Fake group")
-    @group.save
+    assert @group.save
     @messages = [
         Message.new(text: "ciao0", created_at: Time.now, updated_at: Time.now),
         Message.new(text: "ciao1", created_at: Time.now+1.minute, updated_at: Time.now+1.minute),
@@ -16,19 +16,19 @@ class UserTest < ActiveSupport::TestCase
     @messages.each do |msg|
         msg.group_id = @group.id
         msg.user_id = users(:user_1).id
-        msg.save
+        assert msg.save
     end
 
-    @attachement = Attachement.new(name: "ciao", mime_type: "type", data: "data")
-    @attachement.save
+    @attachment = attachment.new(name: "ciao", mime_type: "type", data: "data")
+    assert @attachment.save
   end
 
-  test "should not save if text and attachement are not supplied" do
+  test "should not save if text and attachment are not supplied" do
     message = Message.new(group_id: @group.id, user_id: users(:user_1).id)
     assert_not message.save
   end
 
-  test "should not save if text is empty and attachement is not supplied" do
+  test "should not save if text is empty and attachment is not supplied" do
     message = Message.new(text: "   ", group_id: @group.id, user_id: users(:user_1).id)
     assert_not message.save
   end
@@ -38,13 +38,13 @@ class UserTest < ActiveSupport::TestCase
     assert message.save
   end
 
-  test "should save if only attachement is supplied" do
-    message = Message.new(attachement_id: @attachement.id, group_id: @group.id, user_id: users(:user_1).id)
+  test "should save if only attachment is supplied" do
+    message = Message.new(attachment_id: @attachment.id, group_id: @group.id, user_id: users(:user_1).id)
     assert message.save
   end
 
-  test "should save if both text and attachement are supplied" do
-    message = Message.new(text: "ciao", attachement_id: @attachement.id, group_id: @group.id, user_id: users(:user_1).id)
+  test "should save if both text and attachment are supplied" do
+    message = Message.new(text: "ciao", attachment_id: @attachment.id, group_id: @group.id, user_id: users(:user_1).id)
     assert message.save
   end
 
