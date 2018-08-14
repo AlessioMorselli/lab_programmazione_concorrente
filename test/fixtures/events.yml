@@ -1,5 +1,5 @@
-<% st = (Time.now + (Random.rand(2)).hours) %>
-<% et = (Time.now + 3.hours) %>
+<% st = (DateTime.now + (Random.rand(2)).hours) + 2.minutes %>
+<% et = (DateTime.now + 3.hours) %>
 
 <% 250.times do |n| %>
 event_<%= n %>:

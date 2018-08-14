@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class MessagesControllerTest < ActionDispatch::IntegrationTest
-  fixtures :groups, :memberships, :messages, :users
+  fixtures :groups, :memberships, :messages, :users, :attachments
 
   def setup
     @message = messages(:message_1)
@@ -39,7 +39,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "pinned" do
-    get group_pinned_messages(group_uuid: @message.group.uuid)
+    get group_pinned_messages_path(group_uuid: @message.group.uuid)
     assert_response :success
   end
 end

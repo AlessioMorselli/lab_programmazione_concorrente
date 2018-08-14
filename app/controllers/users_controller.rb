@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
     before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-    # TODO: definire come devo restituire i dati a Mirko
-
+    # TODO: da togliere
     # GET users_path
     def index
         # Restituisce la lista di tutti gli utenti (solo a fine di development)
@@ -33,11 +32,12 @@ class UsersController < ApplicationController
     # GET edit_user_path(user)
     def edit
         # Visualizza la form per modificare le informazioni di un utente
+        render json: @user
     end
 
     # PUT/PATCH user_path(user)
     def update
-        # Aggiorna le informazioni sul un utente
+        # Aggiorna le informazioni su un utente
         if @user.update!(user_params)
             flash[:success] = 'Le tue informazioni sono state aggiornate'
             redirect_to groups_path

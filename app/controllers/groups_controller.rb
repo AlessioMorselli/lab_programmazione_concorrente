@@ -13,17 +13,20 @@ class GroupsController < ApplicationController
             end
             @groups = Group.user_query(query) # Scope che cerca sia nel nome, che nel corso di un gruppo
         else
-            @groups = Group.suggested # Scope che restituisce 10 - 12 gruppi che potrebbero interessare
-                                      # all'utente loggato
+            @groups = current_user.suggested # Scope che restituisce 10 - 12 gruppi che potrebbero interessare
+                                             # all'utente loggato
         end
     end
 
     # GET group_path(uuid: group.uuid)
     def show
         # Visualizza la chat di un gruppo, inclusi messaggi, eventi e membri (online ed offline)
-        @messages = @group.messages.recent # Scope che definisce di cercare solo i messaggi più recenti
-        @events = @group.events#.this_month # Ho pensato che possiamo caricare solo gli eventi del mese,
-                                           # quindi caricarne altri nel caso vengano richiesti
+        # Scope che definisce di cercare solo i messaggi più recenti
+        @messages = @group.messages.recent(get_last_message_read(@group))
+        set_last_message_read(@group, DateTime.now)
+
+        # Carica solo gli eventi della settimana
+        @events = @group.events.next
         @memberships = @group.memberships
 
         render json: {group: @group, messages: @messages, events: @events, memberships: @memberships}

@@ -33,7 +33,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "update" do
-    patch user_path(@user), params: { user: { name: "NewName" } }
+    patch user_path(@user), params: { user: {
+      name: "NewName",
+      # TODO: Perchè devo mettere la password? Problemi con le fixture?
+      password: "ciaone"
+      }
+    }
   
     assert_redirected_to groups_path
 

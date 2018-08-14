@@ -5,8 +5,8 @@ class MembershipsController < ApplicationController
   def index
     # Recupera tutti i membri di un gruppo, in modo da poter visualizzare chi fa parte di un gruppo
     # e chi è online in quel momento (forse, adesso vediamo)
-    group = Group.find_by_uuid(params[:group_uuid])
-    @members = group.memberships
+    @group = Group.find_by_uuid(params[:group_uuid])
+    @members = @group.memberships
 
     render json: @members
   end
@@ -20,8 +20,8 @@ class MembershipsController < ApplicationController
 
   private
   def set_membership
-    group = Group.find_by_uuid(params[:group_uuid])
-    @membership = Membership.get_one(group, current_user)
+    @group = Group.find_by_uuid(params[:group_uuid])
+    @membership = Membership.get_one(@group, current_user)
   end
 
   def membership_params

@@ -4,4 +4,6 @@ attachment_<%= n %>:
   name: <%= "immagine_#{n}.jpg" %>
   mime_type: image/jpeg
   data: qualcosa
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
 <% end %>

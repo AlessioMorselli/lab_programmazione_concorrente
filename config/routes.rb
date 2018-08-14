@@ -30,9 +30,9 @@ Rails.application.routes.draw do
   get     '/users/:user_id/events',                                   to: 'events#user_index', as: 'user_events'
 
   # L'utente accetta l'invito ed entra nel gruppo
-  get     '/groups/:group_uuid/invitations/:id/accept',               to: 'invitations#accept', as: 'group_accept_invitation'
+  get     '/groups/:group_uuid/invitations/:url_string/accept',       to: 'invitations#accept', as: 'group_accept_invitation'
   # L'utente rifiuta l'invito e non entra nel gruppo
-  get     '/groups/:group_uuid/invitations/:id/refuse',               to: 'invitations#refuse', as: 'group_refuse_invitation'
+  get     '/groups/:group_uuid/invitations/:url_string/refuse',       to: 'invitations#refuse', as: 'group_refuse_invitation'
 
   # Per scaricare l'allegato di un messaggio
   get     '/groups/:group_uuid/messages/:message_id/attachment/:id/download',

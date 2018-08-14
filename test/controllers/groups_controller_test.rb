@@ -3,7 +3,7 @@ include ActionDispatch::Routing::UrlFor
 include Rails.application.routes.url_helpers
 
 class GroupsControllerTest < ActionDispatch::IntegrationTest
-  fixtures :groups, :memberships, :users, :messages, :events
+  fixtures :groups, :memberships, :users, :messages, :events, :attachments
 
   def setup
     @user = users(:user_1)
@@ -28,16 +28,18 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
   test "create" do
     assert_difference('Group.count') do
-      post groups_path, params: { group: {
-        name: "I ciccioni",
-        max_members: 10,
-        private: true,
-        course_id: nil
+      assert_difference('Membership.count') do
+        post groups_path, params: { group: {
+          name: "I ciccioni",
+          max_members: 10,
+          private: true,
+          course_id: nil
+          }
         }
-      }
+      end
     end
-   
-    assert_redirected_to group_path(uuid: Group.last.uuid)
+
+    assert_redirected_to group_path(uuid: Group.find_by_name("I ciccioni").uuid)
   end
 
   test "edit" do

@@ -4,8 +4,9 @@ class MessagesController < ApplicationController
     # GET group_messages_path(group_uuid: group.uuid)
     def index
         # Restituisce tutti i messaggi del gruppo, a partire da una certa data e ora
-        group = Group.find_by_uuid(params[:group_uuid])
-        @messages = group.messages.recent()
+        @group = Group.find_by_uuid(params[:group_uuid])
+        @messages = @group.messages.recent(get_last_message_read(@group))
+        set_last_message_read(@group, DateTime.now)
 
         render json: @messages
     end
@@ -38,8 +39,8 @@ class MessagesController < ApplicationController
     # GET group_pinned_messages(group_uuid: group.uuid)
     def pinned
         # Visualizza i messaggi pinnati di un gruppo
-        group = Group.find_by_uuid(params[:group_uuid])
-        @pinned_messages = group.pinned_messages
+        @group = Group.find_by_uuid(params[:group_uuid])
+        @pinned_messages = @group.messages.pinned
 
         render json: @pinned_messages
     end

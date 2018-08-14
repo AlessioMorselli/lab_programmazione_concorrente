@@ -4,8 +4,9 @@ class EventsController < ApplicationController
     # GET group_events_path(group_uuid: group.uuid)
     def index
         # Visualizza tutti gli eventi di un gruppo
-        group = Group.find_by_uuid(params[:group_uuid])
-        @events = group.events#.this_month
+        @group = Group.find_by_uuid(params[:group_uuid])
+        @events = @group.events.next # Devo inserire un parametro in modo da poter cambiare il lasso di tempo
+                                    # da caricare
         render json: @events
     end
 
@@ -13,7 +14,7 @@ class EventsController < ApplicationController
     # GET user_events_path(user)
     def user_index
         # Visualizza tutti gli eventi dei gruppi di cui fa parte l'utente
-        @events = current_user.groups.events#.this_month
+        @events = current_user.groups.events.next
         render json: @events
     end
 
@@ -36,7 +37,7 @@ class EventsController < ApplicationController
         @event = Event.new(event_params)
 
         if @event.save!
-            redirect_to group_path(uuid: @event.group.uuid)
+            redirect_to group_events_path(group_uuid: @event.group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono valide'
             render 'new'
@@ -53,7 +54,7 @@ class EventsController < ApplicationController
     def update
         # Salva nel db le modifiche ad un evento
         if @event.update!(event_params)
-            redirect_to group_path(uuid: @event.group.uuid)
+            redirect_to group_events_path(group_uuid: @event.group.uuid)
         else
             flash.now[:danger] = "Le informazioni dell'evento non sono state aggiornate"
             render 'edit'
@@ -63,10 +64,10 @@ class EventsController < ApplicationController
     # DELETE group_event_path(group_uuid: group.uuid, id: event.id)
     def destroy
         # Elimina un evento
-        group = @event.group
+        @group = @event.group
         @event.destroy
 
-        redirect_to group_path(uuid: group.uuid)
+        redirect_to group_events_path(group_uuid: @group.uuid)
     end
 
     private
@@ -75,6 +76,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:start_time, :end_time, :place, :description, :groupo_id)
+      params.require(:event).permit(:start_time, :end_time, :place, :description, :group_id)
     end
 end

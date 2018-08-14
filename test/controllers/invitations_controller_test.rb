@@ -57,17 +57,22 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "accept_private" do
+    @invitation_group = @invitation.group
     assert_difference('Invitation.count', -1) do
       assert_difference('Membership.count', 1) do
         get group_accept_invitation_path(group_uuid: @invitation.group.uuid, url_string: @invitation.url_string)
       end
     end
+
+    assert_redirected_to group_path(uuid: @invitation_group.uuid)
   end
 
   test "refuse_private" do
     assert_difference('Invitation.count', -1) do
       get group_refuse_invitation_path(group_uuid: @invitation.group.uuid, url_string: @invitation.url_string)
     end
+
+    assert_redirected_to groups_path
   end
 
   test "accept_public" do
@@ -76,11 +81,15 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
         get group_accept_invitation_path(group_uuid: @public_invitation.group.uuid, url_string: @invitation.url_string)
       end
     end
+
+    assert_redirected_to group_path(uuid: @invitation.group.uuid)
   end
 
   test "refuse_public" do
     assert_difference('Invitation.count', 0) do
       get group_refuse_invitation_path(group_uuid: @public_invitation.group.uuid, url_string: @invitation.url_string)
     end
+
+    assert_redirected_to groups_path
   end
 end

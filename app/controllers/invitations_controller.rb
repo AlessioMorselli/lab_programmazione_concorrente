@@ -49,9 +49,12 @@ class InvitationsController < ApplicationController
         @group = @invitation.group
 
         if @invitation.accept(current_user)
+            # Quando un utente si aggiunge ad un gruppo, setto l'ultimo messaggio letto a quelli
+            # del giorno precedente
+            set_last_message_read(@group, DateTime.now - 1.days)
             redirect_to group_path(uuid: @group.uuid)
         else
-            flash.now(:danger) = "Qualcosa è andato storto e l'invito non è andato a buon fine!"
+            flash.now[:danger] = "Qualcosa è andato storto e l'invito non è andato a buon fine!"
         end
     end
 
@@ -69,7 +72,7 @@ class InvitationsController < ApplicationController
 
     private
     def set_invitation
-        @invitation = Invitation.find(params[:id])
+        @invitation = Invitation.find_by_url_string(params[:url_string])
     end
 
     def invitation_params

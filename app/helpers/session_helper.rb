@@ -41,4 +41,14 @@ module SessionHelper
         cookies.delete(:user_id)
         cookies.delete(:remember_token)
     end
+
+    # Memorizza l'ultimo messaggio letto da un utente, in modo da caricare nel gruppo solo i messaggi nuovi
+    def set_last_message_read(group, time)
+        cookies.permanent[group.uuid] = time
+    end
+
+    # Restituisce il DateTime dell'ultimo messaggio letto
+    def get_last_message_read(group)
+        cookies.permanent[group.uuid]
+    end
 end
