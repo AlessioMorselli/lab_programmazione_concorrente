@@ -1,7 +1,7 @@
 class AttachmentsController < ApplicationController
     before_action :set_attachment, only: [:show, :edit, :update, :destroy, :download_attachment]
 
-    # DELETE group_message_attachment(group_uuid: group.uuid, message_id: message.id, id: attachment.id)
+    # DELETE group_message_attachment_path(group_uuid: group.uuid, message_id: message.id, id: attachment.id)
     def destroy
         # Cancella l'allegato di un messaggio, senza cancellare il messaggio per intero
         @group = Group.find_by_uuid(params[:uuid])

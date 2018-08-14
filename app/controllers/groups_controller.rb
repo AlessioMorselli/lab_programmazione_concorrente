@@ -21,7 +21,7 @@ class GroupsController < ApplicationController
     # GET group_path(uuid: group.uuid)
     def show
         # Visualizza la chat di un gruppo, inclusi messaggi, eventi e membri (online ed offline)
-        @messages = @group.messages#.recent # Scope che definisce di cercare solo i messaggi più recenti
+        @messages = @group.messages.recent # Scope che definisce di cercare solo i messaggi più recenti
         @events = @group.events#.this_month # Ho pensato che possiamo caricare solo gli eventi del mese,
                                            # quindi caricarne altri nel caso vengano richiesti
         @memberships = @group.memberships

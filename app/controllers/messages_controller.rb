@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
     def index
         # Restituisce tutti i messaggi del gruppo, a partire da una certa data e ora
         group = Group.find_by_uuid(params[:group_uuid])
-        @messages = group.messages#.recent
+        @messages = group.messages.recent()
 
         render json: @messages
     end

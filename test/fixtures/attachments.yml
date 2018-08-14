@@ -1,0 +1,7 @@
+<% 10.times do |n| %>
+attachment_<%= n %>:
+  id: <%= n %>
+  name: <%= "immagine_#{n}.jpg" %>
+  type: image/jpeg
+  data: null
+<% end %>
