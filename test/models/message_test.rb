@@ -19,7 +19,7 @@ class MessageTest < ActiveSupport::TestCase
         assert msg.save
     end
 
-    @attachment = attachment.new(name: "ciao", mime_type: "type", data: "data")
+    @attachment = Attachment.new(name: "ciao", mime_type: "type", data: "data")
     assert @attachment.save
   end
 

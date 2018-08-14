@@ -11,8 +11,8 @@ class Message < ApplicationRecord
     validate :text_or_attachment_must_be_present
 
     def text_or_attachment_must_be_present
-        unless text.present? || attachement_id.present?
-            errors.add(:message, "Text or attachement must be present")
+        unless text.present? || attachment_id.present?
+            errors.add(:message, "Text or attachment must be present")
         end
     end
 

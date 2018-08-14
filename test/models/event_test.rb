@@ -4,8 +4,33 @@ class EventTest < ActiveSupport::TestCase
   fixtures :groups
 
   def setup
-    st_time = Time.now + 2.hours
+    now = Time.now
+
+    st_time = now + 2.hours
     @event = Event.new(start_time: st_time, end_time: st_time + 2.hours, place: "Aula 20", description: "Generic description", group_id: groups(:group_1).id)
+
+    @events_this_hour = [
+      Event.new(start_time: now+1.minute, end_time: now+2.hours),
+      Event.new(start_time: now+20.minutes, end_time: now+2.hours),
+      Event.new(start_time: now+40.minutes, end_time: now+2.hours),
+      Event.new(start_time: now+45.minutes, end_time: now+2.hours),
+    ]
+
+    @events_this_week = [
+      Event.new(start_time: now+1.day, end_time: now+1.day+2.hours),
+      Event.new(start_time: now+2.day, end_time: now+2.day+2.hours),
+      Event.new(start_time: now+3.day, end_time: now+3.day+2.hours),
+      Event.new(start_time: now+4.day, end_time: now+4.day+2.hours),
+      Event.new(start_time: now+5.day, end_time: now+5.day+2.hours),
+      Event.new(start_time: now+6.day, end_time: now+6.day+2.hours),
+    ]
+
+    @events_next_week = [
+      Event.new(start_time: now+8.day, end_time: now+8.day+2.hours),
+      Event.new(start_time: now+9.day, end_time: now+9.day+2.hours),
+      Event.new(start_time: now+10.day, end_time: now+10.day+2.hours),
+    ]
+
   end
 
   test "should save if everything is supplied" do
@@ -40,6 +65,24 @@ class EventTest < ActiveSupport::TestCase
   test "duration should return the difference between end_time and start_time" do
     @event.end_time = @event.start_time + 2.hour + 20.minutes
     assert_equal @event.duration, "02:20:00"
+  end
+
+  test "next should return events in the next week if no argument is passed" do
+    group = Group.new(name: "fake group")
+    assert group.save
+    group.events << @events_this_week
+    group.events << @events_next_week
+
+    assert_equal @events_this_week.size, group.events.next.count
+  end
+
+  test "next should return events in the next hour, including events not finished, if 1.hour is passed as argument" do
+    group = Group.new(name: "fake group")
+    assert group.save
+    group.events << @events_this_hour
+    group.events << @events_this_week
+
+    assert_equal @events_this_hour.size, group.events.next(1.hour).count
   end
 
 end

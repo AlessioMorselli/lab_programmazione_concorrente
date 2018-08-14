@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+
     belongs_to :group
 
     validates_presence_of :group, :start_time, :end_time
@@ -21,6 +22,11 @@ class Event < ApplicationRecord
         end
     end
 
+
+    def self.next(time = 1.week)
+        where(start_time: Time.now.beginning_of_day..(Time.now+time))
+        .where("end_time > ?", Time.now)
+    end
 
     # restituisce la durata dell'evento nel formato HH:MM:SS
     def duration
