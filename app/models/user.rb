@@ -3,7 +3,8 @@ class User < ApplicationRecord
 
     before_save { self.email = email.downcase }
     
-    has_many :groups, through: :memberships
+    has_many :memberships, :dependent => :delete_all
+    has_many :groups, class_name: "Group", :source => :group, through: :memberships
 
     has_many :messages
 

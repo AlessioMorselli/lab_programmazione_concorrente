@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
+  fixtures :users
 
   def setup
     @user = User.new(name: "name", email: "name@student.it", password: "password")
@@ -95,6 +96,10 @@ class UserTest < ActiveSupport::TestCase
     @user.remember
     @user.forget
     assert @user.remember_digest.nil?
+  end
+
+  test "groups should return user groups" do
+    assert users(:user_1).groups
   end
 
 end
