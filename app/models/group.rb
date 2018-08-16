@@ -1,7 +1,7 @@
 class MembersLimitExceeded < StandardError; end
 
 class Group < ApplicationRecord
-    scope :public, -> { where(private: false) }
+    scope :is_public, -> { where(private: false) }
 
     ### RELATIONS ###
     has_one :course
@@ -35,7 +35,6 @@ class Group < ApplicationRecord
             errors.add(:max_members, "must be more than the current number of members")
         end
     end
-    
 
     def admin
         admin_membership = memberships.admin.first
