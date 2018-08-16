@@ -15,6 +15,8 @@ class AttachmentsControllerTest < ActionDispatch::IntegrationTest
         delete group_message_attachment_path(group_uuid: @group.uuid, message_id: @message.id, id: @attachment.id)
       end
     end
+
+    assert_redirected_to group_path(group_uuid: @group.uuid)
   end
 
   test 'should download attachment' do

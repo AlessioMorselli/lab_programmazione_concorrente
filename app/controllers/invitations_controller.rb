@@ -63,7 +63,7 @@ class InvitationsController < ApplicationController
         # L'utente a cui è stato inviato l'invito ha rifiutato
         # L'azione ha quindi un solo effetto:
         #   - l'invito perde di validità (se è destinato ad un utente specifico)
-        if !@invitation.user_id.nil?
+        if !(@invitation.user.nil?)
             @invitation.destroy
         end
 

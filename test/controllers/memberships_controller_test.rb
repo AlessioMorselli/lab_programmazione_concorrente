@@ -14,8 +14,8 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
 
   test "delete" do
     # TODO: non sapendo come fare il routing, questo test è da rivedere
-    assert_difference('Mambership.count', -1) do
-      delete group_memberships(group_uuid: @membership.group.uuid, user_id: @membership.user.id)
+    assert_difference('Membership.count', -1) do
+      delete group_membership_path(group_uuid: @membership.group.uuid, user_id: @membership.user.id)
     end
     
     assert_redirected_to groups_path

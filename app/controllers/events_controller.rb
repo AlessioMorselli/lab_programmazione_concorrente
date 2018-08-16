@@ -6,7 +6,7 @@ class EventsController < ApplicationController
         # Visualizza tutti gli eventi di un gruppo
         @group = Group.find_by_uuid(params[:group_uuid])
         @events = @group.events.next # Devo inserire un parametro in modo da poter cambiare il lasso di tempo
-                                    # da caricare
+                                     # da caricare
         render json: @events
     end
 
@@ -40,7 +40,6 @@ class EventsController < ApplicationController
             redirect_to group_events_path(group_uuid: @event.group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono valide'
-            render 'new'
         end
     end
 
@@ -57,7 +56,6 @@ class EventsController < ApplicationController
             redirect_to group_events_path(group_uuid: @event.group.uuid)
         else
             flash.now[:danger] = "Le informazioni dell'evento non sono state aggiornate"
-            render 'edit'
         end
     end
 

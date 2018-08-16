@@ -16,6 +16,8 @@ class GroupsController < ApplicationController
             @groups = current_user.suggested # Scope che restituisce 10 - 12 gruppi che potrebbero interessare
                                              # all'utente loggato
         end
+
+        render json: @groups
     end
 
     # GET group_path(uuid: group.uuid)
@@ -48,7 +50,6 @@ class GroupsController < ApplicationController
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono valide'
-            render 'new'
         end
     end
 
@@ -65,7 +66,6 @@ class GroupsController < ApplicationController
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:danger] = 'Le informazioni del gruppo non sono state aggiornate'
-            render 'edit'
         end
     end
 

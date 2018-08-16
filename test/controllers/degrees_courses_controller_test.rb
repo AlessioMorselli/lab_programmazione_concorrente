@@ -8,7 +8,7 @@ class DegreesCoursesControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
   end
 
-  test "index" do
+  test "should index groups of every degree course" do
     get degrees_courses_path
     assert_response :success
   end

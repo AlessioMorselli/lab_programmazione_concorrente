@@ -1,6 +1,4 @@
 require 'test_helper'
-include ActionDispatch::Routing::UrlFor
-include Rails.application.routes.url_helpers
 
 class GroupsControllerTest < ActionDispatch::IntegrationTest
   fixtures :groups, :memberships, :users, :messages, :events, :attachments
@@ -11,22 +9,22 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     @group = groups(:group_1)
   end
 
-  test "index" do
+  test "should index suggested groups" do
     get groups_path
     assert_response :success
   end
 
-  test "show" do
+  test "should show a group chat" do
     get group_path(uuid: @group.uuid)
     assert_response :success
   end
 
-  test "new" do
+  test "should show a form to create a new group" do
     get new_group_path
     assert_response :success
   end
 
-  test "create" do
+  test "should create a new group with an admin member" do
     assert_difference('Group.count') do
       assert_difference('Membership.count') do
         post groups_path, params: { group: {
@@ -42,12 +40,12 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to group_path(uuid: Group.find_by_name("I ciccioni").uuid)
   end
 
-  test "edit" do
+  test "should show a form to edit a group" do
     get edit_group_path(uuid: @group.uuid)
     assert_response :success
   end
 
-  test "update" do 
+  test "should update a grouè" do 
     patch group_path(uuid: @group.uuid), params: { group: { name: "Nuovi ciccioni" } }
   
     assert_redirected_to group_path(uuid: @group.uuid)
@@ -56,10 +54,17 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Nuovi ciccioni", @group.name
   end
 
-  test "delete" do
-    # TODO: devo verificare che vengano cancellati anche messaggi, eventi, membri e inviti
+  test "should destroy a group with its messages, event, members and invitations" do
     assert_difference('Group.count', -1) do
-      delete group_path(uuid: @group.uuid)
+      assert_difference('Message.count', (-1) * @group.messages.count) do
+        assert_difference('Event.count', (-1) * @group.events.count) do
+          assert_difference('Membership.count', (-1) * @group.memberships.count) do
+            assert_difference('Invitation.count', (-1) * @group.invitations.count) do
+              delete group_path(uuid: @group.uuid)
+            end
+          end
+        end
+      end
     end
     
     assert_redirected_to groups_path
