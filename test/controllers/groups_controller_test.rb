@@ -1,12 +1,12 @@
 require 'test_helper'
 
 class GroupsControllerTest < ActionDispatch::IntegrationTest
-  fixtures :groups, :memberships, :users, :messages, :events, :attachments
-
   def setup
     @user = users(:user_1)
     log_in_as(@user)
+
     @group = groups(:group_1)
+    set_last_message_cookies(@group, DateTime.now - 1.hour)
   end
 
   test "should index suggested groups" do
@@ -16,6 +16,8 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
   test "should show a group chat" do
     get group_path(uuid: @group.uuid)
+    assert_not_empty cookies[@group.uuid]
+    assert_equal DateTime.now.to_s, cookies[@group.uuid]
     assert_response :success
   end
 
@@ -45,11 +47,11 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should update a grouè" do 
+  test "should update a group" do 
     patch group_path(uuid: @group.uuid), params: { group: { name: "Nuovi ciccioni" } }
   
     assert_redirected_to group_path(uuid: @group.uuid)
-    # Reload association to fetch updated data and assert that value is updated.
+
     @group.reload
     assert_equal "Nuovi ciccioni", @group.name
   end

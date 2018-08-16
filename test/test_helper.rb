@@ -24,4 +24,14 @@ class ActionDispatch::IntegrationTest
                                           password: password,
                                           remember_me: remember_me } }
   end
+
+  # Setter per il cookie dell'ultimo messaggio letto
+  def set_last_message_cookies(group, time)
+    cookies[group.uuid] = time
+  end
+
+  # Getter per il cookie dell'ultimo messaggio letto
+  def get_last_message_cookies(group)
+    cookies[group.uuid].to_datetime
+  end
 end

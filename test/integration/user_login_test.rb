@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class UsersLoginTest < ActionDispatch::IntegrationTest
-    fixtures :users
-
     def setup
         @user = users(:user_1)
     end

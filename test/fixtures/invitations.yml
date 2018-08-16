@@ -17,6 +17,14 @@ invitation_<%= n %>:
   updated_at: <%= Time.now.to_s %>
 <% end %>
 
+invitation_special:
+  group_id: 75
+  user_id: 1
+  url_string: <%= SecureRandom.urlsafe_base64 %>
+  expiration_date: null
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
 # Inviti pubblici
 <% 50.times do |n| %>
 invitation_public_<%= n %>:

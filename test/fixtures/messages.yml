@@ -1,3 +1,4 @@
+# Messaggi non pinnati senza allegati
 <% 250.times do |n| %>
 message_<%= n %>:
   text: example
@@ -9,6 +10,19 @@ message_<%= n %>:
   updated_at: <%= Time.now.to_s %>
 <% end %>
 
+# Messaggi pinnati senza allegati
+<% 150.times do |n| %>
+pinned_message_<%= n %>:
+  text: example
+  attachment_id: null
+  pinned: true
+  group_id: <%= Random.rand(100) %>
+  user_id: <%= Random.rand(50) %>
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+<% end %>
+
+# Messaggi non pinnati con allegati
 <% 10.times do |n| %>
 message_with_attachments_<%= n %>:
   text: this is a message with an attachment

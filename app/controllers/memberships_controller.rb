@@ -14,14 +14,14 @@ class MembershipsController < ApplicationController
   # DELETE group_memberships(group_uuid: group.uuid, user_id: user.id)
   def destroy
     # Toglie un utente da un gruppo
-    @membership.destroy
+    @group.members.delete(current_user)
     redirect_to groups_path
   end
 
   private
   def set_membership
     @group = Group.find_by_uuid(params[:group_uuid])
-    @membership = Membership.get_one(@group, current_user)
+    @membership = Membership.get_one(current_user, @group)
   end
 
   def membership_params

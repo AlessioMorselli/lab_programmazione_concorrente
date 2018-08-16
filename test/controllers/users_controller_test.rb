@@ -1,18 +1,16 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  fixtures :users, :students, :memberships, :events, :groups, :degrees
-
   def setup
     @user = users(:user_1)
   end
 
-  test "new" do
+  test "should show signup page" do
     get signup_path
     assert_response :success
   end
 
-  test "create" do
+  test "should register a new user" do
     assert_difference('User.count') do
       post signup_path, params: { user: {
         name: "CoolName",
@@ -27,12 +25,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to groups_path
   end
 
-  test "edit" do
+  test "should show form to edit a user" do
     get edit_user_path(@user)
     assert_response :success
   end
 
-  test "update" do
+  test "should update a user" do
     patch user_path(@user), params: { user: {
       name: "NewName",
       # TODO: Perchè devo mettere la password? Problemi con le fixture?
@@ -46,7 +44,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal "NewName", @user.name
   end
 
-  test "delete" do
+  test "should destroy a user" do
     assert_difference('User.count', -1) do
       delete user_path(@user)
     end

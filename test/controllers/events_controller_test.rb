@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
-  fixtures :groups, :events, :users
-
   def setup
     @user = users(:user_1)
     log_in_as(@user)

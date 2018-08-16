@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class AttachmentsControllerTest < ActionDispatch::IntegrationTest
-  fixtures :groups, :memberships, :users, :attachments
-
   def setup
     @message = messages(:message_with_attachments_1)
     @group = @message.group

@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
     def create
         # Il messaggio viene salvato nel db e visualizzato sulla chat
         @message = Message.new(message_params)
-        @attachment = Attachment.new(attachment_params)
+        @attachment = (attachment_params[:name].nil? ? nil : Attachment.new(attachment_params))
         if !@message.save_with_attachment(@attachment)
             flash.now[:danger] = 'Il messaggio non è stato inviato'
         end

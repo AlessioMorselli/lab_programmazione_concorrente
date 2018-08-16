@@ -47,6 +47,8 @@ class GroupsController < ApplicationController
         @group = Group.new(group_params)
 
         if @group.save_with_admin(current_user)
+            # Faccio il reload del gruppo per aggiornare il suo uuid
+            @group.reload
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono valide'

@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class DegreesCoursesControllerTest < ActionDispatch::IntegrationTest
-  fixtures :degrees, :courses, :degrees_courses
-
   def setup
     @user = users(:user_1)
     log_in_as(@user)
