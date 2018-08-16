@@ -1,7 +1,7 @@
 class MembersLimitExceeded < StandardError; end
 
 class Group < ApplicationRecord
-    scope :public_group, -> { where(private: false) }
+    scope :public, -> { where(private: false) }
 
     ### RELATIONS ###
     has_one :course

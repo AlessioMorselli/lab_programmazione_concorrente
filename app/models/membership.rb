@@ -1,5 +1,5 @@
 class Membership < ApplicationRecord
-    #self.primary_key = [:user_id, :group_id]
+    self.primary_key = [:user_id, :group_id]
     
     scope :admin, -> { where(admin: true) }
 
