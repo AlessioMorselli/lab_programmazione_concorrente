@@ -44,11 +44,16 @@ module SessionHelper
 
     # Memorizza l'ultimo messaggio letto da un utente, in modo da caricare nel gruppo solo i messaggi nuovi
     def set_last_message_read(group, time)
-        cookies.permanent[current_user.id.to_s + group.uuid] = time
+        cookies.permanent[create_last_message_key(current_user, group)] = time
     end
 
     # Restituisce il DateTime dell'ultimo messaggio letto
     def get_last_message_read(group)
-        cookies.permanent[current_user.id.to_s + group.uuid].to_datetime
+        cookies.permanent[create_last_message_key(current_user, group)].to_datetime
+    end
+
+    # Crea la chiave per il cookie del last message read
+    def create_last_message_key(user, group)
+        user.id.to_s + group.uuid
     end
 end

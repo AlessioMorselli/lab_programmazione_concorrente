@@ -30,7 +30,7 @@ class InvitationsController < ApplicationController
             redirect_to group_path(uuid: @invitation.group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono corrette'
-            render 'new'
+            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
     end
 
@@ -55,6 +55,7 @@ class InvitationsController < ApplicationController
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:danger] = "Qualcosa è andato storto e l'invito non è andato a buon fine!"
+            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
     end
 

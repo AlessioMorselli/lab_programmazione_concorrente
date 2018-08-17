@@ -16,7 +16,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     test "should login with valid information followed by logout" do
         get login_path
         post login_path, params: { session: { email:    @user.email,
-                                              password: "ciao" } }
+                                              password: "ciaone" } }
         assert_redirected_to groups_path
         assert is_logged_in?
 
@@ -29,7 +29,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
         user = users(:user_1)
         get login_path
         post login_path, params: { session: { email:    @user.email,
-                                              password: "ciao" } }
+                                              password: "ciaone" } }
         assert_redirected_to groups_path
         assert is_logged_in?
         follow_redirect!

@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
         # Lo faccio in relazione a corso di laurea e anno dell'utente
         # Parametri di ricerca da mettere come query parameters nella URL
         if params['query']
+            # Controllo che non sia un array! Mi serve un solo parametro
             if params['query'].is_a?
                 query = params['query'][0]
             else query = params['query']
@@ -24,6 +25,8 @@ class GroupsController < ApplicationController
     def show
         # Visualizza la chat di un gruppo, inclusi messaggi, eventi e membri (online ed offline)
         # Scope che definisce di cercare solo i messaggi più recenti
+
+        # TODO: li metto anche qui che recupero tutto? Magari meglio usare più richieste in //
         @messages = @group.messages.recent(get_last_message_read(@group))
         set_last_message_read(@group, DateTime.now)
 
@@ -52,6 +55,7 @@ class GroupsController < ApplicationController
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono valide'
+            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
     end
 
@@ -68,6 +72,7 @@ class GroupsController < ApplicationController
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:danger] = 'Le informazioni del gruppo non sono state aggiornate'
+            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
     end
 

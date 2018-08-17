@@ -40,6 +40,7 @@ class EventsController < ApplicationController
             redirect_to group_events_path(group_uuid: @event.group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono valide'
+            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
     end
 
@@ -56,6 +57,7 @@ class EventsController < ApplicationController
             redirect_to group_events_path(group_uuid: @event.group.uuid)
         else
             flash.now[:danger] = "Le informazioni dell'evento non sono state aggiornate"
+            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine            
         end
     end
 

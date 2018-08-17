@@ -15,6 +15,9 @@ class MembershipsController < ApplicationController
   def destroy
     # Toglie un utente da un gruppo
     @group.members.delete(current_user)
+    # Cancella anche il cookie dell'utente associato al gruppo
+    cookies.delete(create_last_message_key(current_user, @group))
+
     redirect_to groups_path
   end
 

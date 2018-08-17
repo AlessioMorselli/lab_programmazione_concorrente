@@ -6,7 +6,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
 
     @group = groups(:group_1)
-    set_last_message_cookies(@group, DateTime.now - 1.hour)
+    set_last_message_cookies(@user, @group, DateTime.now - 1.hour)
   end
 
   test "should index suggested groups" do
@@ -16,8 +16,8 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
   test "should show a group chat" do
     get group_path(uuid: @group.uuid)
-    assert_not_empty cookies[@group.uuid]
-    assert_equal DateTime.now.to_s, cookies[@group.uuid]
+    assert_not_empty cookies[@user.id.to_s + @group.uuid]
+    assert_equal DateTime.now.to_s, cookies[@user.id.to_s + @group.uuid]
     assert_response :success
   end
 

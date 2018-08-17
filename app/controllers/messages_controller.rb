@@ -18,7 +18,9 @@ class MessagesController < ApplicationController
         @attachment = (attachment_params[:name].nil? ? nil : Attachment.new(attachment_params))
         if !@message.save_with_attachment(@attachment)
             flash.now[:danger] = 'Il messaggio non è stato inviato'
+            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
+
     end
 
     # PUT/PATCH group_message_path(group_uuid: group.uuid, id: message.id)
@@ -26,6 +28,7 @@ class MessagesController < ApplicationController
         # Modifica il testo di un messaggio
         if !@message.update!(message_params)
             flash.now[:danger] = 'Il messaggio non è stato modificato'
+            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
     end
 

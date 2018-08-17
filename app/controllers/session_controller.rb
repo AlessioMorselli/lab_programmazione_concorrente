@@ -16,7 +16,7 @@ class SessionController < ApplicationController
             redirect_to groups_path
         else
             flash.now[:danger] = 'Email o password sbagliate'
-            render 'new'
+            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
     end
 

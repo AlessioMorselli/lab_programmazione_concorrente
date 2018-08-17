@@ -25,7 +25,7 @@ class UsersController < ApplicationController
             log_in @user
             redirect_to groups_path
         else
-            render 'new'
+            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
     end
 
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
             flash[:success] = 'Le tue informazioni sono state aggiornate'
             redirect_to groups_path
         else
-            render 'edit'
+            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
     end
 
