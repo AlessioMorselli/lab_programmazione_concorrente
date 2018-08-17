@@ -58,7 +58,7 @@ class InvitationsController < ApplicationController
         end
     end
 
-    # GET group_refuse_invitation_path(group_uuid: group.uuid, url_string: @invitation.url_string)
+    # GET group_refuse_invitation_path(group_uuid: group.uuid, url_string: invitation.url_string)
     def refuse
         # L'utente a cui è stato inviato l'invito ha rifiutato
         # L'azione ha quindi un solo effetto:
