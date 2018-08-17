@@ -1,5 +1,5 @@
 <% 30.times do |n| %>
-message_<%= n %>:
+course_<%= n %>:
   id: <%= n %>
   name: <%= "Corso #{n}" %>
   created_at: <%= Time.now.to_s %>

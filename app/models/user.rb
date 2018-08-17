@@ -4,11 +4,14 @@ class User < ApplicationRecord
     before_save { self.email = email.downcase }
     
     has_many :memberships, :dependent => :delete_all
-    has_many :groups, class_name: "Group", :source => :group, through: :memberships
+    has_many :groups, through: :memberships
 
     has_many :messages
 
     has_many :invitations, :dependent => :delete_all
+
+    has_one :student
+    has_one :degree, through: :student
 
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }
@@ -19,6 +22,10 @@ class User < ApplicationRecord
         format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i },
         uniqueness: { case_sensitive: false }
 
+
+    def courses
+        degree.courses
+    end
 
     # restituisce l'hash di una stringa 
     def User.digest(string)

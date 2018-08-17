@@ -112,15 +112,15 @@ class GroupTest < ActiveSupport::TestCase
   end
 
   test "user_query should return groups where the name or the name of course contains the query passed" do
-    course_1 = Course.new(name: "no")
+    course_1 = Course.new(name: "no1")
     course_1.save
-    course_2 = Course.new(name: "no")
+    course_2 = Course.new(name: "no2")
     course_2.save
-    course_3 = Course.new(name: "da trovare")
+    course_3 = Course.new(name: "da trovare1")
     course_3.save
-    course_4 = Course.new(name: "da trovare")
+    course_4 = Course.new(name: "da trovare2")
     course_4.save
-    course_5 = Course.new(name: "da trovare")
+    course_5 = Course.new(name: "da trovare3")
     course_5.save
 
     groups = [

@@ -4,7 +4,7 @@ class Group < ApplicationRecord
     scope :is_public, -> { where(private: false) }
 
     ### RELATIONS ###
-    has_one :course
+    belongs_to :course, optional: true
 
     has_many :messages, :dependent => :delete_all
 

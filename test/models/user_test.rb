@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  fixtures :users
+  fixtures :users, :degrees
 
   def setup
     @user = User.new(name: "name", email: "name@student.it", password: "password")
@@ -92,14 +92,24 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "forget should update remember_digest to nil" do
-    @user.save
+    assert @user.save
     @user.remember
     @user.forget
     assert @user.remember_digest.nil?
   end
 
-  test "groups should return user groups" do
-    assert users(:user_1).groups
+  test "degree should return the user degree" do
+    assert @user.save
+    student = Student.new(user_id: @user.id, degree_id: degrees(:degree_1).id, year: 1)
+    assert student.save
+    assert_equal degrees(:degree_1), @user.degree
+  end
+
+  test "courses should return the user courses" do
+    assert @user.save
+    student = Student.new(user_id: @user.id, degree_id: degrees(:degree_1).id, year: 1)
+    assert student.save
+    assert_equal degrees(:degree_1).courses, @user.courses
   end
 
 end
