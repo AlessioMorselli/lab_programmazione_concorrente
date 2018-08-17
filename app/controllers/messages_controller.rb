@@ -5,7 +5,21 @@ class MessagesController < ApplicationController
     def index
         # Restituisce tutti i messaggi del gruppo, a partire da una certa data e ora
         @group = Group.find_by_uuid(params[:group_uuid])
-        @messages = @group.messages.recent(get_last_message_read(@group))
+
+        # Uso il parametro 'from' per stabilire da quando devo recuperare i messaggi
+        # Si segua il formato della stringa che si ottiene da un valore di tipo DateTime
+        if params['from'].nil?
+            @messages = @group.messages.recent(get_last_message_read(@group))
+        else
+            # Controllo che non sia un array! Mi serve un solo parametro
+            if params['from'].is_a?
+                from = params['from'][0]
+            else from = params['from']
+            end
+            from = from.to_datetime
+            @messages = @group.messages.recent(from)
+        end
+        
         set_last_message_read(@group, DateTime.now)
 
         render json: @messages

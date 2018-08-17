@@ -5,8 +5,21 @@ class EventsController < ApplicationController
     def index
         # Visualizza tutti gli eventi di un gruppo
         @group = Group.find_by_uuid(params[:group_uuid])
-        @events = @group.events.next # Devo inserire un parametro in modo da poter cambiare il lasso di tempo
-                                     # da caricare
+
+        # Uso il parametro 'from' per stabilire da quando devo recuperare gli eventi
+        # Si segua il formato della stringa che si ottiene da un valore di tipo DateTime
+        if params['from'].nil?
+            @events = @group.events.next
+        else
+            # Controllo che non sia un array! Mi serve un solo parametro
+            if params['from'].is_a?
+                from = params['from'][0]
+            else from = params['from']
+            end
+            from = from.to_datetime
+            @events = @group.events.next(from)
+        end
+        
         render json: @events
     end
 
