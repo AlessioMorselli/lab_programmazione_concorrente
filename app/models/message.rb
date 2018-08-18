@@ -29,6 +29,10 @@ class Message < ApplicationRecord
             attachment.save!
             self.attachment_id = attachment.id
             self.save!
+
+            return true
         end
+    rescue ActiveRecord::StatementInvalid => exception
+        return false
     end
 end

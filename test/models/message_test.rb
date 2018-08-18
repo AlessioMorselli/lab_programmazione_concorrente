@@ -70,9 +70,16 @@ class MessageTest < ActiveSupport::TestCase
   test "save_with_attachment should save the message with the attachment passed as argument" do
     message = Message.new(group_id: @group.id, user_id: users(:user_1).id, text: "ciao0", created_at: Time.now, updated_at: Time.now)
     attachment = attachments(:attachment_1)
-    message.save_with_attachment(attachment)
-    assert Attachment.exists?(attachment.id)
+    assert message.save_with_attachment(attachment)
     assert_equal attachment.id, message.attachment_id
+  end
+
+  test "save_with_attachment should return false if the attachemnt is invalid" do
+    message = Message.new(group_id: @group.id, user_id: users(:user_1).id, text: "ciao0", created_at: Time.now, updated_at: Time.now)
+    attachment = attachments(:attachment_1)
+    attachments(:attachment_1).data = nil
+    assert_not message.save_with_attachment(attachment)
+    assert_not_equal attachment.id, message.attachment_id
   end
 
 end

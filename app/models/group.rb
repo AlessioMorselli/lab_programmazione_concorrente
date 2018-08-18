@@ -40,12 +40,13 @@ class Group < ApplicationRecord
             self.transaction do
                 self.save!
                 Membership.new(group_id: self.id, user_id: user.id, admin: true).save!
+                return true
             end
-
-            return true
         else
             return false
         end
+    rescue ActiveRecord::StatementInvalid => exception
+        return false
     end
 
     # restituisce i gruppi il cui nome o il cui corso di studio associato include la query passata
