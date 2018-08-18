@@ -13,7 +13,7 @@ class AttachmentsController < ApplicationController
     # GET group_message_attachment_download_path(group_uuid: group.uuid, message_id: message.id, id: attachment.id)
     def download_attachment
         # Restituisce, in download, l'allegato del messaggio selezionato
-        send_data @attachment.data, filename: @attachment.name, type: @attachment.type, disposition: 'attachment'
+        send_data @attachment.data, filename: @attachment.name, type: @attachment.mime_type, disposition: 'attachment'
     end
 
     private
@@ -22,6 +22,6 @@ class AttachmentsController < ApplicationController
     end
 
     def attachment_params
-        params.require(:attachment).permit(:name, :type, :data)
+        params.require(:attachment).permit(:name, :mime_type, :data)
     end
 end

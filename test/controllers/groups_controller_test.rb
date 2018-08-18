@@ -42,6 +42,22 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to group_path(uuid: Group.find_by_name("I ciccioni").uuid)
   end
 
+  test "should not create a new group with zero max members" do
+    assert_difference('Group.count', 0) do
+      assert_difference('Membership.count', 0) do
+        post groups_path, params: { group: {
+          name: "I ciccioni",
+          max_members: 0,
+          private: true,
+          course_id: nil
+          }
+        }
+      end
+    end
+
+    assert_not flash.empty?
+  end
+
   test "should show a form to edit a group" do
     get edit_group_path(uuid: @group.uuid)
     assert_response :success
@@ -54,6 +70,16 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     @group.reload
     assert_equal "Nuovi ciccioni", @group.name
+  end
+
+  test "should not update a group with zero max members" do
+    max_members = @group.max_members
+    patch group_path(uuid: @group.uuid), params: { group: { max_members: 0 } }
+
+    assert_not flash.empty?
+
+    @group.reload
+    assert_equal max_members, @group.max_members
   end
 
   test "should destroy a group with its messages, event, members and invitations" do

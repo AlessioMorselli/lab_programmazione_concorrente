@@ -47,17 +47,75 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to group_events_path(group_uuid: @group.uuid)
   end
 
+  test "should not create a new event with start time before now" do
+    assert_difference('Event.count', 0) do
+      post group_events_path(group_uuid: @group.uuid), params: { event: {
+        start_time: DateTime.now - 1.hours,
+        end_time: DateTime.now + 3.hours,
+        place: "Aula studio - Secondo piano",
+        description: "4 ore di studio di programmazione concorrente",
+        group_id: @group.id
+        }
+      }
+    end
+   
+    assert_not flash.empty?
+  end
+
+  test "should not create a new event with end time before start time" do
+    assert_difference('Event.count', 0) do
+      post group_events_path(group_uuid: @group.uuid), params: { event: {
+        start_time: DateTime.now + 3.hours,
+        end_time: DateTime.now + 1.hours,
+        place: "Aula studio - Secondo piano",
+        description: "-2 ore di studio di programmazione concorrente",
+        group_id: @group.id
+        }
+      }
+    end
+   
+    assert_not flash.empty?
+  end
+
   test "should show form to edit an event" do
     get edit_group_event_path(group_uuid: @event.group.uuid, id: @event.id)
     assert_response :success
   end
 
   test "should update an event" do
-    patch group_event_path(group_uuid: @event.group.uuid, id: @event.id), params: { event: { place: "Aula studio - Secondo piano" } }
+    patch group_event_path(group_uuid: @event.group.uuid, id: @event.id), params: {
+      event: { place: "Aula studio - Secondo piano" }
+    }
   
     assert_redirected_to group_events_path(group_uuid: @event.group.uuid)
     @event.reload
     assert_equal "Aula studio - Secondo piano", @event.place
+  end
+
+  test "should not update an event with start time before now" do
+    start_time = @event.start_time
+    patch group_event_path(group_uuid: @event.group.uuid, id: @event.id), params: {
+      event: { start_time: DateTime.now - 1.hours }
+    }
+
+    # Se viene modificato, sono sicuro di scoprirlo
+    @event.reload
+   
+    assert_equal start_time, @event.start_time
+    assert_not flash.empty?
+  end
+
+  test "should not update an event with end time before start time" do
+    end_time = @event.end_time
+    patch group_event_path(group_uuid: @event.group.uuid, id: @event.id), params: {
+      event: { end_time: DateTime.now - 1.hours }
+    }
+
+    # Se viene modificato, sono sicuro di scoprirlo
+    @event.reload
+   
+    assert_equal end_time, @event.end_time
+    assert_not flash.empty?
   end
 
   test "should destroy an event" do

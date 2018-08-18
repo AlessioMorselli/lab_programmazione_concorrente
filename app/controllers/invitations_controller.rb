@@ -26,7 +26,7 @@ class InvitationsController < ApplicationController
     def create
         # Salva l'invito nel db
         @invitation = Invitation.new(invitation_params)
-        if @invitation.save!
+        if @invitation.save
             redirect_to group_path(uuid: @invitation.group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono corrette'

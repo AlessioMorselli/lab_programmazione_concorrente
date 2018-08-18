@@ -49,7 +49,7 @@ class EventsController < ApplicationController
         # Salva nel db un nuovo evento
         @event = Event.new(event_params)
 
-        if @event.save!
+        if @event.save
             redirect_to group_events_path(group_uuid: @event.group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono valide'
@@ -66,7 +66,7 @@ class EventsController < ApplicationController
     # PUT/PATCH group_event_path(group_uuid: group.uuid, id: event.id)
     def update
         # Salva nel db le modifiche ad un evento
-        if @event.update!(event_params)
+        if @event.update(event_params)
             redirect_to group_events_path(group_uuid: @event.group.uuid)
         else
             flash.now[:danger] = "Le informazioni dell'evento non sono state aggiornate"

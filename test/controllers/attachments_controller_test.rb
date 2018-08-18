@@ -19,7 +19,7 @@ class AttachmentsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should download attachment' do
     get group_message_attachment_download_path(group_uuid: @group.uuid, message_id: @message.id, id: @attachment.id)
-    assert_equal(@attachment.type, response_headers['Content-Type'])
+    assert_equal(@attachment.mime_type, response_headers['Content-Type'])
     assert_equal("attachment; filename=\"#{@attachment.name}\"", response_headers["Content-Disposition"])
   end
 end

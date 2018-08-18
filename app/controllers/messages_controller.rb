@@ -40,7 +40,7 @@ class MessagesController < ApplicationController
     # PUT/PATCH group_message_path(group_uuid: group.uuid, id: message.id)
     def update
         # Modifica il testo di un messaggio
-        if !@message.update!(message_params)
+        if !@message.update(message_params)
             flash.now[:danger] = 'Il messaggio non è stato modificato'
             # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
@@ -72,6 +72,6 @@ class MessagesController < ApplicationController
     end
 
     def attachment_params
-        params.require(:attachment).permit(:name, :type, :data)
+        params.require(:attachment).permit(:name, :mime_type, :data)
     end
 end

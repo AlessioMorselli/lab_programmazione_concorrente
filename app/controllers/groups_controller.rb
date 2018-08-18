@@ -14,8 +14,8 @@ class GroupsController < ApplicationController
             end
             @groups = Group.user_query(query) # Scope che cerca sia nel nome, che nel corso di un gruppo
         else
-            @groups = current_user.suggested # Scope che restituisce 10 - 12 gruppi che potrebbero interessare
-                                             # all'utente loggato
+            @groups = current_user.suggested_groups # Scope che restituisce 10 - 12 gruppi che potrebbero
+                                                    # interessare all'utente loggato
         end
 
         render json: @groups
@@ -68,7 +68,7 @@ class GroupsController < ApplicationController
     # PUT/PATCH group_path(uuid: group.uuid)
     def update
         # Aggiorna le informazioni sul gruppo
-        if @group.update!(group_params)
+        if @group.update(group_params)
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:danger] = 'Le informazioni del gruppo non sono state aggiornate'

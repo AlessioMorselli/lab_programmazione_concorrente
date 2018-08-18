@@ -3,8 +3,8 @@ class DegreesController < ApplicationController
 
     # GET degree_path(degree)
     def show
-      # Visualizza i corsi di studio (degree_courses) di un corso di laurea
-      @degrees_courses = @degree.degrees_courses
+      # Visualizza i gruppi relativi ai corsi di studio (degree_courses) di un corso di laurea
+      @degrees_courses = @degree.groups
 
       render json: @degrees_courses
     end

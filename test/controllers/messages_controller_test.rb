@@ -2,6 +2,7 @@ require 'test_helper'
 
 class MessagesControllerTest < ActionDispatch::IntegrationTest
   def setup
+    @bytes = IO.read("/home/alessio/Documenti/lab_programmazione_concorrente/test/test_image.jpg").bytes
     @message = messages(:message_1)
     @group = @message.group
     @user = @message.user
@@ -16,7 +17,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should send a message" do
+  test "should send a message without attachment" do
     assert_difference('Message.count') do
       post group_messages_path(group_uuid: @group.uuid), params: {
         message: {
@@ -26,8 +27,63 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
         },
         attachment: {
           name: nil,
-          type: nil,
+          mime_type: nil,
           data: nil
+        }
+      }
+    end
+  end
+
+  test "should send a message with attachment" do
+    assert_difference('Message.count') do
+      post group_messages_path(group_uuid: @group.uuid), params: {
+        message: {
+          text: "Messaggio di prova",
+          group_id: @group.id,
+          user_id: @user.id
+        },
+        # TODO: aggiungi l'allegato
+        attachment: {
+          name: "test_image.jpg",
+          mime_type: "image/jpeg",
+          data: @bytes
+        }
+      }
+    end
+  end
+
+  test "should not send an empty message without attachment" do
+    assert_difference('Message.count') do
+      post group_messages_path(group_uuid: @group.uuid), params: {
+        message: {
+          # TODO: se uno non mette niente in una barra di ricerca, è nil o "" che viene passato?
+          text: "",
+          group_id: @group.id,
+          user_id: @user.id
+        },
+        attachment: {
+          name: nil,
+          mime_type: nil,
+          data: nil
+        }
+      }
+    end
+  end
+
+  test "should send an empty message with attachment" do
+    assert_difference('Message.count') do
+      post group_messages_path(group_uuid: @group.uuid), params: {
+        message: {
+          # TODO: se uno non mette niente in una barra di ricerca, è nil o "" che viene passato?
+          text: "",
+          group_id: @group.id,
+          user_id: @user.id
+        },
+        # TODO: aggiungi l'allegato
+        attachment: {
+          name: "test_image.jpg",
+          mime_type: "image/jpeg",
+          data: @bytes
         }
       }
     end

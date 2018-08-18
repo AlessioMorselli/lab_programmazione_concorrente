@@ -6,14 +6,7 @@ class DegreesCoursesController < ApplicationController
         # Restituisce tutti i gruppi dei corsi di studio corrispondenti al proprio corso di laurea
         # e al proprio anno
         # DOMANDA: è possibile risalire ai degrees_courses di uno user direttamente o servono più passaggi?
-        @user_courses = current_user.degrees_courses
-        @user_courses_groups = []
-
-        @user_courses.each do |course|
-            @user_courses_groups.push(course.group)
-        end
-
-        render json: @user_courses_groups
+        @user_courses = current_user.degree.groups
     end
 
     # private
