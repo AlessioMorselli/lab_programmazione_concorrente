@@ -12,6 +12,7 @@ degrees_course_<%= n %>:
   year: <%= Random.rand(3) + 1 %>
   degree_id: <%= dc[0] %>
   course_id: <%= dc[1] %>
+  group_id: <%= n %>
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
 <% end %>

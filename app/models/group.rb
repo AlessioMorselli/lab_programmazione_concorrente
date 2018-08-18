@@ -2,6 +2,7 @@ class MembersLimitExceeded < StandardError; end
 
 class Group < ApplicationRecord
     scope :is_public, -> { where(private: false) }
+    scope :with_user, -> (user) { where(id: user.group_ids) }
     scope :without_user, -> (user) { where.not(id: user.group_ids) }
 
     ### RELATIONS ###

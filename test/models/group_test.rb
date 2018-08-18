@@ -136,7 +136,14 @@ class GroupTest < ActiveSupport::TestCase
     assert_equal groups.map{|g| g.id}.sort, Group.user_query("trovare").ids.sort
   end
 
-  test "without_user should return groups the user passed as argument is not a member" do
+  test "with_user should return groups where the user passed as argument is a member" do
+    user = users(:user_1)
+    Group.with_user(user).ids.each do |group_id|
+      assert user.groups.ids.include?(group_id)
+    end
+  end
+
+  test "without_user should return groups where the user passed as argument is not a member" do
     user = users(:user_1)
     Group.without_user(user).ids.each do |group_id|
       assert_not user.groups.ids.include?(group_id)
