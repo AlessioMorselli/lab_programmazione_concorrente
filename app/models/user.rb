@@ -53,4 +53,12 @@ class User < ApplicationRecord
     def forget
         update_attribute(:remember_digest, nil)
     end
+
+    def suggested_groups
+        Group.is_public.distinct.joins("JOIN students ON students.user_id = #{self.id}")
+            .joins("JOIN degrees ON degrees.id = students.degree_id")
+            .joins("JOIN degrees_courses ON degrees_courses.degree_id = degrees.id")
+            .where("groups.course_id = degrees_courses.course_id")
+            .without_user(self)
+    end
 end

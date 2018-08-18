@@ -2,6 +2,7 @@ class MembersLimitExceeded < StandardError; end
 
 class Group < ApplicationRecord
     scope :is_public, -> { where(private: false) }
+    scope :without_user, -> (user) { where.not(id: user.group_ids) }
 
     ### RELATIONS ###
     belongs_to :course, optional: true
@@ -50,5 +51,4 @@ class Group < ApplicationRecord
     def self.user_query(query)
         distinct().joins("JOIN courses ON courses.id = groups.course_id").where("groups.name LIKE ? OR courses.name LIKE ?", "%#{query}%", "%#{query}%")
     end
-
 end

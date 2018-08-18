@@ -112,4 +112,15 @@ class UserTest < ActiveSupport::TestCase
     assert_equal degrees(:degree_1).courses, @user.courses
   end
 
+  test "suggested_groups should return groups where the course is in the user degree courses and that are not private and without user" do
+    user = users(:user_1)
+    courses = user.degree.courses.ids
+    suggested = user.suggested_groups.to_a
+    suggested.each do |group|
+      assert_not user.groups.ids.include?(group.id)
+      assert_not group.private
+      assert_includes courses, group.course_id
+    end
+  end
+
 end

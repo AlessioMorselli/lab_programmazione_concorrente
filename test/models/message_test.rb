@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class MessageTest < ActiveSupport::TestCase
-  fixtures :users
+  fixtures :users, :attachments
 
   def setup
     @group = Group.new(name: "Fake group")
@@ -65,6 +65,14 @@ class MessageTest < ActiveSupport::TestCase
   test "recent should return group messages starting from the date passed" do
     index = 2
     assert_equal @messages.size-(index+1), @group.messages.recent(@messages[index].created_at).count
+  end
+
+  test "save_with_attachment should save the message with the attachment passed as argument" do
+    message = Message.new(group_id: @group.id, user_id: users(:user_1).id, text: "ciao0", created_at: Time.now, updated_at: Time.now)
+    attachment = attachments(:attachment_1)
+    message.save_with_attachment(attachment)
+    assert Attachment.exists?(attachment.id)
+    assert_equal attachment.id, message.attachment_id
   end
 
 end

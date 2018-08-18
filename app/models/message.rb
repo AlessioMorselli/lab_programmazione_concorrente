@@ -6,7 +6,7 @@ class Message < ApplicationRecord
     
     belongs_to :user
     belongs_to :group
-    has_one :attachment
+    belongs_to :attachment, optional: true
 
     validate :text_or_attachment_must_be_present
 
@@ -21,6 +21,14 @@ class Message < ApplicationRecord
             all
         else
             where("created_at > ?", from_time)
+        end
+    end
+
+    def save_with_attachment(attachment)
+        self.transaction do
+            attachment.save!
+            self.attachment_id = attachment.id
+            self.save!
         end
     end
 end
