@@ -32,7 +32,7 @@ class Message < ApplicationRecord
 
             return true
         end
-    rescue ActiveRecord::StatementInvalid => exception
+    rescue ActiveRecord::StatementInvalid, ActiveRecord::RecordInvalid
         return false
     end
 end

@@ -111,6 +111,12 @@ class GroupTest < ActiveSupport::TestCase
     assert_not_equal @group.admin, users(:user_1)
   end
 
+  test "save_with_admin should not save the group and add the admin if the group is not valid" do
+    @group.name = nil
+    @group.save_with_admin(users(:user_1))
+    assert_not_equal @group.admin, users(:user_1)
+  end
+
   test "user_query should return groups where the name or the name of course contains the query passed" do
     course_1 = Course.new(name: "no1")
     course_1.save

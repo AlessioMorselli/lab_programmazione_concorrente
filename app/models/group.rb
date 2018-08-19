@@ -45,7 +45,7 @@ class Group < ApplicationRecord
         else
             return false
         end
-    rescue ActiveRecord::StatementInvalid => exception
+    rescue ActiveRecord::StatementInvalid, ActiveRecord::RecordInvalid
         return false
     end
 
