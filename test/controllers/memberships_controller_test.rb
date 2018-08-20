@@ -5,6 +5,7 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
     @membership = Membership.all.first
     @group = @membership.group
     @user = @membership.user
+    @other_user = (users(:user_2) != @user ? users(:user_2) : users(:user_1))
     set_last_message_cookies(@user, @group, DateTime.now)
   end
 
@@ -25,6 +26,17 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
     
     assert_redirected_to groups_path
     assert_empty cookies[@user.id.to_s + @group.uuid]
+  end
+
+  test "should not remove a user from group if logged user is not correct and it's not admin" do
+    log_in_as(@other_user)
+
+    assert_difference('Membership.count', 0) do
+      delete group_membership_path(group_uuid: @group.uuid, user_id: @user.id)
+    end
+    
+    assert_redirected_to groups_path
+    assert_not flash.empty?
   end
 
   ### TEST PER UN UTENTE NON LOGGATO ###

@@ -1,6 +1,9 @@
 class EventsController < ApplicationController
     before_action :set_event, only: [:show, :edit, :update, :destroy]
     before_action :logged_in_user
+    before_action only: [:user_index, :show] do
+        correct_user(params[:user_id])
+    end
 
     # GET group_events_path(group_uuid: group.uuid)
     def index
@@ -28,7 +31,7 @@ class EventsController < ApplicationController
     # GET user_events_path(user)
     def user_index
         # Visualizza tutti gli eventi dei gruppi di cui fa parte l'utente
-        @events = current_user.groups.events.next
+        @events = @user.groups.events.next
         render json: @events
     end
 

@@ -50,7 +50,7 @@ class MessagesController < ApplicationController
     # DELETE group_message_path(group_uuid: group.uuid, id: message.id)
     def destroy
         # Cancella un messaggio dalla chat del gruppo
-        @message.destroy_with_attachment
+        @message.destroy
         flash.now[:success] = 'Il messaggio è stato eliminato'
     end
 

@@ -3,6 +3,7 @@ require 'test_helper'
 class EventsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:user_1)
+    @other_user = users(:user_2)
     @group = groups(:group_1)
     @event = events(:event_1)
   end
@@ -26,11 +27,30 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     #assert_operator assigns(:events).last.start_time, :<=, DateTime.now + 7.days
   end
 
+  test "should not index every user's groups event if it's not the correct user" do
+    log_in_as(@other_user)
+
+    get user_events_path(@user)
+    
+    assert_redirected_to groups_path
+    assert_not flash.empty?
+  end
+
+
   test "should show a single event" do
     log_in_as(@user)
 
     get user_event_path(@user, @event)
     assert_response :success
+  end
+
+  test "should not show a single event if logged user is not correct" do
+    log_in_as(@other_user)
+
+    get user_event_path(@user, @event)
+    
+    assert_redirected_to groups_path
+    assert_not flash.empty?
   end
 
   test "should show form to create a new event" do

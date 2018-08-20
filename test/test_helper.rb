@@ -25,10 +25,6 @@ class ActionDispatch::IntegrationTest
                                           remember_me: remember_me } }
   end
 
-  def log_out
-    delete logout_path
-  end
-
   # Setter per il cookie dell'ultimo messaggio letto
   def set_last_message_cookies(user, group, time)
     cookies[user.id.to_s + group.uuid] = time

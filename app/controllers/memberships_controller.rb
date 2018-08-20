@@ -1,6 +1,9 @@
 class MembershipsController < ApplicationController
   before_action :set_membership, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user
+  before_action only: [:destroy], unless: -> {@membership.admin} do
+    correct_user(params[:user_id])
+  end
 
   # GET group_memberships(group_uuid: group.uuid)
   def index
@@ -15,9 +18,9 @@ class MembershipsController < ApplicationController
   # DELETE group_memberships(group_uuid: group.uuid, user_id: user.id)
   def destroy
     # Toglie un utente da un gruppo
-    @group.members.delete(current_user)
+    @group.members.delete(@user)
     # Cancella anche il cookie dell'utente associato al gruppo
-    cookies.delete(create_last_message_key(current_user, @group))
+    cookies.delete(create_last_message_key(@user, @group))
 
     redirect_to groups_path
   end

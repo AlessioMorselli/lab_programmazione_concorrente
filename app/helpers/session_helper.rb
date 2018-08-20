@@ -60,8 +60,32 @@ module SessionHelper
     # Verifica che un utente sia effettivamente loggato
     def logged_in_user
         unless logged_in?
+            store_location
             flash[:danger] = "Per compiere quest'azione è necessario effettuare login"
             redirect_to login_path
         end
     end
+
+    # Frindly forwarding
+    def redirect_back_or(default)
+        redirect_to(session[:forwarding_url] || default)
+        session.delete(:forwarding_url)
+    end
+
+    # Memorizzo l'URL richiesta: in questo modo, posso fare una friendly forwarding
+    def store_location
+        session[:forwarding_url] = request.original_fullpath if request.get?
+    end
+
+    # Verifica che l'utente loggato sia effettivamente il bersaglio dell'azione
+    # Vogliamo impedire che un altro utente modifichi senza permessi informazioni di utenti diversi
+    # tramite url create ad hoc
+    def correct_user(id)
+        @user = User.find(id)
+        unless current_user == @user
+            flash[:danger] = "Azione non autorizzata"
+            redirect_to groups_path
+        end
+    end
+
 end

@@ -13,7 +13,7 @@ class SessionController < ApplicationController
         if user && user.authenticate(params[:session][:password])
             log_in user
             params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-            redirect_to groups_path
+            redirect_back_or groups_path
         else
             flash.now[:danger] = 'Email o password sbagliate'
             # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
