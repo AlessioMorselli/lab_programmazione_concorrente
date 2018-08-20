@@ -6,7 +6,7 @@ class Message < ApplicationRecord
     
     belongs_to :user
     belongs_to :group
-    belongs_to :attachment, optional: true
+    belongs_to :attachment, optional: true, dependent: :destroy
 
     validate :text_or_attachment_must_be_present
 
@@ -24,10 +24,12 @@ class Message < ApplicationRecord
         end
     end
 
-    def save_with_attachment(attachment)
+    def save_with_attachment(attachment = nil)
         self.transaction do
-            attachment.save!
-            self.attachment_id = attachment.id
+            if attachment != nil
+                attachment.save!
+                self.attachment_id = attachment.id
+            end
             self.save!
 
             return true
@@ -35,4 +37,5 @@ class Message < ApplicationRecord
     rescue ActiveRecord::StatementInvalid, ActiveRecord::RecordInvalid
         return false
     end
+
 end

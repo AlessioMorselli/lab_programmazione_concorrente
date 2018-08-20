@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class MessageTest < ActiveSupport::TestCase
-  fixtures :users, :attachments
+  fixtures :users, :attachments, :messages
 
   def setup
     @group = Group.new(name: "Fake group")
@@ -69,17 +69,26 @@ class MessageTest < ActiveSupport::TestCase
 
   test "save_with_attachment should save the message with the attachment passed as argument" do
     message = Message.new(group_id: @group.id, user_id: users(:user_1).id, text: "ciao0", created_at: Time.now, updated_at: Time.now)
-    attachment = attachments(:attachment_1)
+    attachment = Attachment.new(data: "qualcosa", mime_type: "image/jpeg", name: "image")
     assert message.save_with_attachment(attachment)
     assert_equal attachment.id, message.attachment_id
   end
 
   test "save_with_attachment should return false if the attachemnt is invalid" do
     message = Message.new(group_id: @group.id, user_id: users(:user_1).id, text: "ciao0", created_at: Time.now, updated_at: Time.now)
-    attachment = attachments(:attachment_1)
-    attachments(:attachment_1).data = nil
+    attachment = Attachment.new(data: nil, mime_type: "image/jpeg", name: "image")
     assert_not message.save_with_attachment(attachment)
-    assert_not_equal attachment.id, message.attachment_id
+    assert_not Message.exists?(message.id)
+    assert_not Attachment.exists?(attachment.id)
+  end
+
+  test "destroy should destroy the message and its attachment" do
+    message = messages(:message_with_attachments_1)
+    message_id = message.id
+    attachment_id = message.attachment.id
+    message.destroy!
+    assert_not Message.exists?(message_id)
+    assert_not Attachment.exists?(attachment_id)
   end
 
 end
