@@ -63,7 +63,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   test "should not send an empty message without attachment" do
     log_in_as(@user)
   
-    assert_difference('Message.count') do
+    assert_difference('Message.count', 0) do
       post group_messages_path(group_uuid: @group.uuid), params: {
         message: {
           # TODO: se uno non mette niente in una barra di ricerca, è nil o "" che viene passato?
