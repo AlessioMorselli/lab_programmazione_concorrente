@@ -15,6 +15,7 @@ class AttachmentsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to group_path(group_uuid: @group.uuid)
+    assert_not flash.empty?
   end
 
   test 'should download attachment' do

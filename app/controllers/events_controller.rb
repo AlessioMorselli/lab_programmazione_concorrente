@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
     before_action :set_event, only: [:show, :edit, :update, :destroy]
+    before_action :logged_in_user
 
     # GET group_events_path(group_uuid: group.uuid)
     def index

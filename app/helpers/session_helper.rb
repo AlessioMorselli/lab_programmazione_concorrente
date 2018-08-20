@@ -56,4 +56,12 @@ module SessionHelper
     def create_last_message_key(user, group)
         user.id.to_s + group.uuid
     end
+
+    # Verifica che un utente sia effettivamente loggato
+    def logged_in_user
+        unless logged_in?
+            flash[:danger] = "Per compiere quest'azione è necessario effettuare login"
+            redirect_to login_path
+        end
+    end
 end

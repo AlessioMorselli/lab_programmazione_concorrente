@@ -1,5 +1,6 @@
 class AttachmentsController < ApplicationController
     before_action :set_attachment, only: [:show, :edit, :update, :destroy, :download_attachment]
+    before_action :logged_in_user
 
     # DELETE group_message_attachment_path(group_uuid: group.uuid, message_id: message.id, id: attachment.id)
     def destroy

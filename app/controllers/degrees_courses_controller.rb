@@ -1,5 +1,6 @@
 class DegreesCoursesController < ApplicationController
     # before_action :set_degrees_course, only: [:show, :edit, :update, :destroy]
+    before_action :logged_in_user
 
     # GET degrees_courses_path
     def index
@@ -7,6 +8,8 @@ class DegreesCoursesController < ApplicationController
         # e al proprio anno
         # DOMANDA: è possibile risalire ai degrees_courses di uno user direttamente o servono più passaggi?
         @user_courses = current_user.degree.groups
+
+        render json: @user_courses
     end
 
     # private

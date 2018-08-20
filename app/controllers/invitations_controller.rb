@@ -1,5 +1,6 @@
 class InvitationsController < ApplicationController
     before_action :set_invitation, only: [:show, :edit, :update, :destroy, :accept, :refuse]
+    before_action :logged_in_user
 
     # GET user_invitations_path(user)
     def index

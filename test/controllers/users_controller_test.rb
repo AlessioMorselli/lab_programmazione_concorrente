@@ -25,12 +25,17 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to groups_path
   end
 
+  ### TEST PER UN UTENTE LOGGATO ###
   test "should show form to edit a user" do
+    log_in_as(@user)
+
     get edit_user_path(@user)
     assert_response :success
   end
 
   test "should update a user" do
+    log_in_as(@user)
+    
     patch user_path(@user), params: { user: {
       name: "NewName",
       # TODO: Perchè devo mettere la password? Problemi con le fixture?
@@ -45,10 +50,45 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy a user" do
+    log_in_as(@user)
+    
     assert_difference('User.count', -1) do
       delete user_path(@user)
     end
     
     assert_redirected_to login_path
+  end
+
+  ### TEST PER UN UTENTE NON LOGGATO ###
+  test "should not show form to edit a user if not logged in" do
+    get edit_user_path(@user)
+    
+    assert_redirected_to login_path
+    assert_not flash.empty?
+  end
+
+  test "should not update a user if not logged in" do
+    name = @user.name
+    patch user_path(@user), params: { user: {
+      name: "NewName",
+      # TODO: Perchè devo mettere la password? Problemi con le fixture?
+      password: "ciaone"
+      }
+    }
+  
+    assert_redirected_to login_path
+    assert_not flash.empty?
+
+    @user.reload
+    assert_equal name, @user.name
+  end
+
+  test "should not destroy a user if not logged in" do
+    assert_difference('User.count', 0) do
+      delete user_path(@user)
+    end
+    
+    assert_redirected_to login_path
+    assert_not flash.empty?
   end
 end

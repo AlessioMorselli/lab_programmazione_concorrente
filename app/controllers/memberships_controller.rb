@@ -1,5 +1,6 @@
 class MembershipsController < ApplicationController
   before_action :set_membership, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user
 
   # GET group_memberships(group_uuid: group.uuid)
   def index
@@ -24,7 +25,8 @@ class MembershipsController < ApplicationController
   private
   def set_membership
     @group = Group.find_by_uuid(params[:group_uuid])
-    @membership = Membership.get_one(current_user, @group)
+    @user = User.find(params[:user_id])
+    @membership = Membership.get_one(@user, @group)
   end
 
   def membership_params
