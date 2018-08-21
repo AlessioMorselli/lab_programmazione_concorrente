@@ -3,8 +3,9 @@ require_relative '../config/environment'
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
+  fixtures :users, :groups, :degrees, :courses
+  fixtures :memberships, :messages, :events, :degrees_courses, :students
+  fixtures :attachments, :invitations
 
   # Restituisce true se un utente di test è loggato
   def is_logged_in?

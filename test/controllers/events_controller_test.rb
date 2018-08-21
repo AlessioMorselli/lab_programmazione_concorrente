@@ -4,12 +4,12 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @event = events(:event_1)
     @group = @event.group
-    @user = @group.members.first
-    @other_user = @group.members.second
+    @user = @group.admins.first # membro admin
+    @other_user = (@group.members - @group.admins).first # membro non admin
     @non_member = (User.all - @group.members).first
   end
 
-### TEST PER UN UTENTE LOGGATO ###
+### TEST PER UN UTENTE LOGGATO E AMMINISTRATORE ###
   test "should index every group event of the next 7 days" do
     log_in_as(@user)
 
@@ -252,6 +252,67 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     get group_events_path(group_uuid: @group.uuid)
     
     assert_redirected_to groups_path
+    assert_not flash.empty?
+  end
+
+### TEST PER UN UTENTE NON AMMINISTRATORE ###
+  test "should not show form to create a new event if logged user is not admin" do
+    log_in_as(@other_user)
+
+    get new_group_event_path(group_uuid: @group.uuid)
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+  end
+
+  test "should not create a new event if logged user is not admin" do
+    log_in_as(@other_user)
+
+    assert_difference('Event.count', 0) do
+      post group_events_path(group_uuid: @group.uuid), params: { event: {
+        start_time: DateTime.now + 1.hours,
+        end_time: DateTime.now + 3.hours,
+        place: "Aula studio - Secondo piano",
+        description: "2 ore di studio di programmazione concorrente",
+        group_id: @group.id
+        }
+      }
+    end
+  
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+  end
+
+  test "should not show form to edit an event if logged user is not admin" do
+    log_in_as(@other_user)
+
+    get edit_group_event_path(group_uuid: @group.uuid, id: @event.id)
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+  end
+
+  test "should not update an event if logged user is not admin" do
+    log_in_as(@other_user)
+
+    place = @event.place
+    patch group_event_path(group_uuid: @group.uuid, id: @event.id), params: {
+      event: { place: "Aula studio - Secondo piano" }
+    }
+
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+
+    @event.reload
+    assert_equal place, @event.place
+  end
+
+  test "should not destroy an event if logged user is not admin" do
+    log_in_as(@other_user)
+
+    assert_difference('Event.count', 0) do
+      delete group_event_path(group_uuid: @group.uuid, id: @event.id)
+    end
+    
+    assert_redirected_to group_path(uuid: @group.uuid)
     assert_not flash.empty?
   end
 end

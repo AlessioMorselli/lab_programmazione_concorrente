@@ -1,8 +1,12 @@
 class InvitationsController < ApplicationController
     before_action :set_invitation, only: [:show, :edit, :update, :destroy, :accept, :refuse]
+    before_action :set_group, only: [:new, :create, :destroy]
     before_action :logged_in_user
     before_action only: [:index] do
         correct_user params[:user_id]
+    end
+    before_action only: [:new, :create, :destroy] do
+        is_admin_in @group
     end
 
     # GET user_invitations_path(user)
@@ -78,6 +82,10 @@ class InvitationsController < ApplicationController
     private
     def set_invitation
         @invitation = Invitation.find_by_url_string(params[:url_string])
+    end
+
+    def set_group
+        @group = Group.find_by_uuid(params[:group_uuid])
     end
 
     def invitation_params

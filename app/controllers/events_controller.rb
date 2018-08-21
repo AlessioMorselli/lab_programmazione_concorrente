@@ -1,12 +1,15 @@
 class EventsController < ApplicationController
     before_action :set_event, only: [:show, :edit, :update, :destroy]
-    before_action :set_group, only: [:index]
+    before_action :set_group
     before_action :logged_in_user
     before_action only: [:user_index, :show] do
         correct_user params[:user_id]
     end
     before_action only: [:index] do
         is_member_in @group
+    end
+    before_action only: [:new, :create, :edit, :update, :destroy] do
+        is_admin_in @group
     end
 
     # GET group_events_path(group_uuid: group.uuid)
@@ -56,7 +59,7 @@ class EventsController < ApplicationController
         @event = Event.new(event_params)
 
         if @event.save
-            redirect_to group_events_path(group_uuid: @event.group.uuid)
+            redirect_to group_events_path(group_uuid: @group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono valide'
             # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
@@ -73,7 +76,7 @@ class EventsController < ApplicationController
     def update
         # Salva nel db le modifiche ad un evento
         if @event.update(event_params)
-            redirect_to group_events_path(group_uuid: @event.group.uuid)
+            redirect_to group_events_path(group_uuid: @group.uuid)
         else
             flash.now[:danger] = "Le informazioni dell'evento non sono state aggiornate"
             # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine            
@@ -83,7 +86,6 @@ class EventsController < ApplicationController
     # DELETE group_event_path(group_uuid: group.uuid, id: event.id)
     def destroy
         # Elimina un evento
-        @group = @event.group
         @event.destroy
 
         redirect_to group_events_path(group_uuid: @group.uuid)

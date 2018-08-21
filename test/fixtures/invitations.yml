@@ -1,37 +1,30 @@
-<% invs = [] %>
-<% 50.times do |i| %>
-  <% 100.times do |j| %>
-    <% invs.push([i, j])%>
-  <% end %>
+<% non_members = [] %>
+<% Group.all.each do |g| %>
+  <% non_members.push (User.all - g.members) %>
+  <% non_members.last.shuffle %>
 <% end %>
-<% invs = invs.shuffle %>
 
-<% 100.times do |n| %>
-<% inv = invs.shift %>
+<% 200.times do %>
+<% group_id = Random.rand(50) %>
+<% user = non_members[group_id].shift %>
 invitation_<%= n %>:
-  group_id: <%= inv[0] %>
-  user_id: <%= inv[1] %>
+  group_id: <%= group_id %>
+  user_id: <%= user.id %>
   url_string: <%= SecureRandom.urlsafe_base64 %>
   expiration_date: null
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
 <% end %>
-
-invitation_special:
-  group_id: 75
-  user_id: 1
-  url_string: <%= SecureRandom.urlsafe_base64 %>
-  expiration_date: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
 
 # Inviti pubblici
 <% 50.times do |n| %>
-invitation_public_<%= n %>:
-  group_id: <%= n %>
-  user_id: null
-  url_string: <%= SecureRandom.urlsafe_base64 %>
-  expiration_date: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  <% if n != 1 %>
+  invitation_public_<%= n %>:
+    group_id: <%= n %>
+    user_id: null
+    url_string: <%= SecureRandom.urlsafe_base64 %>
+    expiration_date: null
+    created_at: <%= Time.now.to_s %>
+    updated_at: <%= Time.now.to_s %>
+  <% end %>
 <% end %>
