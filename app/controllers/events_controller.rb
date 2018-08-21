@@ -1,15 +1,17 @@
 class EventsController < ApplicationController
     before_action :set_event, only: [:show, :edit, :update, :destroy]
+    before_action :set_group, only: [:index]
     before_action :logged_in_user
     before_action only: [:user_index, :show] do
-        correct_user(params[:user_id])
+        correct_user params[:user_id]
+    end
+    before_action only: [:index] do
+        is_member_in @group
     end
 
     # GET group_events_path(group_uuid: group.uuid)
     def index
         # Visualizza tutti gli eventi di un gruppo
-        @group = Group.find_by_uuid(params[:group_uuid])
-
         # Uso il parametro 'from' per stabilire da quando devo recuperare gli eventi
         # Si segua il formato della stringa che si ottiene da un valore di tipo DateTime
         if params['from'].nil?
@@ -89,7 +91,11 @@ class EventsController < ApplicationController
 
     private
     def set_event
-      @event = Event.find(params[:id])
+        @event = Event.find(params[:id])
+    end
+
+    def set_group
+        @group = Group.find_by_uuid(params[:group_uuid])
     end
 
     def event_params

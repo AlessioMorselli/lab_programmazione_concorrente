@@ -6,7 +6,7 @@ class DegreesControllerTest < ActionDispatch::IntegrationTest
     @degree = degrees(:degree_1)
   end
 
-  ### TEST PER UN UTENTE LOGGATO ###
+### TEST PER UN UTENTE LOGGATO ###
   test "should show degree courses" do
     log_in_as(@user)
 
@@ -14,7 +14,7 @@ class DegreesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  ### TEST PER UN UTENTE NON LOGGATO ###
+### TEST PER UN UTENTE NON LOGGATO ###
   test "should not show degree courses if not logged in" do
     get degree_path(@degree)
     

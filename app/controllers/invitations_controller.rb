@@ -2,13 +2,13 @@ class InvitationsController < ApplicationController
     before_action :set_invitation, only: [:show, :edit, :update, :destroy, :accept, :refuse]
     before_action :logged_in_user
     before_action only: [:index] do
-        correct_user(params[:user_id])
+        correct_user params[:user_id]
     end
 
     # GET user_invitations_path(user)
     def index
         # Visualizza tutte gli inviti in sospeso da parte di un utente
-        @invitations = current_user.invitations
+        @invitations = @user.invitations
         render json: @invitations
     end
 

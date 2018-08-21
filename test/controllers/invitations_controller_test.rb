@@ -7,9 +7,11 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     @group1 = groups(:group_1)
     @invitation = Invitation.where(user_id: @user.id, group_id: @group.id).first
     @public_invitation = Invitation.where(user_id: nil, group_id: @group1.id).first
+
+    @other_user = users(:user_2)
   end
 
-  ### TEST PER UN UTENTE LOGGATO ###
+### TEST PER UN UTENTE LOGGATO ###
   test "should index every user's invitation" do
     log_in_as(@user)
 
@@ -140,7 +142,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to groups_path
   end
 
-  ### TEST PER UN UTENTE NON LOGGATO ###
+### TEST PER UN UTENTE NON LOGGATO ###
   test "should not index every user's invitation if not logged in" do
     get user_invitations_path(@user)
     
@@ -235,6 +237,16 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to login_path
+    assert_not flash.empty?
+  end
+
+### TEST PER UN UTENTE NON CORRETTO ###
+  test "should not index every user's invitation if logged user is not correct" do
+    log_in_as(@other_user)
+
+    get user_invitations_path(@user)
+    
+    assert_redirected_to groups_path
     assert_not flash.empty?
   end
 end

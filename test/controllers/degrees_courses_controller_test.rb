@@ -5,7 +5,7 @@ class DegreesCoursesControllerTest < ActionDispatch::IntegrationTest
     @user = users(:user_1)
   end
 
-  ### TEST PER UN UTENTE LOGGATO ###
+### TEST PER UN UTENTE LOGGATO ###
   test "should index groups of every degree course" do
     log_in_as(@user)
 
@@ -13,7 +13,7 @@ class DegreesCoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  ### TEST PER UN UTENTE NON LOGGATO ###
+### TEST PER UN UTENTE NON LOGGATO ###
   test "should not index groups of every degree course if not logged in" do
     get degrees_courses_path
     assert_redirected_to login_path

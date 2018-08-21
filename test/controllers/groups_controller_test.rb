@@ -2,13 +2,15 @@ require 'test_helper'
 
 class GroupsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:user_1)
-
     @group = groups(:group_1)
+    @user = @group.members.first
+
+    @non_member = (User.all - @group.members).first
+
     set_last_message_cookies(@user, @group, DateTime.now - 1.hour)
   end
 
-  ### TEST PER UN UTENTE LOGGATO ###
+### TEST PER UN UTENTE LOGGATO ###
   test "should index suggested groups" do
     log_in_as(@user)
 
@@ -114,7 +116,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to groups_path
   end
 
-  ### TEST PER UN UTENTE NON LOGGATO ###
+### TEST PER UN UTENTE NON LOGGATO ###
   test "should not index groups if not logged in" do
     get groups_path
 
@@ -185,6 +187,16 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     end
     
     assert_redirected_to login_path
+    assert_not flash.empty?
+  end
+
+### TEST PER UN UTENTE NON MEMBRO ###
+  test "should not show a group chat if logged user is not member" do
+    log_in_as(@non_member)
+
+    get group_path(uuid: @group.uuid)
+    
+    assert_redirected_to groups_path
     assert_not flash.empty?
   end
 end

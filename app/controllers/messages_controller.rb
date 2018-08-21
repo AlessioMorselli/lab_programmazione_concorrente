@@ -1,12 +1,17 @@
 class MessagesController < ApplicationController
     before_action :set_message, only: [:show, :edit, :update, :destroy, :download_attachment]
     before_action :logged_in_user
+    before_action only: [:update, :destroy] do
+        correct_user @message.user_id
+    end
+    before_action :set_group
+    before_action do
+        is_member_in @group
+    end 
 
     # GET group_messages_path(group_uuid: group.uuid)
     def index
         # Restituisce tutti i messaggi del gruppo, a partire da una certa data e ora
-        @group = Group.find_by_uuid(params[:group_uuid])
-
         # Uso il parametro 'from' per stabilire da quando devo recuperare i messaggi
         # Si segua il formato della stringa che si ottiene da un valore di tipo DateTime
         if params['from'].nil?
@@ -57,7 +62,6 @@ class MessagesController < ApplicationController
     # GET group_pinned_messages(group_uuid: group.uuid)
     def pinned
         # Visualizza i messaggi pinnati di un gruppo
-        @group = Group.find_by_uuid(params[:group_uuid])
         @pinned_messages = @group.messages.pinned
 
         render json: @pinned_messages
@@ -66,6 +70,10 @@ class MessagesController < ApplicationController
     private
     def set_message
         @message = Message.find(params[:id])
+    end
+
+    def set_group
+        @group = Group.find_by_uuid(params[:group_uuid])
     end
 
     def message_params

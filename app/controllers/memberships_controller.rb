@@ -1,15 +1,18 @@
 class MembershipsController < ApplicationController
-  before_action :set_membership, only: [:show, :edit, :update, :destroy]
+  before_action :set_group
+  before_action :set_membership, only: [:destroy]
   before_action :logged_in_user
   before_action only: [:destroy], unless: -> {@membership.admin} do
-    correct_user(params[:user_id])
+    correct_user params[:user_id]
+  end
+  before_action only: [:index] do
+    is_member_in @group
   end
 
   # GET group_memberships(group_uuid: group.uuid)
   def index
     # Recupera tutti i membri di un gruppo, in modo da poter visualizzare chi fa parte di un gruppo
     # e chi è online in quel momento (forse, adesso vediamo)
-    @group = Group.find_by_uuid(params[:group_uuid])
     @members = @group.memberships
 
     render json: @members
@@ -27,9 +30,12 @@ class MembershipsController < ApplicationController
 
   private
   def set_membership
-    @group = Group.find_by_uuid(params[:group_uuid])
     @user = User.find(params[:user_id])
     @membership = Membership.get_one(@user, @group)
+  end
+
+  def set_group
+    @group = Group.find_by_uuid(params[:group_uuid])
   end
 
   def membership_params
