@@ -1,19 +1,20 @@
 <% non_members = [] %>
-<% Group.all.each do |g| %>
+<% groups = Group.all %>
+<% groups.each do |g| %>
   <% non_members.push (User.all - g.members) %>
   <% non_members.last.shuffle %>
 <% end %>
 
-<% 200.times do %>
-<% group_id = Random.rand(50) %>
-<% user = non_members[group_id].shift %>
-invitation_<%= n %>:
-  group_id: <%= group_id %>
-  user_id: <%= user.id %>
-  url_string: <%= SecureRandom.urlsafe_base64 %>
-  expiration_date: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+<% 200.times do |n| %>
+  <% group_id = Random.rand(50) %>
+  <% user = non_members[group_id].shift %>
+  invitation_<%= n %>:
+    group_id: <%= group_id %>
+    user_id: <%= user.id %>
+    url_string: <%= SecureRandom.urlsafe_base64 %>
+    expiration_date: null
+    created_at: <%= Time.now.to_s %>
+    updated_at: <%= Time.now.to_s %>
 <% end %>
 
 # Inviti pubblici
