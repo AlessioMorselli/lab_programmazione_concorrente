@@ -1,90 +1,24 @@
-fondatore_pirati:
-  user: giorgio
-  group: pirati
-  admin: true
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+<% ms = [] %>
+<% 50.times do |i| %>
+  <% 100.times do |j| %>
+    <% ms.push([i, j])%>
+  <% end %>
+<% end %>
+<% ms = ms.shuffle %>
 
-membro_pirati_1:
-  user: luigi
-  group: pirati
+<% 250.times do |n| %>
+<% m = ms.shift %>
+membership_<%= n %>:
+  user_id: <%= m[0] %>
+  group_id: <%= m[1] %>
   admin: false
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
+<% end %>
 
-fondatore_samurai:
-  user: giorgio
-  group: samurai
-  admin: true
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
-
-admin_samurai_1:
-  user: giacomo
-  group: samurai
-  admin: false
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
-
-membro_samurai_1:
-  user: luigi
-  group: samurai
-  admin: true
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
-
-membro_samurai_2:
-  user: giovanni
-  group: samurai
-  admin: false
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
-
-fondatore_cavalieri:
-  user: giacomo
-  group: cavalieri
-  admin: true
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
-
-admin_cavalieri_1:
-  user: mario
-  group: cavalieri
-  admin: true
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
-
-membro_cavalieri_1:
-  user: giovanni
-  group: cavalieri
-  admin: false
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
-
-membro_cavalieri_2:
-  user: aldo
-  group: cavalieri
-  admin: false
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
-
-fondatore_ninja:
-  user: mario
-  group: ninja
-  admin: true
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
-
-membro_ninja_1:
-  user: giacomo
-  group: ninja
-  admin: false
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
-
-membro_ninja_2:
-  user: aldo
-  group: ninja
-  admin: false
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+<% 100.times do |n| %>
+<% g = Group.find(n) %>
+<% g.memberships.first.admin = true; g.memberships.first.save if g.members.count >= 1 %>
+<% g.memberships.second.admin = true; g.memberships.second.save if g.members.count >= 2 %>
+<% g.memberships.third.admin = true; g.memberships.third.save if g.members.count >= 3 %>
+<% end %>
