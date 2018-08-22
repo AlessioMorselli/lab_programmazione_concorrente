@@ -1,0 +1,4847 @@
+[
+  {
+    "name": "Chimica (Laurea)",
+    "value": "1138",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2010|1",
+        "courses": [
+          {
+            "code": "EC277396",
+            "name": "Laboratorio di chimica generale e inorganica"
+          },
+          {
+            "code": "EC277397",
+            "name": "Chimica generale ed inorganica"
+          },
+          {
+            "code": "EC277398",
+            "name": "Analisi I"
+          },
+          {
+            "code": "EC277401",
+            "name": "Algebra e geometria"
+          },
+          {
+            "code": "EC281231",
+            "name": "Matematica per la chimica"
+          },
+          {
+            "code": "EC281233",
+            "name": "Informatica per la chimica"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2010|2",
+        "courses": [
+          {
+            "code": "EC248755",
+            "name": "Biochimica"
+          },
+          {
+            "code": "EC248731",
+            "name": "Analisi II"
+          },
+          {
+            "code": "EC248742",
+            "name": "Chimica inorganica"
+          },
+          {
+            "code": "EC248744",
+            "name": "Chimica organica II"
+          },
+          {
+            "code": "EC248745",
+            "name": "Laboratorio di chimica organica II"
+          },
+          {
+            "code": "EC277377",
+            "name": "Tecniche della sicurezza I"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS 2010|3",
+        "courses": [
+          {
+            "code": "EC241320",
+            "name": "Chimica fisica ii con esercitazioni"
+          },
+          {
+            "code": "EC241327",
+            "name": "Cinetica chimica e laboratorio"
+          },
+          {
+            "code": "EC241336",
+            "name": "Chimica industriale"
+          },
+          {
+            "code": "EC277373",
+            "name": "Principi di sintesi organica"
+          },
+          {
+            "code": "EC277375",
+            "name": "Chimica per i beni culturali"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Chimica e tecnologia farmaceutiche (Laurea Magistrale Ciclo Unico 5 anni)",
+    "value": "1151",
+    "num_years": 5,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0-2009|1",
+        "courses": [
+          {
+            "code": "EC277458",
+            "name": "Chimica generale e inorganica"
+          },
+          {
+            "code": "EC277464",
+            "name": "Citologia e anatomia umana"
+          },
+          {
+            "code": "EC283805",
+            "name": "Formazione sicurezza nei luoghi di lavoro ai sensi del d.lgs.81/2008 e s.m.i."
+          },
+          {
+            "code": "EC277449",
+            "name": "Matematica e informatica"
+          },
+          {
+            "code": "EC277450",
+            "name": "Fisica"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0-2009|2",
+        "courses": [
+          {
+            "code": "EC262021",
+            "name": "Chimica fisica"
+          },
+          {
+            "code": "EC262026",
+            "name": "Chimica organica avanzata"
+          },
+          {
+            "code": "EC262030",
+            "name": "Biologia molecolare"
+          },
+          {
+            "code": "EC262031",
+            "name": "Biochimica"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS0-2009|3",
+        "courses": [
+          {
+            "code": "EC241440",
+            "name": "Chimica farmaceutica e tossicologica I"
+          },
+          {
+            "code": "EC241443",
+            "name": "Heterocyclic chemistry"
+          },
+          {
+            "code": "EC241444",
+            "name": "Patologia generale"
+          },
+          {
+            "code": "EC241445",
+            "name": "Chimica analitica"
+          },
+          {
+            "code": "EC241447",
+            "name": "Tecnologie farmaceutiche"
+          }
+        ]
+      },
+      {
+        "year": 4,
+        "value": "PDS0-2009|4",
+        "courses": [
+          {
+            "code": "EC226283",
+            "name": "Biofarmaceutica"
+          },
+          {
+            "code": "EC226284",
+            "name": "Tossicologia e metodologie farmacologiche"
+          },
+          {
+            "code": "EC226286",
+            "name": "Chimica farmaceutica e tossicologica II"
+          }
+        ]
+      },
+      {
+        "year": 5,
+        "value": "PDS0-2009|5",
+        "courses": [
+          {
+            "code": "EC208224",
+            "name": "Laboratorio preparazioni estrattive e sintetiche dei farmaci"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Culture e tradizioni del medio evo e del rinascimento (Laurea Magistrale)",
+    "value": "1155",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0-2009|1",
+        "courses": [
+          {
+            "code": "EC275524",
+            "name": "Paleografia e diplomatica"
+          },
+          {
+            "code": "EC275528",
+            "name": "Critica testuale"
+          },
+          {
+            "code": "EC275531",
+            "name": "Storia medievale"
+          },
+          {
+            "code": "EC275532",
+            "name": "Filologia romanza"
+          },
+          {
+            "code": "EC275526",
+            "name": "Descrizione e catalogazione dei manoscritti"
+          },
+          {
+            "code": "EC275530",
+            "name": "Letteratura italiana del medio evo e del rinascimento"
+          },
+          {
+            "code": "EC275525",
+            "name": "Il medioevo romanzo nella letteratura contemporanea"
+          },
+          {
+            "code": "EC275529",
+            "name": "Storia dell'europa moderna"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0-2009|2",
+        "courses": [
+          {
+            "code": "EC255040",
+            "name": "Iconografia e iconologia"
+          },
+          {
+            "code": "EC255046",
+            "name": "Storia della lingua italiana del medio evo e del rinascimento"
+          },
+          {
+            "code": "EC255044",
+            "name": "Letteratura spagnola del rinascimento e del barocco"
+          },
+          {
+            "code": "EC255043",
+            "name": "Filologia della letteratura italiana del rinascimento"
+          },
+          {
+            "code": "EC255047",
+            "name": "Storia della musica rinascimentale"
+          },
+          {
+            "code": "EC255037",
+            "name": "Linguistica generale"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dietistica (abilitante alla professione sanitaria di dietista) (Laurea)",
+    "value": "1050",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": [
+          {
+            "code": "EC273089",
+            "name": "Inglese scientifico"
+          },
+          {
+            "code": "EC273100",
+            "name": "Patologia generale"
+          },
+          {
+            "code": "EC273114",
+            "name": "Chimica e biochimica"
+          },
+          {
+            "code": "EC273104",
+            "name": "Fisica"
+          },
+          {
+            "code": "EC273106",
+            "name": "Statistica medica"
+          },
+          {
+            "code": "EC273107",
+            "name": "Informatica"
+          },
+          {
+            "code": "EC273116",
+            "name": "Biologia applicata"
+          },
+          {
+            "code": "EC273118",
+            "name": "Anatomia umana"
+          },
+          {
+            "code": "EC273119",
+            "name": "Istologia"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": []
+      },
+      {
+        "year": 3,
+        "value": "PDS 2011|3",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Economia (Laurea)",
+    "value": "1022",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0-2008|1",
+        "courses": [
+          {
+            "code": "EC278650",
+            "name": "Economia aziendale (gruppo a)"
+          },
+          {
+            "code": "EC278668",
+            "name": "Informatica (gruppo a)"
+          },
+          {
+            "code": "EC278664",
+            "name": "Istituzioni di diritto privato (gruppo a)"
+          },
+          {
+            "code": "EC278675",
+            "name": "Metodi matematici per l'economia (gruppo a)"
+          },
+          {
+            "code": "EC00000001",
+            "name": "Precorso di lingua inglese (lz+a)"
+          },
+          {
+            "code": "EC278651",
+            "name": "Economia aziendale (gruppo b)"
+          },
+          {
+            "code": "EC278669",
+            "name": "Informatica (gruppo b)"
+          },
+          {
+            "code": "EC278665",
+            "name": "Istituzioni di diritto privato (gruppo b)"
+          },
+          {
+            "code": "EC278676",
+            "name": "Metodi matematici per l'economia (gruppo b)"
+          },
+          {
+            "code": "EC00000000",
+            "name": "Precorso di lingua inglese (ak+b+c)"
+          },
+          {
+            "code": "EC278652",
+            "name": "Economia aziendale (gruppo c)"
+          },
+          {
+            "code": "EC278670",
+            "name": "Informatica (gruppo c)"
+          },
+          {
+            "code": "EC278666",
+            "name": "Istituzioni di diritto privato (gruppo c)"
+          },
+          {
+            "code": "EC278677",
+            "name": "Metodi matematici per l'economia (gruppo c)"
+          },
+          {
+            "code": "EC278645",
+            "name": "Diritto pubblico ed economia (gruppo a)"
+          },
+          {
+            "code": "EC278654",
+            "name": "Economia politica i (gruppo a)"
+          },
+          {
+            "code": "EC2787231",
+            "name": "Lingua inglese a (i) + lz (ii)"
+          },
+          {
+            "code": "EC278660",
+            "name": "Statistica (gruppo a)"
+          },
+          {
+            "code": "EC278646",
+            "name": "Diritto pubblico ed economia (gruppo b)"
+          },
+          {
+            "code": "EC278655",
+            "name": "Economia politica i (gruppo b)"
+          },
+          {
+            "code": "EC278661",
+            "name": "Statistica (gruppo b)"
+          },
+          {
+            "code": "EC278647",
+            "name": "Diritto pubblico ed economia (gruppo c)"
+          },
+          {
+            "code": "EC278656",
+            "name": "Economia politica i (gruppo c)"
+          },
+          {
+            "code": "EC278662",
+            "name": "Statistica (gruppo c)"
+          },
+          {
+            "code": "EC278672",
+            "name": "Lingua inglese (b+c (i) + ak (ii)"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0-2008|2",
+        "courses": [
+          {
+            "code": "EC00000001",
+            "name": "Precorso di lingua inglese (lz+a)"
+          },
+          {
+            "code": "EC00000000",
+            "name": "Precorso di lingua inglese (ak+b+c)"
+          },
+          {
+            "code": "EC262423",
+            "name": "Diritto commerciale (cognomi A-K)"
+          },
+          {
+            "code": "EC262406",
+            "name": "Economia politica ii (cognomi A-K)"
+          },
+          {
+            "code": "EC262415",
+            "name": "Matematica finanziaria (cognomi A-K)"
+          },
+          {
+            "code": "EC262409",
+            "name": "Programmazione e controllo (cognomi A-K)"
+          },
+          {
+            "code": "EC262420",
+            "name": "Lingua francese (a)"
+          },
+          {
+            "code": "EC262429",
+            "name": "Lingua spagnola (a)"
+          },
+          {
+            "code": "EC262421",
+            "name": "Lingua tedesca (a)"
+          },
+          {
+            "code": "EC262424",
+            "name": "Diritto commerciale (cognomi L-Z)"
+          },
+          {
+            "code": "EC262407",
+            "name": "Economia politica ii (cognomi L-Z)"
+          },
+          {
+            "code": "EC262416",
+            "name": "Matematica finanziaria (cognomi L-Z)"
+          },
+          {
+            "code": "EC262410",
+            "name": "Programmazione e controllo (cognomi L-Z)"
+          },
+          {
+            "code": "EC2787231",
+            "name": "Lingua inglese a (i) + lz (ii)"
+          },
+          {
+            "code": "EC262418",
+            "name": "Economia pubblica (cognomi A-K)"
+          },
+          {
+            "code": "EC262412",
+            "name": "Lingua inglese (cognomi A-K)"
+          },
+          {
+            "code": "EC278707",
+            "name": "Lingua inglese ak (ii) +b+c (i)"
+          },
+          {
+            "code": "EC262426",
+            "name": "Ragioneria generale ed applicata (cognomi A-K)"
+          },
+          {
+            "code": "EC262430",
+            "name": "Lingua cinese (a)"
+          },
+          {
+            "code": "EC262419",
+            "name": "Economia pubblica (cognomi L-Z)"
+          },
+          {
+            "code": "EC262427",
+            "name": "Ragioneria generale ed applicata (cognomi L-Z)"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS0-2008|3",
+        "courses": [
+          {
+            "code": "EC244134",
+            "name": "Economia degli intermediari finanziari (cognomi A-K)"
+          },
+          {
+            "code": "EC244136",
+            "name": "Economia degli intermediari finanziari (cognomi L-Z)"
+          },
+          {
+            "code": "EC244157",
+            "name": "Diritto tributario"
+          },
+          {
+            "code": "EC244173",
+            "name": "Revisione aziendale"
+          },
+          {
+            "code": "EC244161",
+            "name": "Diritto del lavoro"
+          },
+          {
+            "code": "EC244167",
+            "name": "Lingua francese (b)"
+          },
+          {
+            "code": "EC244164",
+            "name": "Lingua spagnola (b)"
+          },
+          {
+            "code": "EC244165",
+            "name": "Lingua tedesca (b)"
+          },
+          {
+            "code": "EC244138",
+            "name": "Marketing"
+          },
+          {
+            "code": "EC244145",
+            "name": "Storia economica"
+          },
+          {
+            "code": "EC244176",
+            "name": "Economia urbana e regionale"
+          },
+          {
+            "code": "EC244163",
+            "name": "Organizzazione aziendale"
+          },
+          {
+            "code": "EC244130",
+            "name": "Economia e politica industriale (cognomi L-Z)"
+          },
+          {
+            "code": "EC244170",
+            "name": "Strategia e politica aziendale"
+          },
+          {
+            "code": "EC244120",
+            "name": "Diritto europeo dei bilanci pubblici"
+          },
+          {
+            "code": "EC244179",
+            "name": "Economia dell'energia e dell'ambiente"
+          },
+          {
+            "code": "EC244122",
+            "name": "Economia e bilancio delle pubbliche amministrazioni"
+          },
+          {
+            "code": "EC244129",
+            "name": "Economia e politica industriale (cognomi A-K)"
+          },
+          {
+            "code": "EC244123",
+            "name": "Industrial organization and industrial policy"
+          },
+          {
+            "code": "EC244126",
+            "name": "Lingua cinese (b)"
+          },
+          {
+            "code": "EC244169",
+            "name": "Politica economica"
+          },
+          {
+            "code": "EC244156",
+            "name": "Economia dello sviluppo"
+          },
+          {
+            "code": "EC244152",
+            "name": "Finanza degli enti locali"
+          },
+          {
+            "code": "EC244154",
+            "name": "Economia del lavoro"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Economia, mercati e management (Laurea Magistrale)",
+    "value": "1232",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "1232-7|1",
+        "courses": [
+          {
+            "code": "EC279896",
+            "name": "Diritto amministrativo dell'economia"
+          },
+          {
+            "code": "EC279917",
+            "name": "Strumenti per l'analisi dei dati"
+          },
+          {
+            "code": "EC279897",
+            "name": "Economia delle public and personal utilities"
+          },
+          {
+            "code": "EC279893",
+            "name": "Economia e politiche per lo sviluppo industriale"
+          },
+          {
+            "code": "EC279899",
+            "name": "Diritto della concorrenza e regolazione dei mercati"
+          },
+          {
+            "code": "EC279886",
+            "name": "Economia e finanza pubblica"
+          },
+          {
+            "code": "EC279894",
+            "name": "Management pubblico"
+          },
+          {
+            "code": "EC279895",
+            "name": "Scenari macroeconomici, mercati e istituzioni"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "1232-5|2",
+        "courses": [
+          {
+            "code": "EC262511",
+            "name": "Eco-innovation, firm's performance and industrial dynamics"
+          },
+          {
+            "code": "EC262541",
+            "name": "French language"
+          },
+          {
+            "code": "EC262543",
+            "name": "German language"
+          },
+          {
+            "code": "EC262552",
+            "name": "Policies for sustainability and local development"
+          },
+          {
+            "code": "EC262559",
+            "name": "Spanish language"
+          },
+          {
+            "code": "EC262524",
+            "name": "Environmental economics and the green economy"
+          },
+          {
+            "code": "EC262508",
+            "name": "Development economics and emerging markets"
+          },
+          {
+            "code": "EC262532",
+            "name": "Economics of innovation"
+          },
+          {
+            "code": "EC262533",
+            "name": "Environmental and intellectual property law"
+          },
+          {
+            "code": "EC262534",
+            "name": "Evaluation of public policies"
+          },
+          {
+            "code": "EC262499",
+            "name": "Chinese language"
+          },
+          {
+            "code": "EC262522",
+            "name": "Econometric techniques for policy evaluation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Economics, management and policies for global challenges (Laurea Magistrale)",
+    "value": "3042",
+    "num_years": 1,
+    "years": [
+      {
+        "year": 1,
+        "value": "3042-2|1",
+        "courses": [
+          {
+            "code": "EC275428",
+            "name": "Economics of innovation"
+          },
+          {
+            "code": "EC275417",
+            "name": "Environmental economics and policy"
+          },
+          {
+            "code": "EC275425",
+            "name": "Statistics for economics and business"
+          },
+          {
+            "code": "EC275416",
+            "name": "Strategic control and performance management"
+          },
+          {
+            "code": "EC275415",
+            "name": "Environmental law and intellectual property rights"
+          },
+          {
+            "code": "EC275425",
+            "name": "Statistics for economics and business"
+          },
+          {
+            "code": "EC275429",
+            "name": "Applied econometrics"
+          },
+          {
+            "code": "EC275426",
+            "name": "Project appraisal and cost benefit analysis for the environment"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Educazione professionale (abilitante alla professione sanitaria di educatore professionale) (Laurea)",
+    "value": "1051",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": []
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": []
+      },
+      {
+        "year": 3,
+        "value": "PDS 2011|3",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Farmacia (Laurea Magistrale Ciclo Unico 5 anni)",
+    "value": "1150",
+    "num_years": 5,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0-2009|1",
+        "courses": [
+          {
+            "code": "EC277356",
+            "name": "Lingua inglese: verifica delle conoscenze"
+          },
+          {
+            "code": "EC277357",
+            "name": "Chimica generale e inorganica"
+          },
+          {
+            "code": "EC277364",
+            "name": "Biologia vegetale"
+          },
+          {
+            "code": "EC277365",
+            "name": "Biologia animale"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0-2009|2",
+        "courses": [
+          {
+            "code": "EC257185",
+            "name": "Chimica delle sostanze naturali"
+          },
+          {
+            "code": "EC277848",
+            "name": "Organizzazione e gestione delle farmacie"
+          },
+          {
+            "code": "EC277849",
+            "name": "Storia della farmacia e del farmaco"
+          },
+          {
+            "code": "EC257188",
+            "name": "Analisi quantitativa del farmaco"
+          },
+          {
+            "code": "EC257191",
+            "name": "Chimica analitica"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS0-2009|3",
+        "courses": [
+          {
+            "code": "EC236663",
+            "name": "Tecnologie farmaceutiche I"
+          },
+          {
+            "code": "EC236666",
+            "name": "Analisi quantitativa del farmaco"
+          },
+          {
+            "code": "EC236669",
+            "name": "Chimica analitica"
+          },
+          {
+            "code": "EC236671",
+            "name": "Chimica farmaceutica e tossicologica I"
+          }
+        ]
+      },
+      {
+        "year": 4,
+        "value": "PDS0-2009|4",
+        "courses": [
+          {
+            "code": "EC226052",
+            "name": "Tossicologia"
+          },
+          {
+            "code": "EC226053",
+            "name": "Farmacovigilanza e medicinali ospedalieri"
+          },
+          {
+            "code": "EC226054",
+            "name": "Tecnologie farmaceutiche II"
+          }
+        ]
+      },
+      {
+        "year": 5,
+        "value": "PDS0-2009|5",
+        "courses": [
+          {
+            "code": "EC208934",
+            "name": "Economia sanitaria"
+          },
+          {
+            "code": "EC208935",
+            "name": "Prodotti dietetici e nutriceutica"
+          },
+          {
+            "code": "EC208937",
+            "name": "Storia della farmacia e del farmaco"
+          },
+          {
+            "code": "EC208940",
+            "name": "Organizzazione e gestione delle farmacie"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Filosofia (Laurea Magistrale)",
+    "value": "5025",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "GEN|1",
+        "courses": [
+          {
+            "code": "EC169449",
+            "name": "Storia della filosofia politica"
+          },
+          {
+            "code": "EC172797",
+            "name": "Antropologia filosofica del medioevo e del rinascimento"
+          },
+          {
+            "code": "EC172949",
+            "name": "Filosofia dell'illuminismo"
+          },
+          {
+            "code": "EC169441",
+            "name": "Scienza e filosofia"
+          },
+          {
+            "code": "EC169457",
+            "name": "Storia della filosofia antica"
+          },
+          {
+            "code": "EC169459",
+            "name": "Linguaggio e filosofia contemporanea"
+          },
+          {
+            "code": "EC169468",
+            "name": "Estetica - fe"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "GEN|2",
+        "courses": [
+          {
+            "code": "EC159820",
+            "name": "Scienza, medicina, societa'"
+          },
+          {
+            "code": "EC159827",
+            "name": "Antropologia filosofica del medioevo e del rinascimento"
+          },
+          {
+            "code": "EC159816",
+            "name": "Uomo evoluzione e ambiente"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fisica (Laurea Magistrale)",
+    "value": "1145",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2016|1",
+        "courses": [
+          {
+            "code": "ECFeS_67219_1145_1_TOMAS",
+            "name": "Object-oriented programming for experimental data analysis"
+          },
+          {
+            "code": "ECFeS_52146_1145_1_SPIZZ",
+            "name": "Solid state physics"
+          },
+          {
+            "code": "ECFeS_52142_1145_1_MORET",
+            "name": "Quantum mechanics"
+          },
+          {
+            "code": "ECFeS_52144_1145_1_ZAVAT",
+            "name": "Advanced electromagnetism"
+          },
+          {
+            "code": "ECFeS_55805_1145_1_COTTA",
+            "name": "Physics of electronic devices"
+          },
+          {
+            "code": "ECFeS_52141_1145_1_DRAGO",
+            "name": "Mathematical methods of physics"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2016|2",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Fisica (Laurea)",
+    "value": "1139",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2010|1",
+        "courses": [
+          {
+            "code": "ECFeS_000470_1139_1_CHIAV",
+            "name": "Geometria"
+          },
+          {
+            "code": "ECFeS_64057_1139_1_GUIDO",
+            "name": "Fisica generale i - 1 parte"
+          },
+          {
+            "code": "ECFeS_57275_1139_1_LUPPI",
+            "name": "Laboratorio di fisica con elementi di statistica e informatica - i parte"
+          },
+          {
+            "code": "ECFeS_000015_1139_1_SEGAL",
+            "name": "Analisi matematica I"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2010|2",
+        "courses": [
+          {
+            "code": "ECFeS_000686_1139_2_GRAND",
+            "name": "Meccanica analitica"
+          },
+          {
+            "code": "ECFeS_015011_1139_2_ANDRE",
+            "name": "Laboratorio di elettronica digitale"
+          },
+          {
+            "code": "ECFeS_000017_1139_2_SEGAL",
+            "name": "Analisi matematica II"
+          },
+          {
+            "code": "ECFeS_55852_1139_2_MALAG",
+            "name": "Fisica generale ii - 1 parte"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS 2010|3",
+        "courses": [
+          {
+            "code": "ECFeS_59096_1139_3_ROSAT",
+            "name": "Astrofisica"
+          },
+          {
+            "code": "ECFeS_013549_1139_3_CALAB",
+            "name": "Laboratorio di ottica"
+          },
+          {
+            "code": "ECFeS_016528_1139_3_DALPI",
+            "name": "Epistemologia e storia della fisica"
+          },
+          {
+            "code": "ECFeS_013553_1139_3_TRIPI",
+            "name": "Elementi di meccanica quantistica"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fisioterapia (abilitante alla professione sanitaria di fisioterapista) (Laurea)",
+    "value": "1052",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0-2011|1",
+        "courses": [
+          {
+            "code": "EC278758",
+            "name": "Anatomia umana"
+          },
+          {
+            "code": "EC278777",
+            "name": "Tirocinio per le competenze core del primo anno"
+          },
+          {
+            "code": "EC278374",
+            "name": "Inglese scientifico"
+          },
+          {
+            "code": "EC278403",
+            "name": "Fisica applicata"
+          },
+          {
+            "code": "EC278404",
+            "name": "Biochimica"
+          },
+          {
+            "code": "EC278405",
+            "name": "Biologia"
+          },
+          {
+            "code": "EC278406",
+            "name": "Microbiologia"
+          },
+          {
+            "code": "EC278760",
+            "name": "Istologia"
+          },
+          {
+            "code": "EC278779",
+            "name": "Seminario: informatica"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0-2011|2",
+        "courses": [
+          {
+            "code": "EC258226",
+            "name": "Problemi prioritari di salute di tipo sistemico"
+          },
+          {
+            "code": "EC258227",
+            "name": "Farmacologia in riabilitazione"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS0-2011|3",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Fisioterapia (abilitante alla professione sanitaria di fisioterapista) - sede bolzano (Laurea)",
+    "value": "1053",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": []
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": []
+      },
+      {
+        "year": 3,
+        "value": "PDS 2011|3",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Giurisprudenza (Laurea Magistrale Ciclo Unico 5 anni)",
+    "value": "1007",
+    "num_years": 5,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0-2008|1",
+        "courses": []
+      },
+      {
+        "year": 2,
+        "value": "PDS0-2008|2",
+        "courses": []
+      },
+      {
+        "year": 3,
+        "value": "AttC|3",
+        "courses": []
+      },
+      {
+        "year": 4,
+        "value": "AttD|4",
+        "courses": []
+      },
+      {
+        "year": 5,
+        "value": "AttCD|5",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Giurisprudenza (sede di rovigo) (Laurea Magistrale Ciclo Unico 5 anni)",
+    "value": "1008",
+    "num_years": 5,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0-2008|1",
+        "courses": []
+      },
+      {
+        "year": 2,
+        "value": "PDS0-2008|2",
+        "courses": []
+      },
+      {
+        "year": 3,
+        "value": "AttC|3",
+        "courses": []
+      },
+      {
+        "year": 4,
+        "value": "AttD|4",
+        "courses": []
+      },
+      {
+        "year": 5,
+        "value": "AttCD|5",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Igiene dentale (abilitante alla professione sanitaria di igienista dentale) (Laurea)",
+    "value": "1054",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": [
+          {
+            "code": "EC273524",
+            "name": "Biologia applicata agli studi biomedici"
+          },
+          {
+            "code": "EC273527",
+            "name": "Fisica ad indirizzo biomedico"
+          },
+          {
+            "code": "EC273528",
+            "name": "Statistica medica"
+          },
+          {
+            "code": "EC273530",
+            "name": "Informatica"
+          },
+          {
+            "code": "EC273543",
+            "name": "Istologia"
+          },
+          {
+            "code": "EC273523",
+            "name": "Chimica e biochimica"
+          },
+          {
+            "code": "EC273538",
+            "name": "Lingua inglese"
+          },
+          {
+            "code": "EC273544",
+            "name": "Anatomia umana"
+          },
+          {
+            "code": "EC273518",
+            "name": "Patologia generale"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": [
+          {
+            "code": "EC258397",
+            "name": "Medicina interna"
+          },
+          {
+            "code": "EC258400",
+            "name": "Endocrinologia"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS 2011|3",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Infermieristica (abilitante alla professione sanitaria di infermiere) (Laurea)",
+    "value": "1055",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": [
+          {
+            "code": "EC273631",
+            "name": "Istologia"
+          },
+          {
+            "code": "EC273632",
+            "name": "Anatomia umana"
+          },
+          {
+            "code": "EC273634",
+            "name": "Genetica medica"
+          },
+          {
+            "code": "EC273635",
+            "name": "Biologia applicata"
+          },
+          {
+            "code": "EC273636",
+            "name": "Fisica applicata"
+          },
+          {
+            "code": "EC273637",
+            "name": "Informatica"
+          },
+          {
+            "code": "EC273639",
+            "name": "Chimica medica"
+          },
+          {
+            "code": "EC273640",
+            "name": "Biochimica"
+          },
+          {
+            "code": "EC275944",
+            "name": "Infermieristica generale"
+          },
+          {
+            "code": "EC275945",
+            "name": "Inglese scientifico"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": [
+          {
+            "code": "EC255948",
+            "name": "Psicologia generale"
+          },
+          {
+            "code": "EC255949",
+            "name": "Psicologia clinica"
+          },
+          {
+            "code": "EC255953",
+            "name": "Infermieristica clinica medica"
+          },
+          {
+            "code": "EC255955",
+            "name": "Malattie infettive"
+          },
+          {
+            "code": "EC255964",
+            "name": "Farmacologia clinica"
+          },
+          {
+            "code": "EC255965",
+            "name": "Medicina interna (oncoematologia)"
+          },
+          {
+            "code": "EC255968",
+            "name": "Semeiotica medica e medicina interna"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS 2011|3",
+        "courses": [
+          {
+            "code": "EC237523",
+            "name": "Psichiatria"
+          },
+          {
+            "code": "EC237537",
+            "name": "Igiene applicata"
+          },
+          {
+            "code": "EC237538",
+            "name": "Diritto del lavoro"
+          },
+          {
+            "code": "EC237542",
+            "name": "Pediatria"
+          },
+          {
+            "code": "EC237543",
+            "name": "Ginecologia/ostetricia"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Infermieristica (abilitante alla professione sanitaria di infermiere) - sede di pieve di cento (Laurea)",
+    "value": "1057",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": []
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": []
+      },
+      {
+        "year": 3,
+        "value": "PDS 2011|3",
+        "courses": [
+          {
+            "code": "EC237637",
+            "name": "Medicina legale"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Informatica (Laurea)",
+    "value": "1233",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0|1",
+        "courses": [
+          {
+            "code": "EC279771",
+            "name": "Istituzioni di matematica (i parte)"
+          },
+          {
+            "code": "EC279772",
+            "name": "Istituzioni di matematica (ii parte)"
+          },
+          {
+            "code": "EC279777",
+            "name": "Programmazione e laboratorio"
+          },
+          {
+            "code": "EC279780",
+            "name": "Lingua inglese: verifica delle conoscenze"
+          },
+          {
+            "code": "EC279767",
+            "name": "Architettura degli elaboratori e laboratorio"
+          },
+          {
+            "code": "EC279773",
+            "name": "Calcolo delle probabilita' e statistica"
+          },
+          {
+            "code": "EC279776",
+            "name": "Fisica"
+          },
+          {
+            "code": "EC279781",
+            "name": "Matematica discreta"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0|2",
+        "courses": [
+          {
+            "code": "EC259541",
+            "name": "Reti di telecomunicazioni"
+          },
+          {
+            "code": "EC259527",
+            "name": "Economia e gestione aziendale"
+          },
+          {
+            "code": "EC259529",
+            "name": "Calcolo numerico e laboratorio"
+          },
+          {
+            "code": "EC259538",
+            "name": "Sistemi operativi e laboratorio"
+          },
+          {
+            "code": "EC259542",
+            "name": "Algoritmi e strutture dati"
+          },
+          {
+            "code": "EC259522",
+            "name": "Fondamenti di automatica"
+          },
+          {
+            "code": "EC259528",
+            "name": "Algoritmi per il calcolo parallelo"
+          },
+          {
+            "code": "EC259532",
+            "name": "Linguaggi di programmazione e laboratorio"
+          },
+          {
+            "code": "EC259535",
+            "name": "Basi di dati e laboratorio"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS0|3",
+        "courses": [
+          {
+            "code": "EC243029",
+            "name": "Reti di telecomunicazioni"
+          },
+          {
+            "code": "EC243027",
+            "name": "Architettura di reti"
+          },
+          {
+            "code": "EC243030",
+            "name": "Grafica computerizzata"
+          },
+          {
+            "code": "EC243033",
+            "name": "Tecnologie web"
+          },
+          {
+            "code": "EC243032",
+            "name": "Calcolabilita' e complessita'"
+          },
+          {
+            "code": "EC243022",
+            "name": "Economia e gestione aziendale"
+          },
+          {
+            "code": "EC243015",
+            "name": "Fondamenti di automatica"
+          },
+          {
+            "code": "EC243024",
+            "name": "Laboratorio di reti"
+          },
+          {
+            "code": "EC243031",
+            "name": "Ingegneria del software"
+          },
+          {
+            "code": "EC243023",
+            "name": "Algoritmi per il calcolo parallelo"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ingegneria civile (Laurea Magistrale)",
+    "value": "1227",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "1227-14-2|1",
+        "courses": [
+          {
+            "code": "EC260166",
+            "name": "Progetti di strutture"
+          },
+          {
+            "code": "EC260170",
+            "name": "Valutazione progetti immobiliari e ambientali"
+          },
+          {
+            "code": "EC260172",
+            "name": "Cartografia numerica e telerilevamento"
+          },
+          {
+            "code": "EC260193",
+            "name": "Fer da energia meccanica"
+          },
+          {
+            "code": "EC260197",
+            "name": "Fer da energia termica"
+          },
+          {
+            "code": "EC260173",
+            "name": "Laboratorio di Geomatica"
+          },
+          {
+            "code": "EC260171",
+            "name": "Idraulica fluviale e protezione idraulica del territorio"
+          },
+          {
+            "code": "EC260185",
+            "name": "Ingegneria sanitaria e ambientale"
+          },
+          {
+            "code": "EC260156",
+            "name": "Geotecnica"
+          },
+          {
+            "code": "EC260163",
+            "name": "Tecnica delle costruzioni"
+          },
+          {
+            "code": "EC260180",
+            "name": "Idrologia"
+          },
+          {
+            "code": "EC260159",
+            "name": "Costruzioni di strade"
+          },
+          {
+            "code": "EC260184",
+            "name": "Tecniche di bonifica idraulica"
+          },
+          {
+            "code": "EC260165",
+            "name": "Costruzioni idrauliche"
+          },
+          {
+            "code": "EC239751",
+            "name": "Opere in terra"
+          },
+          {
+            "code": "EC239731",
+            "name": "Laboratorio di sostenibilità ambientale e antropica"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "1227-14-2|2",
+        "courses": [
+          {
+            "code": "EC260166",
+            "name": "Progetti di strutture"
+          },
+          {
+            "code": "EC260170",
+            "name": "Valutazione progetti immobiliari e ambientali"
+          },
+          {
+            "code": "EC260172",
+            "name": "Cartografia numerica e telerilevamento"
+          },
+          {
+            "code": "EC260193",
+            "name": "Fer da energia meccanica"
+          },
+          {
+            "code": "EC260197",
+            "name": "Fer da energia termica"
+          },
+          {
+            "code": "EC260173",
+            "name": "Laboratorio di Geomatica"
+          },
+          {
+            "code": "EC260171",
+            "name": "Idraulica fluviale e protezione idraulica del territorio"
+          },
+          {
+            "code": "EC260185",
+            "name": "Ingegneria sanitaria e ambientale"
+          },
+          {
+            "code": "EC260180",
+            "name": "Idrologia"
+          },
+          {
+            "code": "EC260159",
+            "name": "Costruzioni di strade"
+          },
+          {
+            "code": "EC260184",
+            "name": "Tecniche di bonifica idraulica"
+          },
+          {
+            "code": "EC239751",
+            "name": "Opere in terra"
+          },
+          {
+            "code": "EC239731",
+            "name": "Laboratorio di sostenibilità ambientale e antropica"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ingegneria civile e ambientale (Laurea)",
+    "value": "1029",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0|1",
+        "courses": [
+          {
+            "code": "EC276543",
+            "name": "Analisi matematica I"
+          },
+          {
+            "code": "EC276542",
+            "name": "Disegno civile"
+          },
+          {
+            "code": "EC276549",
+            "name": "Tecnologia dei materiali"
+          },
+          {
+            "code": "EC276548",
+            "name": "Fondamenti di chimica"
+          },
+          {
+            "code": "EC276544",
+            "name": "Fisica generale"
+          },
+          {
+            "code": "EC276551",
+            "name": "Geometria"
+          },
+          {
+            "code": "EC276550",
+            "name": "Lingua inglese: verifica delle conoscenze"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0|2",
+        "courses": [
+          {
+            "code": "EC260123",
+            "name": "Analisi matematica II"
+          },
+          {
+            "code": "EC262930",
+            "name": "Disegno automatico"
+          },
+          {
+            "code": "EC262929",
+            "name": "Elementi di bim"
+          },
+          {
+            "code": "EC260124",
+            "name": "Meccanica razionale"
+          },
+          {
+            "code": "EC260120",
+            "name": "Idraulica"
+          },
+          {
+            "code": "EC260122",
+            "name": "Topografia"
+          },
+          {
+            "code": "EC260121",
+            "name": "Metodi di osservazione e misura"
+          },
+          {
+            "code": "EC260125",
+            "name": "Progettazione degli elementi costruttivi"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS0|3",
+        "courses": [
+          {
+            "code": "EC239709",
+            "name": "Elementi di economia ed estimo"
+          },
+          {
+            "code": "EC239704",
+            "name": "Scienza delle costruzioni"
+          },
+          {
+            "code": "EC280893",
+            "name": "Elementi di geologia e geomorfologia"
+          },
+          {
+            "code": "EC280899",
+            "name": "Idraulica ambientale"
+          },
+          {
+            "code": "EC239705",
+            "name": "Fisica tecnica"
+          },
+          {
+            "code": "EC239704",
+            "name": "Scienza delle costruzioni"
+          },
+          {
+            "code": "EC280895",
+            "name": "Elementi di calcolo strutturale"
+          },
+          {
+            "code": "EC280901",
+            "name": "Rilevamento e rappresentazione dell'ambiente costruito"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ingegneria elettronica e informatica (Laurea)",
+    "value": "1328",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0|1",
+        "courses": [
+          {
+            "code": "EC276894",
+            "name": "Analisi matematica i.a"
+          },
+          {
+            "code": "EC276891",
+            "name": "Geometria e algebra"
+          },
+          {
+            "code": "EC276893",
+            "name": "Lingua inglese: verifica delle conoscenze"
+          },
+          {
+            "code": "EC276889",
+            "name": "Modulo A"
+          },
+          {
+            "code": "EC276897",
+            "name": "Analisi matematica i.b"
+          },
+          {
+            "code": "EC276896",
+            "name": "Fisica I"
+          },
+          {
+            "code": "EC276895",
+            "name": "Metodi statistici per l'ingegneria"
+          },
+          {
+            "code": "EC276890",
+            "name": "Modulo B"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0|2",
+        "courses": [
+          {
+            "code": "EC260601",
+            "name": "Analisi matematica II"
+          },
+          {
+            "code": "EC260609",
+            "name": "Calcolatori elettronici"
+          },
+          {
+            "code": "EC260610",
+            "name": "Circuiti elettrici: fondamenti e laboratorio"
+          },
+          {
+            "code": "EC260608",
+            "name": "Fisica II"
+          },
+          {
+            "code": "EC260603",
+            "name": "Fondamenti di automatica"
+          },
+          {
+            "code": "EC260599",
+            "name": "Segnali e comunicazioni:fondamenti e laboratorio"
+          },
+          {
+            "code": "EC260602",
+            "name": "Sistemi elettronici digitali"
+          },
+          {
+            "code": "EC260607",
+            "name": "Sistemi operativi"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS1|3",
+        "courses": [
+          {
+            "code": "EC240141",
+            "name": "Reti di calcolatori"
+          },
+          {
+            "code": "EC240121",
+            "name": "Elettronica analogica"
+          },
+          {
+            "code": "EC240123",
+            "name": "Reti di telecomunicazioni e internet"
+          },
+          {
+            "code": "EC240124",
+            "name": "Matematica discreta"
+          },
+          {
+            "code": "EC240134",
+            "name": "Azionamenti elettrici"
+          },
+          {
+            "code": "EC240129",
+            "name": "Linguaggi di descrizione dell'hardware"
+          },
+          {
+            "code": "EC240137",
+            "name": "Sistemi wireless"
+          },
+          {
+            "code": "EC276990",
+            "name": "Laboratorio di segnali e sistemi"
+          },
+          {
+            "code": "EC240132",
+            "name": "Sistemi di controllo digitale"
+          },
+          {
+            "code": "EC277625",
+            "name": "Sistemi elettronici di misura"
+          },
+          {
+            "code": "EC240139",
+            "name": "Metodi matematici per l'ingegneria"
+          },
+          {
+            "code": "EC240133",
+            "name": "Automazione industriale"
+          },
+          {
+            "code": "EC240140",
+            "name": "Basi di dati"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ingegneria elettronica per l'ict (Laurea Magistrale)",
+    "value": "3046",
+    "num_years": 1,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS2|1",
+        "courses": [
+          {
+            "code": "EC276688",
+            "name": "Azionamenti elettrici"
+          },
+          {
+            "code": "EC260462",
+            "name": "Economia ed organizzazione aziendale"
+          },
+          {
+            "code": "EC276968",
+            "name": "Ecosistemi wireless"
+          },
+          {
+            "code": "EC240141",
+            "name": "Reti di calcolatori"
+          },
+          {
+            "code": "EC276996",
+            "name": "Scambio termico nei sistemi elettronici"
+          },
+          {
+            "code": "EC277003",
+            "name": "Sistemi wireless"
+          },
+          {
+            "code": "EC240124",
+            "name": "Matematica discreta"
+          },
+          {
+            "code": "EC277005",
+            "name": "Propagazione"
+          },
+          {
+            "code": "EC277002",
+            "name": "Industrial organization and industrial policy"
+          },
+          {
+            "code": "EC276710",
+            "name": "Automazione industriale"
+          },
+          {
+            "code": "EC276997",
+            "name": "Elettronica dei sistemi wireless"
+          },
+          {
+            "code": "EC277006",
+            "name": "Propagazione guidata"
+          },
+          {
+            "code": "EC276990",
+            "name": "Laboratorio di segnali e sistemi"
+          },
+          {
+            "code": "EC276980",
+            "name": "Progetto di circuiti elettronici ad alta frequenza"
+          },
+          {
+            "code": "EC276718",
+            "name": "Ricerca operativa"
+          },
+          {
+            "code": "EC277001",
+            "name": "Sicurezza,progettazione e laboratorio internet"
+          },
+          {
+            "code": "EC276709",
+            "name": "Sistemi di elaborazione"
+          },
+          {
+            "code": "EC276991",
+            "name": "Teoria dei numeri e fondamenti di crittografia"
+          },
+          {
+            "code": "EC277625",
+            "name": "Sistemi elettronici di misura"
+          },
+          {
+            "code": "EC260561",
+            "name": "Gestione della produzione"
+          },
+          {
+            "code": "EC240139",
+            "name": "Metodi matematici per l'ingegneria"
+          },
+          {
+            "code": "EC276969",
+            "name": "Progettazione dei sistemi elettronici ad alta affidabilita'"
+          },
+          {
+            "code": "EC276979",
+            "name": "Sensori per applicazioni industriali"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ingegneria informatica e dell automazione (Laurea Magistrale)",
+    "value": "1229",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0-INFORMATICA|1",
+        "courses": [
+          {
+            "code": "EC276685",
+            "name": "Linguaggi di descrizione dell'hardware"
+          },
+          {
+            "code": "EC260587",
+            "name": "Strategia, innovazione e gestione aziendale"
+          },
+          {
+            "code": "EC276732",
+            "name": "Fondamenti di intelligenza artificiale"
+          },
+          {
+            "code": "EC276747",
+            "name": "Sistemi distribuiti e mobili"
+          },
+          {
+            "code": "EC276708",
+            "name": "Sistemi di supervisione adattativi"
+          },
+          {
+            "code": "EC276718",
+            "name": "Ricerca operativa"
+          },
+          {
+            "code": "EC276709",
+            "name": "Sistemi di elaborazione"
+          },
+          {
+            "code": "EC276991",
+            "name": "Teoria dei numeri e fondamenti di crittografia"
+          },
+          {
+            "code": "EC276730",
+            "name": "Basi di dati"
+          },
+          {
+            "code": "EC276682",
+            "name": "Constraint programming"
+          },
+          {
+            "code": "EC276681",
+            "name": "Data mining and analytics"
+          },
+          {
+            "code": "EC240127",
+            "name": "Ingegneria del software"
+          },
+          {
+            "code": "EC276711",
+            "name": "Progetto automatico di sistemi digitali"
+          },
+          {
+            "code": "EC240132",
+            "name": "Sistemi di controllo digitale"
+          },
+          {
+            "code": "EC240125",
+            "name": "Ingegneria dei sistemi web"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0-AUTO1|2",
+        "courses": [
+          {
+            "code": "EC239670",
+            "name": "Meccanica degli azionamenti"
+          },
+          {
+            "code": "EC260462",
+            "name": "Economia ed organizzazione aziendale"
+          },
+          {
+            "code": "EC276685",
+            "name": "Linguaggi di descrizione dell'hardware"
+          },
+          {
+            "code": "EC276732",
+            "name": "Fondamenti di intelligenza artificiale"
+          },
+          {
+            "code": "EC276747",
+            "name": "Sistemi distribuiti e mobili"
+          },
+          {
+            "code": "EC276708",
+            "name": "Sistemi di supervisione adattativi"
+          },
+          {
+            "code": "EC260460",
+            "name": "Strategia, innovazione e gestione aziendale"
+          },
+          {
+            "code": "EC260347",
+            "name": "Industrial organization and industrial policy"
+          },
+          {
+            "code": "EC276710",
+            "name": "Automazione industriale"
+          },
+          {
+            "code": "EC276718",
+            "name": "Ricerca operativa"
+          },
+          {
+            "code": "EC276709",
+            "name": "Sistemi di elaborazione"
+          },
+          {
+            "code": "EC276711",
+            "name": "Progetto automatico di sistemi digitali"
+          },
+          {
+            "code": "EC277625",
+            "name": "Sistemi elettronici di misura"
+          },
+          {
+            "code": "EC260466",
+            "name": "Meccanica dei robot"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ingegneria meccanica (Laurea Magistrale)",
+    "value": "1230",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0|1",
+        "courses": [
+          {
+            "code": "EC276819",
+            "name": "Integrita' strutturale A"
+          },
+          {
+            "code": "EC276820",
+            "name": "Integrita' strutturale B"
+          },
+          {
+            "code": "EC276817",
+            "name": "Statistica e modelli di dati sperimentali"
+          },
+          {
+            "code": "EC276832",
+            "name": "Termofluidodinamica numerica"
+          },
+          {
+            "code": "EC276830",
+            "name": "Fluidodinamica numerica applicata alle macchine e ai sistemi energetici"
+          },
+          {
+            "code": "EC276826",
+            "name": "Meccanica delle vibrazioni"
+          },
+          {
+            "code": "EC276831",
+            "name": "Metallurgia II"
+          },
+          {
+            "code": "EC276833",
+            "name": "Tecnologia meccanica II"
+          },
+          {
+            "code": "EC276825",
+            "name": "Corrosione e protezione dei materiali metallici"
+          },
+          {
+            "code": "EC276824",
+            "name": "Materiali polimerici e compositi"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "1230-2e|2",
+        "courses": [
+          {
+            "code": "EC260560",
+            "name": "Acustica applicata"
+          },
+          {
+            "code": "EC260542",
+            "name": "Diagnostica vibrazionale delle macchine rotanti"
+          },
+          {
+            "code": "EC260545",
+            "name": "Progettazione con materiali polimerici"
+          },
+          {
+            "code": "EC260586",
+            "name": "Simulazioni e test vibrazionali per lo sviluppo prodotto"
+          },
+          {
+            "code": "EC276825",
+            "name": "Corrosione e protezione dei materiali metallici"
+          },
+          {
+            "code": "EC276824",
+            "name": "Materiali polimerici e compositi"
+          },
+          {
+            "code": "EC260582",
+            "name": "Progettazione assistita di strutture meccaniche"
+          },
+          {
+            "code": "EC260552",
+            "name": "Progettazione di prodotto"
+          },
+          {
+            "code": "EC260549",
+            "name": "Progettazione meccanica"
+          },
+          {
+            "code": "EC282847",
+            "name": "Processi metallurgici e fonderia"
+          },
+          {
+            "code": "EC260568",
+            "name": "Tecniche per il controllo del rumore"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ingegneria meccanica (Laurea)",
+    "value": "1028",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2010|1",
+        "courses": [
+          {
+            "code": "EC276504",
+            "name": "Analisi matematica A"
+          },
+          {
+            "code": "EC276502",
+            "name": "Disegno tecnico industriale"
+          },
+          {
+            "code": "EC276508",
+            "name": "Fondamenti di chimica e materiali"
+          },
+          {
+            "code": "EC276509",
+            "name": "Geometria e algebra"
+          },
+          {
+            "code": "EC276505",
+            "name": "Analisi matematica B"
+          },
+          {
+            "code": "EC276510",
+            "name": "Fisica generale I"
+          },
+          {
+            "code": "EC276507",
+            "name": "Informatica industriale"
+          },
+          {
+            "code": "EC276511",
+            "name": "Lingua inglese: verifica delle conoscenze"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2010|2",
+        "courses": [
+          {
+            "code": "EC260084",
+            "name": "Complementi di analisi matematica"
+          },
+          {
+            "code": "EC260086",
+            "name": "Fisica generale II"
+          },
+          {
+            "code": "EC260089",
+            "name": "Meccanica razionale"
+          },
+          {
+            "code": "EC260087",
+            "name": "Metallurgia I"
+          },
+          {
+            "code": "EC260090",
+            "name": "Tecnologia meccanica"
+          },
+          {
+            "code": "EC277735",
+            "name": "Fisica tecnica"
+          },
+          {
+            "code": "EC260082",
+            "name": "Meccanica applicata alle macchine A"
+          },
+          {
+            "code": "EC260083",
+            "name": "Meccanica applicata alle macchine B"
+          },
+          {
+            "code": "EC260085",
+            "name": "Statica"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS 2010|3",
+        "courses": [
+          {
+            "code": "EC300007",
+            "name": "Costr. di macchine e elem. costr. delle macchine"
+          },
+          {
+            "code": "EC239681",
+            "name": "Macchine"
+          },
+          {
+            "code": "EC239670",
+            "name": "Meccanica degli azionamenti"
+          },
+          {
+            "code": "EC239679",
+            "name": "Tecniche di misura"
+          },
+          {
+            "code": "EC260560",
+            "name": "Acustica applicata"
+          },
+          {
+            "code": "EC276688",
+            "name": "Azionamenti elettrici"
+          },
+          {
+            "code": "EC260462",
+            "name": "Economia ed organizzazione aziendale"
+          },
+          {
+            "code": "EC260347",
+            "name": "Industrial organization and industrial policy"
+          },
+          {
+            "code": "EC239677",
+            "name": "Sistemi energetici"
+          },
+          {
+            "code": "EC276710",
+            "name": "Automazione industriale"
+          },
+          {
+            "code": "EC239671",
+            "name": "Impianti industriali"
+          },
+          {
+            "code": "EC282851",
+            "name": "Metallografia e failure analysis"
+          },
+          {
+            "code": "EC239668",
+            "name": "Scienza e tecnologia dei materiali"
+          },
+          {
+            "code": "EC277769",
+            "name": "Sistemi di conversione dell'energia da fonti rinnovabili"
+          },
+          {
+            "code": "EC260571",
+            "name": "Controlli automatici"
+          },
+          {
+            "code": "EC239666",
+            "name": "Meccanica dei fluidi"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Lettere, arti e archeologia (Laurea)",
+    "value": "1167",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0|1",
+        "courses": [
+          {
+            "code": "EC274939",
+            "name": "Storia moderna I"
+          },
+          {
+            "code": "EC274952",
+            "name": "Paleografia"
+          },
+          {
+            "code": "EC274940",
+            "name": "Storia romana"
+          },
+          {
+            "code": "EC274944",
+            "name": "Iconografia e iconologia"
+          },
+          {
+            "code": "EC274946",
+            "name": "Storia del cinema"
+          },
+          {
+            "code": "EC274950",
+            "name": "Metodologia della ricerca archeologica"
+          },
+          {
+            "code": "EC274953",
+            "name": "Etruscologia e antichita' italiche"
+          },
+          {
+            "code": "EC274958",
+            "name": "Storia della musica"
+          },
+          {
+            "code": "EC274959",
+            "name": "Filologia classica"
+          },
+          {
+            "code": "EC274960",
+            "name": "Letteratura italiana"
+          },
+          {
+            "code": "EC274938",
+            "name": "Storia contemporanea"
+          },
+          {
+            "code": "EC274942",
+            "name": "Linguistica generale"
+          },
+          {
+            "code": "EC274943",
+            "name": "Archeologia classica"
+          },
+          {
+            "code": "EC274945",
+            "name": "Storia contemporanea"
+          },
+          {
+            "code": "EC274947",
+            "name": "Storia dell'arte moderna"
+          },
+          {
+            "code": "EC274949",
+            "name": "Esercitazioni di latino giuridico"
+          },
+          {
+            "code": "EC274951",
+            "name": "Storia dell'arte contemporanea"
+          },
+          {
+            "code": "EC274954",
+            "name": "Preistoria e protostoria"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "2|2",
+        "courses": [
+          {
+            "code": "EC255132",
+            "name": "Etruscologia e antichita' italiche"
+          },
+          {
+            "code": "EC255127",
+            "name": "Iconografia e iconologia"
+          },
+          {
+            "code": "EC255129",
+            "name": "Storia del cinema"
+          },
+          {
+            "code": "EC255131",
+            "name": "Storia moderna I"
+          },
+          {
+            "code": "EC255136",
+            "name": "Storia della musica"
+          },
+          {
+            "code": "EC255154",
+            "name": "Fenomenologia dell'arte contemporanea"
+          },
+          {
+            "code": "EC255159",
+            "name": "Museologia"
+          },
+          {
+            "code": "EC255160",
+            "name": "Letteratura inglese"
+          },
+          {
+            "code": "EC255161",
+            "name": "Letteratura francese"
+          },
+          {
+            "code": "EC255165",
+            "name": "Storia della scienza"
+          },
+          {
+            "code": "EC255169",
+            "name": "Ecologia preistorica"
+          },
+          {
+            "code": "EC255171",
+            "name": "Metodologia della ricerca archeologica"
+          },
+          {
+            "code": "EC255175",
+            "name": "Letteratura greca"
+          },
+          {
+            "code": "EC255153",
+            "name": "Lingua tedesca"
+          },
+          {
+            "code": "EC255157",
+            "name": "Lingua francese"
+          },
+          {
+            "code": "EC255158",
+            "name": "Lingua spagnola"
+          },
+          {
+            "code": "EC255177",
+            "name": "Lingua inglese"
+          },
+          {
+            "code": "EC255130",
+            "name": "Storia dell'arte moderna"
+          },
+          {
+            "code": "EC255133",
+            "name": "Preistoria e protostoria"
+          },
+          {
+            "code": "EC255134",
+            "name": "Storia dell'arte contemporanea"
+          },
+          {
+            "code": "EC255167",
+            "name": "Archeologia classica"
+          },
+          {
+            "code": "EC255174",
+            "name": "Filologia romanza"
+          },
+          {
+            "code": "EC255178",
+            "name": "Storia contemporanea"
+          },
+          {
+            "code": "EC255152",
+            "name": "Storia greca"
+          },
+          {
+            "code": "EC255155",
+            "name": "Filologia e storia della letteratura italiana moderna"
+          },
+          {
+            "code": "EC255156",
+            "name": "Letteratura spagnola"
+          },
+          {
+            "code": "EC255162",
+            "name": "Letteratura tedesca"
+          },
+          {
+            "code": "EC255163",
+            "name": "Letterature angloamericane"
+          },
+          {
+            "code": "EC255166",
+            "name": "Storia medievale"
+          },
+          {
+            "code": "EC255168",
+            "name": "Antropologia"
+          },
+          {
+            "code": "EC255170",
+            "name": "Archeologia medioevale"
+          },
+          {
+            "code": "EC255172",
+            "name": "Storia dell'arte dei paesi europei"
+          },
+          {
+            "code": "EC255173",
+            "name": "Storia medievale"
+          },
+          {
+            "code": "EC255153",
+            "name": "Lingua tedesca"
+          },
+          {
+            "code": "EC255157",
+            "name": "Lingua francese"
+          },
+          {
+            "code": "EC255158",
+            "name": "Lingua spagnola"
+          },
+          {
+            "code": "EC255177",
+            "name": "Lingua inglese"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "2|3",
+        "courses": [
+          {
+            "code": "EC236149",
+            "name": "Filologia classica"
+          },
+          {
+            "code": "EC236144",
+            "name": "Ecologia preistorica"
+          },
+          {
+            "code": "EC236146",
+            "name": "Museologia"
+          },
+          {
+            "code": "EC236155",
+            "name": "Evoluzione del paesaggio"
+          },
+          {
+            "code": "EC236160",
+            "name": "Metodologia della ricerca archeologica"
+          },
+          {
+            "code": "EC236150",
+            "name": "Storia del cinema"
+          },
+          {
+            "code": "EC236159",
+            "name": "Fenomenologia dell'arte contemporanea"
+          },
+          {
+            "code": "EC236151",
+            "name": "Esercitazioni di latino giuridico"
+          },
+          {
+            "code": "EC236143",
+            "name": "Antropologia"
+          },
+          {
+            "code": "EC236145",
+            "name": "Archeologia medioevale"
+          },
+          {
+            "code": "EC236157",
+            "name": "Museologia scientifica"
+          },
+          {
+            "code": "EC236158",
+            "name": "Archeologia classica"
+          },
+          {
+            "code": "EC236147",
+            "name": "Storia dell'arte dei paesi europei"
+          },
+          {
+            "code": "EC236162",
+            "name": "Storia medievale"
+          },
+          {
+            "code": "EC236164",
+            "name": "Paleografia II"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Lingue e letterature moderne (Laurea)",
+    "value": "1168",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0|1",
+        "courses": [
+          {
+            "code": "EC275058",
+            "name": "Letteratura francese I"
+          },
+          {
+            "code": "EC275059",
+            "name": "Letteratura inglese I"
+          },
+          {
+            "code": "EC275062",
+            "name": "Storia romana"
+          },
+          {
+            "code": "EC275069",
+            "name": "Linguistica italiana"
+          },
+          {
+            "code": "EC275045",
+            "name": "Lingua francese"
+          },
+          {
+            "code": "EC275053",
+            "name": "Lingua inglese"
+          },
+          {
+            "code": "EC275064",
+            "name": "Lingua spagnola A"
+          },
+          {
+            "code": "EC275074",
+            "name": "Lingua tedesca"
+          },
+          {
+            "code": "EC275051",
+            "name": "Storia moderna I"
+          },
+          {
+            "code": "EC275050",
+            "name": "Storia contemporanea"
+          },
+          {
+            "code": "EC275060",
+            "name": "Letteratura spagnola I"
+          },
+          {
+            "code": "EC275061",
+            "name": "Letteratura tedesca I"
+          },
+          {
+            "code": "EC275045",
+            "name": "Lingua francese"
+          },
+          {
+            "code": "EC275053",
+            "name": "Lingua inglese"
+          },
+          {
+            "code": "EC275064",
+            "name": "Lingua spagnola A"
+          },
+          {
+            "code": "EC275074",
+            "name": "Lingua tedesca"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0|2",
+        "courses": [
+          {
+            "code": "EC254796",
+            "name": "Letteratura francese II"
+          },
+          {
+            "code": "EC254798",
+            "name": "Letteratura inglese II"
+          },
+          {
+            "code": "EC254800",
+            "name": "Letteratura spagnola II"
+          },
+          {
+            "code": "EC254802",
+            "name": "Letteratura tedesca II"
+          },
+          {
+            "code": "EC254804",
+            "name": "Lingua francese II"
+          },
+          {
+            "code": "EC254812",
+            "name": "Lingua inglese II"
+          },
+          {
+            "code": "EC254814",
+            "name": "Lingua spagnola II"
+          },
+          {
+            "code": "EC254816",
+            "name": "Lingua tedesca II"
+          },
+          {
+            "code": "EC254810",
+            "name": "Storia del cinema"
+          },
+          {
+            "code": "EC254818",
+            "name": "Letterature angloamericane I"
+          },
+          {
+            "code": "EC275962",
+            "name": "Linguistica generale"
+          },
+          {
+            "code": "EC254804",
+            "name": "Lingua francese II"
+          },
+          {
+            "code": "EC254812",
+            "name": "Lingua inglese II"
+          },
+          {
+            "code": "EC254814",
+            "name": "Lingua spagnola II"
+          },
+          {
+            "code": "EC254816",
+            "name": "Lingua tedesca II"
+          },
+          {
+            "code": "EC254806",
+            "name": "Storia dell'arte moderna"
+          },
+          {
+            "code": "EC254807",
+            "name": "Storia medievale"
+          },
+          {
+            "code": "EC254809",
+            "name": "Letteratura italiana"
+          },
+          {
+            "code": "EC254820",
+            "name": "Esercitazioni di latino giuridico"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS0|3",
+        "courses": [
+          {
+            "code": "EC236237",
+            "name": "Letteratura francese III"
+          },
+          {
+            "code": "EC236238",
+            "name": "Letteratura inglese III"
+          },
+          {
+            "code": "EC236241",
+            "name": "Letteratura spagnola III"
+          },
+          {
+            "code": "EC236243",
+            "name": "Letteratura tedesca III"
+          },
+          {
+            "code": "EC236231",
+            "name": "Lingua inglese III"
+          },
+          {
+            "code": "EC236233",
+            "name": "Lingua spagnola III"
+          },
+          {
+            "code": "EC236235",
+            "name": "Lingua tedesca III"
+          },
+          {
+            "code": "EC236248",
+            "name": "Lingua francese III"
+          },
+          {
+            "code": "EC236245",
+            "name": "Letterature angloamericane II"
+          },
+          {
+            "code": "EC236231",
+            "name": "Lingua inglese III"
+          },
+          {
+            "code": "EC236233",
+            "name": "Lingua spagnola III"
+          },
+          {
+            "code": "EC236235",
+            "name": "Lingua tedesca III"
+          },
+          {
+            "code": "EC236248",
+            "name": "Lingua francese III"
+          },
+          {
+            "code": "EC236236",
+            "name": "Letteratura italiana"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Lingue e letterature straniere (Laurea Magistrale)",
+    "value": "1156",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "DIDATTICA|1",
+        "courses": [
+          {
+            "code": "EC275971",
+            "name": "Letteratura inglese"
+          },
+          {
+            "code": "EC275974",
+            "name": "Letteratura francese"
+          },
+          {
+            "code": "EC275978",
+            "name": "Letteratura spagnola"
+          },
+          {
+            "code": "EC275972",
+            "name": "Filologia romanza"
+          },
+          {
+            "code": "EC275973",
+            "name": "Filologia germanica"
+          },
+          {
+            "code": "EC275990",
+            "name": "Lingua francese"
+          },
+          {
+            "code": "EC275994",
+            "name": "Lingua tedesca"
+          },
+          {
+            "code": "EC275989",
+            "name": "Lingua inglese"
+          },
+          {
+            "code": "EC275993",
+            "name": "Lingua spagnola"
+          },
+          {
+            "code": "EC275963",
+            "name": "Storia dell'europa moderna"
+          },
+          {
+            "code": "EC275968",
+            "name": "Letterature angloamericane"
+          },
+          {
+            "code": "EC275969",
+            "name": "Linguistica generale"
+          },
+          {
+            "code": "EC275970",
+            "name": "Letteratura tedesca"
+          },
+          {
+            "code": "EC275991",
+            "name": "Didattica della lingua inglese"
+          },
+          {
+            "code": "EC275966",
+            "name": "Tedesco: lingua e didattica della lingua"
+          },
+          {
+            "code": "EC275979",
+            "name": "Inglese: lingua e didattica della lingua"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "DIDATTICA|2",
+        "courses": [
+          {
+            "code": "EC255499",
+            "name": "Letteratura spagnola II"
+          },
+          {
+            "code": "EC255500",
+            "name": "Letteratura inglese II"
+          },
+          {
+            "code": "EC255512",
+            "name": "Didattica dell'italiano l2"
+          },
+          {
+            "code": "EC255502",
+            "name": "Approfondimenti di lingua inglese"
+          },
+          {
+            "code": "EC255503",
+            "name": "Approfondimenti di lingua francese"
+          },
+          {
+            "code": "EC255504",
+            "name": "Approfondimenti di lingua spagnola"
+          },
+          {
+            "code": "EC255505",
+            "name": "Approfondimenti di lingua tedesca"
+          },
+          {
+            "code": "EC255498",
+            "name": "Letterature angloamericane II"
+          },
+          {
+            "code": "EC255515",
+            "name": "Il medioevo romanzo nella letteratura contemporanea"
+          },
+          {
+            "code": "EC255516",
+            "name": "Storia dell'europa moderna II"
+          },
+          {
+            "code": "EC255502",
+            "name": "Approfondimenti di lingua inglese"
+          },
+          {
+            "code": "EC255503",
+            "name": "Approfondimenti di lingua francese"
+          },
+          {
+            "code": "EC255504",
+            "name": "Approfondimenti di lingua spagnola"
+          },
+          {
+            "code": "EC255505",
+            "name": "Approfondimenti di lingua tedesca"
+          },
+          {
+            "code": "EC255506",
+            "name": "Letteratura italiana"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Logopedia (abilitante alla professione sanitaria di logopedista) (Laurea)",
+    "value": "1058",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": [
+          {
+            "code": "EC272102",
+            "name": "Psicologia clinica"
+          },
+          {
+            "code": "EC272090",
+            "name": "Biochimica"
+          },
+          {
+            "code": "EC272091",
+            "name": "Biologia applicata"
+          },
+          {
+            "code": "EC272092",
+            "name": "Fisica applicata"
+          },
+          {
+            "code": "EC272093",
+            "name": "Microbiologia e microbiologia clinica"
+          },
+          {
+            "code": "EC272094",
+            "name": "Informatica"
+          },
+          {
+            "code": "EC272095",
+            "name": "Statistica medica"
+          },
+          {
+            "code": "EC272097",
+            "name": "Anatomia umana"
+          },
+          {
+            "code": "EC272099",
+            "name": "Istologia"
+          },
+          {
+            "code": "EC272100",
+            "name": "Inglese scientifico"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": [
+          {
+            "code": "EC256182",
+            "name": "Medicina interna"
+          },
+          {
+            "code": "EC256183",
+            "name": "Farmacologia"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS 2011|3",
+        "courses": [
+          {
+            "code": "EC237743",
+            "name": "Diritto del lavoro"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Manager degli itinerari culturali (Laurea)",
+    "value": "3041",
+    "num_years": 1,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0|1",
+        "courses": [
+          {
+            "code": "EC276428",
+            "name": "Laboratorio di comunicazioni video per il turismo culturale"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Matematica (Laurea Magistrale)",
+    "value": "1147",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0|1",
+        "courses": [
+          {
+            "code": "ECMAT_55833_1147_1_Calab",
+            "name": "Algebra commutativa e geometria algebrica"
+          },
+          {
+            "code": "ECMAT_000012_1147_1_Prina",
+            "name": "Analisi funzionale"
+          },
+          {
+            "code": "ECMAT_67316_1147_1_Patri",
+            "name": "Fisica matematica I"
+          },
+          {
+            "code": "ECMAT_43997_1147_1_Tomas",
+            "name": "Laboratorio di didattica della matematica"
+          },
+          {
+            "code": "ECMAT_45025_1147_1_Zangh",
+            "name": "Metodi di approssimazione numerica"
+          },
+          {
+            "code": "ECMAT_019284_1147_1_Mini",
+            "name": "Statistica multivariata"
+          },
+          {
+            "code": "ECMAT_45502_1147_1_MU",
+            "name": "Storia delle matematiche"
+          },
+          {
+            "code": "ECMAT_55835_1147_1_MU",
+            "name": "Teoria della misura e integrazione"
+          },
+          {
+            "code": "ECMAT_45032_1147_1_MU",
+            "name": "Teoria di galois"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0|2",
+        "courses": [
+          {
+            "code": "ECMAT_43997_1147_2_MU",
+            "name": "Laboratorio di didattica della matematica"
+          },
+          {
+            "code": "ECMAT_45502_1147_2_MU",
+            "name": "Storia delle matematiche"
+          },
+          {
+            "code": "ECMAT_55835_1147_2_MU",
+            "name": "Teoria della misura e integrazione"
+          },
+          {
+            "code": "ECMAT_45032_1147_2_MU",
+            "name": "Teoria di galois"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Matematica (Laurea)",
+    "value": "1141",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2010|1",
+        "courses": [
+          {
+            "code": "ECMAT_000005_1141_1_Stumb",
+            "name": "Algebra"
+          },
+          {
+            "code": "ECMAT_000015_1141_1_Boiti",
+            "name": "Analisi matematica I"
+          },
+          {
+            "code": "ECMAT_67318_1141_1_Borga",
+            "name": "Didattica della matematica"
+          },
+          {
+            "code": "ECMAT_000475_1141_1_Ellia",
+            "name": "Geometria I"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2010|2",
+        "courses": [
+          {
+            "code": "ECMAT_000017_1141_2_Ascan",
+            "name": "Analisi matematica II"
+          },
+          {
+            "code": "ECMAT_015634_1141_2_Ruggi",
+            "name": "Analisi numerica I"
+          },
+          {
+            "code": "ECMAT_45502_1141_2_Fiocc",
+            "name": "Storia delle matematiche"
+          },
+          {
+            "code": "ECMAT_55835_1141_2_Miran",
+            "name": "Teoria della misura e integrazione"
+          },
+          {
+            "code": "ECMAT_45032_1141_2_Stumb",
+            "name": "Teoria di galois"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS 2010|3",
+        "courses": [
+          {
+            "code": "ECMAT_008816_1141_3_Fosch",
+            "name": "Analisi matematica III"
+          },
+          {
+            "code": "ECMAT_014912_1141_3_Cosci",
+            "name": "Equazioni della fisica matematica"
+          },
+          {
+            "code": "ECMAT_015616_1141_3_Mella",
+            "name": "Geometria III"
+          },
+          {
+            "code": "ECMAT_45502_1141_3_MU",
+            "name": "Storia delle matematiche"
+          },
+          {
+            "code": "ECMAT_55835_1141_3_MU",
+            "name": "Teoria della misura e integrazione"
+          },
+          {
+            "code": "ECMAT_45032_1141_3_MU",
+            "name": "Teoria di galois"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Medicina e chirurgia (Laurea Magistrale Ciclo Unico 6 anni)",
+    "value": "1023",
+    "num_years": 6,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0-2009|1",
+        "courses": [
+          {
+            "code": "EC270964",
+            "name": "Chimica medica e propedeutica biochimica"
+          },
+          {
+            "code": "EC270977",
+            "name": "Fisica applicata"
+          },
+          {
+            "code": "EC270978",
+            "name": "Informatica"
+          },
+          {
+            "code": "EC270979",
+            "name": "Logica matematica"
+          },
+          {
+            "code": "EC279634",
+            "name": "Medicina legale"
+          },
+          {
+            "code": "EC279635",
+            "name": "Storia della medicina"
+          },
+          {
+            "code": "EC279636",
+            "name": "Logica e filosofia della scienza"
+          },
+          {
+            "code": "EC279637",
+            "name": "Psicologia medica"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0-2009|2",
+        "courses": [
+          {
+            "code": "EC257868",
+            "name": "Biochimica"
+          },
+          {
+            "code": "EC257871",
+            "name": "Anatomia umana"
+          },
+          {
+            "code": "EC257875",
+            "name": "Medicina interna"
+          },
+          {
+            "code": "EC123456",
+            "name": "Recupero lezioni e attività guidata in aula (2° anno medicina e chirurgia)"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS0-2009|3",
+        "courses": [
+          {
+            "code": "EC240208",
+            "name": "Fisiologia II"
+          },
+          {
+            "code": "EC240225",
+            "name": "Patologia generale"
+          },
+          {
+            "code": "EC240240",
+            "name": "Medicina interna"
+          },
+          {
+            "code": "EC4654567",
+            "name": "Metodologia clinica i (no esame)"
+          }
+        ]
+      },
+      {
+        "year": 4,
+        "value": "PDS0-2009|4",
+        "courses": [
+          {
+            "code": "EC224608",
+            "name": "Medicina interna"
+          },
+          {
+            "code": "EC224611",
+            "name": "Malattie del sangue"
+          },
+          {
+            "code": "EC224614",
+            "name": "Oncologia medica"
+          },
+          {
+            "code": "EC224618",
+            "name": "Malattie infettive"
+          },
+          {
+            "code": "EC224638",
+            "name": "Reumatologia"
+          },
+          {
+            "code": "EC224641",
+            "name": "Malattie apparato locomotore"
+          },
+          {
+            "code": "EC224644",
+            "name": "Medicina fisica e riabilitativa"
+          },
+          {
+            "code": "EC224645",
+            "name": "Anatomia patologica"
+          }
+        ]
+      },
+      {
+        "year": 5,
+        "value": "PDS0-2009|5",
+        "courses": [
+          {
+            "code": "EC202838",
+            "name": "Malattie dell'apparato cardiovascolare"
+          },
+          {
+            "code": "EC202841",
+            "name": "Malattie dell'apparato respiratorio"
+          },
+          {
+            "code": "EC202845",
+            "name": "Psicologia clinica"
+          },
+          {
+            "code": "EC202846",
+            "name": "Psichiatria"
+          },
+          {
+            "code": "EC202847",
+            "name": "Psicologia fisiologica"
+          },
+          {
+            "code": "EC202848",
+            "name": "Anatomia patologica II"
+          },
+          {
+            "code": "EC280104",
+            "name": "Igiene generale e applicata"
+          },
+          {
+            "code": "EC280107",
+            "name": "Statistica medica"
+          },
+          {
+            "code": "EC280108",
+            "name": "Lingua e traduzione-lingua inglese"
+          }
+        ]
+      },
+      {
+        "year": 6,
+        "value": "PDS0-2009|6",
+        "courses": [
+          {
+            "code": "EC280265",
+            "name": "Chirurgia generale"
+          },
+          {
+            "code": "EC280266",
+            "name": "Anestesiologia"
+          },
+          {
+            "code": "EC280272",
+            "name": "Psicologia dello sviluppo"
+          },
+          {
+            "code": "EC280273",
+            "name": "Neuropsichiatria infantile"
+          },
+          {
+            "code": "EC280843",
+            "name": "Pediatria"
+          },
+          {
+            "code": "EC280274",
+            "name": "Ginecologia e ostetricia - no esame"
+          },
+          {
+            "code": "EC281971",
+            "name": "Medicina del territorio"
+          },
+          {
+            "code": "EC281972",
+            "name": "Genetica medica"
+          },
+          {
+            "code": "EC281983",
+            "name": "Medicina interna"
+          },
+          {
+            "code": "EC189784",
+            "name": "Medicina del lavoro"
+          },
+          {
+            "code": "EC189785",
+            "name": "Psicologia del lavoro"
+          },
+          {
+            "code": "EC189781",
+            "name": "Medicina legale"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Odontoiatria e protesi dentaria (Laurea Magistrale Ciclo Unico 6 anni)",
+    "value": "1024",
+    "num_years": 6,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0-2009|1",
+        "courses": [
+          {
+            "code": "EC271266",
+            "name": "Biologia applicata"
+          },
+          {
+            "code": "EC271270",
+            "name": "Istologia ed embriologia"
+          },
+          {
+            "code": "EC271271",
+            "name": "Fisica applicata"
+          },
+          {
+            "code": "EC271272",
+            "name": "Chimica e propedeutica biochimica"
+          },
+          {
+            "code": "EC271277",
+            "name": "Anatomia umana (i° parte - no esame)"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0-2009|2",
+        "courses": [
+          {
+            "code": "EC259046",
+            "name": "Propedeutica clinica"
+          },
+          {
+            "code": "EC259053",
+            "name": "Fisiologia"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS0-2009|3",
+        "courses": [
+          {
+            "code": "EC240455",
+            "name": "Endocrinologia"
+          },
+          {
+            "code": "EC240457",
+            "name": "Patologia clinica"
+          },
+          {
+            "code": "EC240460",
+            "name": "Medicina interna"
+          }
+        ]
+      },
+      {
+        "year": 4,
+        "value": "PDS0-2009|4",
+        "courses": [
+          {
+            "code": "EC222933",
+            "name": "Psichiatria"
+          },
+          {
+            "code": "EC222935",
+            "name": "Chirurgia generale"
+          },
+          {
+            "code": "EC222936",
+            "name": "Anestesiologia e trattamento dell'emergenza"
+          }
+        ]
+      },
+      {
+        "year": 5,
+        "value": "PDS0-2009|5",
+        "courses": [
+          {
+            "code": "EC204896",
+            "name": "Chirurgia maxillo-facciale"
+          },
+          {
+            "code": "EC204899",
+            "name": "Otorinolaringoiatria"
+          },
+          {
+            "code": "EC204900",
+            "name": "Chirurgia plastica"
+          }
+        ]
+      },
+      {
+        "year": 6,
+        "value": "PDS0-2009|6",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Operatore dei servizi giuridici (Laurea)",
+    "value": "1021",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0-2008|1",
+        "courses": []
+      },
+      {
+        "year": 2,
+        "value": "PDS0-2008|2",
+        "courses": []
+      },
+      {
+        "year": 3,
+        "value": "OSGIMMOBIL|3",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Ortottica ed assistenza oftalmologica (abilitante alla professione sanitaria di ortottista ed assistente di oftalmologia) (Laurea)",
+    "value": "1059",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": [
+          {
+            "code": "EC271551",
+            "name": "Inglese scientifico"
+          },
+          {
+            "code": "EC271555",
+            "name": "Psicologia clinica"
+          },
+          {
+            "code": "EC271563",
+            "name": "Anatomia umana"
+          },
+          {
+            "code": "EC271565",
+            "name": "Istologia"
+          },
+          {
+            "code": "EC271567",
+            "name": "Biochimica"
+          },
+          {
+            "code": "EC271568",
+            "name": "Informatica"
+          },
+          {
+            "code": "EC271569",
+            "name": "Biologia applicata"
+          },
+          {
+            "code": "EC271570",
+            "name": "Statistica medica"
+          },
+          {
+            "code": "EC271571",
+            "name": "Fisica applicata"
+          },
+          {
+            "code": "EC271572",
+            "name": "Microbiologia e microbiologia clinica"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": [
+          {
+            "code": "EC256296",
+            "name": "Medicina interna"
+          },
+          {
+            "code": "EC256297",
+            "name": "Farmacologia"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS 2011|3",
+        "courses": [
+          {
+            "code": "EC237871",
+            "name": "Diritto del lavoro"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ostetricia (abilitante alla professione sanitaria di ostetrica/o) (Laurea)",
+    "value": "1060",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": [
+          {
+            "code": "EC274145",
+            "name": "Istologia"
+          },
+          {
+            "code": "EC274146",
+            "name": "Anatomia umana"
+          },
+          {
+            "code": "EC274152",
+            "name": "Inglese"
+          },
+          {
+            "code": "EC274161",
+            "name": "Genetica medica"
+          },
+          {
+            "code": "EC274162",
+            "name": "Chimica medica"
+          },
+          {
+            "code": "EC274163",
+            "name": "Biochimica"
+          },
+          {
+            "code": "EC274164",
+            "name": "Biologia applicata"
+          },
+          {
+            "code": "EC274165",
+            "name": "Fisica"
+          },
+          {
+            "code": "EC274166",
+            "name": "Informatica"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": []
+      },
+      {
+        "year": 3,
+        "value": "PDS 2011|3",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Scienze chimiche (Laurea Magistrale)",
+    "value": "1148",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "CAT|1",
+        "courses": [
+          {
+            "code": "EC278580",
+            "name": "Prodotti dietetici e nutriceutica"
+          },
+          {
+            "code": "EC278536",
+            "name": "Chimica dell'ambiente"
+          },
+          {
+            "code": "EC278511",
+            "name": "Lingua inglese livello b2"
+          },
+          {
+            "code": "EC278519",
+            "name": "Chimica organica"
+          },
+          {
+            "code": "EC278522",
+            "name": "Strutturistica chimica"
+          },
+          {
+            "code": "EC278523",
+            "name": "Chimica bioinorganica e catalisi"
+          },
+          {
+            "code": "EC278526",
+            "name": "Spettroscopia molecolare"
+          },
+          {
+            "code": "EC278529",
+            "name": "Chimica analitica strumentale"
+          },
+          {
+            "code": "EC278576",
+            "name": "Formazione sicurezza nei luoghi di lavoro ai sensi del d.lgs.81/2008 e s.m.i."
+          },
+          {
+            "code": "EC278983",
+            "name": "Fotochimica"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "CAT|2",
+        "courses": [
+          {
+            "code": "EC248826",
+            "name": "Metodologie chimiche per il monitoraggio ambientale"
+          },
+          {
+            "code": "EC248835",
+            "name": "Chimica fisica"
+          },
+          {
+            "code": "EC248825",
+            "name": "Energie sostenibili"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Scienze delle professioni sanitarie tecniche diagnostiche (Laurea Magistrale)",
+    "value": "1072",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": []
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Scienze e tecniche dell'attività motoria preventiva e adattata (Laurea Magistrale)",
+    "value": "1026",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0|1",
+        "courses": [
+          {
+            "code": "EC273438",
+            "name": "Sociologia dei processi culturali e comunicativi"
+          },
+          {
+            "code": "EC273439",
+            "name": "Legislazione sportiva"
+          },
+          {
+            "code": "EC273440",
+            "name": "Didattica e pedagogia speciale"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0|2",
+        "courses": [
+          {
+            "code": "EC258161",
+            "name": "L'esercizio durante la gravidanza"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Scienze e tecnologie della comunicazione (Laurea)",
+    "value": "1226",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0|1",
+        "courses": [
+          {
+            "code": "EC274878",
+            "name": "Storia del cinema"
+          },
+          {
+            "code": "EC274883",
+            "name": "Sociologia generale"
+          },
+          {
+            "code": "EC274884",
+            "name": "Lingua inglese"
+          },
+          {
+            "code": "EC274873",
+            "name": "Estetica"
+          },
+          {
+            "code": "EC274880",
+            "name": "Lingua francese"
+          },
+          {
+            "code": "EC274881",
+            "name": "Lingua spagnola"
+          },
+          {
+            "code": "EC274882",
+            "name": "Lingua tedesca"
+          },
+          {
+            "code": "EC274874",
+            "name": "Fondamenti della comunicazione musicale"
+          },
+          {
+            "code": "EC274884",
+            "name": "Lingua inglese"
+          },
+          {
+            "code": "EC274876",
+            "name": "Storia contemporanea"
+          },
+          {
+            "code": "EC274880",
+            "name": "Lingua francese"
+          },
+          {
+            "code": "EC274881",
+            "name": "Lingua spagnola"
+          },
+          {
+            "code": "EC274882",
+            "name": "Lingua tedesca"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0|2",
+        "courses": [
+          {
+            "code": "EC254736",
+            "name": "Drammaturgia musicale del sei settecento"
+          },
+          {
+            "code": "EC254737",
+            "name": "Teorie e tecnica del linguaggio audiovisivo"
+          },
+          {
+            "code": "EC254739",
+            "name": "Antropologia culturale e della comunicazione"
+          },
+          {
+            "code": "EC254740",
+            "name": "Iconografia e iconologia"
+          },
+          {
+            "code": "EC254745",
+            "name": "Tecnologie informatiche e multimediali"
+          },
+          {
+            "code": "EC254750",
+            "name": "Storia delle dottrine politiche"
+          },
+          {
+            "code": "EC254751",
+            "name": "Storia della musica del cinque-settecento"
+          },
+          {
+            "code": "EC254742",
+            "name": "Lingua francese"
+          },
+          {
+            "code": "EC254743",
+            "name": "Lingua spagnola"
+          },
+          {
+            "code": "EC254744",
+            "name": "Lingua tedesca"
+          },
+          {
+            "code": "EC254735",
+            "name": "Storia e fenomenologia del cinema"
+          },
+          {
+            "code": "EC254741",
+            "name": "Sociologia dei processi culturali"
+          },
+          {
+            "code": "EC254747",
+            "name": "Nuovi media per la didattica"
+          },
+          {
+            "code": "EC254748",
+            "name": "Sociologia urbana e del territorio"
+          },
+          {
+            "code": "EC254738",
+            "name": "Storia dell'arte contemporanea"
+          },
+          {
+            "code": "EC254746",
+            "name": "Storia dell'arte moderna"
+          },
+          {
+            "code": "EC254742",
+            "name": "Lingua francese"
+          },
+          {
+            "code": "EC254743",
+            "name": "Lingua spagnola"
+          },
+          {
+            "code": "EC254744",
+            "name": "Lingua tedesca"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS0|3",
+        "courses": [
+          {
+            "code": "EC236281",
+            "name": "Sociologia dell'arte"
+          },
+          {
+            "code": "EC236284",
+            "name": "Antropologia urbana"
+          },
+          {
+            "code": "EC236291",
+            "name": "Marketing e nuovi media"
+          },
+          {
+            "code": "EC236293",
+            "name": "Psicologia della comunicazione"
+          },
+          {
+            "code": "EC236287",
+            "name": "Storia della musica del cinque-settecento"
+          },
+          {
+            "code": "EC236289",
+            "name": "Drammaturgia musicale del sei settecento"
+          },
+          {
+            "code": "EC236290",
+            "name": "Fenomenologia dell'arte contemporanea"
+          },
+          {
+            "code": "EC236283",
+            "name": "Musiche contemporanee"
+          },
+          {
+            "code": "EC236285",
+            "name": "Storia dell'arte dei paesi europei"
+          },
+          {
+            "code": "EC236286",
+            "name": "Storia contemporanea"
+          },
+          {
+            "code": "EC236292",
+            "name": "Filosofia della scienza"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Scienze filosofiche e dell'educazione (Laurea)",
+    "value": "1231",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0|1",
+        "courses": [
+          {
+            "code": "EC275128",
+            "name": "Storia e didattica della filosofia"
+          },
+          {
+            "code": "EC275129",
+            "name": "Logica filosofica"
+          },
+          {
+            "code": "EC275131",
+            "name": "Filosofia teoretica"
+          },
+          {
+            "code": "EC275133",
+            "name": "Psicologia dello sviluppo"
+          },
+          {
+            "code": "EC275134",
+            "name": "Psicologia generale"
+          },
+          {
+            "code": "EC275135",
+            "name": "Lingua inglese"
+          },
+          {
+            "code": "EC275136",
+            "name": "Pedagogia generale"
+          },
+          {
+            "code": "EC275135",
+            "name": "Lingua inglese"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0|2",
+        "courses": [
+          {
+            "code": "EC254861",
+            "name": "Organizzazione dei servizi sociali"
+          },
+          {
+            "code": "EC254862",
+            "name": "Psicologia clinica"
+          },
+          {
+            "code": "EC254867",
+            "name": "Storia della filosofia antica"
+          },
+          {
+            "code": "EC254868",
+            "name": "Estetica"
+          },
+          {
+            "code": "EC254869",
+            "name": "Psicologia dinamica"
+          },
+          {
+            "code": "EC254870",
+            "name": "Storia moderna"
+          },
+          {
+            "code": "EC254858",
+            "name": "Storia dell'educazione"
+          },
+          {
+            "code": "EC254863",
+            "name": "Sociologia urbana e del territorio"
+          },
+          {
+            "code": "EC254865",
+            "name": "Storia contemporanea"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS0|3",
+        "courses": [
+          {
+            "code": "EC236319",
+            "name": "Antropologia filosofica del medioevo e del rinascimento"
+          },
+          {
+            "code": "EC236323",
+            "name": "Pedagogia sperimentale"
+          },
+          {
+            "code": "EC236324",
+            "name": "Letteratura per l'infanzia"
+          },
+          {
+            "code": "EC236325",
+            "name": "Sociologia della salute"
+          },
+          {
+            "code": "EC236328",
+            "name": "Filosofia del linguaggio"
+          },
+          {
+            "code": "EC236330",
+            "name": "Psicologia sociale"
+          },
+          {
+            "code": "EC236332",
+            "name": "Educazione degli adulti"
+          },
+          {
+            "code": "EC236333",
+            "name": "Didattica e pedagogia speciale"
+          },
+          {
+            "code": "EC236335",
+            "name": "Storia della scienza"
+          },
+          {
+            "code": "EC236327",
+            "name": "Filosofia teoretica"
+          },
+          {
+            "code": "EC236318",
+            "name": "Metodologia della ricerca educativa"
+          },
+          {
+            "code": "EC236326",
+            "name": "Antropologia e cosmologia nel pensiero antico"
+          },
+          {
+            "code": "EC236329",
+            "name": "Filosofia della scienza"
+          },
+          {
+            "code": "EC236334",
+            "name": "Storia della filosofia moderna e contemporanea"
+          },
+          {
+            "code": "EC236336",
+            "name": "Sociologia di genere"
+          },
+          {
+            "code": "EC236337",
+            "name": "Sociologia dell'educazione"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Scienze geologiche (Laurea)",
+    "value": "1140",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0-2009|1",
+        "courses": [
+          {
+            "code": "ECFeS_000757_1140_1_POSEN",
+            "name": "Paleontologia"
+          },
+          {
+            "code": "ECFeS_013440_1140_1_MORSI",
+            "name": "Geologia I"
+          },
+          {
+            "code": "ECFeS_000674_1140_1_CHIAV",
+            "name": "Matematica"
+          },
+          {
+            "code": "ECFeS_000088_1140_1_BIGNO",
+            "name": "Chimica"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0-2009|2",
+        "courses": [
+          {
+            "code": "ECFeS_64076_1140_2_VERDE",
+            "name": "Informatica ed introduzione ai sistemi informativi geografici"
+          },
+          {
+            "code": "ECFeS_000722_1140_2_CRUCI",
+            "name": "Mineralogia"
+          },
+          {
+            "code": "ECFeS_000420_1140_2_STRAT",
+            "name": "Fisica II"
+          },
+          {
+            "code": "ECFeS_015021_1140_2_FRIJI",
+            "name": "Laboratorio di stratigrafia e sedimentologia"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS0-2009|3",
+        "courses": [
+          {
+            "code": "ECFeS_013442_1140_3_CAPUT",
+            "name": "Geologia II"
+          },
+          {
+            "code": "ECFeS_5865_1140_3_ABU-Z",
+            "name": "Geofisica"
+          },
+          {
+            "code": "ECFeS_000465_1140_3_GHIRO",
+            "name": "Geologia applicata"
+          },
+          {
+            "code": "ECFeS_000452_1140_3_BONAD",
+            "name": "Geochimica"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Scienze geologiche, georisorse e territorio (Laurea Magistrale)",
+    "value": "1149",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2016|1",
+        "courses": [
+          {
+            "code": "ECFeS_67223_1149_1_MORSI",
+            "name": "Geologia dell'italia"
+          },
+          {
+            "code": "ECFeS_64096_1149_1_CIAVO",
+            "name": "Applicazioni dei gis e del telerilevamento alla cartografia territoriale"
+          },
+          {
+            "code": "ECFeS_45052_1149_1_MARTU",
+            "name": "Mineralogia per l'industria e l'ambiente"
+          },
+          {
+            "code": "ECFeS_45049_1149_1_SIMEO",
+            "name": "Dinamica e gestione delle coste"
+          },
+          {
+            "code": "ECFeS_59157_1149_1_MARTI",
+            "name": "Applicazioni normative alla geologia"
+          },
+          {
+            "code": "ECFeS_61836_1149_1_FRIJI",
+            "name": "Geologia degli idrocarburi"
+          },
+          {
+            "code": "ECFeS_45051_1149_1_MARTU",
+            "name": "Tecniche mineralogiche avanzate"
+          },
+          {
+            "code": "ECFeS_000896_1149_1_MORSI",
+            "name": "Sedimentologia"
+          },
+          {
+            "code": "ECFeS_002086_1149_1_SACCA",
+            "name": "Petrografia del sedimentario"
+          },
+          {
+            "code": "ECFeS_45050_1149_1_COLTO",
+            "name": "Vulcanismo e petrogenesi"
+          },
+          {
+            "code": "ECFeS_59057_1149_1_CIAVO",
+            "name": "Coastal risks"
+          },
+          {
+            "code": "ECFeS_015222_1149_1_ABU-Z",
+            "name": "Geofisica applicata"
+          },
+          {
+            "code": "ECFeS_008119_1149_1_SIMEO",
+            "name": "Geologia ambientale"
+          },
+          {
+            "code": "ECFeS_019156_1149_1_CAPUT",
+            "name": "Geologia dei terremoti"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2016|2",
+        "courses": [
+          {
+            "code": "ECFeS_64096_1149_2_MU",
+            "name": "Applicazioni dei gis e del telerilevamento alla cartografia territoriale"
+          },
+          {
+            "code": "ECFeS_45051_1149_2_MU",
+            "name": "Tecniche mineralogiche avanzate"
+          },
+          {
+            "code": "ECFeS_000896_1149_2_MU",
+            "name": "Sedimentologia"
+          },
+          {
+            "code": "ECFeS_019156_1149_2_MU",
+            "name": "Geologia dei terremoti"
+          },
+          {
+            "code": "ECFeS_45052_1149_2_MU",
+            "name": "Mineralogia per l'industria e l'ambiente"
+          },
+          {
+            "code": "ECFeS_45049_1149_2_MU",
+            "name": "Dinamica e gestione delle coste"
+          },
+          {
+            "code": "ECFeS_59157_1149_2_MU",
+            "name": "Applicazioni normative alla geologia"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Scienze infermieristiche e ostetriche (Laurea Magistrale)",
+    "value": "1070",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": []
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Scienze motorie (Laurea)",
+    "value": "1025",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0|1",
+        "courses": [
+          {
+            "code": "EC281404",
+            "name": "Biofisica"
+          },
+          {
+            "code": "EC281405",
+            "name": "Fisica"
+          },
+          {
+            "code": "EC281406",
+            "name": "Statistica e analisi dei dati"
+          },
+          {
+            "code": "EC281413",
+            "name": "Macro e micro nutrienti"
+          },
+          {
+            "code": "EC281414",
+            "name": "Nutrizione ottimale per esercizio dello sport"
+          },
+          {
+            "code": "EC281416",
+            "name": "Biologia applicata all'esercizio fisico"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS0|2",
+        "courses": []
+      },
+      {
+        "year": 3,
+        "value": "PDS0|3",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Scienze riabilitative delle professioni sanitarie (Laurea Magistrale)",
+    "value": "1071",
+    "num_years": 2,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": []
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": []
+      }
+    ]
+  },
+  {
+    "name": "Tecnica della riabilitazione psichiatrica (abilitante alla professione sanitaria di tecnico della riabilitazione psichiatrica) (Laurea)",
+    "value": "1061",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": [
+          {
+            "code": "EC273829",
+            "name": "Microbiologia e microbiologia clinica"
+          },
+          {
+            "code": "EC273843",
+            "name": "Tecniche del colloquio"
+          },
+          {
+            "code": "EC273846",
+            "name": "Psicologia della comunicazione"
+          },
+          {
+            "code": "EC273820",
+            "name": "Inglese scientifico"
+          },
+          {
+            "code": "EC273822",
+            "name": "Anatomia umana"
+          },
+          {
+            "code": "EC273826",
+            "name": "Biochimica"
+          },
+          {
+            "code": "EC273827",
+            "name": "Fisica applicata"
+          },
+          {
+            "code": "EC273828",
+            "name": "Biologia applicata"
+          },
+          {
+            "code": "EC273842",
+            "name": "Psicologia della relazione nella clinica"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": [
+          {
+            "code": "EC256504",
+            "name": "Statistica medica"
+          },
+          {
+            "code": "EC256514",
+            "name": "Medicina interna"
+          },
+          {
+            "code": "EC256515",
+            "name": "Farmacologia"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS 2011|3",
+        "courses": [
+          {
+            "code": "EC238077",
+            "name": "Diritto del lavoro"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tecnica della riabilitazione psichiatrica (abilitante alla professione sanitaria di tecnico della riabilitazione psichiatrica) - sede di ficarolo (Laurea)",
+    "value": "3080",
+    "num_years": 1,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS0|1",
+        "courses": [
+          {
+            "code": "EC283228",
+            "name": "Igiene generale applicata"
+          },
+          {
+            "code": "EC283229",
+            "name": "Basic life support (bls)"
+          },
+          {
+            "code": "EC283193",
+            "name": "Psicologia della relazione nella clinica"
+          },
+          {
+            "code": "EC283197",
+            "name": "Psicologia della comunicazione"
+          },
+          {
+            "code": "EC283216",
+            "name": "Anatomia umana"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tecniche di laboratorio biomedico (abilitante alla professione sanitaria di tecnico di laboratorio biomedico) (Laurea)",
+    "value": "1062",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": [
+          {
+            "code": "EC273944",
+            "name": "Istologia"
+          },
+          {
+            "code": "EC273945",
+            "name": "Anatomia umana"
+          },
+          {
+            "code": "EC273947",
+            "name": "Statistica medica"
+          },
+          {
+            "code": "EC273948",
+            "name": "Fisica applicata"
+          },
+          {
+            "code": "EC273949",
+            "name": "Informatica"
+          },
+          {
+            "code": "EC273933",
+            "name": "Patologia generale"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": [
+          {
+            "code": "EC256593",
+            "name": "Patologia clinica I"
+          }
+        ]
+      },
+      {
+        "year": 3,
+        "value": "PDS 2011|3",
+        "courses": [
+          {
+            "code": "EC238149",
+            "name": "Inglese"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tecniche di radiologia medica, per immagini e radioterapia (abilitante alla professione sanitaria di tecnico di radiologia medica) (Laurea)",
+    "value": "1063",
+    "num_years": 3,
+    "years": [
+      {
+        "year": 1,
+        "value": "PDS 2011|1",
+        "courses": [
+          {
+            "code": "EC274002",
+            "name": "Fondamenti di fisica"
+          },
+          {
+            "code": "EC274003",
+            "name": "Fisica delle radiazioni"
+          },
+          {
+            "code": "EC274005",
+            "name": "Statistica medica nelle scienze radiologiche"
+          },
+          {
+            "code": "EC274006",
+            "name": "Informatica nelle scienze radiologiche"
+          },
+          {
+            "code": "EC274015",
+            "name": "Biologia"
+          },
+          {
+            "code": "EC274037",
+            "name": "Istologia nelle scienze radiologiche"
+          }
+        ]
+      },
+      {
+        "year": 2,
+        "value": "PDS 2011|2",
+        "courses": []
+      },
+      {
+        "year": 3,
+        "value": "PDS 2011|3",
+        "courses": [
+          {
+            "code": "EC238274",
+            "name": "Inglese"
+          }
+        ]
+      }
+    ]
+  }
+]
