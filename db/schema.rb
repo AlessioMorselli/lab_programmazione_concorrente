@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 400) do
+ActiveRecord::Schema.define(version: 401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -80,12 +80,13 @@ ActiveRecord::Schema.define(version: 400) do
     t.index ["group_id", "user_id"], name: "index_invitations_on_group_id_and_user_id", unique: true
   end
 
-  create_table "memberships", id: false, force: :cascade do |t|
+  create_table "memberships", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "group_id", null: false
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "super_admin", default: false, null: false
     t.index ["group_id", "user_id"], name: "index_memberships_on_group_id_and_user_id", unique: true
   end
 
@@ -100,7 +101,7 @@ ActiveRecord::Schema.define(version: 400) do
     t.index ["attachment_id"], name: "index_messages_on_attachment_id"
   end
 
-  create_table "students", id: false, force: :cascade do |t|
+  create_table "students", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "degree_id", null: false
     t.integer "year", limit: 2, null: false

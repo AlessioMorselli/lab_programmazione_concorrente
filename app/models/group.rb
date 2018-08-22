@@ -8,6 +8,8 @@ class Group < ApplicationRecord
     ### RELATIONS ###
     belongs_to :course, optional: true
 
+    has_one :degree_course
+
     has_many :messages, :dependent => :delete_all
 
     has_many :memberships, :dependent => :delete_all
@@ -30,20 +32,43 @@ class Group < ApplicationRecord
         end
     end
 
-    def admin
-        admin_membership = memberships.admin.first
-        admin_membership.user unless admin_membership.nil?
+    def admins
+        User.where(id: memberships.admin.pluck(:user_id)).all
+    end
+
+    def super_admin
+        User.where(id: memberships.super_admin.pluck(:user_id)).first
+    end
+
+    def is_official
+        self.degree_course != nil
     end
 
     def save_with_admin(user)
-        if self.new_record?
-            self.transaction do
+        self.transaction do
+            if self.new_record?
                 self.save!
-                Membership.new(group_id: self.id, user_id: user.id, admin: true).save!
+                Membership.new(group_id: self.id, user_id: user.id, super_admin: true).save!
+                return true
+            else
+                return false
+            end
+        end
+    rescue ActiveRecord::StatementInvalid, ActiveRecord::RecordInvalid
+        return false
+    end
+
+    def change_super_admin(user)
+        self.transaction do
+            user_membership = Membership.find_by(user_id: user.id, group_id: self.id)
+            if user_membership.nil?
+                # the user is not part of the group
+                return false
+            else
+                self.memberships.super_admin.first.update_attribute(:super_admin, false)
+                user_membership.update_attribute(:super_admin, true)
                 return true
             end
-        else
-            return false
         end
     rescue ActiveRecord::StatementInvalid, ActiveRecord::RecordInvalid
         return false
