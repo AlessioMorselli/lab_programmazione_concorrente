@@ -61,10 +61,10 @@ class GroupTest < ActiveSupport::TestCase
     assert_equal @group.max_members, @group.members.size
   end
 
-  test "admin method should return the group's admin" do
+  test "admins method should return the group's admins" do
     @group.save
     membership = Membership.create(group_id: @group.id, user_id: users(:user_1).id, admin: true)
-    assert_equal @group.admin, users(:user_1)
+    assert @group.admins.to_a.include? users(:user_1)
   end
 
   test "should also delete all memberships when deleting group" do
@@ -100,21 +100,34 @@ class GroupTest < ActiveSupport::TestCase
     assert_equal Invitation.all.where(group_id: group_id).size, 0
   end
 
-  test "save_with_admin should save the group and add the user as an admin" do
+  test "save_with_admin should save the group and add the user as a super_admin" do
     @group.save_with_admin(users(:user_1))
-    assert_equal @group.admin, users(:user_1)
+    assert_equal @group.super_admin, users(:user_1)
   end
 
-  test "save_with_admin should not save the group and add the admin if the group is not new" do
+  test "save_with_admin should not save the group and add the super_admin if the group is not new" do
     @group.save
     @group.save_with_admin(users(:user_1))
-    assert_not_equal @group.admin, users(:user_1)
+    assert_not_equal @group.super_admin, users(:user_1)
   end
 
-  test "save_with_admin should not save the group and add the admin if the group is not valid" do
+  test "save_with_admin should not save the group and add the super_admin if the group is not valid" do
     @group.name = nil
     @group.save_with_admin(users(:user_1))
-    assert_not_equal @group.admin, users(:user_1)
+    assert_not_equal @group.super_admin, users(:user_1)
+  end
+
+  test "change_super_admin should switch the current super_admin to the the user passed as argument" do
+    assert @group.save_with_admin(users(:user_1))
+    assert Membership.new(group_id: @group.id, user_id: users(:user_2).id).save
+    assert @group.change_super_admin(users(:user_2))
+    assert_equal @group.super_admin, users(:user_2)
+  end
+
+  test "change_super_admin should not switch the current super_admin if the user passed as argument is not member of the group" do
+    assert @group.save_with_admin(users(:user_1))
+    assert_not @group.change_super_admin(users(:user_2))
+    assert_equal @group.super_admin, users(:user_1)
   end
 
   test "user_query should return groups where the name or the name of course contains the query passed" do
@@ -154,5 +167,10 @@ class GroupTest < ActiveSupport::TestCase
     Group.without_user(user).ids.each do |group_id|
       assert_not user.groups.ids.include?(group_id)
     end
+  end
+
+  test "is_official should return true if the group is linked to a degree_course" do
+    group_id = DegreeCourse.where("degrees_courses.group_id IS NOT NULL").first.group_id
+    assert Group.find(group_id).is_official
   end
 end

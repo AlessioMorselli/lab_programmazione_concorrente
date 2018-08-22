@@ -61,4 +61,8 @@ class User < ApplicationRecord
             .where("groups.course_id = degrees_courses.course_id")
             .without_user(self)
     end
+
+    def create_group(group)
+        return group.save_with_admin(self);
+    end
 end
