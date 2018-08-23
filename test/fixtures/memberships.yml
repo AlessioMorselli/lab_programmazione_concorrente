@@ -18,7 +18,7 @@ membership_<%= n %>:
 
 <% 100.times do |n| %>
 <% g = Group.find(n) %>
-<% g.memberships.first.admin = true; g.memberships.first.save if g.members.count >= 1 %>
-<% g.memberships.second.admin = true; g.memberships.second.save if g.members.count >= 2 %>
-<% g.memberships.third.admin = true; g.memberships.third.save if g.members.count >= 3 %>
+<% g.memberships.first.update_attribute(:admin, true) if g.members.count >= 1 %>
+<% g.memberships.second.update_attribute(:admin, true) if g.members.count >= 2 %>
+<% g.memberships.third.update_attribute(:admin, true) if g.members.count >= 3 %>
 <% end %>
