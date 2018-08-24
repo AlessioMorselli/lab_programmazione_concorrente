@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 401) do
     t.index ["name"], name: "index_degrees_on_name", unique: true
   end
 
-  create_table "degrees_courses", id: false, force: :cascade do |t|
+  create_table "degrees_courses", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "degree_id", null: false
     t.integer "year", limit: 2, null: false
