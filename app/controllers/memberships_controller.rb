@@ -1,6 +1,6 @@
 class MembershipsController < ApplicationController
   before_action :set_group
-  before_action :set_membership, only: [:destroy]
+  before_action :set_membership, only: [:destroy, :set_admin]
   before_action :logged_in_user
   before_action only: [:destroy], unless: -> {@group.admins.include? current_user} do
     correct_user params[:user_id]
@@ -14,6 +14,9 @@ class MembershipsController < ApplicationController
   before_action only: [:destroy], if: -> {@group.admins.include? @user} do
     flash[:danger] = "L'utente selezionato è un amministratore e non può essere rimosso"
     redirect_to group_path(uuid: @group.uuid)
+  end
+  before_action only: [:set_admin, :set_super_admin] do
+    is_super_admin_in @group
   end
 
   # GET group_memberships(group_uuid: group.uuid)
@@ -40,6 +43,36 @@ class MembershipsController < ApplicationController
     end
   end
 
+  # GET group_set_admin_path(group_uuid: group.uuid, user_id: user.id)
+  def set_admin
+    # Rende un utente amministratore e gli rimuove il titolo, se lo è già
+    @membership.admin = !@membership.admin
+
+    if @membership.save
+      flash[:success] = "L'utente #{@user.name} è stato " +
+      (@membership.admin ? "aggiunto agli" : "tolto dagli") +
+      " amministratori del gruppo."
+    else
+      flash[:danger] = "L'utente #{@user.name} non è stato " +
+      (@membership.admin ? "aggiunto agli" : "tolto dagli") +
+      " amministratori del gruppo."
+    end
+
+    redirect_to group_path(uuid: @group.uuid)
+  end
+
+  # GET group_set_super_admin_path(group_uuid: group.uuid, user_id: user.id)
+  def set_super_admin
+    # Trasferisce il titolo di super admin dal super admin attuale ad un altro membro del gruppo
+    if @user.become_super_admin(current_user, @group)
+      flash[:success] = "Il regno di #{@user.name} ha inizio, dopo l'abdicazione di #{current_user.name}"
+    else
+      flash[:danger] = "L'utente #{@user.name} non è stato nominato super amministratore. Ritenta."
+    end
+
+    redirect_to group_path(uuid: @group.uuid)
+  end
+
   private
   def set_membership
     @user = User.find(params[:user_id])
@@ -51,6 +84,6 @@ class MembershipsController < ApplicationController
   end
 
   def membership_params
-    params.require(:membership).permit(:group_id, :user_id, :admin)
+    params.require(:membership).permit(:group_id, :user_id)
   end
 end

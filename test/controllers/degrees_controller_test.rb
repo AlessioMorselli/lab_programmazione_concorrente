@@ -2,8 +2,8 @@ require 'test_helper'
 
 class DegreesControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:user_1)
-    @degree = degrees(:degree_1)
+    @user = users(:luigi)
+    @degree = degrees(:ingegneria_informatica)
   end
 
 ### TEST PER UN UTENTE LOGGATO ###

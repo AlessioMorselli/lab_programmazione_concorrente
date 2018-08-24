@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DegreesCoursesControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:user_1)
+    @user = users(:luigi)
   end
 
 ### TEST PER UN UTENTE LOGGATO ###

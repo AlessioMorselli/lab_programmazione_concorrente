@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-    before_action :set_invitation, only: [:show, :edit, :update, :destroy, :accept, :refuse]
+    before_action :set_invitation, only: [:show, :destroy, :accept, :refuse]
     before_action :set_group, only: [:new, :create, :destroy]
     before_action :logged_in_user
     before_action only: [:index] do

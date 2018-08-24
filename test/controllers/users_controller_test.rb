@@ -2,8 +2,8 @@ require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:user_1)
-    @other_user = users(:user_2)
+    @user = users(:luigi)
+    @other_user = users(:mario)
   end
 
 ### TEST DI REGISTRAZIONE ###
@@ -55,7 +55,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     
     assert_difference('User.count', -1) do
-      delete user_path(@user)
+      assert_difference('Invitation.count', -1 * @user.invitations.count) do
+        assert_difference('Student.count', -1) do
+          delete user_path(@user)
+        end
+      end
     end
     
     assert_redirected_to login_path

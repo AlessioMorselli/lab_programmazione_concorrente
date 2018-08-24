@@ -2,9 +2,9 @@ require 'test_helper'
 
 class AttachmentsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @message = messages(:message_with_attachments_1)
-    @group = @message.group
-    @attachment = @message.attachment
+    @message = messages(:messaggio_allegato_giacomo_samurai_1)
+    @group = groups(:samurai)
+    @attachment = attachments(:allegato_giacomo)
   end
   
   test 'should destroy attachment but not message' do

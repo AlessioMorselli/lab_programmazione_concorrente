@@ -105,8 +105,8 @@ module SessionHelper
     end
 
     # Verifica che l'utente loggato sia il fondatore del gruppo
-    def is_founder_in(group)
-        unless group.founder == current_user
+    def is_super_admin_in(group)
+        unless group.super_admin == current_user
             flash[:danger] = "Devi essere il fondatore per eseguire questa azione"
             redirect_to group_path(uuid: group.uuid)
         end

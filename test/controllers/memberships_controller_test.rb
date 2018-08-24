@@ -10,7 +10,9 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
 
     @non_member = users(:aldo) # utente non membro
     @admin = users(:giacomo) # utente admin
-    @other_admin = users(:giorgio)
+    @other_admin = users(:giorgio) # anche super admin
+
+    @user_membership = memberships(:membro_samurai_2)
   end
 
 ### TEST PER UN UTENTE LOGGATO ###
@@ -90,6 +92,73 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
       delete group_membership_path(group_uuid: @group.uuid, user_id: @other_admin.id)
     end
     
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+  end
+
+  test "should not give admin title if logged user is admin and not super admin" do
+    log_in_as(@admin)
+
+    get group_set_admin_path(group_uuid: @group.uuid, user_id: @user.id)
+    
+    assert_not @group.admins.include? @user
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+  end
+
+  test "should not remove admin title if logged user is admin and not super admin" do
+    # Fornisco a @user il titolo di admin
+    @user_membership.update!(admin: true)
+
+    log_in_as(@admin)
+
+    get group_set_admin_path(group_uuid: @group.uuid, user_id: @user.id)
+    
+    assert @group.admins.include? @user
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+  end
+
+  test "should not transfer super admin title if logged user is not super admin" do
+    log_in_as(@admin)
+
+    get group_set_super_admin_path(group_uuid: @group.uuid, user_id: @admin.id)
+    
+    assert_not_equal @admin, @group.super_admin
+    assert_equal @other_admin, @group.super_admin
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+  end
+
+### TEST PER UTENTE SUPER AMMINISTRATORE ###
+  test "should give admin title if logged user is super admin" do
+    log_in_as(@other_admin)
+
+    get group_set_admin_path(group_uuid: @group.uuid, user_id: @user.id)
+    
+    assert @group.admins.include? @user
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+  end
+
+  test "should remove admin title if logged user is super admin" do
+    log_in_as(@other_admin)
+
+    get group_set_admin_path(group_uuid: @group.uuid, user_id: @admin.id)
+    
+    assert_not @group.admins.include? @admin
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+  end
+
+  test "should transfer super admin title" do
+    log_in_as(@other_admin)
+
+    get group_set_super_admin_path(group_uuid: @group.uuid, user_id: @admin.id)
+    
+    assert_equal @admin, @group.super_admin
+    assert_not_equal @other_admin, @group.super_admin
+    assert @group.admins.include? @other_admin
     assert_redirected_to group_path(uuid: @group.uuid)
     assert_not flash.empty?
   end

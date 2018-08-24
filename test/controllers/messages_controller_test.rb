@@ -2,32 +2,26 @@ require 'test_helper'
 
 class MessagesControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @message = messages(:message_1)
-    @group = @message.group
-    @user = @message.user
+    @message = messages(:messaggio_giovanni_cavalieri_1)
+    @group = groups(:cavalieri)
+    @user = users(:giovanni)
     set_last_message_cookies(@user, @group, DateTime.now - 1.hour)
 
-    @group.members.push @user unless @group.members.include? @user
-
-    unless @group.members.count < 2
-      @other_user = (@group.members.first == @user ? @group.members.second : @group.members.first)
-    else
-      @other_user = (users(:user_1) == @user ? users(:user_2) : users(:user_1))
-      @group.members.push @other_user
-    end
+    @other_user = users(:aldo)
     
-    @message_with_attachment = messages(:message_with_attachments_1)
-    @group_with_attachment = @message_with_attachment.group
-    @user_with_attachment = @message_with_attachment.user
+    @message_with_attachment = messages(:messaggio_allegato_mario_cavalieri_1)
+    @user_with_attachment = users(:mario)
 
-    @group_with_attachment.members.push @user_with_attachment unless @group_with_attachment.members.include? @user_with_attachment
+    @message_pinned = messages(:messaggio_pinnato_giacomo_cavalieri_1)
 
-    @non_member = (User.all - @group.members).first
+    @non_member = users(:giorgio)
+
+    @admin = users(:giacomo)
   end
 
 ### TEST PER UN UTENTE LOGGATO ###
   test "should index the most recent messages" do
-    log_in_as(@user)
+    log_in_as @user
 
     get group_messages_path(group_uuid: @group.uuid)
     assert_not_empty cookies[@user.id.to_s + @group.uuid]
@@ -36,7 +30,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should send a message without attachment" do
-    log_in_as(@user)
+    log_in_as @user
     
     assert_difference('Message.count') do
       post group_messages_path(group_uuid: @group.uuid), params: {
@@ -55,7 +49,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should send a message with attachment" do
-    log_in_as(@user)
+    log_in_as @user
 
     assert_difference('Message.count') do
       post group_messages_path(group_uuid: @group.uuid), params: {
@@ -74,7 +68,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not send an empty message without attachment" do
-    log_in_as(@user)
+    log_in_as @user
   
     assert_difference('Message.count', 0) do
       post group_messages_path(group_uuid: @group.uuid), params: {
@@ -94,7 +88,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should send an empty message with attachment" do
-    log_in_as(@user)
+    log_in_as @user
 
     assert_difference('Message.count') do
       post group_messages_path(group_uuid: @group.uuid), params: {
@@ -114,7 +108,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update a message" do
-    log_in_as(@user)
+    log_in_as @user
 
     patch group_message_path(group_uuid: @group.uuid, id: @message.id), params: {
       message: { text: "Messaggio modificato" }
@@ -125,7 +119,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not update a message if its text is deleted" do
-    log_in_as(@user)
+    log_in_as @user
 
     text = @message.text
     patch group_message_path(group_uuid: @group.uuid, id: @message.id), params: {
@@ -137,7 +131,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy a message without an attachment" do
-    log_in_as(@user)
+    log_in_as @user
 
     assert_difference('Message.count', -1) do
       assert_difference('Attachment.count', 0) do
@@ -149,11 +143,11 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy a message with attachment" do
-    log_in_as(@user_with_attachment)
+    log_in_as @user_with_attachment
 
     assert_difference('Message.count', -1) do
       assert_difference('Attachment.count', -1) do
-        delete group_message_path(group_uuid: @group_with_attachment.uuid, id: @message_with_attachment.id)
+        delete group_message_path(group_uuid: @group.uuid, id: @message_with_attachment.id)
       end
     end
 
@@ -161,11 +155,31 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show group pinned messages" do
-    log_in_as(@user)
+    log_in_as @user
 
     get group_pinned_messages_path(group_uuid: @group.uuid)
     assert_response :success
   end
+
+  test "should not pin a message if logged user is not admin" do
+    log_in_as @user
+
+    get group_pin_message_path(group_uuid: @group.uuid, id: @message.id)
+
+    assert_equal false, @message.pinned
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+  end
+
+  test "should not unpin a message if logged user is not admin" do
+    log_in_as @user
+
+    get group_pin_message_path(group_uuid: @group.uuid, id: @message_pinned.id)
+
+    assert_equal true, @message_pinned.pinned
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+  end 
 
 ### TEST PER UN UTENTE NON LOGGATO ###
   test "should not index the most recent messages if not logged in" do
@@ -323,4 +337,49 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to groups_path
     assert_not flash.empty?
   end
+
+### TEST PER UN UTENTE AMMINISTRATORE ###
+  test "should destroy another user's message without an attachment if logged user is admin" do
+    log_in_as(@admin)
+
+    assert_difference('Message.count', -1) do
+      assert_difference('Attachment.count', 0) do
+        delete group_message_path(group_uuid: @group.uuid, id: @message.id)
+      end
+    end
+
+    assert_not flash.empty?
+  end
+
+  test "should destroy another user's message with attachment if logged user is admin" do
+    log_in_as(@admin)
+
+    assert_difference('Message.count', -1) do
+      assert_difference('Attachment.count', -1) do
+        delete group_message_path(group_uuid: @group.uuid, id: @message_with_attachment.id)
+      end
+    end
+    
+    assert_not flash.empty?
+  end
+
+  test "should pin a message if logged user is admin" do
+    log_in_as @admin
+
+    get group_pin_message_path(group_uuid: @group.uuid, id: @message.id)
+
+    @message.reload
+    assert_equal true, @message.pinned
+    assert_not flash.empty?
+  end
+
+  test "should unpin a message if logged user is admin" do
+    log_in_as @admin
+
+    get group_pin_message_path(group_uuid: @group.uuid, id: @message_pinned.id)
+
+    @message_pinned.reload
+    assert_equal false, @message_pinned.pinned
+    assert_not flash.empty?
+  end 
 end

@@ -1,13 +1,22 @@
 class MessagesController < ApplicationController
-    before_action :set_message, only: [:show, :edit, :update, :destroy, :download_attachment]
+    before_action :set_message, only: [:edit, :update, :destroy, :pin_message]
     before_action :logged_in_user
-    before_action only: [:update, :destroy] do
+    before_action only: [:update] do
+        correct_user @message.user_id
+    end
+    before_action only: [:destroy], unless: -> {@message.group.admins.include? current_user} do
         correct_user @message.user_id
     end
     before_action :set_group
     before_action do
         is_member_in @group
     end 
+    before_action only: [:destroy], unless: -> {@message.user == current_user} do
+        is_admin_in @group
+    end
+    before_action only: [:pin_message] do
+        is_admin_in @group
+    end
 
     # GET group_messages_path(group_uuid: group.uuid)
     def index
@@ -67,6 +76,22 @@ class MessagesController < ApplicationController
         render json: @pinned_messages
     end
 
+    # GET group_pin_message(group_uuid: group.uuid, id: message.id)
+    def pin_message
+        # Aggiunge un messaggio in bacheca o lo toglie, se già presente
+        @message.pinned = !@message.pinned
+        if @message.save
+            flash.now[:success] = "Il messaggio è stato " +
+                (@message.pinned ? "aggiunto alla" : "tolto dalla") +
+                " bacheca."
+        else flash.now[:danger] = "Il messaggio non è stato " +
+            (@message.pinned ? "aggiunto alla" : "tolto dalla") +
+            " bacheca."
+        end
+
+        render json: @message
+    end
+
     private
     def set_message
         @message = Message.find(params[:id])
@@ -77,7 +102,7 @@ class MessagesController < ApplicationController
     end
 
     def message_params
-        params.require(:message).permit(:text, :attachment_id, :pinned, :group_id, :user_id)
+        params.require(:message).permit(:text, :attachment_id, :group_id, :user_id)
     end
 
     def attachment_params

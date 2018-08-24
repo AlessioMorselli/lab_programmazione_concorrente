@@ -1,5 +1,5 @@
 class DegreesController < ApplicationController
-    before_action :set_degree, only: [:show, :edit, :update, :destroy]
+    before_action :set_degree, only: [:show]
     before_action :logged_in_user
 
     # GET degree_path(degree)

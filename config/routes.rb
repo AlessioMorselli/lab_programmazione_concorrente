@@ -24,7 +24,11 @@ Rails.application.routes.draw do
   post    '/login',                                                   to: 'session#create'
   delete  '/logout',                                                  to: 'session#destroy'
 
+  # Bacheca del gruppo
   get     '/groups/:group_uuid/messages/pinned',                      to: 'messages#pinned', as: 'group_pinned_messages'
+
+  # Aggiunge / Toglie un messaggio dalla bacheca
+  get     '/groups/:group_uuid/message/:id/pin',                      to: 'messages#pin_message', as: 'group_pin_message'
   
   # Lista di tutti gli eventi dell'utente
   get     '/users/:user_id/events',                                   to: 'events#user_index', as: 'user_events'
@@ -37,5 +41,11 @@ Rails.application.routes.draw do
   # Per scaricare l'allegato di un messaggio
   get     '/groups/:group_uuid/messages/:message_id/attachment/:id/download',
       to: 'messages#download_attachment', as: 'group_message_attachment_download'
+  
+  # Aggiunge / Rimuove il titolo di amministratore
+  get     '/groups/:group_uuid/memberships/:user_id/admin',           to: 'memberships#set_admin', as: 'group_set_admin'
 
+  # Trasferisce il titolo di super amministratore
+  get     '/groups/:group_uuid/memberships/:user_id/super_admin',
+      to: 'memberships#set_super_admin', as: 'group_set_super_admin' 
 end

@@ -1,5 +1,4 @@
 class DegreesCoursesController < ApplicationController
-    # before_action :set_degrees_course, only: [:show, :edit, :update, :destroy]
     before_action :logged_in_user
 
     # GET degrees_courses_path
@@ -11,14 +10,4 @@ class DegreesCoursesController < ApplicationController
 
         render json: @user_courses
     end
-
-    # private
-    # def set_degrees_course
-
-    #     @degrees_course = DegreesCourse.find(params[:id])
-    # end
-
-    # def degrees_course_params
-    #     params.require(:degrees_course).permit(:year, :course_id, :degree_id, :group_id)
-    # end
 end

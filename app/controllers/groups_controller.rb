@@ -4,6 +4,9 @@ class GroupsController < ApplicationController
     before_action only: [:show] do
         is_member_in @group
     end
+    before_action only: [:edit, :update, :destroy] do
+        is_super_admin_in @group
+    end
 
     # GET groups_path
     def index

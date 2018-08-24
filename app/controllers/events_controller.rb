@@ -36,7 +36,7 @@ class EventsController < ApplicationController
     # GET user_events_path(user)
     def user_index
         # Visualizza tutti gli eventi dei gruppi di cui fa parte l'utente
-        @events = @user.groups.events.next
+        @events = @user.events.next
         render json: @events
     end
 

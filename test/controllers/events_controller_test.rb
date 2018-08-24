@@ -3,10 +3,10 @@ require 'test_helper'
 class EventsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @event = events(:evento_pirati_1)
-    @group = @event.group
-    @user = @group.admins.first # membro admin
-    @other_user = (@group.members - @group.admins).first # membro non admin
-    @non_member = (User.all - @group.members).first
+    @group = groups(:pirati)
+    @user = users(:giorgio) # membro admin
+    @other_user = users(:luigi) # membro non admin
+    @non_member = users(:mario)
   end
 
 ### TEST PER UN UTENTE LOGGATO E AMMINISTRATORE ###

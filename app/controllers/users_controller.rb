@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:show, :edit, :update, :destroy]
+    before_action :set_user, only: [:edit, :update, :destroy]
     before_action :logged_in_user, only: [:edit, :update, :destroy]
     before_action only: [:edit, :update, :destroy] do
         correct_user params[:id]
