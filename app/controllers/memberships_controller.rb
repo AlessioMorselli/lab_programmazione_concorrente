@@ -2,11 +2,18 @@ class MembershipsController < ApplicationController
   before_action :set_group
   before_action :set_membership, only: [:destroy]
   before_action :logged_in_user
-  before_action only: [:destroy], unless: -> {@membership.admin} do
+  before_action only: [:destroy], unless: -> {@group.admins.include? current_user} do
     correct_user params[:user_id]
   end
-  before_action only: [:index] do
+  before_action only: [:index, :destroy] do
     is_member_in @group
+  end
+  before_action only: [:destroy], unless: -> {@user == current_user} do
+    is_admin_in @group
+  end
+  before_action only: [:destroy], if: -> {@group.admins.include? @user} do
+    flash[:danger] = "L'utente selezionato è un amministratore e non può essere rimosso"
+    redirect_to group_path(uuid: @group.uuid)
   end
 
   # GET group_memberships(group_uuid: group.uuid)
@@ -25,7 +32,12 @@ class MembershipsController < ApplicationController
     # Cancella anche il cookie dell'utente associato al gruppo
     cookies.delete(create_last_message_key(@user, @group))
 
-    redirect_to groups_path
+    if !@group.members.include? current_user
+      redirect_to groups_path
+    else
+      flash[:success] = "Membro eliminato dal gruppo"
+      redirect_to group_path(uuid: @group.uuid)
+    end
   end
 
   private

@@ -2,14 +2,15 @@ require 'test_helper'
 
 class MembershipsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @membership = Membership.all.first
-    @group = @membership.group
-    @user = @membership.user
-    @other_user = (@group.members.first == @user ? @group.members.second : @group.members.first)
+    @group = groups(:samurai)
+    @user = users(:giovanni) # utente membro non admin
+    @other_user = users(:luigi) # utente membro non admin diverso da @user
 
     set_last_message_cookies(@user, @group, DateTime.now)
 
-    @non_member = (User.all - @group.members).first
+    @non_member = users(:aldo) # utente non membro
+    @admin = users(:giacomo) # utente admin
+    @other_admin = users(:giorgio)
   end
 
 ### TEST PER UN UTENTE LOGGATO ###
@@ -67,6 +68,29 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
     get group_memberships_path(group_uuid: @group.uuid)
     
     assert_redirected_to groups_path
+    assert_not flash.empty?
+  end
+
+### TEST PER UN UTENTE AMMINISTRATORE ###
+  test "should remove another user from group if logged user is admin" do
+    log_in_as(@admin)
+
+    assert_difference('Membership.count', -1) do
+      delete group_membership_path(group_uuid: @group.uuid, user_id: @user.id)
+    end
+    
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+  end
+
+  test "should not remove another user from group if logged user is admin and that user is admin" do
+    log_in_as(@admin)
+
+    assert_difference('Membership.count', 0) do
+      delete group_membership_path(group_uuid: @group.uuid, user_id: @other_admin.id)
+    end
+    
+    assert_redirected_to group_path(uuid: @group.uuid)
     assert_not flash.empty?
   end
 end

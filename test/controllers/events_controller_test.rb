@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @event = events(:event_1)
+    @event = events(:evento_pirati_1)
     @group = @event.group
     @user = @group.admins.first # membro admin
     @other_user = (@group.members - @group.admins).first # membro non admin

@@ -2,8 +2,11 @@ require 'test_helper'
 
 class GroupsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @group = groups(:group_1)
+    @group = groups(:pirati)
+
     @user = @group.members.first
+
+    puts @user.id
 
     @non_member = (User.all - @group.members).first
 

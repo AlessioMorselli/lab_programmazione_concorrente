@@ -26,7 +26,7 @@ admin_samurai_1:
   user: giacomo
   group: samurai
   super_admin: false
-  admin: false
+  admin: true
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
 
@@ -34,7 +34,7 @@ membro_samurai_1:
   user: luigi
   group: samurai
   super_admin: false
-  admin: true
+  admin: false
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
 
