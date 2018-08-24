@@ -6,6 +6,7 @@ class MessageTest < ActiveSupport::TestCase
   def setup
     @group = Group.new(name: "Fake group")
     assert @group.save
+    @user = users(:giorgio)
     @messages = [
         Message.new(text: "ciao0", created_at: Time.now, updated_at: Time.now),
         Message.new(text: "ciao1", created_at: Time.now+1.minute, updated_at: Time.now+1.minute),
@@ -15,7 +16,7 @@ class MessageTest < ActiveSupport::TestCase
     ]
     @messages.each do |msg|
         msg.group_id = @group.id
-        msg.user_id = users(:user_1).id
+        msg.user_id = @user.id
         assert msg.save
     end
 
@@ -24,35 +25,35 @@ class MessageTest < ActiveSupport::TestCase
   end
 
   test "should not save if text and attachment are not supplied" do
-    message = Message.new(group_id: @group.id, user_id: users(:user_1).id)
+    message = Message.new(group_id: @group.id, user_id: @user.id)
     assert_not message.save
   end
 
   test "should not save if text is empty and attachment is not supplied" do
-    message = Message.new(text: "   ", group_id: @group.id, user_id: users(:user_1).id)
+    message = Message.new(text: "   ", group_id: @group.id, user_id: @user.id)
     assert_not message.save
   end
 
   test "should save if only text is supplied" do
-    message = Message.new(text: "ciao", group_id: @group.id, user_id: users(:user_1).id)
+    message = Message.new(text: "ciao", group_id: @group.id, user_id: @user.id)
     assert message.save
   end
 
   test "should save if only attachment is supplied" do
-    message = Message.new(attachment_id: @attachment.id, group_id: @group.id, user_id: users(:user_1).id)
+    message = Message.new(attachment_id: @attachment.id, group_id: @group.id, user_id: @user.id)
     assert message.save
   end
 
   test "should save if both text and attachment are supplied" do
-    message = Message.new(text: "ciao", attachment_id: @attachment.id, group_id: @group.id, user_id: users(:user_1).id)
+    message = Message.new(text: "ciao", attachment_id: @attachment.id, group_id: @group.id, user_id: @user.id)
     assert message.save
   end
 
   test "pinned should return pinned messages" do
     pinned_messages = [
-        Message.new(text: "pinned0", pinned: true, user: users(:user_1)),
-        Message.new(text: "pinned1", pinned: true, user: users(:user_1)),
-        Message.new(text: "pinned2", pinned: true, user: users(:user_1))
+        Message.new(text: "pinned0", pinned: true, user: @user),
+        Message.new(text: "pinned1", pinned: true, user: @user),
+        Message.new(text: "pinned2", pinned: true, user: @user)
     ]
     @group.messages << pinned_messages
     assert_equal pinned_messages.size, @group.messages.pinned.count
@@ -68,14 +69,14 @@ class MessageTest < ActiveSupport::TestCase
   end
 
   test "save_with_attachment should save the message with the attachment passed as argument" do
-    message = Message.new(group_id: @group.id, user_id: users(:user_1).id, text: "ciao0", created_at: Time.now, updated_at: Time.now)
+    message = Message.new(group_id: @group.id, user_id: @user.id, text: "ciao0", created_at: Time.now, updated_at: Time.now)
     attachment = Attachment.new(data: "qualcosa", mime_type: "image/jpeg", name: "image")
     assert message.save_with_attachment(attachment)
     assert_equal attachment.id, message.attachment_id
   end
 
   test "save_with_attachment should return false if the attachemnt is invalid" do
-    message = Message.new(group_id: @group.id, user_id: users(:user_1).id, text: "ciao0", created_at: Time.now, updated_at: Time.now)
+    message = Message.new(group_id: @group.id, user_id: @user.id, text: "ciao0", created_at: Time.now, updated_at: Time.now)
     attachment = Attachment.new(data: nil, mime_type: "image/jpeg", name: "image")
     assert_not message.save_with_attachment(attachment)
     assert_not Message.exists?(message.id)
@@ -83,7 +84,7 @@ class MessageTest < ActiveSupport::TestCase
   end
 
   test "destroy should destroy the message and its attachment" do
-    message = messages(:message_with_attachments_1)
+    message = Message.where("attachment_id IS NOT NULL").first
     message_id = message.id
     attachment_id = message.attachment.id
     message.destroy!

@@ -7,7 +7,8 @@ class EventTest < ActiveSupport::TestCase
     now = Time.now
 
     st_time = now + 2.hours
-    @event = Event.new(start_time: st_time, end_time: st_time + 2.hours, place: "Aula 20", description: "Generic description", group_id: groups(:group_1).id)
+    @group = groups(:pirati)
+    @event = Event.new(start_time: st_time, end_time: st_time + 2.hours, place: "Aula 20", description: "Generic description", group_id: @group.id)
 
     @events_this_hour = [
       Event.new(start_time: now+1.minute, end_time: now+2.hours),

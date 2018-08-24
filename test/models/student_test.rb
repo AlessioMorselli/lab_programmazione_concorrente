@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class StudentTest < ActiveSupport::TestCase
-  fixtures :users, :degrees
 
   def setup
     @degree = Degree.new(name: "degree_123", years: 3)

@@ -15,10 +15,10 @@ class InvitationTest < ActiveSupport::TestCase
   end
 
   test "should not save if the couple user_id, group_id is not unique (even if user_id is nil)" do
-    inv1 = invitations(:invitation_1)
-    inv2 = invitations(:invitation_2)
-    inv3 = invitations(:invitation_3)
-    inv4 = invitations(:invitation_4)
+    inv1 = invitations(:invito_ninja_giorgio)
+    inv2 = invitations(:invito_ninja_giovanni)
+    inv3 = invitations(:invito_pirati_mario_scaduto)
+    inv4 = invitations(:invito_pirati)
 
     inv1.user_id = @user.id
     inv1.group_id = @group.id
@@ -75,7 +75,8 @@ class InvitationTest < ActiveSupport::TestCase
 
   test "accept should return false if the invitation is for a user and a different user is passed" do
     @invitation.save
-    assert_not @invitation.accept(users(:user_2))
+    user = users(:giorgio)
+    assert_not @invitation.accept(user)
   end
 
 end

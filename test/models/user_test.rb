@@ -99,21 +99,23 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "degree should return the user degree" do
+    degree = degrees(:ingegneria_informatica)
     assert @user.save
-    student = Student.new(user_id: @user.id, degree_id: degrees(:degree_1).id, year: 1)
+    student = Student.new(user_id: @user.id, degree_id: degree.id, year: 1)
     assert student.save
-    assert_equal degrees(:degree_1), @user.degree
+    assert_equal degree, @user.degree
   end
 
   test "courses should return the user courses" do
+    degree = degrees(:ingegneria_informatica)
     assert @user.save
-    student = Student.new(user_id: @user.id, degree_id: degrees(:degree_1).id, year: 1)
+    student = Student.new(user_id: @user.id, degree_id: degree.id, year: 1)
     assert student.save
-    assert_equal degrees(:degree_1).courses, @user.courses
+    assert_equal degree.courses, @user.courses
   end
 
   test "suggested_groups should return groups where the course is in the user degree courses and that are not private and without user" do
-    user = users(:user_1)
+    user = users(:giorgio)
     courses = user.degree.courses.ids
     suggested = user.suggested_groups.to_a
     suggested.each do |group|
