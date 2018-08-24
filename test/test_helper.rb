@@ -3,9 +3,7 @@ require_relative '../config/environment'
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
-  fixtures :users, :groups, :degrees, :courses
-  fixtures :memberships, :messages, :events, :degrees_courses, :students
-  fixtures :attachments, :invitations
+  fixtures :all
 
   # Restituisce true se un utente di test è loggato
   def is_logged_in?

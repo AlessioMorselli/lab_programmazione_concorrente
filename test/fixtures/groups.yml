@@ -1,33 +1,31 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-# one: {}
-# column: value
-#
-# two: {}
-# column: value
-
-<% 50.times do |n| %>
-group_<%= n %>:
-  id: <%= n %>
-  name: <%= "Gruppo #{n}" %>
+pirati:
+  name: pirati
   max_members: 10
-  private: TRUE
-  course_id: <%= Random.rand(30) %>
+  private: true
+  course_id: null
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
-<% end %>
 
-<% 50.times do |n| %>
-group_<%= n + 50 %>:
-  id: <%= n + 50 %>
-  name: <%= "Gruppo #{n + 50}" %>
+ninja:
+  name: ninja
   max_members: 10
-  private: FALSE
-  course_id: <%= Random.rand(30) %>
+  private: true
+  course_id: null
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
-<% end %>
+
+samurai:
+  name: samurai
+  max_members: 10
+  private: false
+  course_id: null
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+cavalieri:
+  name: cavalieri
+  max_members: 10
+  private: false
+  course_id: null
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>

@@ -1,24 +1,103 @@
-<% ms = [] %>
-<% 50.times do |i| %>
-  <% 100.times do |j| %>
-    <% ms.push([i, j])%>
-  <% end %>
-<% end %>
-<% ms = ms.shuffle %>
+fondatore_pirati:
+  user: giorgio
+  group: pirati
+  super_admin: true
+  admin: true
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
 
-<% 250.times do |n| %>
-<% m = ms.shift %>
-membership_<%= n %>:
-  user_id: <%= m[0] %>
-  group_id: <%= m[1] %>
+membro_pirati_1:
+  user: luigi
+  group: pirati
+  super_admin: false
   admin: false
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
-<% end %>
 
-<% 100.times do |n| %>
-<% g = Group.find(n) %>
-<% g.memberships.first.update_attribute(:admin, true) if g.members.count >= 1 %>
-<% g.memberships.second.update_attribute(:admin, true) if g.members.count >= 2 %>
-<% g.memberships.third.update_attribute(:admin, true) if g.members.count >= 3 %>
-<% end %>
+fondatore_samurai:
+  user: giorgio
+  group: samurai
+  super_admin: true
+  admin: true
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+admin_samurai_1:
+  user: giacomo
+  group: samurai
+  super_admin: false
+  admin: false
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+membro_samurai_1:
+  user: luigi
+  group: samurai
+  super_admin: false
+  admin: true
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+membro_samurai_2:
+  user: giovanni
+  group: samurai
+  super_admin: false
+  admin: false
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+fondatore_cavalieri:
+  user: giacomo
+  group: cavalieri
+  super_admin: true
+  admin: true
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+admin_cavalieri_1:
+  user: mario
+  group: cavalieri
+  super_admin: false
+  admin: true
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+membro_cavalieri_1:
+  user: giovanni
+  group: cavalieri
+  super_admin: false
+  admin: false
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+membro_cavalieri_2:
+  user: aldo
+  group: cavalieri
+  super_admin: false
+  admin: false
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+fondatore_ninja:
+  user: mario
+  group: ninja
+  super_admin: true
+  admin: true
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+membro_ninja_1:
+  user: giacomo
+  group: ninja
+  super_admin: false
+  admin: false
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+  
+membro_ninja_2:
+  user: aldo
+  group: ninja
+  super_admin: false
+  admin: false
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %> 

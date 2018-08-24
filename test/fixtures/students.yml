@@ -1,8 +1,41 @@
-<% 50.times do |n| %>
-student_<%= n %>:
-  user_id: <%= n %>
-  year: <%= Random.rand(3) + 1 %>
-  degree_id: <%= Random.rand(10) %>
+studente_giorgio:
+  user: giorgio
+  year: 2
+  degree: ingegneria_informatica
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
-<% end %>
+
+studente_giovanni:
+  user: giovanni
+  year: 1
+  degree: ingegneria_informatica
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+studente_luigi:
+  user: luigi
+  year: 1
+  degree: ingegneria_meccanica
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+studente_giacomo:
+  user: giacomo
+  year: 3
+  degree: ingegneria_meccanica
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+studente_aldo:
+  user: aldo
+  year: 1
+  degree: ingegneria_magistrale
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+studente_mario:
+  user: mario
+  year: 2
+  degree: ingegneria_magistrale
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>

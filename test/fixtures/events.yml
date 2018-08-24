@@ -1,14 +1,74 @@
 <% st = (DateTime.now + (Random.rand(2)).hours) + 2.minutes %>
 <% et = (DateTime.now + 3.hours) %>
 
-<% 250.times do |n| %>
-event_<%= n %>:
-  id: <%= n %>
+evento_pirati_1:
   start_time: <%= st.to_s %>
   end_time: <%= et.to_s %>
-  place: Aula
-  description: Evento bello
-  group_id: <%= Random.rand(100) %>
+  place: Aula pirati
+  description: Evento pirati 1
+  group: pirati
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
-<% end %>
+
+evento_pirati_2:
+  start_time: <%= st.to_s %>
+  end_time: <%= et.to_s %>
+  place: Aula pirati
+  description: Evento pirati 2
+  group: pirati
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+evento_samurai_1:
+  start_time: <%= st.to_s %>
+  end_time: <%= et.to_s %>
+  place: Aula samurai
+  description: Evento samurai 1
+  group: samurai
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+evento_cavalieri_1:
+  start_time: <%= st.to_s %>
+  end_time: <%= et.to_s %>
+  place: Aula cavalieri
+  description: Evento cavalieri 1
+  group: cavalieri
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+evento_cavalieri_1:
+  start_time: <%= st.to_s %>
+  end_time: <%= et.to_s %>
+  place: Aula cavalieri
+  description: Evento cavalieri 1
+  group: cavalieri
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+evento_cavalieri_2:
+  start_time: <%= st.to_s %>
+  end_time: <%= et.to_s %>
+  place: Aula cavalieri
+  description: Evento cavalieri 2
+  group: cavalieri
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+evento_cavalieri_3:
+  start_time: <%= st.to_s %>
+  end_time: <%= et.to_s %>
+  place: Aula cavalieri
+  description: Evento cavalieri 3
+  group: cavalieri
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+evento_ninja_1:
+  start_time: <%= st.to_s %>
+  end_time: <%= et.to_s %>
+  place: Aula ninja
+  description: Evento ninja 1
+  group: ninja
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>

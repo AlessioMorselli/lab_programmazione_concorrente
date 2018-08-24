@@ -1,18 +1,79 @@
-<% dcs = [] %>
-<% 10.times do |i| %>
-  <% 30.times do |j| %>
-    <% dcs.push([i, j])%>
-  <% end %>
-<% end %>
-<% dcs = dcs.shuffle %>
-
-<% 75.times do |n| %>
-<% dc = dcs.shift %>
-degrees_course_<%= n %>:
-  year: <%= Random.rand(3) + 1 %>
-  degree_id: <%= dc[0] %>
-  course_id: <%= dc[1] %>
-  group_id: <%= n %>
+ingegneria_informatica_corso_1:
+  year: 1
+  # degree: ingegneria_informatica
+  degree_id: 1
+  # course: analisi_1
+  course_id: 1
+  group_id: null
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
-<% end %>
+
+ingegneria_informatica_corso_2:
+  year: 2
+  # degree: ingegneria_informatica
+  degree_id: 1
+  # course: elettronica
+  course_id: 6
+  group_id: null
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+ingegneria_informatica_corso_3:
+  year: 3
+  # degree: ingegneria_informatica
+  degree_id: 1
+  # course: informatica
+  course_id: 2
+  group_id: null
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+ingegneria_meccanica_corso_1:
+  year: 1
+  # degree: ingegneria_meccanica
+  degree_id: 2
+  # course: analisi_1
+  course_id: 1
+  group_id: null
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+ingegneria_meccanica_corso_2:
+  year: 2
+  # degree: ingegneria_meccanica
+  degree_id: 2
+  # course: fisica
+  course_id: 7
+  group_id: null
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+ingegneria_meccanica_corso_3:
+  year: 3
+  # degree: ingegneria_meccanica
+  degree_id: 2
+  # course: meccanica
+  course_id: 4
+  group_id: null
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+ingegneria_magistrale_corso_1:
+  year: 1
+  # degree: ingegneria_magistrale
+  degree_id: 3
+  # course: analisi_2
+  course_id: 3
+  group_id: null
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
+
+ingegneria_magistrale_corso_2:
+  year: 2
+  # degree: ingegneria_magistrale
+  degree_id: 3
+  # course: meccatronica
+  course_id: 5
+  group_id: null
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>

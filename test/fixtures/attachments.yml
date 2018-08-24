@@ -1,9 +1,13 @@
-<% 10.times do |n| %>
-attachment_<%= n %>:
-  id: <%= n %>
-  name: <%= "immagine_#{n}.jpg" %>
+allegato_mario:
+  name: immagine mario
   mime_type: image/jpeg
   data: qualcosa
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
-<% end %>
+
+allegato_giacomo:
+  name: immagine giacomo
+  mime_type: image/jpeg
+  data: qualcosa
+  created_at: <%= Time.now.to_s %>
+  updated_at: <%= Time.now.to_s %>
