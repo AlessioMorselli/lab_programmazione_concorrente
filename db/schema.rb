@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 401) do
     t.index ["name"], name: "index_degrees_on_name", unique: true
   end
 
-  create_table "degrees_courses", id: false, force: :cascade do |t|
+  create_table "degrees_courses", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "degree_id", null: false
     t.integer "year", limit: 2, null: false
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 401) do
     t.integer "year", limit: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_students_on_user_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
