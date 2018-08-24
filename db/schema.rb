@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 401) do
     t.integer "year", limit: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_students_on_user_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
