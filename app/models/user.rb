@@ -27,6 +27,10 @@ class User < ApplicationRecord
         degree.courses
     end
 
+    def events
+        Event.where(group_id: groups.ids)
+    end
+
     # restituisce l'hash di una stringa 
     def User.digest(string)
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost

@@ -125,4 +125,10 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test "events should return all the events of all the user's groups" do
+    user = users(:giorgio)
+    expected_events = Event.joins("JOIN memberships ON events.group_id = memberships.group_id").where("memberships.user_id = ?", user.id)
+    assert_equal expected_events.ids.sort, user.events.ids.sort
+  end
+
 end
