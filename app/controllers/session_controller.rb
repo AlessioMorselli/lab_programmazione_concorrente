@@ -3,7 +3,7 @@ class SessionController < ApplicationController
     def new
         # Visualizza la form per permettere il log in
         # TODO: da cambiare con quello vero
-        render file: 'app/views/test.html.erb'
+        render file: 'app/views/login_page.html.erb'
     end
 
     # POST login_path
