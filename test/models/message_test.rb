@@ -92,4 +92,12 @@ class MessageTest < ActiveSupport::TestCase
     assert_not Attachment.exists?(attachment_id)
   end
 
+  test "destroy_attachment should destroy the attachment and set attachment_id to nil" do
+    message = Message.where("attachment_id IS NOT NULL").first
+    attachment_id = message.attachment.id
+    message.destroy_attachment
+    assert_not Attachment.exists?(attachment_id)
+    assert message.attachment.nil?
+  end
+
 end

@@ -38,4 +38,14 @@ class Message < ApplicationRecord
         return false
     end
 
+    def destroy_attachment
+        self.transaction do
+            if attachment != nil
+                attachment_id = attachment.id
+                self.update_attribute(:attachment_id, nil)
+                Attachment.destroy(attachment_id)
+            end
+        end
+    end
+
 end
