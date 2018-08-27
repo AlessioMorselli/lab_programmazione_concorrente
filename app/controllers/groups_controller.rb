@@ -25,7 +25,7 @@ class GroupsController < ApplicationController
                                                     # interessare all'utente loggato
         end
 
-        render json: @groups
+        render file: 'app/views/public_groups_list'
     end
 
     # GET group_path(uuid: group.uuid)
@@ -33,7 +33,6 @@ class GroupsController < ApplicationController
         # Visualizza la chat di un gruppo, inclusi messaggi, eventi e membri (online ed offline)
         # Scope che definisce di cercare solo i messaggi più recenti
 
-        # TODO: li metto anche qui che recupero tutto? Magari meglio usare più richieste in //
         @messages = @group.messages.recent(get_last_message_read(@group))
         set_last_message_read(@group, DateTime.now)
 
@@ -41,7 +40,7 @@ class GroupsController < ApplicationController
         @events = @group.events.next
         @memberships = @group.memberships
 
-        render json: {group: @group, messages: @messages, events: @events, memberships: @memberships}
+        render file: 'app/views/dashboard'
     end
 
     # GET new_group_path

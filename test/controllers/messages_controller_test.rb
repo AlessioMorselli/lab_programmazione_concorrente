@@ -39,11 +39,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
           group_id: @group.id,
           user_id: @user.id
         },
-        attachment: {
-          name: nil,
-          mime_type: nil,
-          data: nil
-        }
+        attachment: nil
       }
     end
   end
@@ -58,11 +54,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
           group_id: @group.id,
           user_id: @user.id
         },
-        attachment: {
-          name: "test_image.jpg",
-          mime_type: "image/jpeg",
-          data: "qualcosa"
-        }
+        attachment: fixture_file_upload('files/test_image.jpg','image/jpeg')
       }
     end
   end
@@ -78,11 +70,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
           group_id: @group.id,
           user_id: @user.id
         },
-        attachment: {
-          name: nil,
-          mime_type: nil,
-          data: nil
-        }
+        attachment: nil
       }
     end
   end
@@ -98,11 +86,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
           group_id: @group.id,
           user_id: @user.id
         },
-        attachment: {
-          name: "test_image.jpg",
-          mime_type: "image/jpeg",
-          data: "qualcosa"
-        }
+        attachment: fixture_file_upload('files/test_image.jpg','image/jpeg')
       }
     end
   end
@@ -197,11 +181,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
           group_id: @group.id,
           user_id: @user.id
         },
-        attachment: {
-          name: nil,
-          mime_type: nil,
-          data: nil
-        }
+        attachment: nil
       }
     end
 
@@ -289,11 +269,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
           group_id: @group.id,
           user_id: @user.id
         },
-        attachment: {
-          name: nil,
-          mime_type: nil,
-          data: nil
-        }
+        attachment: nil
       }
     end
 

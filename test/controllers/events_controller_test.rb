@@ -227,7 +227,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
 ### TEST PER UN UTENTE NON CORRETTO ###
-  test "should not index every user's groups event if logged user not the correct user" do
+  test "should not index every user's groups event if logged user is not the correct user" do
     log_in_as(@other_user)
 
     get user_events_path(@user)

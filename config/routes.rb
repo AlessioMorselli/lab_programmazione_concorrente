@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get     '/signup',                                                  to: 'users#new'
   post    '/signup',                                                  to: 'users#create'
 
-  get     '/',                                                        to: 'session#new'
+  get     '/',                                                        to: 'session#landing', as: 'landing'
   get     '/login',                                                   to: 'session#new'
   post    '/login',                                                   to: 'session#create'
   delete  '/logout',                                                  to: 'session#destroy'
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
 
   # Per scaricare l'allegato di un messaggio
   get     '/groups/:group_uuid/messages/:message_id/attachment/:id/download',
-      to: 'messages#download_attachment', as: 'group_message_attachment_download'
+      to: 'attachments#download_attachment', as: 'group_message_attachment_download'
   
   # Aggiunge / Rimuove il titolo di amministratore
   get     '/groups/:group_uuid/memberships/:user_id/admin',           to: 'memberships#set_admin', as: 'group_set_admin'

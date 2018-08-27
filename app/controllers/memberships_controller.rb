@@ -1,6 +1,6 @@
 class MembershipsController < ApplicationController
   before_action :set_group
-  before_action :set_membership, only: [:destroy, :set_admin]
+  before_action :set_membership, only: [:destroy, :set_admin, :set_super_admin]
   before_action :logged_in_user
   before_action only: [:destroy], unless: -> {@group.admins.include? current_user} do
     correct_user params[:user_id]
@@ -64,7 +64,7 @@ class MembershipsController < ApplicationController
   # GET group_set_super_admin_path(group_uuid: group.uuid, user_id: user.id)
   def set_super_admin
     # Trasferisce il titolo di super admin dal super admin attuale ad un altro membro del gruppo
-    if @user.become_super_admin(current_user, @group)
+    if @group.change_super_admin(@user)
       flash[:success] = "Il regno di #{@user.name} ha inizio, dopo l'abdicazione di #{current_user.name}"
     else
       flash[:danger] = "L'utente #{@user.name} non è stato nominato super amministratore. Ritenta."

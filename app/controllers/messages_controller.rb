@@ -44,7 +44,10 @@ class MessagesController < ApplicationController
     def create
         # Il messaggio viene salvato nel db e visualizzato sulla chat
         @message = Message.new(message_params)
-        @attachment = (attachment_params[:name].nil? ? nil : Attachment.new(attachment_params))
+        if !params[:attachment].blank?
+            @attachment = Attachment.new
+            @attachment.uploaded_file = params[:attachment]
+        end
         if !@message.save_with_attachment(@attachment)
             flash.now[:danger] = 'Il messaggio non è stato inviato'
             # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
