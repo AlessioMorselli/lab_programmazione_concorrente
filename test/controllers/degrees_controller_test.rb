@@ -8,7 +8,7 @@ class DegreesControllerTest < ActionDispatch::IntegrationTest
 
 ### TEST PER UN UTENTE LOGGATO ###
   test "should show degree courses" do
-    log_in_as(@user)
+    log_in_as @user
 
     get degree_path(@degree)
     assert_response :success

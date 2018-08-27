@@ -14,21 +14,21 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
 ### TEST PER UN UTENTE LOGGATO ###
   test "should index every user's invitation" do
-    log_in_as(@user)
+    log_in_as @user
 
     get user_invitations_path(@user)
     assert_response :success
   end
 
   test "should show choices for an invitation" do
-    log_in_as(@user)
+    log_in_as @user
 
     get group_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
     assert_response :success
   end
 
   test "should accept a private invitation" do
-    log_in_as(@user)
+    log_in_as @user
 
     assert_difference('Invitation.count', -1) do
       assert_difference('Membership.count', 1) do
@@ -40,7 +40,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should refuse a private invitation" do
-    log_in_as(@user)
+    log_in_as @user
 
     assert_difference('Invitation.count', -1) do
       get group_refuse_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
@@ -54,7 +54,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     @public_invitation = Invitation.create(group_id: @group.id, user_id: nil)
     @public_invitation.reload
 
-    log_in_as(@user)
+    log_in_as @user
 
     assert_difference('Invitation.count', 0) do
       assert_difference('Membership.count', 1) do
@@ -70,7 +70,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     @public_invitation = Invitation.create(group_id: @group.id, user_id: nil)
     @public_invitation.reload
   
-    log_in_as(@user)
+    log_in_as @user
 
     assert_difference('Invitation.count', 0) do
       get group_refuse_invitation_path(group_uuid: @group.uuid, url_string: @public_invitation.url_string)
@@ -184,7 +184,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
 ### TEST PER UN UTENTE NON CORRETTO ###
   test "should not index every user's invitation if logged user is not correct" do
-    log_in_as(@other_user)
+    log_in_as @other_user
 
     get user_invitations_path(@user)
     
@@ -194,14 +194,14 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
 ### TEST PER UN UTENTE AMMINISTRATORE ###
   test "should show a form to create a new invitation" do
-    log_in_as(@admin)
+    log_in_as @admin
 
     get new_group_invitation_path(group_uuid: @group.uuid)
     assert_response :success
   end
 
   test "should create a new private invitation" do
-    log_in_as(@admin)
+    log_in_as @admin
 
     assert_difference('Invitation.count') do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
@@ -215,7 +215,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not create a new private invitation if an identical invitation exists" do
-    log_in_as(@admin)
+    log_in_as @admin
 
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
@@ -229,7 +229,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create a new public invitation" do
-    log_in_as(@admin)
+    log_in_as @admin
 
     assert_difference('Invitation.count') do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
@@ -246,7 +246,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     @public_invitation = Invitation.create(group_id: @group.id, user_id: nil)
     @public_invitation.reload
 
-    log_in_as(@admin)
+    log_in_as @admin
 
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
@@ -260,7 +260,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy an invitation" do
-    log_in_as(@admin)
+    log_in_as @admin
 
     assert_difference('Invitation.count', -1) do
       delete group_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
@@ -269,7 +269,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
 ### TEST PER UN UTENTE MEMBRO NON AMMINISTRATORE ###
   test "should not show a form to create a new invitation if logged user is not admin" do
-    log_in_as(@member)
+    log_in_as @member
 
     get new_group_invitation_path(group_uuid: @group.uuid)
     assert_redirected_to group_path(uuid: @group.uuid)
@@ -277,7 +277,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not create a new private invitation if logged user is not admin" do
-    log_in_as(@member)
+    log_in_as @member
 
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
@@ -292,7 +292,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not create a new public invitation if logged user is not admin" do
-    log_in_as(@member)
+    log_in_as @member
 
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
@@ -307,7 +307,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not destroy an invitation if logged user is not admin" do
-    log_in_as(@member)
+    log_in_as @member
 
     assert_difference('Invitation.count', 0) do
       delete group_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)

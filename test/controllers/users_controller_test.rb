@@ -29,14 +29,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
 ### TEST PER UN UTENTE LOGGATO ###
   test "should show form to edit a user" do
-    log_in_as(@user)
+    log_in_as @user
 
     get edit_user_path(@user)
     assert_response :success
   end
 
   test "should update a user" do
-    log_in_as(@user)
+    log_in_as @user
     
     patch user_path(@user), params: { user: {
       name: "NewName",
@@ -51,19 +51,19 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal "NewName", @user.name
   end
 
-  test "should destroy a user" do
-    log_in_as(@user)
+  # test "should destroy a user" do
+  #   log_in_as @user
     
-    assert_difference('User.count', -1) do
-      assert_difference('Invitation.count', -1 * @user.invitations.count) do
-        assert_difference('Student.count', -1) do
-          delete user_path(@user)
-        end
-      end
-    end
+  #   assert_difference('User.count', -1) do
+  #     assert_difference('Invitation.count', -1 * @user.invitations.count) do
+  #       assert_difference('Student.count', -1) do
+  #         delete user_path(@user)
+  #       end
+  #     end
+  #   end
     
-    assert_redirected_to login_path
-  end
+  #   assert_redirected_to login_path
+  # end
 
 ### TEST PER UN UTENTE NON LOGGATO ###
   test "should not show form to edit a user if not logged in" do
@@ -89,18 +89,18 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal name, @user.name
   end
 
-  test "should not destroy a user if not logged in" do
-    assert_difference('User.count', 0) do
-      delete user_path(@user)
-    end
+  # test "should not destroy a user if not logged in" do
+  #   assert_difference('User.count', 0) do
+  #     delete user_path(@user)
+  #   end
     
-    assert_redirected_to login_path
-    assert_not flash.empty?
-  end
+  #   assert_redirected_to login_path
+  #   assert_not flash.empty?
+  # end
 
 ### TEST PER UN UTENTE NON CORRETTO ###
   test "should not show form to edit a user if logged user is not correct" do
-    log_in_as(@other_user)
+    log_in_as @other_user
 
     get edit_user_path(@user)
     
@@ -109,7 +109,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update a user if logged user is not correct" do
-    log_in_as(@other_user)
+    log_in_as @other_user
     
     name = @user.name
     patch user_path(@user), params: { user: {
@@ -126,14 +126,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal name, @user.name
   end
 
-  test "should not destroy a user if logged user is not correct" do
-    log_in_as(@other_user)
+  # test "should not destroy a user if logged user is not correct" do
+  #   log_in_as @other_user
     
-    assert_difference('User.count', 0) do
-      delete user_path(@user)
-    end
+  #   assert_difference('User.count', 0) do
+  #     delete user_path(@user)
+  #   end
     
-    assert_redirected_to groups_path
-    assert_not flash.empty?
-  end
+  #   assert_redirected_to groups_path
+  #   assert_not flash.empty?
+  # end
 end

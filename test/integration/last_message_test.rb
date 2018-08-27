@@ -2,25 +2,15 @@ require 'test_helper'
 
 class UsersLoginTest < ActionDispatch::IntegrationTest
     def setup
-        @user_1 = users(:user_1)
-        @user_2 = users(:user_2)
-
-        # Prendo i gruppi di cui fanno parte...
-        @groups_1 = @user_1.groups
-        @groups_2 = @user_2.groups
-        # ...e prendo il primo di user_1 di cui non fa parte user_2
-        @group = (@groups_1 - @groups_2).first
+        @user_1 = users(:giorgio)
+        @user_2 = users(:giovanni)
+        @group = groups(:pirati)
 
         # Loggo come user_1 e setto i suoi cookie per l'ultimo messaggio letto
         log_in_as(@user_1)
         set_last_message_cookies(@user_1, @group, DateTime.now - 2.days)
 
-        # Nel frattempo, creo un invito pubblico a group (mi serve poi)
-        if (@invitation = Invitation.where(group_id: @group.id, user_id: nil).first).nil?
-            @invitation = Invitation.new
-            @invitation.group = @group
-            @invitation.save!
-        end
+        @invitation = invitations(:invito_pirati)
     end
 
     test "two users should not share same last message cookies" do

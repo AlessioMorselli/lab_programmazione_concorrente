@@ -222,7 +222,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 
 ### TEST PER UN UTENTE NON CORRETTO ###
   test "should not update a message if logged user is not correct" do
-    log_in_as(@other_user)
+    log_in_as @other_user
 
     text = @message.text
     patch group_message_path(group_uuid: @group.uuid, id: @message.id), params: {
@@ -237,7 +237,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not destroy a message if logged user is not correct" do
-    log_in_as(@other_user)
+    log_in_as @other_user
 
     assert_difference('Message.count', 0) do
       assert_difference('Attachment.count', 0) do
@@ -251,7 +251,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 
 ### TEST PER UN UTENTE NON MEMBRO ###
   test "should not index the most recent messages if logged user is not member" do
-    log_in_as(@non_member)
+    log_in_as @non_member
 
     get group_messages_path(group_uuid: @group.uuid)
     
@@ -260,7 +260,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not send a message if logged user is not member" do
-    log_in_as(@non_member)
+    log_in_as @non_member
     
     assert_difference('Message.count', 0) do
       post group_messages_path(group_uuid: @group.uuid), params: {
@@ -278,7 +278,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not update a message if logged user is not a member" do
-    log_in_as(@non_member)
+    log_in_as @non_member
 
     text = @message.text
     patch group_message_path(group_uuid: @group.uuid, id: @message.id), params: {
@@ -293,7 +293,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not destroy a message if logged user is not a member" do
-    log_in_as(@non_member)
+    log_in_as @non_member
 
     assert_difference('Message.count', 0) do
       assert_difference('Attachment.count', 0) do
@@ -306,7 +306,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not show group pinned messages if logged user is not member" do
-    log_in_as(@non_member)
+    log_in_as @non_member
 
     get group_pinned_messages_path(group_uuid: @group.uuid)
     
@@ -316,7 +316,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 
 ### TEST PER UN UTENTE AMMINISTRATORE ###
   test "should destroy another user's message without an attachment if logged user is admin" do
-    log_in_as(@admin)
+    log_in_as @admin
 
     assert_difference('Message.count', -1) do
       assert_difference('Attachment.count', 0) do
@@ -328,7 +328,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy another user's message with attachment if logged user is admin" do
-    log_in_as(@admin)
+    log_in_as @admin
 
     assert_difference('Message.count', -1) do
       assert_difference('Attachment.count', -1) do

@@ -4,7 +4,7 @@ class SessionHelperTest < ActionView::TestCase
     fixtures :users
 
     def setup
-        @user = users(:user_1)
+        @user = users(:giorgio)
         remember(@user)
     end
 

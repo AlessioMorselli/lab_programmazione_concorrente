@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:edit, :update, :destroy]
-    before_action :logged_in_user, only: [:edit, :update, :destroy]
-    before_action only: [:edit, :update, :destroy] do
+    before_action :set_user, only: [:edit, :update] #[:edit, :update, :destroy]
+    before_action :logged_in_user, only: [:edit, :update] #[:edit, :update, :destroy]
+    before_action only: [:edit, :update] do #[:edit, :update, :destroy]
         correct_user params[:id]
     end
 
@@ -51,11 +51,11 @@ class UsersController < ApplicationController
     end
 
     # DELETE user_path(user)
-    def destroy
-        # Cancella un utente dall'applicativo
-        @user.destroy
-        redirect_to login_path
-    end
+    # def destroy
+    #     # Cancella un utente dall'applicativo
+    #     @user.destroy
+    #     redirect_to login_path
+    # end
 
     private
     def set_user

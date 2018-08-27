@@ -45,8 +45,11 @@ class MessagesController < ApplicationController
         # Il messaggio viene salvato nel db e visualizzato sulla chat
         @message = Message.new(message_params)
         if !params[:attachment].blank?
+            incoming_file = params[:attachment]
             @attachment = Attachment.new
-            @attachment.uploaded_file = params[:attachment]
+            @attachment.name = incoming_file.original_filename
+            @attachment.mime_type = incoming_file.content_type
+            @attachment.data = incoming_file.read
         end
         if !@message.save_with_attachment(@attachment)
             flash.now[:danger] = 'Il messaggio non è stato inviato'
