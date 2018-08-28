@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   # Aggiunge / Toglie un messaggio dalla bacheca
   patch   '/groups/:group_uuid/message/:id/pin',                      to: 'messages#pin_message', as: 'group_pin_message'
-  put     '/groups/:group_uuid/message/:id/pin',                      to: 'messages#pin_message', as: 'group_pin_message'
+  # put     '/groups/:group_uuid/message/:id/pin',                      to: 'messages#pin_message', as: 'group_pin_message'
   
   # Lista di tutti gli eventi dell'utente
   get     '/users/:user_id/events',                                   to: 'events#user_index', as: 'user_events'
@@ -45,13 +45,13 @@ Rails.application.routes.draw do
   
   # Aggiunge / Rimuove il titolo di amministratore
   patch   '/groups/:group_uuid/memberships/:user_id/admin',           to: 'memberships#set_admin', as: 'group_set_admin'
-  put     '/groups/:group_uuid/memberships/:user_id/admin',           to: 'memberships#set_admin', as: 'group_set_admin'
+  # put     '/groups/:group_uuid/memberships/:user_id/admin',           to: 'memberships#set_admin', as: 'group_set_admin'
 
   # Trasferisce il titolo di super amministratore
   patch   '/groups/:group_uuid/memberships/:user_id/super_admin',
       to: 'memberships#set_super_admin', as: 'group_set_super_admin'
-  put     '/groups/:group_uuid/memberships/:user_id/super_admin',
-      to: 'memberships#set_super_admin', as: 'group_set_super_admin'
+  # put     '/groups/:group_uuid/memberships/:user_id/super_admin',
+  #     to: 'memberships#set_super_admin', as: 'group_set_super_admin'
 
   # Conferma la email dell'utente
   get     'users/:id/confirm_email/:confirm_token',                   to: 'users#confirm_email', as: 'user_confirm_email'
