@@ -1,5 +1,7 @@
 class InvitationMailer < ActionMailer::Base
-    def registration_confirmation(invitation)
+    default :from => "unife.community@unife.study.groups.it"
+
+    def invite_to_group(invitation)
         @invitation = invitation
         @user = @invitation.user
         @group = @invitation.group

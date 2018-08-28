@@ -1,0 +1,11 @@
+Ciao <%= @user.name %>,
+
+Sei stato invitato ad unirti al gruppo <%= @group.name %>! Non sprecare questa occasione!
+<% if @invitation.expiration_date %>
+<% date = @invitation.expiration_date %>
+Affrettati! L'invito scade in data <%= d.day %>/<%= d.month %>/<%= d.year %> alle ore <%= d. hour %>:<%= d.minute %>
+<% end %>
+
+Clicca sul link qui sotto per unirti al mitico gruppo <%= @group.name %>:
+
+<%= group_invitation_url(group_uuid: @group.uuid, url_string: @invitation.url_string) %>

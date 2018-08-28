@@ -74,7 +74,7 @@ class UsersController < ApplicationController
             remember(user)
             redirect_to groups_path
         else
-            flash[:error] = "Mi dispiace, ma pare che l'utente non esista."
+            flash[:error] = "Siamo spiacenti, ma pare che l'utente non esista."
             redirect_to login_path
         end
     end

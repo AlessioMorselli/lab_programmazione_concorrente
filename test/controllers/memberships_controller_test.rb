@@ -99,7 +99,7 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
   test "should not give admin title if logged user is admin and not super admin" do
     log_in_as @admin
 
-    get group_set_admin_path(group_uuid: @group.uuid, user_id: @user.id)
+    patch group_set_admin_path(group_uuid: @group.uuid, user_id: @user.id)
     
     assert_not @group.admins.include? @user
     assert_redirected_to group_path(uuid: @group.uuid)
@@ -112,7 +112,7 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
 
     log_in_as @admin
 
-    get group_set_admin_path(group_uuid: @group.uuid, user_id: @user.id)
+    patch group_set_admin_path(group_uuid: @group.uuid, user_id: @user.id)
     
     assert @group.admins.include? @user
     assert_redirected_to group_path(uuid: @group.uuid)
@@ -122,7 +122,7 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
   test "should not transfer super admin title if logged user is not super admin" do
     log_in_as @admin
 
-    get group_set_super_admin_path(group_uuid: @group.uuid, user_id: @admin.id)
+    patch group_set_super_admin_path(group_uuid: @group.uuid, user_id: @admin.id)
     
     assert_not_equal @admin, @group.super_admin
     assert_equal @other_admin, @group.super_admin
@@ -134,7 +134,7 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
   test "should give admin title if logged user is super admin" do
     log_in_as @other_admin
 
-    get group_set_admin_path(group_uuid: @group.uuid, user_id: @user.id)
+    patch group_set_admin_path(group_uuid: @group.uuid, user_id: @user.id)
     
     assert @group.admins.include? @user
     assert_redirected_to group_path(uuid: @group.uuid)
@@ -144,7 +144,7 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
   test "should remove admin title if logged user is super admin" do
     log_in_as @other_admin
 
-    get group_set_admin_path(group_uuid: @group.uuid, user_id: @admin.id)
+    patch group_set_admin_path(group_uuid: @group.uuid, user_id: @admin.id)
     
     assert_not @group.admins.include? @admin
     assert_redirected_to group_path(uuid: @group.uuid)
@@ -154,7 +154,7 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
   test "should transfer super admin title" do
     log_in_as @other_admin
 
-    get group_set_super_admin_path(group_uuid: @group.uuid, user_id: @admin.id)
+    patch group_set_super_admin_path(group_uuid: @group.uuid, user_id: @admin.id)
     
     assert_equal @admin, @group.super_admin
     assert_not_equal @other_admin, @group.super_admin

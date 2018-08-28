@@ -32,7 +32,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count', -1) do
       assert_difference('Membership.count', 1) do
-        get group_accept_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
+        post group_accept_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
       end
     end
 
@@ -43,7 +43,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     log_in_as @user
 
     assert_difference('Invitation.count', -1) do
-      get group_refuse_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
+      post group_refuse_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
     end
 
     assert_redirected_to groups_path
@@ -58,7 +58,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count', 0) do
       assert_difference('Membership.count', 1) do
-        get group_accept_invitation_path(group_uuid: @group.uuid, url_string: @public_invitation.url_string)
+        post group_accept_invitation_path(group_uuid: @group.uuid, url_string: @public_invitation.url_string)
       end
     end
 
@@ -73,7 +73,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     log_in_as @user
 
     assert_difference('Invitation.count', 0) do
-      get group_refuse_invitation_path(group_uuid: @group.uuid, url_string: @public_invitation.url_string)
+      post group_refuse_invitation_path(group_uuid: @group.uuid, url_string: @public_invitation.url_string)
     end
 
     assert_redirected_to groups_path
@@ -139,7 +139,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   test "should not accept a private invitation if not logged in" do
     assert_difference('Invitation.count', 0) do
       assert_difference('Membership.count', 0) do
-        get group_accept_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
+        post group_accept_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
       end
     end
 
@@ -149,7 +149,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not refuse a private invitation if not logged in" do
     assert_difference('Invitation.count', 0) do
-      get group_refuse_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
+      post group_refuse_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
     end
 
     assert_redirected_to login_path
@@ -162,7 +162,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count', 0) do
       assert_difference('Membership.count', 0) do
-        get group_accept_invitation_path(group_uuid: @group.uuid, url_string: @public_invitation.url_string)
+        post group_accept_invitation_path(group_uuid: @group.uuid, url_string: @public_invitation.url_string)
       end
     end
 
@@ -175,7 +175,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     @public_invitation.reload
 
     assert_difference('Invitation.count', 0) do
-      get group_refuse_invitation_path(group_uuid: @group.uuid, url_string: @public_invitation.url_string)
+      post group_refuse_invitation_path(group_uuid: @group.uuid, url_string: @public_invitation.url_string)
     end
 
     assert_redirected_to login_path

@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get     '/groups/:group_uuid/messages/pinned',                      to: 'messages#pinned', as: 'group_pinned_messages'
 
   # Aggiunge / Toglie un messaggio dalla bacheca
-  patch   '/groups/:group_uuid/message/:id/pin',                      to: 'messages#pin_message', as: 'group_pin_message'
+  patch   '/groups/:group_uuid/messages/:id/pin',                     to: 'messages#pin_message', as: 'group_pin_message'
   # put     '/groups/:group_uuid/message/:id/pin',                      to: 'messages#pin_message', as: 'group_pin_message'
   
   # Lista di tutti gli eventi dell'utente
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   post    '/groups/:group_uuid/invitations/:url_string/refuse',       to: 'invitations#refuse', as: 'group_refuse_invitation'
 
   # Per scaricare l'allegato di un messaggio
-  get     '/groups/:group_uuid/messages/:message_id/attachment/:id/download',
+  get     '/groups/:group_uuid/messages/:message_id/attachments/:id/download',
       to: 'attachments#download_attachment', as: 'group_message_attachment_download'
   
   # Aggiunge / Rimuove il titolo di amministratore

@@ -35,6 +35,8 @@ class InvitationsController < ApplicationController
         # Salva l'invito nel db
         @invitation = Invitation.new(invitation_params)
         if @invitation.save
+            @invitation.reload
+            InvitationMailer.invite_to_group(@invitation) unless @invitation.user_id.nil?
             redirect_to group_path(uuid: @invitation.group.uuid)
         else
             flash.now[:danger] = 'Le informazioni inserite non sono corrette'

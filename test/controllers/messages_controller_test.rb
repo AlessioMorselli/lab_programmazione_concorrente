@@ -148,7 +148,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   test "should not pin a message if logged user is not admin" do
     log_in_as @user
 
-    get group_pin_message_path(group_uuid: @group.uuid, id: @message.id)
+    patch group_pin_message_path(group_uuid: @group.uuid, id: @message.id)
 
     assert_equal false, @message.pinned
     assert_redirected_to group_path(uuid: @group.uuid)
@@ -158,7 +158,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   test "should not unpin a message if logged user is not admin" do
     log_in_as @user
 
-    get group_pin_message_path(group_uuid: @group.uuid, id: @message_pinned.id)
+    patch group_pin_message_path(group_uuid: @group.uuid, id: @message_pinned.id)
 
     assert_equal true, @message_pinned.pinned
     assert_redirected_to group_path(uuid: @group.uuid)
@@ -342,7 +342,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   test "should pin a message if logged user is admin" do
     log_in_as @admin
 
-    get group_pin_message_path(group_uuid: @group.uuid, id: @message.id)
+    patch group_pin_message_path(group_uuid: @group.uuid, id: @message.id)
 
     @message.reload
     assert_equal true, @message.pinned
@@ -352,7 +352,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   test "should unpin a message if logged user is admin" do
     log_in_as @admin
 
-    get group_pin_message_path(group_uuid: @group.uuid, id: @message_pinned.id)
+    patch group_pin_message_path(group_uuid: @group.uuid, id: @message_pinned.id)
 
     @message_pinned.reload
     assert_equal false, @message_pinned.pinned
