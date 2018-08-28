@@ -49,7 +49,11 @@ module SessionHelper
 
     # Restituisce il DateTime dell'ultimo messaggio letto
     def get_last_message_read(group)
-        cookies.permanent[create_last_message_key(current_user, group)].to_datetime
+        unless cookies[create_last_message_key(current_user, group)].nil?
+            cookies[create_last_message_key(current_user, group)].to_datetime
+        else
+            DateTime.now - 1.day
+        end
     end
 
     # Crea la chiave per il cookie del last message read
