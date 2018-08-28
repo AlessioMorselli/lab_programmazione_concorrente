@@ -131,4 +131,19 @@ class UserTest < ActiveSupport::TestCase
     assert_equal expected_events.ids.sort, user.events.ids.sort
   end
 
+  test "should set email_confirm_token before create" do
+    user = User.new(name: "name", email: "name@student.it", password: "password")
+    assert user.email_confirm_token.nil?
+    assert user.save
+    assert_not user.email_confirm_token.nil?
+  end
+
+  test "email_activate should set email_confirmed to true" do
+    user = User.new(name: "name", email: "name@student.it", password: "password")
+    assert user.save
+    assert_not user.email_confirmed?
+    user.email_activate
+    assert user.email_confirmed
+  end
+
 end

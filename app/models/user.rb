@@ -22,6 +22,8 @@ class User < ApplicationRecord
         format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i },
         uniqueness: { case_sensitive: false }
 
+    before_create :set_email_confirm_token
+
 
     def courses
         degree.courses
@@ -37,7 +39,7 @@ class User < ApplicationRecord
         BCrypt::Password.create(string, cost: cost)
     end
 
-    # restituisce un remember token
+    # restituisce un token
     def User.new_token
         SecureRandom.urlsafe_base64
     end
@@ -56,6 +58,18 @@ class User < ApplicationRecord
     # Forgets a user.
     def forget
         update_attribute(:remember_digest, nil)
+    end
+
+    def set_email_confirm_token
+        if self.email_confirm_token.blank?
+            self.email_confirm_token = SecureRandom.urlsafe_base64.to_s
+        end
+    end
+
+    def email_activate
+        self.email_confirmed = true
+        self.email_confirm_token = nil
+        save
     end
 
     def suggested_groups
