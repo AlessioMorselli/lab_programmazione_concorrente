@@ -47,5 +47,8 @@ Rails.application.routes.draw do
 
   # Trasferisce il titolo di super amministratore
   get     '/groups/:group_uuid/memberships/:user_id/super_admin',
-      to: 'memberships#set_super_admin', as: 'group_set_super_admin' 
+      to: 'memberships#set_super_admin', as: 'group_set_super_admin'
+  
+  # Conferma la email dell'utente
+  get     'users/:id/confirm_email/:confirm_token',                   to: 'users#confirm_email', as: 'user_confirm_email'
 end

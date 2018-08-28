@@ -1,0 +1,6 @@
+Ciao <%= @user.name %>,
+
+Grazie per esserti registrato a Unife Study Groups!
+Per termianre la tua iscrizione, clicca sul link sottostante:
+
+<%= user_confirm_email_url(id: @user.id, confirm_token: @user.email_confirm_token) %>

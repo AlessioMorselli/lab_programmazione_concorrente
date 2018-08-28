@@ -26,10 +26,15 @@ class UsersController < ApplicationController
         # Salva nel database un nuovo utente
         @user = User.new(user_params)
         if @user.save!
-            log_in @user
-            redirect_to groups_path
+            # log_in @user
+            # redirect_to groups_path
+            UserMailer.registration_confirmation(@user).deliver_now
+            flash[:success] = "Per piacere, conferma la tua email prima di continuare!"
+            # TODO: metti la ridirezione corretta
+            redirect_to login_path
         else
-            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
+            flash.now[:error] = "Ooooppss, qualcosa è andato storto!"
+            render file: "app/views/signup_page"
         end
     end
 
@@ -46,7 +51,9 @@ class UsersController < ApplicationController
             flash[:success] = 'Le tue informazioni sono state aggiornate'
             redirect_to groups_path
         else
-            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
+            flash.now[:error] = "Ooooppss, qualcosa è andato storto!"
+            # TODO: metti il template corrispondente alla modifica di un utente
+            # render file: "app/views/edit_user_page"
         end
     end
 
@@ -56,6 +63,21 @@ class UsersController < ApplicationController
     #     @user.destroy
     #     redirect_to login_path
     # end
+
+    # GET user_confirm_email_path(id: user.id, confirm_token: user.email_confirm_token)
+    def confirm_email
+        user = User.find_by_email_confirm_token(params[:confirm_token])
+        if user
+            user.email_activate
+            flash[:success] = "La tua email è stata confermata! Benvenuto!"
+            log_in user
+            remember(user)
+            redirect_to groups_path
+        else
+            flash[:error] = "Mi dispiace, ma pare che l'utente non esista."
+            redirect_to login_path
+        end
+    end
 
     private
     def set_user

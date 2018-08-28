@@ -2,6 +2,7 @@ giorgio:
   name: giorgio
   password_digest: $2a$10$JdrjoqkYH/dCFdEKYPLsfO6CsA7YAEIGCyKZwKlcVMNjIsHzVO1o6 # Password: ciaone
   email: giorgio@unife.it
+  email_confirmed: true
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
 
@@ -9,6 +10,7 @@ giovanni:
   name: giovanni
   password_digest: $2a$10$JdrjoqkYH/dCFdEKYPLsfO6CsA7YAEIGCyKZwKlcVMNjIsHzVO1o6 # Password: ciaone
   email: giovanni@unife.it
+  email_confirmed: true
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
 
@@ -16,6 +18,7 @@ luigi:
   name: luigi
   password_digest: $2a$10$JdrjoqkYH/dCFdEKYPLsfO6CsA7YAEIGCyKZwKlcVMNjIsHzVO1o6 # Password: ciaone
   email: luigi@unife.it
+  email_confirmed: true
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
 
@@ -23,6 +26,7 @@ giacomo:
   name: giacomo
   password_digest: $2a$10$JdrjoqkYH/dCFdEKYPLsfO6CsA7YAEIGCyKZwKlcVMNjIsHzVO1o6 # Password: ciaone
   email: giacomo@unife.it
+  email_confirmed: true
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
 
@@ -30,6 +34,7 @@ aldo:
   name: aldo
   password_digest: $2a$10$JdrjoqkYH/dCFdEKYPLsfO6CsA7YAEIGCyKZwKlcVMNjIsHzVO1o6 # Password: ciaone
   email: aldo@unife.it
+  email_confirmed: true
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
 
@@ -37,5 +42,6 @@ mario:
   name: mario
   password_digest: $2a$10$JdrjoqkYH/dCFdEKYPLsfO6CsA7YAEIGCyKZwKlcVMNjIsHzVO1o6 # Password: ciaone
   email: mario@unife.it
+  email_confirmed: true
   created_at: <%= Time.now.to_s %>
   updated_at: <%= Time.now.to_s %>
