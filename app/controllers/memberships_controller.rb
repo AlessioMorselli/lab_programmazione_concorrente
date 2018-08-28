@@ -43,7 +43,7 @@ class MembershipsController < ApplicationController
     end
   end
 
-  # GET group_set_admin_path(group_uuid: group.uuid, user_id: user.id)
+  # PUT/PATCH group_set_admin_path(group_uuid: group.uuid, user_id: user.id)
   def set_admin
     # Rende un utente amministratore e gli rimuove il titolo, se lo è già
     @membership.admin = !@membership.admin
@@ -61,7 +61,7 @@ class MembershipsController < ApplicationController
     redirect_to group_path(uuid: @group.uuid)
   end
 
-  # GET group_set_super_admin_path(group_uuid: group.uuid, user_id: user.id)
+  # PUT/PATCH group_set_super_admin_path(group_uuid: group.uuid, user_id: user.id)
   def set_super_admin
     # Trasferisce il titolo di super admin dal super admin attuale ad un altro membro del gruppo
     if @group.change_super_admin(@user)

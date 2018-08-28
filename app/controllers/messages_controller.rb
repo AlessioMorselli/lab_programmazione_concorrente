@@ -82,7 +82,7 @@ class MessagesController < ApplicationController
         render json: @pinned_messages
     end
 
-    # GET group_pin_message(group_uuid: group.uuid, id: message.id)
+    # PUT/PATCH group_pin_message(group_uuid: group.uuid, id: message.id)
     def pin_message
         # Aggiunge un messaggio in bacheca o lo toglie, se già presente
         @message.pinned = !@message.pinned

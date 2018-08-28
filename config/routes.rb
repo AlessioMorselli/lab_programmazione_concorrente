@@ -28,27 +28,31 @@ Rails.application.routes.draw do
   get     '/groups/:group_uuid/messages/pinned',                      to: 'messages#pinned', as: 'group_pinned_messages'
 
   # Aggiunge / Toglie un messaggio dalla bacheca
-  get     '/groups/:group_uuid/message/:id/pin',                      to: 'messages#pin_message', as: 'group_pin_message'
+  patch   '/groups/:group_uuid/message/:id/pin',                      to: 'messages#pin_message', as: 'group_pin_message'
+  put     '/groups/:group_uuid/message/:id/pin',                      to: 'messages#pin_message', as: 'group_pin_message'
   
   # Lista di tutti gli eventi dell'utente
   get     '/users/:user_id/events',                                   to: 'events#user_index', as: 'user_events'
 
   # L'utente accetta l'invito ed entra nel gruppo
-  get     '/groups/:group_uuid/invitations/:url_string/accept',       to: 'invitations#accept', as: 'group_accept_invitation'
+  post    '/groups/:group_uuid/invitations/:url_string/accept',       to: 'invitations#accept', as: 'group_accept_invitation'
   # L'utente rifiuta l'invito e non entra nel gruppo
-  get     '/groups/:group_uuid/invitations/:url_string/refuse',       to: 'invitations#refuse', as: 'group_refuse_invitation'
+  post    '/groups/:group_uuid/invitations/:url_string/refuse',       to: 'invitations#refuse', as: 'group_refuse_invitation'
 
   # Per scaricare l'allegato di un messaggio
   get     '/groups/:group_uuid/messages/:message_id/attachment/:id/download',
       to: 'attachments#download_attachment', as: 'group_message_attachment_download'
   
   # Aggiunge / Rimuove il titolo di amministratore
-  get     '/groups/:group_uuid/memberships/:user_id/admin',           to: 'memberships#set_admin', as: 'group_set_admin'
+  patch   '/groups/:group_uuid/memberships/:user_id/admin',           to: 'memberships#set_admin', as: 'group_set_admin'
+  put     '/groups/:group_uuid/memberships/:user_id/admin',           to: 'memberships#set_admin', as: 'group_set_admin'
 
   # Trasferisce il titolo di super amministratore
-  get     '/groups/:group_uuid/memberships/:user_id/super_admin',
+  patch   '/groups/:group_uuid/memberships/:user_id/super_admin',
       to: 'memberships#set_super_admin', as: 'group_set_super_admin'
-  
+  put     '/groups/:group_uuid/memberships/:user_id/super_admin',
+      to: 'memberships#set_super_admin', as: 'group_set_super_admin'
+
   # Conferma la email dell'utente
   get     'users/:id/confirm_email/:confirm_token',                   to: 'users#confirm_email', as: 'user_confirm_email'
 end
