@@ -21,7 +21,7 @@ class EventsController < ApplicationController
             @events = @group.events.next
         else
             # Controllo che non sia un array! Mi serve un solo parametro
-            if params['from'].is_a?
+            if params['from'].is_a? Array
                 from = params['from'][0]
             else from = params['from']
             end

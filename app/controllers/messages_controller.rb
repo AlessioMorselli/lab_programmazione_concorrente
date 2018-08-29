@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
     before_action do
         is_member_in @group
     end 
-    before_action only: [:destroy], unless: -> {@message.user == current_user} do
+    before_action only: [:destroy], unless: -> {current_user? @message.user} do
         is_admin_in @group
     end
     before_action only: [:pin_message] do
@@ -27,7 +27,7 @@ class MessagesController < ApplicationController
             @messages = @group.messages.recent(get_last_message_read(@group))
         else
             # Controllo che non sia un array! Mi serve un solo parametro
-            if params['from'].is_a?
+            if params['from'].is_a? Array
                 from = params['from'][0]
             else from = params['from']
             end

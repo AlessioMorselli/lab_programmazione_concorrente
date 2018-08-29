@@ -15,7 +15,7 @@ class GroupsController < ApplicationController
         # Parametri di ricerca da mettere come query parameters nella URL
         if params['query']
             # Controllo che non sia un array! Mi serve un solo parametro
-            if params['query'].is_a?
+            if params['query'].is_a? Array
                 query = params['query'][0]
             else query = params['query']
             end
