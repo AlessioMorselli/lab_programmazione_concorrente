@@ -11,18 +11,14 @@
 </head>
 
 <body class="text-center">
-        <form class="form-signin">
-          <h1 class="h3 mb-3 font-weight-normal text-white">Login</h1>
-          <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" id="inputEmail" class="form-control rounded-0" placeholder="Indirizzo email" required autofocus>
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" id="inputPassword" class="form-control rounded-0" placeholder="Password" required>
-
-        <label class="text-white">
-          <input value="remember-me" type="checkbox"> Ricordami
-        </label>
-      
-          <button class="btn btn-lg btn-secondary btn-block rounded-0 shadow" type="submit">Entra</button>
-        </form>
+  <%= form_for(:session, url: login_path, html: {class: 'form-signin'}) do |f| %>
+  <h1 class="h3 mb-3 font-weight-normal text-white">Login</h1>
+  <%= f.email_field :email, class: 'form-control rounded-0', placeholder: "Indirizzo email" %>
+  <%= f.password_field :password, class: 'form-control rounded-0', placeholder: "Password" %>
+  <label class="text-white">
+    <%= check_box_tag "remember-me" %> Ricordami
+  </label>
+  <%= f.submit "Entra", class: 'btn btn-lg btn-secondary btn-block rounded-0 shadow' %>
+  <% end %>
 </body>
 </html>

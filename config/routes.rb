@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get     '/',                                                        to: 'session#landing', as: 'landing'
   get     '/login',                                                   to: 'session#new'
   post    '/login',                                                   to: 'session#create'
-  delete  '/logout',                                                  to: 'session#destroy'
+  get     '/logout',                                                  to: 'session#destroy'
 
   # Bacheca del gruppo
   get     '/groups/:group_uuid/messages/pinned',                      to: 'messages#pinned', as: 'group_pinned_messages'
