@@ -13,6 +13,10 @@ class Invitation < ApplicationRecord
         Time.now > self.expiration_date unless self.expiration_date.nil?
     end
 
+    def is_private?
+        user != nil
+    end
+
     def accept(user = nil)
         if self.expired? || (self.user.nil? && user.nil?) || (self.user != user unless user.nil? || self.user.nil?)
             return false
