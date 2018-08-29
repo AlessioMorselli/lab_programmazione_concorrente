@@ -15,18 +15,18 @@ class EventsController < ApplicationController
     # GET group_events_path(group_uuid: group.uuid)
     def index
         # Visualizza tutti gli eventi di un gruppo
-        # Uso il parametro 'from' per stabilire da quando devo recuperare gli eventi
-        # Si segua il formato della stringa che si ottiene da un valore di tipo DateTime
-        if params['from'].nil?
+        # Uso il parametro 'up_to' per stabilire da quando devo recuperare gli eventi
+        # Esempio di parametro valido: (2.months).to_s
+        if params['up_to'].nil?
             @events = @group.events.next
         else
             # Controllo che non sia un array! Mi serve un solo parametro
-            if params['from'].is_a? Array
-                from = params['from'][0]
-            else from = params['from']
+            if params['up_to'].is_a? Array
+                up_to = params['up_to'][0]
+            else up_to = params['up_to']
             end
-            from = from.to_datetime
-            @events = @group.events.next(from)
+            up_to = up_to.to_i
+            @events = @group.events.next(up_to)
         end
         
         render json: @events
@@ -36,7 +36,20 @@ class EventsController < ApplicationController
     # GET user_events_path(user)
     def user_index
         # Visualizza tutti gli eventi dei gruppi di cui fa parte l'utente
-        @events = @user.events.next
+        # Uso il parametro 'up_to' per stabilire da quando devo recuperare gli eventi
+        # Esempio di parametro valido: (2.months).to_s
+        if params['up_to'].nil?
+            @events = @user.events.next
+        else
+            # Controllo che non sia un array! Mi serve un solo parametro
+            if params['up_to'].is_a? Array
+                up_to = params['up_to'][0]
+            else up_to = params['up_to']
+            end
+            up_to = up_to.to_i
+            @events = @user.events.next(up_to)
+        end
+        
         render json: @events
     end
 

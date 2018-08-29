@@ -7,17 +7,17 @@ evento_pirati_1:
   place: Aula pirati
   description: Evento pirati 1
   group: pirati
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 evento_pirati_2:
-  start_time: <%= st.to_s %>
-  end_time: <%= et.to_s %>
+  start_time: <%= (st + 1.month).to_s %>
+  end_time: <%= (et + 1.month).to_s %>
   place: Aula pirati
   description: Evento pirati 2
   group: pirati
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 evento_samurai_1:
   start_time: <%= st.to_s %>
@@ -25,8 +25,8 @@ evento_samurai_1:
   place: Aula samurai
   description: Evento samurai 1
   group: samurai
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 evento_cavalieri_1:
   start_time: <%= st.to_s %>
@@ -34,8 +34,8 @@ evento_cavalieri_1:
   place: Aula cavalieri
   description: Evento cavalieri 1
   group: cavalieri
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 evento_cavalieri_1:
   start_time: <%= st.to_s %>
@@ -43,8 +43,8 @@ evento_cavalieri_1:
   place: Aula cavalieri
   description: Evento cavalieri 1
   group: cavalieri
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 evento_cavalieri_2:
   start_time: <%= st.to_s %>
@@ -52,8 +52,8 @@ evento_cavalieri_2:
   place: Aula cavalieri
   description: Evento cavalieri 2
   group: cavalieri
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 evento_cavalieri_3:
   start_time: <%= st.to_s %>
@@ -61,8 +61,8 @@ evento_cavalieri_3:
   place: Aula cavalieri
   description: Evento cavalieri 3
   group: cavalieri
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 evento_ninja_1:
   start_time: <%= st.to_s %>
@@ -70,5 +70,5 @@ evento_ninja_1:
   place: Aula ninja
   description: Evento ninja 1
   group: ninja
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>

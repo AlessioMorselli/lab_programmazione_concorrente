@@ -2,30 +2,33 @@ pirati:
   name: pirati
   max_members: 10
   private: true
-  course_id: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  # I pirati studiano meccatronica
+  course_id: 5
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 ninja:
   name: ninja
   max_members: 10
   private: true
   course_id: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 samurai:
   name: samurai
   max_members: 10
   private: false
-  course_id: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  # I samurai studiano meccatronica
+  course_id: 5
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 cavalieri:
   name: cavalieri
   max_members: 10
   private: false
-  course_id: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  # I cavalieri studiano analisi 2
+  course_id: 3
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>

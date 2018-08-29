@@ -3,45 +3,45 @@ studente_giorgio:
   year: 2
   # degree: ingegneria_informatica
   degree_id: 1
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 studente_giovanni:
   user: giovanni
   year: 1
   # degree: ingegneria_informatica
   degree_id: 1
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 studente_luigi:
   user: luigi
   year: 1
   # degree: ingegneria_meccanica
   degree_id: 2
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 studente_giacomo:
   user: giacomo
   year: 3
   # degree: ingegneria_meccanica
   degree_id: 2
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 studente_aldo:
   user: aldo
   year: 1
   # degree: ingegneria_magistrale
   degree_id: 3
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 studente_mario:
   user: mario
   year: 2
   # degree: ingegneria_magistrale
   degree_id: 3
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>

@@ -5,8 +5,8 @@ ingegneria_informatica_corso_1:
   # course: analisi_1
   course_id: 1
   group_id: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 ingegneria_informatica_corso_2:
   year: 2
@@ -15,8 +15,8 @@ ingegneria_informatica_corso_2:
   # course: elettronica
   course_id: 6
   group_id: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 ingegneria_informatica_corso_3:
   year: 3
@@ -25,8 +25,8 @@ ingegneria_informatica_corso_3:
   # course: informatica
   course_id: 2
   group_id: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 ingegneria_meccanica_corso_1:
   year: 1
@@ -35,8 +35,8 @@ ingegneria_meccanica_corso_1:
   # course: analisi_1
   course_id: 1
   group_id: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 ingegneria_meccanica_corso_2:
   year: 2
@@ -45,8 +45,8 @@ ingegneria_meccanica_corso_2:
   # course: fisica
   course_id: 7
   group_id: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 ingegneria_meccanica_corso_3:
   year: 3
@@ -55,8 +55,8 @@ ingegneria_meccanica_corso_3:
   # course: meccanica
   course_id: 4
   group_id: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 ingegneria_magistrale_corso_1:
   year: 1
@@ -65,8 +65,8 @@ ingegneria_magistrale_corso_1:
   # course: analisi_2
   course_id: 3
   group_id: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 ingegneria_magistrale_corso_2:
   year: 2
@@ -75,5 +75,5 @@ ingegneria_magistrale_corso_2:
   # course: meccatronica
   course_id: 5
   group_id: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>

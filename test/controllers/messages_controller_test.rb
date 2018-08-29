@@ -27,6 +27,35 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_not_empty cookies[@user.id.to_s + @group.uuid]
     assert_equal DateTime.now.to_s, cookies[@user.id.to_s + @group.uuid]
     assert_response :success
+
+    # I messaggi più recenti per Giovanni (quindi mandati nell'ultima ora) nel gruppo dei cavalieri sono 8
+    assert_equal 8, assigns(:messages).length
+  end
+
+  test "should index messages of last day" do
+    log_in_as @user
+
+    get group_messages_path(group_uuid: @group.uuid),
+        params: {from: (DateTime.now - 1.day).to_s}
+    assert_not_empty cookies[@user.id.to_s + @group.uuid]
+    assert_equal DateTime.now.to_s, cookies[@user.id.to_s + @group.uuid]
+    assert_response :success
+
+    # I messaggi dell'ultimo giorno per Giovanni nel gruppo dei cavalieri sono 14
+    assert_equal 14, assigns(:messages).length
+  end
+
+  test "should index messages of last day with from as array" do
+    log_in_as @user
+
+    get group_messages_path(group_uuid: @group.uuid),
+        params: {from: [(DateTime.now - 1.day).to_s, "dato in più"]}
+    assert_not_empty cookies[@user.id.to_s + @group.uuid]
+    assert_equal DateTime.now.to_s, cookies[@user.id.to_s + @group.uuid]
+    assert_response :success
+
+    # I messaggi dell'ultimo giorno per Giovanni nel gruppo dei cavalieri sono 14
+    assert_equal 14, assigns(:messages).length
   end
 
   test "should send a message without attachment" do

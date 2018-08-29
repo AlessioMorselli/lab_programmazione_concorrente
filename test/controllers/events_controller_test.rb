@@ -16,7 +16,30 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     get group_events_path(group_uuid: @group.uuid)
     assert_response :success
 
-    #assert_operator assigns(:events).last.start_time, :<=, DateTime.now + 7.days
+    # Il gruppo dei pirati ha solo un evento entro i 7 giorni
+    assert_equal 1, assigns(:events).length
+  end
+
+  test "should index every group event of the next 2 months" do
+    log_in_as @user
+
+    get group_events_path(group_uuid: @group.uuid),
+        params: {up_to: (2.months).to_s}
+    assert_response :success
+
+    # Il gruppo dei pirati ha due eventi entro i 2 mesi
+    assert_equal 2, assigns(:events).length
+  end
+
+  test "should index every group event of the next 2 months with up_to as array" do
+    log_in_as @user
+
+    get group_events_path(group_uuid: @group.uuid),
+        params: {up_to: [(2.months).to_s, "dato in più"]}
+    assert_response :success
+
+    # Il gruppo dei pirati ha due eventi entro i 2 mesi
+    assert_equal 2, assigns(:events).length
   end
 
   test "should index every user's groups event of the next 7 days" do
@@ -25,7 +48,30 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     get user_events_path(@user)
     assert_response :success
 
-    #assert_operator assigns(:events).last.start_time, :<=, DateTime.now + 7.days
+    # Giorgio ha due eventi entro i 7 giorni
+    assert_equal 2, assigns(:events).length
+  end
+
+  test "should index every user's groups event of the next 2 months" do
+    log_in_as @user
+
+    get user_events_path(@user),
+        params: {up_to: (2.months).to_s}
+    assert_response :success
+
+    # Giorgio ha tre eventi entro i 2 mesi
+    assert_equal 3, assigns(:events).length
+  end
+
+  test "should index every user's groups event of the next 2 months with up_to as array" do
+    log_in_as @user
+
+    get user_events_path(@user),
+        params: {up_to: [(2.months).to_s, "dato in più"]}
+    assert_response :success
+
+    # Giorgio ha tre eventi entro i 2 mesi
+    assert_equal 3, assigns(:events).length
   end
 
   test "should show a single event" do

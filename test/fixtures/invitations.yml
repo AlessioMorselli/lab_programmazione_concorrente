@@ -3,29 +3,29 @@ invito_ninja_giorgio:
   user: giorgio
   url_string: <%= SecureRandom.urlsafe_base64 %>
   expiration_date: <%= DateTime.now + 1.day %>
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 invito_ninja_giovanni:
   group: ninja
   user: giovanni
   url_string: <%= SecureRandom.urlsafe_base64 %>
   expiration_date: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 invito_pirati_mario_scaduto:
   group: pirati
   user: mario
   url_string: <%= SecureRandom.urlsafe_base64 %>
   expiration_date: <%= DateTime.now - 1.day %>
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 invito_pirati:
   group: pirati
   user: null
   url_string: <%= SecureRandom.urlsafe_base64 %>
   expiration_date: null
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>

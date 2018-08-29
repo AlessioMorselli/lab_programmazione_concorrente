@@ -3,101 +3,101 @@ fondatore_pirati:
   group: pirati
   super_admin: true
   admin: true
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 membro_pirati_1:
   user: luigi
   group: pirati
   super_admin: false
   admin: false
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 fondatore_samurai:
   user: giorgio
   group: samurai
   super_admin: true
   admin: true
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 admin_samurai_1:
   user: giacomo
   group: samurai
   super_admin: false
   admin: true
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 membro_samurai_1:
   user: luigi
   group: samurai
   super_admin: false
   admin: false
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 membro_samurai_2:
   user: giovanni
   group: samurai
   super_admin: false
   admin: false
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 fondatore_cavalieri:
   user: giacomo
   group: cavalieri
   super_admin: true
   admin: true
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 admin_cavalieri_1:
   user: mario
   group: cavalieri
   super_admin: false
   admin: true
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 membro_cavalieri_1:
   user: giovanni
   group: cavalieri
   super_admin: false
   admin: false
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 membro_cavalieri_2:
   user: aldo
   group: cavalieri
   super_admin: false
   admin: false
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 fondatore_ninja:
   user: mario
   group: ninja
   super_admin: true
   admin: true
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 membro_ninja_1:
   user: giacomo
   group: ninja
   super_admin: false
   admin: false
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
   
 membro_ninja_2:
   user: aldo
   group: ninja
   super_admin: false
   admin: false
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %> 
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %> 

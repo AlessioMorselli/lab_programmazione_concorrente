@@ -2,19 +2,19 @@ ingegneria_informatica:
   id: 1
   name: ingegneria informatica
   years: 3
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 ingegneria_meccanica:
   id: 2
   name: ingegneria meccanica
   years: 3
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 ingegneria_magistrale:
   id: 3
   name: ingegneria magistrale
   years: 2
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>

@@ -20,6 +20,50 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     get groups_path
     assert_response :success
+
+    # Per Aldo non ci sono gruppi suggeriti
+    # Solo i cavalieri studiano analisi 2, ma Aldo è già suo membro
+    assert_equal 0, assigns(:groups).length
+  end
+
+  test "should index searched groups (private, name)" do
+    log_in_as @user
+
+    get groups_path, params: {query: "pirati"}
+    assert_response :success
+
+    # Vi è un solo gruppo denominato "pirati", ma è privato, non deve risultare
+    assert_equal 0, assigns(:groups).length
+  end
+
+  test "should index searched groups (public, name)" do
+    log_in_as @user
+
+    get groups_path, params: {query: "samurai"}
+    assert_response :success
+
+    # Vi è un solo gruppo denominato "samurai"
+    assert_equal 1, assigns(:groups).length
+  end
+
+  test "should index searched groups (course)" do
+    log_in_as @user
+
+    get groups_path, params: {query: "meccatronica"}
+    assert_response :success
+
+    # Vi sono due gruppi che studia meccatronica, ma uno è privato
+    assert_equal 1, assigns(:groups).length
+  end
+
+  test "should index searched groups (course) with query as array" do
+    log_in_as @user
+
+    get groups_path, params: {query: ["meccatronica", "dato in più"]}
+    assert_response :success
+
+    # Vi sono due gruppi che studia meccatronica, ma uno è privato
+    assert_equal 1, assigns(:groups).length
   end
 
   test "should show a group chat" do

@@ -2,12 +2,12 @@ allegato_mario:
   name: immagine mario
   mime_type: image/jpeg
   data: qualcosa
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
 
 allegato_giacomo:
   name: immagine giacomo
   mime_type: image/jpeg
   data: qualcosa
-  created_at: <%= Time.now.to_s %>
-  updated_at: <%= Time.now.to_s %>
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
