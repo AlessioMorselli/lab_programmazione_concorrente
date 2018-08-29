@@ -17,17 +17,55 @@
 <body class="bg-light">
   <nav class="navbar navbar-dark bg-dark p-1 shadow">
     <a class="navbar-brand col-sm-12 col-md-3 mr-0 text-center col-lg-2" href="#">Unife Study Groups</a>
-    <input class="form-control form-control-dark col-9 col-sm-10 col-md-7 text-center text-md-left col-lg-9" type="text" placeholder="Cerca gruppi" aria-label="Search">
+    <form class="col-9 col-sm-10 col-md-7 col-lg-9" type="POST" action="/groups">
+      <input class="form-control form-control-dark text-center text-md-left" type="text" placeholder="Cerca gruppi" aria-label="Search" name="query">
+    </form>
     <ul class="navbar-nav align-items-center col-3 col-sm-2 col-md-2 col-lg-1 px-3">
       <li class="nav-item text-nowrap">
-        <a id="logout" class="nav-link" href="/logout">Logout</a>
+        <a class="nav-link" href="/logout">Logout</a>
       </li>
     </ul>
   </nav>
   
   <div class="container-fluid main-container">
     <div class="row h-100">
-      <div class="col-12 h-100 p-2">
+
+      <div class="col-md-3 col-lg-2 col-xl-2 h-100 d-none d-md-block pl-2 py-2 pr-0">
+        <div class="container-fluid h-100 d-flex flex-column pl-2 py-2 pr-0">
+          <div class="row flex-grow-1">
+            <div class="col-12">
+              <div class="card card-chat shadow rounded-0 h-100">
+                <div class="card-header shadow rounded-0 text-center">
+                  Gruppi in cui sei membro
+                </div>
+                <div class="card-body p-2">
+                  <div class="mb-2">
+                    <ul class="nav flex-column sidebar">
+                      <% current_user.groups.each do |group| %>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/groups/<%= group.uuid %>">
+                          <span data-feather="users"></span>
+                          <%= group.name %>
+                        </a>
+                      </li>
+                      <% end %>
+                    </ul>
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-right p-2 mt-2 mb-1 text-muted add-group-sticky">
+                      <a class="d-flex align-items-center text-muted " href="#">
+                        <span data-feather="plus-circle" class="mr-2"></span> Crea Nuovo Gruppo
+                      </a>
+                    </h6>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-9 col-lg-10 h-100 p-2">
         <div class="container-fluid h-100 d-flex flex-column px-2 pb-2 pt-0">
           <div class="row flex-grow-1 mt-2">
 
@@ -36,87 +74,77 @@
                 <div class="card-header shadow rounded-0 text-center">Lista Gruppi Pubblici</div>
                 <div class="card-body p-2">
                   <div class="mb-2">
-                    <table>
-                      <% @groups.each do |group| %>
-                      <tr>
-                        <td><%= group.name %></td>
-                      </tr>
-                      <% end %>
-                    </table>
+                    <% id_num = 0 %>
+                    <% @groups.is_public.each do |group| %>
+                    <% id_num = id_num + 1 %>
 
-                    <div class="card shadow-sm">
-                      <div class="card-body group-name-body d-flex justify-content-between">
-                        <a class="align-self-center" href="#"><span data-feather="users"></span>  Spagnolo 1</a>
-                        <div class="text-secondary align-self-center ml-2"><span data-feather="chevron-right"></span></div>
-                        <a class="align-self-center ml-2" href="#" data-toggle="modal" data-target="#infoModal"><span data-feather="info"></span>  Info</a>
-                        <a class="flex-grow-1 text-right" href="#"><span data-feather="check-circle"></span> Iscritto</a>
+                    <% if id_num != 1 %>
+                    <div class="card shadow-sm mt-2">
+                      <% else %>
+                      <div class="card shadow-sm">
+                        <% end %>
+                        <div class="card-body group-name-body d-flex justify-content-between">
+                          <a class="align-self-center" href="/groups/<%= group.uuid %>"><span data-feather="users"></span>  <%= group.name %></a>
+                          <div class="text-secondary align-self-center ml-2"><span data-feather="chevron-right"></span></div>
+                          <a class="align-self-center ml-2" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>"><span data-feather="info"></span>  Info</a>
+                          <% if group.members.exists?(current_user.id) %>
+                          <a class="flex-grow-1 text-right" href="#"><span data-feather="check-circle"></span> Iscritto</a>
+                          <% else %>
+                          <a class="flex-grow-1 text-right" href="#" style="width: 100px"><span data-feather="circle"></span> Iscriviti</a>
+                          <% end %>
+                        </div>
                       </div>
-                    </div>
 
-                    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModal" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content rounded-0">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Spagnolo 1</h5>
-                            <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <b>Nr. Membri:</b> 7<br>
-                            <b>Descrizione:</b> Gruppo studio molto affiatato che si ritrova quotidianamente per studiare Spagnolo 1, in preparazione per l'esame del Signor Chang.
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <div class="modal fade" id="infoModal<%= id_num %>" tabindex="-1" role="dialog" aria-labelledby="infoModal<%= id_num %>" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content rounded-0">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalCenterTitle"><%= group.name %></h5>
+                              <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <b>Nr. Membri:</b> <%= group.members.count %><br>
+                              <b>Descrizione:</b> 
+                              <% if group.description == '' %>
+                              Nessuna descrizione disponibile.
+                              <% else %>
+                              <%= group.description %>
+                              <% end %>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <% end %>
+
                     </div>
-
-                    <div class="card shadow-sm mt-2">
-                      <div class="card-body group-name-body d-flex justify-content-between">
-                        <a class="align-self-center" href="#"><span data-feather="users"></span>  Fisica 1</a>
-                        <div class="text-secondary align-self-center ml-2"><span data-feather="chevron-right"></span></div>
-                        <a class="align-self-center ml-2" href="#"><span data-feather="info"></span>  Info</a>
-
-                        <a class="flex-grow-1 text-right" href="#" style="width: 100px"><span data-feather="circle"></span> Iscriviti</a>
-                      </div>
-                    </div>
-
-                    <div class="card shadow-sm mt-2">
-                      <div class="card-body group-name-body d-flex justify-content-between">
-                        <a class="align-self-center" href="#"><span data-feather="users"></span>  Analisi 1</a>
-                        <div class="text-secondary align-self-center ml-2"><span data-feather="chevron-right"></span></div>
-                        <a class="align-self-center ml-2" href="#"><span data-feather="info"></span>  Info</a>
-
-                        <a class="flex-grow-1 text-right" href="#" style="width: 100px"><span data-feather="circle"></span> Iscriviti</a>
-                      </div>
-                    </div>
-
                   </div>
+
                 </div>
-
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-      feather.replace()
-    </script>
-  
+      <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+      <script>
+        feather.replace()
+      </script>
+
     <!--
     <script>
       $(document).ready(function() {
@@ -134,5 +162,5 @@
       });
     </script>
   -->
-  </body>
+</body>
 </html>
