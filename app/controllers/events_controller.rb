@@ -63,7 +63,7 @@ class EventsController < ApplicationController
     def new
         # Mostra la form per creare un evento
         @event = Event.new
-        render json: @event
+        render file: 'app/views/dashboard_new_event'
     end
 
     # POST group_events_path(group_uuid: group.uuid)
