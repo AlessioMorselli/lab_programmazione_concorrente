@@ -8,7 +8,7 @@ class MembershipsController < ApplicationController
   before_action only: [:index, :destroy] do
     is_member_in @group
   end
-  before_action only: [:destroy], unless: -> {@user == current_user} do
+  before_action only: [:destroy], unless: -> {current_user? @user} do
     is_admin_in @group
   end
   before_action only: [:destroy], if: -> {@group.admins.include? @user} do

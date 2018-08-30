@@ -11,16 +11,24 @@ class SessionController < ApplicationController
         # Esegue il log in e ridireziona a groups_path
         user = User.find_by(email: params[:session][:email].downcase)
         if user && user.authenticate(params[:session][:password])
-            if user.email_confirmed
+            # if user.email_confirmed
+            #     log_in user
+            #     params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+            #     redirect_back_or groups_path
+            # else
+            #     flash.now[:error] = 'Per piacere, attiva il tuo account seguendo le istruzioni
+            #         nella email di conferma che hai ricevuto per procedere'
+            #     render file: 'app/views/login_page'
+            # end
+            if user.confirmed?
                 log_in user
                 params[:session][:remember_me] == '1' ? remember(user) : forget(user)
                 redirect_back_or groups_path
             else
-                flash.now[:error] = 'Per piacere, attiva il tuo account seguendo le istruzioni
-                    nella email di conferma che hai ricevuto per procedere'
-                render file: 'app/views/login_page'
+                flash[:warning] = 'Per piacere, attiva il tuo account seguendo le istruzioni
+                                nella email di conferma che hai ricevuto per procedere'
+                redirect_to landing_path
             end
-            
         else
             flash.now[:danger] = 'Email e/o password sbagliate'
             render file: 'app/views/login_page'

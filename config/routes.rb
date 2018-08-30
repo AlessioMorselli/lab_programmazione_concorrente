@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :events, only: [:show]
     resources :invitations, only: [:index]
   end
+  resources :confirm_accounts, only: [:edit]
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   ### URL NON RESTFUL ###
   get     '/signup',                                                  to: 'users#new'
@@ -52,7 +54,4 @@ Rails.application.routes.draw do
       to: 'memberships#set_super_admin', as: 'group_set_super_admin'
   # put     '/groups/:group_uuid/memberships/:user_id/super_admin',
   #     to: 'memberships#set_super_admin', as: 'group_set_super_admin'
-
-  # Conferma la email dell'utente
-  get     'users/:id/confirm_email/:confirm_token',                   to: 'users#confirm_email', as: 'user_confirm_email'
 end

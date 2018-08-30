@@ -9,7 +9,7 @@ class AttachmentsController < ApplicationController
     before_action do
         is_member_in @group
     end
-    before_action only: [:destroy], unless: -> {@message.user == current_user} do
+    before_action only: [:destroy], unless: -> {current_user? @message.user} do
         is_admin_in @group
     end
 

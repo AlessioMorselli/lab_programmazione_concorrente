@@ -28,10 +28,11 @@ class UsersController < ApplicationController
         if @user.save!
             # log_in @user
             # redirect_to groups_path
-            UserMailer.registration_confirmation(@user).deliver_now
-            flash[:success] = "Per piacere, conferma la tua email prima di continuare!"
+            @user.send_confirm_email
+            flash[:info] = "Per piacere, controlla la tua casella di posta elettronica e 
+                                conferma il tuo indirizzo email prima di continuare!"
             # TODO: metti la ridirezione corretta
-            redirect_to login_path
+            redirect_to landing_path
         else
             flash.now[:error] = "Ooooppss, qualcosa è andato storto!"
             render file: "app/views/signup_page"

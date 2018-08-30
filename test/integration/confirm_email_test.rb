@@ -29,20 +29,20 @@ class ConfirmEmailTest < ActionDispatch::IntegrationTest
         assert_not is_logged_in?
         assert_not @user.nil?
 
-        # Verifico che esista il token di conferma e che email_confirmed sia false
-        assert_not @user.email_confirmed
-        assert_not @user.email_confirm_token.nil?
+        # Verifico che esista il token di conferma e che confirmed sia false
+        assert_not @user.confirmed?
+        # assert_not @user.confirm_token.nil?
 
-        # Verifico la ridirezione a login_path
-        assert_redirected_to login_path
+        # Verifico la ridirezione a landing_path
+        assert_redirected_to landing_path
 
         # Simulo il clic dell'utente sul link della mail
-        get user_confirm_email_path(id: @user.id, confirm_token: @user.email_confirm_token)
+        get edit_confirm_account_path(@user.confirm_token, email: @user.email)
         @user.reload
 
-        # Verifico che il token di conferma sia stato cancellato e che email_confirmed sia ora a true
-        assert @user.email_confirmed
-        assert @user.email_confirm_token.nil?
+        # Verifico che il token di conferma sia stato cancellato e che confirmed sia ora a true
+        assert @user.confirmed?
+        # assert @user.confirm_token.nil?
 
         # Verifico che ora l'utente sia loggato e la ridirezione a groups_path
         assert is_logged_in?
@@ -66,23 +66,23 @@ class ConfirmEmailTest < ActionDispatch::IntegrationTest
         assert_not is_logged_in?
         assert_not @user.nil?
 
-        # Verifico che esista il token di conferma e che email_confirmed sia false
-        assert_not @user.email_confirmed
-        assert_not @user.email_confirm_token.nil?
+        # Verifico che esista il token di conferma e che confirmed sia false
+        assert_not @user.confirmed?
+        # assert_not @user.confirm_token.nil?
 
-        # Verifico la ridirezione a login_path
-        assert_redirected_to login_path
+        # Verifico la ridirezione a landing_path
+        assert_redirected_to landing_path
 
         # Simulo il clic dell'utente sul link della mail
-        get user_confirm_email_path(id: @user.id, confirm_token: "confirm_token_non_corretto")
+        get edit_confirm_account_path("token puzzone", email: @user.email)
         @user.reload
 
-        # Verifico che il token di conferma sia stato cancellato e che email_confirmed sia ora a true
-        assert_not @user.email_confirmed
-        assert_not @user.email_confirm_token.nil?
+        # Verifico che il token di conferma sia stato cancellato e che confirmed sia ora a true
+        assert_not @user.confirmed?
+        # assert_not @user.confirm_token.nil?
 
-        # Verifico che ora l'utente sia loggato e la ridirezione a groups_path
+        # Verifico che ora l'utente non sia loggato e la ridirezione a landing_path
         assert_not is_logged_in?
-        assert_redirected_to login_path
+        assert_redirected_to landing_path
     end
 end

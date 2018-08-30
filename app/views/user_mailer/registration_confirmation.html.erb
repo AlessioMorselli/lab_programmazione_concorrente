@@ -1,0 +1,8 @@
+<h1>Unife Study Groups</h1>
+
+<p>Ciao <%= @user.name %>,</p>
+
+<p>Grazie per esserti registrato a Unife Study Groups!</p>
+<p>Per terminare la tua iscrizione, clicca sul link sottostante:</p>
+
+<%= link_to "Conferma iscrizione", edit_confirm_account_url(@user.confirm_token, email: @user.email) %>

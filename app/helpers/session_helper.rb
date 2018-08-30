@@ -10,7 +10,7 @@ module SessionHelper
             @current_user ||= User.find(user_id)
         elsif (user_id = cookies.signed[:user_id])
             user = User.find(user_id)
-            if user && user.authenticated?(cookies[:remember_token])
+            if user && user.confirmed?(:remember, cookies[:remember_token])
                 log_in user
                 @current_user = user
             end
@@ -82,12 +82,17 @@ module SessionHelper
         session[:forwarding_url] = request.original_fullpath if request.get?
     end
 
+    # Confronta user con l'utente corrente
+    def current_user?(user)
+        user == current_user
+    end
+
     # Verifica che l'utente loggato sia effettivamente il bersaglio dell'azione
     # Vogliamo impedire che un altro utente modifichi senza permessi informazioni di utenti diversi
     # tramite url create ad hoc
     def correct_user(id)
         @user = User.find(id)
-        unless current_user == @user
+        unless current_user? @user
             flash[:danger] = "Azione non autorizzata"
             redirect_to groups_path
         end

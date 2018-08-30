@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FrienlyForwardingTest < ActionDispatch::IntegrationTest
+class FriendlyForwardingTest < ActionDispatch::IntegrationTest
     def setup
         @user = users(:giorgio)
         @group = groups(:samurai)
