@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    attr_accessor :remember_token
+    attr_accessor :remember_token, :confirm_token, :reset_token
 
     before_save { self.email = email.downcase }
     
@@ -22,7 +22,7 @@ class User < ApplicationRecord
         format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i },
         uniqueness: { case_sensitive: false }
 
-    before_create :set_email_confirm_token
+    before_create :create_confirm_digest
 
 
     def courses
@@ -50,9 +50,16 @@ class User < ApplicationRecord
         update_attribute(:remember_digest, User.digest(remember_token))
     end
 
-    # Restituisce true se il remember token corrisponde a quello salvato nel database
-    def authenticated?(remember_token)
-        remember_digest ? BCrypt::Password.new(remember_digest).is_password?(remember_token) : false
+    # Restituisce true se il token dell'attributo (:confirm, :remember) corrisponde a quello salvato nel database
+    def authenticated?(attribute, token)
+        digest = send("#{attribute}_digest")
+        return false if digest.nil?
+        BCrypt::Password.new(digest).is_password?(token)
+    end
+
+    # Returns true if a password reset has expired.
+    def password_reset_expired?
+        reset_sent_at < 2.hours.ago
     end
 
     # Forgets a user.
@@ -60,17 +67,31 @@ class User < ApplicationRecord
         update_attribute(:remember_digest, nil)
     end
 
-    def set_email_confirm_token
-        if self.email_confirm_token.blank?
-            self.email_confirm_token = SecureRandom.urlsafe_base64.to_s
-        end
+    def create_confirm_digest
+        self.confirm_token  = User.new_token
+        self.confirm_digest = User.digest(confirm_token)
     end
 
-    def email_activate
-        self.email_confirmed = true
-        self.email_confirm_token = nil
+    def create_reset_digest
+        self.reset_token = User.new_token
+        update_attribute(:reset_digest, User.digest(reset_token))
+        update_attribute(:reset_sent_at, Time.zone.now)
+    end
+
+    def activate
+        self.confirmed = true
+        self.confirm_digest = nil
         save
     end
+
+    def send_confirm_email
+        UserMailer.registration_confirmation(self).deliver_now
+    end
+
+    def send_password_reset_email
+        UserMailer.password_reset(self).deliver_now
+      end
+
 
     def suggested_groups
         Group.is_public.distinct.joins("JOIN students ON students.user_id = #{self.id}")

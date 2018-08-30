@@ -77,18 +77,18 @@ class UserTest < ActiveSupport::TestCase
   test "authenticated? should return true if the remember_token is correct" do
     @user.save
     @user.remember
-    assert @user.authenticated?(@user.remember_token)
+    assert @user.authenticated?(:remember, @user.remember_token)
   end
 
   test "authenticated? should return true if the remember_token is not correct" do
     @user.save
     @user.remember
-    assert_not @user.authenticated?("sbagliato")
+    assert_not @user.authenticated?(:remember, "sbagliato")
   end
 
   test "authenticated? should return false for a user with nil digest" do
     @user.save
-    assert_not @user.authenticated?('')
+    assert_not @user.authenticated?(:remember, '')
   end
 
   test "forget should update remember_digest to nil" do
@@ -133,17 +133,17 @@ class UserTest < ActiveSupport::TestCase
 
   test "should set email_confirm_token before create" do
     user = User.new(name: "name", email: "name@student.it", password: "password")
-    assert user.email_confirm_token.nil?
+    assert user.confirm_token.nil?
     assert user.save
-    assert_not user.email_confirm_token.nil?
+    assert_not user.confirm_token.nil?
   end
 
   test "email_activate should set email_confirmed to true" do
     user = User.new(name: "name", email: "name@student.it", password: "password")
     assert user.save
-    assert_not user.email_confirmed?
-    user.email_activate
-    assert user.email_confirmed
+    assert_not user.confirmed?
+    user.activate
+    assert user.confirmed
   end
 
 end
