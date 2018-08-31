@@ -4,7 +4,11 @@ class Degree < ApplicationRecord
     has_many :users, through: :students
 
     has_many :degrees_courses, class_name: "DegreeCourse", :dependent => :delete_all
-    has_many :courses, through: :degrees_courses
+    has_many :courses, :through => :degrees_courses do
+        def year(year=nil)
+            year == nil ? self : where("degrees_courses.year = ?", year)
+        end
+    end
 
     def groups(year = nil)
         if year.nil?

@@ -23,4 +23,14 @@ class DegreeTest < ActiveSupport::TestCase
     assert_equal degree_course_group_ids.sort, group_ids.sort
   end
 
+  test "courses returns courses of a specific year if a year is passed as argument" do
+    degree = degrees(:ingegneria_informatica)
+    year = 1
+    courses = degree.courses.year year
+    expected = Course.joins("JOIN degrees_courses ON degrees_courses.course_id = courses.id")
+                      .where("degrees_courses.degree_id = ?", degree.id)
+                      .where("degrees_courses.year = ?", year).ids.sort
+    assert_equal expected, courses.ids.sort
+  end
+
 end
