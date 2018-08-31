@@ -25,7 +25,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
    
     assert_not flash.empty?
-    assert_redirected_to login_path
+    assert_redirected_to landing_path
   end
 
 ### TEST PER UN UTENTE LOGGATO ###

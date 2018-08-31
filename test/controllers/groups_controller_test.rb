@@ -22,8 +22,9 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     # Per Aldo non ci sono gruppi suggeriti
-    # Solo i cavalieri studiano analisi 2, ma Aldo è già suo membro
-    assert_equal 0, assigns(:groups).length
+    # I cavalieri studiano analisi 2 (ma Aldo è già suo membro), mentre i samurai studiano
+    # meccatronica, che fa parte del corso di studi di Aldo (il prossimo anno)
+    assert_equal 1, assigns(:groups).length
   end
 
   test "should index searched groups (private, name)" do

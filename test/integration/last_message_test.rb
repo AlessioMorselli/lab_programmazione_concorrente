@@ -22,7 +22,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
         assert_equal now.to_s, cookies[@user_1.id.to_s + @group.uuid]
     
         # Faccio log out
-        delete logout_path
+        get logout_path
 
         # Faccio log in con user_2
         log_in_as(@user_2)
@@ -43,7 +43,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
         assert_equal DateTime.now.to_s, cookies[@user_2.id.to_s + @group.uuid]
 
         # Faccio log out
-        delete logout_path
+        get logout_path
 
         # Faccio log in con user_1
         log_in_as(@user_1)

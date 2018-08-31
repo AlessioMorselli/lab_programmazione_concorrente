@@ -20,7 +20,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
         assert_redirected_to groups_path
         assert is_logged_in?
 
-        delete logout_path
+        get logout_path
         assert_not is_logged_in?
         assert_redirected_to login_path
     end
@@ -37,12 +37,12 @@ class UserLoginTest < ActionDispatch::IntegrationTest
         # assert_select "a[href=?]", signup_path, count: 0
         # assert_select "a[href=?]", logout_path
 
-        delete logout_path
+        get logout_path
         assert_not is_logged_in?
         assert_redirected_to login_path
 
         # Simula il click su logout su un'altra finestra
-        delete logout_path
+        get logout_path
 
         follow_redirect!
         # assert_select "a[href=?]", signup_path

@@ -14,24 +14,24 @@ class ConfirmEmailTest < ActionDispatch::IntegrationTest
 
     test "new user should confirm email before log in for the first time" do
         # Registro il nuovo utente
-        post signup_path, params: { user: {
-            name: @user.name,
-            password: @user.password,
-            email: @user.email,
-            degree_id: @degree.id,
-            year: @year
+        assert_difference 'User.count', 1 do
+            post signup_path, params: { user: {
+                name: @user.name,
+                password: @user.password,
+                email: @user.email,
+                degree_id: @degree.id,
+                year: @year
+                }
             }
-        }
-
-        @user = User.find_by_name("The Evil Skeletor")
+        end
+        assert_equal 1, ActionMailer::Base.deliveries.size
+        @user = assigns(:user)
 
         # Verifico che l'utente sia stato registrato, ma non loggato
         assert_not is_logged_in?
-        assert_not @user.nil?
 
         # Verifico che esista il token di conferma e che confirmed sia false
         assert_not @user.confirmed?
-        # assert_not @user.confirm_token.nil?
 
         # Verifico la ridirezione a landing_path
         assert_redirected_to landing_path
@@ -42,7 +42,6 @@ class ConfirmEmailTest < ActionDispatch::IntegrationTest
 
         # Verifico che il token di conferma sia stato cancellato e che confirmed sia ora a true
         assert @user.confirmed?
-        # assert @user.confirm_token.nil?
 
         # Verifico che ora l'utente sia loggato e la ridirezione a groups_path
         assert is_logged_in?
@@ -51,24 +50,24 @@ class ConfirmEmailTest < ActionDispatch::IntegrationTest
     
     test "should not login if confirm token is not correct" do
         # Registro il nuovo utente
-        post signup_path, params: { user: {
-            name: @user.name,
-            password: @user.password,
-            email: @user.email,
-            degree_id: @degree.id,
-            year: @year
+        assert_difference 'User.count', 1 do
+            post signup_path, params: { user: {
+                name: @user.name,
+                password: @user.password,
+                email: @user.email,
+                degree_id: @degree.id,
+                year: @year
+                }
             }
-        }
-
-        @user = User.find_by_name("The Evil Skeletor")
+        end
+        assert_equal 1, ActionMailer::Base.deliveries.size
+        @user = assigns(:user)
 
         # Verifico che l'utente sia stato registrato, ma non loggato
         assert_not is_logged_in?
-        assert_not @user.nil?
 
         # Verifico che esista il token di conferma e che confirmed sia false
         assert_not @user.confirmed?
-        # assert_not @user.confirm_token.nil?
 
         # Verifico la ridirezione a landing_path
         assert_redirected_to landing_path
@@ -79,7 +78,6 @@ class ConfirmEmailTest < ActionDispatch::IntegrationTest
 
         # Verifico che il token di conferma sia stato cancellato e che confirmed sia ora a true
         assert_not @user.confirmed?
-        # assert_not @user.confirm_token.nil?
 
         # Verifico che ora l'utente non sia loggato e la ridirezione a landing_path
         assert_not is_logged_in?

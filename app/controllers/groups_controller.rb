@@ -19,7 +19,7 @@ class GroupsController < ApplicationController
                 query = params['query'][0]
             else query = params['query']
             end
-            @groups = Group.user_query(query) # Scope che cerca sia nel nome, che nel corso di un gruppo
+            @groups = Group.user_query(query).is_public # Scope che cerca sia nel nome, che nel corso di un gruppo
         else
             @groups = current_user.suggested_groups # Scope che restituisce 10 - 12 gruppi che potrebbero
                                                     # interessare all'utente loggato
@@ -46,6 +46,7 @@ class GroupsController < ApplicationController
     # GET new_group_path
     def new
         # Visualizza la form per creare un nuovo gruppo
+        @degrees = Degree.all # Servono in fase di selezione del corso che studierà il gruppo studio
         @group = Group.new
         render file: 'app/views/dashboard_new_group'
     end
