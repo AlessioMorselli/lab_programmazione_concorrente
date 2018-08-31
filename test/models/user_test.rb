@@ -139,11 +139,12 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "email_activate should set email_confirmed to true" do
-    user = User.new(name: "name", email: "name@student.it", password: "password")
-    assert user.save
+    _user = User.new(name: "name", email: "name@student.it", password: "password")
+    assert _user.save
+    user = User.find _user.id
     assert_not user.confirmed?
     user.activate
-    assert user.confirmed
+    assert user.confirmed?
   end
 
 end
