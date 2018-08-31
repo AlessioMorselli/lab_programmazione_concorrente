@@ -25,6 +25,8 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     # I cavalieri studiano analisi 2 (ma Aldo è già suo membro), mentre i samurai studiano
     # meccatronica, che fa parte del corso di studi di Aldo (il prossimo anno)
     assert_equal 1, assigns(:groups).length
+
+    # assert_template :public_groups_list
   end
 
   test "should index searched groups (private, name)" do

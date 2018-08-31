@@ -1,5 +1,6 @@
 class DegreesCoursesController < ApplicationController
     before_action :logged_in_user
+    before_action :set_degree
 
     # GET degrees_courses_path
     # def index
@@ -14,8 +15,13 @@ class DegreesCoursesController < ApplicationController
     # GET degrees_courses_path(degree: degree.id, year: year)
     def index
         # Restituisce tutti i corsi di studio del degree e dell'anno indicati
-        @courses = DegreeCourse.metodo_fasullo(params[:degree], params[:year])
+        @courses = @degree.courses.year(params[:year])
 
         render json: @courses
+    end
+
+    private
+    def set_degree
+        @degree = Degree.find(params[:degree])
     end
 end
