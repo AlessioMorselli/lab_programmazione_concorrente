@@ -79,9 +79,8 @@ class User < ApplicationRecord
     end
 
     def activate
-        self.confirmed = true
-        self.confirm_digest = nil
-        save
+        update_attribute(:confirmed, true)
+        update_attribute(:confirm_digest, nil)
     end
 
     def send_confirm_email
