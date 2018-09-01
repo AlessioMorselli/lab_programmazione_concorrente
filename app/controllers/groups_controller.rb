@@ -32,8 +32,8 @@ class GroupsController < ApplicationController
     def show
         # Visualizza la chat di un gruppo, inclusi messaggi, eventi e membri (online ed offline)
         # Scope che definisce di cercare solo i messaggi più recenti
-
-        @messages = @group.messages.recent(get_last_message_read(@group))
+        @messages = @group.messages.recent
+        @pinned_messages = @group.messages.pinned
         set_last_message_read(@group, DateTime.now)
 
         # Carica solo gli eventi della settimana
