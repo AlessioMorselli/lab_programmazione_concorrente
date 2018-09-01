@@ -12,6 +12,9 @@ class DegreesControllerTest < ActionDispatch::IntegrationTest
 
     get degree_path(@degree)
     assert_response :success
+
+
+    assert_equal 3, assigns(:degrees_courses).length
   end
 
 ### TEST PER UN UTENTE NON LOGGATO ###

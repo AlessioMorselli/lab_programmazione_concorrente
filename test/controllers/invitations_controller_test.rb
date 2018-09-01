@@ -18,6 +18,9 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     get user_invitations_path(@user)
     assert_response :success
+
+    # Giorgio è stato invitato ai ninja
+    assert_equal 1, assigns(:invitations).length
   end
 
   test "should show choices for an invitation" do

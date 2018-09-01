@@ -21,6 +21,8 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
 
     get group_memberships_path(group_uuid: @group.uuid)
     assert_response :success
+
+    assert_equal 4, assigns(:members).length
   end
 
   test "should remove logged user from group" do

@@ -79,6 +79,15 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_not_empty cookies[@user.id.to_s + @group.uuid]
     assert_equal DateTime.now.to_s, cookies[@user.id.to_s + @group.uuid]
     assert_response :success
+
+    # I messaggi nel gruppo dei cavalieri sono in totale 14
+    assert_equal 14, assigns(:messages).length
+    # I messaggi pinnati nei cavalieri sono 2
+    assert_equal 2, assigns(:pinned_messages).length
+    # Gli eventi dei prossimi 7 giorni sono 3
+    assert_equal 3, assigns(:events).length
+    # I membri dei cavalieri sono 4
+    assert_equal 4, assigns(:memberships).length
   end
 
   test "should show a form to create a new group" do

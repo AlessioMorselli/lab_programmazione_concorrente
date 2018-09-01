@@ -13,7 +13,7 @@ class DegreesCoursesControllerTest < ActionDispatch::IntegrationTest
     get degrees_courses_path, params: {degree: @degree.id, year: 1}
     assert_response :success
 
-    # Non ci sono gruppi dei corsi nelle fixture
+    # I gruppi ufficiali dei corsi di ingegneria informatica sono 3
     assert_equal 3, assigns(:user_courses).length
   end
 
