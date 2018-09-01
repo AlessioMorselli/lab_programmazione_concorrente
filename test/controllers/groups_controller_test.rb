@@ -24,7 +24,8 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     # Per Aldo non ci sono gruppi suggeriti
     # I cavalieri studiano analisi 2 (ma Aldo è già suo membro), mentre i samurai studiano
     # meccatronica, che fa parte del corso di studi di Aldo (il prossimo anno)
-    assert_equal 1, assigns(:groups).length
+    # A questi si aggiungono i 2 gruppi ufficiali dei corsi di ingegneria magistrale
+    assert_equal 1 + 2, assigns(:groups).length
 
     # assert_template :public_groups_list
   end
@@ -56,7 +57,8 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     # Vi sono due gruppi che studia meccatronica, ma uno è privato
-    assert_equal 1, assigns(:groups).length
+    # A questo si aggiunge il gruppo ufficiale di meccatronica
+    assert_equal 1 + 1, assigns(:groups).length
   end
 
   test "should index searched groups (course) with query as array" do
@@ -66,7 +68,8 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     # Vi sono due gruppi che studia meccatronica, ma uno è privato
-    assert_equal 1, assigns(:groups).length
+    # A questo si aggiunge il gruppo ufficiale di meccatronica
+    assert_equal 1 + 1, assigns(:groups).length
   end
 
   test "should show a group chat" do

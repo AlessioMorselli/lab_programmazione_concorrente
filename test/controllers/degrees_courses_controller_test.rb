@@ -13,7 +13,8 @@ class DegreesCoursesControllerTest < ActionDispatch::IntegrationTest
     get degrees_courses_path, params: {degree: @degree.id, year: 1}
     assert_response :success
 
-    assert_equal 1, assigns(:courses).length
+    # Non ci sono gruppi dei corsi nelle fixture
+    assert_equal 3, assigns(:user_courses).length
   end
 
 ### TEST PER UN UTENTE NON LOGGATO ###

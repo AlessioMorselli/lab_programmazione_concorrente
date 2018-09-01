@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     resources :invitations, only: [:show, :new, :create, :destroy], param: :url_string
   end
   resources :degrees_courses, only: [:index]
-  resources :degrees, only: [:show]
+  resources :degrees, only: [:show] do
+    resources :courses, only: [:index]
+  end
   resources :users, except: [:new, :create, :show] do
     resources :events, only: [:show]
     resources :invitations, only: [:index]

@@ -4,7 +4,7 @@ ingegneria_informatica_corso_1:
   degree_id: 1
   # course: analisi_1
   course_id: 1
-  group_id: null
+  group_id: 10
   created_at: <%= DateTime.now.to_s %>
   updated_at: <%= DateTime.now.to_s %>
 
@@ -14,7 +14,7 @@ ingegneria_informatica_corso_2:
   degree_id: 1
   # course: elettronica
   course_id: 6
-  group_id: null
+  group_id: 11
   created_at: <%= DateTime.now.to_s %>
   updated_at: <%= DateTime.now.to_s %>
 
@@ -24,7 +24,7 @@ ingegneria_informatica_corso_3:
   degree_id: 1
   # course: informatica
   course_id: 2
-  group_id: null
+  group_id: 12
   created_at: <%= DateTime.now.to_s %>
   updated_at: <%= DateTime.now.to_s %>
 
@@ -34,7 +34,7 @@ ingegneria_meccanica_corso_1:
   degree_id: 2
   # course: analisi_1
   course_id: 1
-  group_id: null
+  group_id: 13
   created_at: <%= DateTime.now.to_s %>
   updated_at: <%= DateTime.now.to_s %>
 
@@ -44,7 +44,7 @@ ingegneria_meccanica_corso_2:
   degree_id: 2
   # course: fisica
   course_id: 7
-  group_id: null
+  group_id: 14
   created_at: <%= DateTime.now.to_s %>
   updated_at: <%= DateTime.now.to_s %>
 
@@ -54,7 +54,7 @@ ingegneria_meccanica_corso_3:
   degree_id: 2
   # course: meccanica
   course_id: 4
-  group_id: null
+  group_id: 15
   created_at: <%= DateTime.now.to_s %>
   updated_at: <%= DateTime.now.to_s %>
 
@@ -64,7 +64,7 @@ ingegneria_magistrale_corso_1:
   degree_id: 3
   # course: analisi_2
   course_id: 3
-  group_id: null
+  group_id: 16
   created_at: <%= DateTime.now.to_s %>
   updated_at: <%= DateTime.now.to_s %>
 
@@ -74,6 +74,6 @@ ingegneria_magistrale_corso_2:
   degree_id: 3
   # course: meccatronica
   course_id: 5
-  group_id: null
+  group_id: 17
   created_at: <%= DateTime.now.to_s %>
   updated_at: <%= DateTime.now.to_s %>

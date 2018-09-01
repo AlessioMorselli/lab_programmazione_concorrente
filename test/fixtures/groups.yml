@@ -32,3 +32,84 @@ cavalieri:
   course_id: 3
   created_at: <%= DateTime.now.to_s %>
   updated_at: <%= DateTime.now.to_s %>
+
+
+gruppo_analisi_1_ing_inf:
+  id: 10
+  name: analisi 1
+  max_members: -1
+  private: false
+  course: analisi_1
+  # course_id: 1
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
+
+gruppo_elettronica_ing_inf:
+  id: 11
+  name: elettronica
+  max_members: -1
+  private: false
+  # course: elettronica
+  course_id: 6
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
+
+gruppo_informatica_ing_inf:
+  id: 12
+  name: informatica
+  max_members: -1
+  private: false
+  # course: informatica
+  course_id: 2
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
+
+gruppo_analisi_1_ing_mec:
+  id: 13
+  name: analisi 1
+  max_members: -1
+  private: false
+  # course: analisi_1
+  course_id: 1
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
+
+gruppo_fisica_ing_mec:
+  id: 14
+  name: fisica
+  max_members: -1
+  private: false
+  # course: fisica
+  course_id: 7
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
+
+gruppo_meccanica_ing_mec:
+  id: 15
+  name: meccanica
+  max_members: -1
+  private: false
+  # course: meccanica
+  course_id: 4
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
+
+gruppo_analisi_2_ing_mag:
+  id: 16
+  name: analisi 2
+  max_members: -1
+  private: false
+  # course: analisi_2
+  course_id: 3
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
+
+gruppo_meccatronica_ing_mag:
+  id: 17
+  name: meccatronica
+  max_members: -1
+  private: false
+  # course: meccatronica
+  course_id: 5
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
