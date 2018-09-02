@@ -14,71 +14,26 @@
 </head>
 
 <body class="bg-light">
-  <nav class="navbar navbar-dark bg-dark p-1 shadow">
-    <a class="navbar-brand col-sm-12 col-md-3 mr-0 text-center col-lg-2" href="#">Unife Study Groups</a>
-    <form class="col-9 col-sm-10 col-md-7 col-lg-9" type="POST" action="/groups">
-      <input class="form-control form-control-dark text-center text-md-left" type="text" placeholder="Cerca gruppi" aria-label="Search" name="query">
-    </form>
-    <ul class="navbar-nav align-items-center col-3 col-sm-2 col-md-2 col-lg-1 px-3">
-      <li class="nav-item text-nowrap">
-        <a class="nav-link" href="/logout">Logout</a>
-      </li>
-    </ul>
-  </nav>
+  <%= render "nav" %>
   
   <div class="container-fluid main-container">
     <div class="row h-100">
       <div class="col-md-3 col-lg-2 col-xl-2 h-100 d-none d-md-block pl-2 py-2 pr-0">
-        <div class="container-fluid h-100 d-flex flex-column pl-2 py-2 pr-0">
-          <div class="row flex-grow-1">
-            <div class="col-12">
-              <div class="card card-chat shadow rounded-0 h-100">
-                <div class="card-header text-center shadow rounded-0">
-                  Gruppi in cui sei membro
-                </div>
-                <div class="card-body p-2">
-                  <div class="mb-2">
-                    <ul class="nav flex-column sidebar">
-                      <% current_user.groups.each do |group| %>
-                      <li class="nav-item">
-                        <% if @group.uuid == group.uuid %>
-                          <a class="nav-link active" href="/groups/<%= group.uuid %>">
-                        <% else %>
-                          <a class="nav-link" href="/groups/<%= group.uuid %>">
-                        <% end %>
-                          <span data-feather="users"></span>
-                          <%= group.name %>
-                        </a>
-                      </li>
-                      <% end %>
-                    </ul>
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-right p-2 mt-2 mb-1 text-muted add-group-sticky">
-                      <a class="d-flex align-items-center text-muted " href="#">
-                        <span data-feather="plus-circle" class="mr-2"></span> Crea Nuovo Gruppo
-                      </a>
-                    </h6>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <%= render "user_groups" %>
       </div>
       <div class="col-md-9 col-lg-10 h-100 p-2">
         <div class="container-fluid h-100 d-flex flex-column px-2 pb-2 pt-0">
-          <div class="row flex-shrink-0">
-            <div class="col-12 d-md-none">
+          <div class="row flex-shrink-0 d-md-none">
+            <div class="col-12">
               <h3 class="text-center">
-                Spagnolo 1
+                <%= @group.name %>
               </h3>
             </div>
           </div>
-          <div class="row flex-shrink-0">
+          <div class="row flex-shrink-0 d-xl-none">
 
             <div class="col-12">
-              <div class="btn-toolbar justify-content-center d-xl-none">
+              <div class="btn-toolbar justify-content-center">
                 <button class="btn btn-sm btn-outline-secondary dropdown-toggle shadow-sm d-md-none" data-target="#groupsModal" data-toggle="modal">
                   <span data-feather="users"></span>
                   Gruppi
@@ -286,7 +241,7 @@
                           <div class="calendar-modal-scroll">
                             <div class="row row-striped">
                               <div class="col-4 text-center">
-                                <div class="shadow ml-2">
+                                <div class="ml-2">
                                   <h1 class="display-5"><span class="badge badge-secondary rounded-0">8</span></h1>
                                   <h4>AGO</h4>
                                 </div>
@@ -303,7 +258,7 @@
                             </div>
                             <div class="row row-striped">
                               <div class="col-4 text-center">
-                                <div class="shadow ml-2">
+                                <div class="ml-2">
                                   <h1 class="display-5"><span class="badge badge-secondary rounded-0">9</span></h1>
                                   <h4 >AGO</h4>
                                 </div>
@@ -320,7 +275,7 @@
                             </div>
                             <div class="row row-striped">
                               <div class="col-4 text-center">
-                                <div class="shadow ml-2">
+                                <div class="ml-2">
                                   <h1 class="display-5"><span class="badge badge-secondary rounded-0">9</span></h1>
                                   <h4>AGO</h4>
                                 </div>
@@ -358,6 +313,22 @@
                   <div class="mb-2">
 
                     <div class="msg_history">
+                      <% @messages.pinned.each do |pinned| %>
+                        <div class="incoming_msg_flagged ml-1">
+                          <div class="incoming_msg_img_flagged"> <%= pinned.user.name %>: </div>
+                          <div class="received_msg_flagged">
+                            <div class="received_withd_msg_flagged">
+                              <p><%= pinned.text %></p>
+                              <span class="time_date"> 11:01 AM    |    Today    <span data-feather="map-pin"></span></span>
+                              <a class="d-flex align-items-center" href="#">
+                                <span data-feather="paperclip" class="mr-2"></span> Locandina Paintball 2018
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <hr/>
+                      <% end %>
+
                       <div class="incoming_msg_flagged ml-1">
                         <div class="incoming_msg_img_flagged"> Dean: </div>
                         <div class="received_msg_flagged">
@@ -483,7 +454,7 @@
                     <div class="container px-2">
                       <div class="row row-striped">
                         <div class="col-4 text-center">
-                          <div class="shadow">
+                          <div class="">
                             <h1 class="display-5"><span class="badge badge-secondary rounded-0">8</span></h1>
                             <h4>AGO</h4>
                           </div>
@@ -500,7 +471,7 @@
                       </div>
                       <div class="row row-striped">
                         <div class="col-4 text-center">
-                          <div class="shadow">
+                          <div class="">
                             <h1 class="display-5"><span class="badge badge-secondary rounded-0">9</span></h1>
                             <h4 >AGO</h4>
                           </div>
@@ -517,7 +488,7 @@
                       </div>
                       <div class="row row-striped">
                         <div class="col-4 text-center">
-                          <div class="shadow">
+                          <div class="">
                             <h1 class="display-5"><span class="badge badge-secondary rounded-0">9</span></h1>
                             <h4>AGO</h4>
                           </div>
@@ -550,7 +521,10 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
@@ -558,5 +532,18 @@
     <script>
       feather.replace()
     </script>
-  </body>
-  </html>
+
+    <script type="text/javascript">
+      $(document).ready(function (e){
+       var groupItems = $('#groups li');
+       groupItems.each(function(idx, li){
+        var group = $(li);
+        var name = group.find('a').clone().children().remove().end().text();
+        if (name.trim() === "<%= @group.name %>"){
+          group.find('a').addClass("active");
+        }
+      });
+     });
+   </script>
+ </body>
+ </html>

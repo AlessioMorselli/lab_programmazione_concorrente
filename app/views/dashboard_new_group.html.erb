@@ -7,63 +7,65 @@
   <title>Unife Study Groups</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link href="dashboard.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+
+  <%= stylesheet_link_tag "dashboard" %>
 </head>
 
 <body class="bg-light">
-  <nav class="navbar navbar-dark bg-dark p-1 shadow">
-    <a class="navbar-brand col-sm-12 col-md-3 mr-0 text-center col-lg-2" href="#">Unife Study Groups</a>
-    <input class="form-control form-control-dark col-9 col-sm-10 col-md-7 text-center text-md-left col-lg-9" type="text" placeholder="Cerca gruppi" aria-label="Search">
-    <ul class="navbar-nav align-items-center col-3 col-sm-2 col-md-2 col-lg-1 px-3">
-      <li class="nav-item text-nowrap">
-        <a class="nav-link" href="#">Logout</a>
-      </li>
-    </ul>
-  </nav>
-  
+  <%= render "nav" %>
+
   <div class="container-fluid main-container">
     <div class="row h-100">
-      <div class="col-12 h-100 p-2">
+
+      <div class="col-md-3 col-lg-2 col-xl-2 h-100 d-none d-md-block pl-2 py-2 pr-0">
+        <%= render "user_groups" %>
+      </div>
+
+      <div class="col-md-9 col-lg-10 h-100 p-2">
         <div class="container-fluid h-100 d-flex flex-column px-2 pb-2 pt-0">
-          <div class="row flex-grow-1 mt-2">
-
+          <div class="row flex-shrink-0 d-md-none">
             <div class="col-12">
-              <div class="card card-chat shadow rounded-0 h-100">
-                <div class="card-header shadow rounded-0 text-center">Creazione Nuovo Gruppo</div>
-                <div class="card-body p-2 d-flex justify-content-center">
-                  <div class="mb-2">
-
-
-                    <form class="form-new-group">
-                      <input type="text" id="inputName" class="form-control m-1 rounded-0 shadow-sm" placeholder="Nome" required autofocus>
-                      <input type="number" id="inputMaxMembers" class="form-control m-1 rounded-0 shadow-sm" placeholder="Massimo Nr. di Membri" required autofocus>
-                        <select class="form-control m-1 rounded-0 shadow-sm" id="course">
-                          <option>Spagnolo 1</option>
-                          <option>Analisi 1</option>
-                          <option>Fisica 1</option>
-                          <option>Fondamenti di Informatica</option>
-                        </select>
+              <%= render "user_groups_modal" %>
+            </div>
+          </div>
+        </div>
+        <div class="row flex-grow-1 mt-2">
+          <div class="col-12">
+            <div class="card card-chat shadow rounded-0 h-100">
+              <div class="card-header shadow rounded-0 text-center">Creazione Nuovo Gruppo</div>
+              <div class="card-body p-2 d-flex justify-content-center">
+                <div class="mb-2">
+                  <%= form_for @group, :html => {class: 'form-new-group'} do |f| %>
+                    <%= f.text_field :name, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: "Nome" , required: true %>
+                    <%= f.number_field :max_members, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: "Massimo Nr. di Membri", id: "numberBox", value: "", required: true %>
+                    <select class="form-control m-1 rounded-0 shadow-sm" id="degree">
+                      <option selected>Scegli il Corso di Studio (opzionale)...</option>
+                      <% @degrees.each do |degree| %>
+                      <option value="<%= degree.id %>" years="<%= degree.years %>"><%= degree.name %></option>
+                      <% end %>
+                    </select>
                       <div class="form-check text-center my-3">
                         <label class="form-check-label">
-                          <input type="checkbox" class="form-check-input" value="">Questo Gruppo é Privato
+                          <%= f.check_box :private, class: "form-check-input" %>Questo Gruppo é Privato
                         </label>
                       </div>
-                      <button class="btn btn-lg btn-secondary btn-block m-1 shadow-sm" type="submit">Crea Gruppo</button>
-                    </form>
-                  </div>
+                      <%= f.submit "Crea Gruppo", :class => "btn btn-lg btn-secondary btn-block m-1 shadow-sm" %>
+                  <% end %>
+
                 </div>
-
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
@@ -71,6 +73,109 @@
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script>
       feather.replace()
+    </script>
+
+    <script type="text/javascript">
+      function selection (){
+        var optionSelected = $('option:selected', this);
+        var valueSelected = this.value;
+        var yearsSelected = optionSelected.attr('years');
+        var yearSelector = $("<select class='form-control m-1 rounded-0 shadow-sm' id='year' required></select>");
+        if (typeof yearsSelected !== 'undefined'){
+          if ($('#year').length == 0){
+            $('#degree').after(yearSelector);
+            $('#year').on('change', getCourses);
+          }
+
+          if ($('#course').length !== 0)
+            $('#course').remove();
+
+          $('#year').empty();
+
+          $('#year').append($('<option>', {
+            selected: true,
+            text: "Scegli l'Anno...",
+          }));
+          for (i = 0; i < yearsSelected; i++) {
+            $('#year').append($('<option>', {
+              value: i + 1,
+              text: (i + 1).toString(),
+            }));
+          }
+        } else {
+          if ($('#year').length !== 0)
+            $('#year').remove();
+          if ($('#course').length !== 0)
+            $('#course').remove();
+        }
+      }
+
+      function getCourses (){
+        var courseSelector = $('<select class="form-control m-1 rounded-0 shadow-sm" required="required" name="group[course_id]" id="course"></select>');
+        if (typeof $('#year').find(':selected').attr('selected') == 'undefined'){
+          if ($('#course').length == 0)
+            $('#year').after(courseSelector);
+
+          $('#course').empty();
+
+          $('#course').append($('<option>', {
+            selected: true,
+            text: "Scegli l'Insegnamento...",
+          }));
+
+          $.ajax({
+            url: "/degrees/" + $('#degree option:selected').val() + "/courses",
+            type: 'get',
+            data: {
+              year: $('#year option:selected').val(),
+            },
+            success: function(response) {
+              for (i=0; i < response.length; i++){
+                $('#course').append($('<option>', {
+                  value: response[i]['id'],
+                  text: response[i]['name'],
+                }));
+              }
+            },
+            error: function(xhr) {
+            }
+          });
+        } else {
+          if ($('#course').length !== 0)
+            $('#course').remove();
+        }
+      }
+
+      $(document).ready(selection);
+
+      $(document).ready(function(){
+        $('#degree').on('change', selection);
+      });
+
+    </script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#numberBox").keydown(function (e) {
+              // Allow: backspace, delete, tab, escape, enter and .
+              if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                   // Allow: Ctrl/cmd+A
+                   (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                   // Allow: Ctrl/cmd+C
+                   (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+                   // Allow: Ctrl/cmd+X
+                   (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+                   // Allow: home, end, left, right
+                   (e.keyCode >= 35 && e.keyCode <= 39)) {
+                       // let it happen, don't do anything
+                     return;
+                   }
+              // Ensure that it is a number and stop the keypress
+              if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+              }
+            });
+      });
     </script>
 
   </body>
