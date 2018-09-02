@@ -172,7 +172,6 @@ class GroupTest < ActiveSupport::TestCase
 
   test "is_official should return true if the group is linked to a degree_course" do
     @group.save
-    DegreeCourse.where("degrees_courses.group_id IS NULL").first.update_attribute(:group_id, @group.id)
     group_id = DegreeCourse.where("degrees_courses.group_id IS NOT NULL").first.group_id
     assert Group.find(group_id).is_official
   end

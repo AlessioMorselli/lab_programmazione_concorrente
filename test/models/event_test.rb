@@ -8,28 +8,28 @@ class EventTest < ActiveSupport::TestCase
 
     st_time = now + 2.hours
     @group = groups(:pirati)
-    @event = Event.new(start_time: st_time, end_time: st_time + 2.hours, place: "Aula 20", description: "Generic description", group_id: @group.id)
+    @event = Event.new(name: "evento", start_time: st_time, end_time: st_time + 2.hours, place: "Aula 20", description: "Generic description", group_id: @group.id)
 
     @events_this_hour = [
-      Event.new(start_time: now+1.minute, end_time: now+2.hours),
-      Event.new(start_time: now+20.minutes, end_time: now+2.hours),
-      Event.new(start_time: now+40.minutes, end_time: now+2.hours),
-      Event.new(start_time: now+45.minutes, end_time: now+2.hours),
+      Event.new(name: "evento", start_time: now+1.minute, end_time: now+2.hours),
+      Event.new(name: "evento", start_time: now+20.minutes, end_time: now+2.hours),
+      Event.new(name: "evento", start_time: now+40.minutes, end_time: now+2.hours),
+      Event.new(name: "evento", start_time: now+45.minutes, end_time: now+2.hours),
     ]
 
     @events_this_week = [
-      Event.new(start_time: now+1.day, end_time: now+1.day+2.hours),
-      Event.new(start_time: now+2.day, end_time: now+2.day+2.hours),
-      Event.new(start_time: now+3.day, end_time: now+3.day+2.hours),
-      Event.new(start_time: now+4.day, end_time: now+4.day+2.hours),
-      Event.new(start_time: now+5.day, end_time: now+5.day+2.hours),
-      Event.new(start_time: now+6.day, end_time: now+6.day+2.hours),
+      Event.new(name: "evento", start_time: now+1.day, end_time: now+1.day+2.hours),
+      Event.new(name: "evento", start_time: now+2.day, end_time: now+2.day+2.hours),
+      Event.new(name: "evento", start_time: now+3.day, end_time: now+3.day+2.hours),
+      Event.new(name: "evento", start_time: now+4.day, end_time: now+4.day+2.hours),
+      Event.new(name: "evento", start_time: now+5.day, end_time: now+5.day+2.hours),
+      Event.new(name: "evento", start_time: now+6.day, end_time: now+6.day+2.hours),
     ]
 
     @events_next_week = [
-      Event.new(start_time: now+8.day, end_time: now+8.day+2.hours),
-      Event.new(start_time: now+9.day, end_time: now+9.day+2.hours),
-      Event.new(start_time: now+10.day, end_time: now+10.day+2.hours),
+      Event.new(name: "evento", start_time: now+8.day, end_time: now+8.day+2.hours),
+      Event.new(name: "evento", start_time: now+9.day, end_time: now+9.day+2.hours),
+      Event.new(name: "evento", start_time: now+10.day, end_time: now+10.day+2.hours),
     ]
 
   end
@@ -63,6 +63,16 @@ class EventTest < ActiveSupport::TestCase
     assert_not @event.save
   end
 
+  test "should not save if name is not supplied" do
+    @event.name = nil
+    assert_not @event.save
+  end
+
+  test "should not save if end time is in a different day than start time" do
+    @event.end_time = @event.start_time + 1.day
+    assert_not @event.save
+  end
+
   test "duration should return the difference between end_time and start_time" do
     @event.end_time = @event.start_time + 2.hour + 20.minutes
     assert_equal @event.duration, "02:20:00"
@@ -84,6 +94,18 @@ class EventTest < ActiveSupport::TestCase
     group.events << @events_this_week
 
     assert_equal @events_this_hour.size, group.events.next(1.hour).count
+  end
+
+  test "after create should create repeated events if repeated is supplied" do
+    event = Event.new(repeated: 7.day, repeated_for: 10, name: "evento con nome unico", start_time: Time.now+1.hour, end_time: Time.now + 2.hours, place: "Aula 20", description: "Generic description", group_id: @group.id)
+    assert event.save
+    assert_equal event.repeated_for, Event.where("name = ?", event.name).count
+  end
+
+  test "after create should not create repeated events if repeated is not supplied" do
+    @event.name = "evento con un nome unico"
+    assert @event.save
+    assert 1, Event.where("name = ?", @event.name).count
   end
 
 end

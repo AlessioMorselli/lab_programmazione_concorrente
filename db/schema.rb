@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 501) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "group_id"
+    t.string "name", null: false
     t.index ["group_id"], name: "index_events_on_group_id"
   end
 
