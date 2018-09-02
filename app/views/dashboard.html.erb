@@ -319,57 +319,25 @@
                           <div class="received_msg_flagged">
                             <div class="received_withd_msg_flagged">
                               <p><%= pinned.text %></p>
-                              <span class="time_date"> 11:01 AM    |    Today    <span data-feather="map-pin"></span></span>
+                              <% time = pinned.updated_at.strftime("%I:%M %p") %>
+                              <% if pinned.updated_at.strftime("%d/%m/%Y").to_s.eql? Time.now.strftime("%d/%m/%Y").to_s %>
+                                <% date = "Today" %>
+                              <% elsif pinned.updated_at.strftime("%d/%m/%Y").to_s.eql? (Time.now - 1.days).strftime("%d/%m/%Y").to_s %>
+                                <% date = "Yesterday" %>
+                              <% else %>
+                                <% date = pinned.updated_at.strftime("%B %-d") %>
+                              <% end %>
+                              <span class="time_date"> <%= time %>    |    <%= date %>  <a href="#"><span data-feather="trash"></span></a></span>
+                              <!--
                               <a class="d-flex align-items-center" href="#">
                                 <span data-feather="paperclip" class="mr-2"></span> Locandina Paintball 2018
                               </a>
+                              -->
                             </div>
                           </div>
                         </div>
                         <hr/>
                       <% end %>
-
-                      <div class="incoming_msg_flagged ml-1">
-                        <div class="incoming_msg_img_flagged"> Dean: </div>
-                        <div class="received_msg_flagged">
-                          <div class="received_withd_msg_flagged">
-                            <p>Oggi a Greendale ci sarà una sfida a Paintball!</p>
-                            <span class="time_date"> 11:01 AM    |    Today    <span data-feather="map-pin"></span></span>
-                            <a class="d-flex align-items-center" href="#">
-                              <span data-feather="paperclip" class="mr-2"></span> Locandina Paintball 2018
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <hr/>
-
-                      <div class="incoming_msg_flagged ml-1">
-                        <div class="incoming_msg_img_flagged"> Dean: </div>
-                        <div class="received_msg_flagged">
-                          <div class="received_withd_msg_flagged">
-                            <p>Oggi a Greendale ci sarà una sfida a Paintball!</p>
-                            <span class="time_date"> 11:01 AM    |    Today    <span data-feather="map-pin"></span></span>
-                            <a class="d-flex align-items-center" href="#">
-                              <span data-feather="paperclip" class="mr-2"></span> Locandina Paintball 2018
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <hr/>
-
-                      <div class="incoming_msg_flagged ml-1">
-                        <div class="incoming_msg_img_flagged"> Dean: </div>
-                        <div class="received_msg_flagged">
-                          <div class="received_withd_msg_flagged">
-                            <p>Oggi a Greendale ci sarà una sfida a Paintball!</p>
-                            <span class="time_date"> 11:01 AM    |    Today    <span data-feather="map-pin"></span></span>
-                            <a class="d-flex align-items-center" href="#">
-                              <span data-feather="paperclip" class="mr-2"></span> Locandina Paintball 2018
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <hr/>
 
                     </div>
 
@@ -384,46 +352,27 @@
                 <div class="card-body p-2">
                   <div class="mb-2">
 
-                    <div class="received_msg ml-1">
-                      <div class="received_withd_msg">
-                        Britta:
-                        <p>Ma quindi cosa dobbiamo studiare?</p>
-                        <span class="time_date"> 11:01 AM    |    June 9    <a href="#"><span data-feather="map-pin"></span></span></a></span>
-                      </div>
-                    </div>
-
-                    <div class="outgoing_msg">
-                      <div class="sent_msg">
-                        <p>Mah, io direi di iniziare con i vocaboli</p>
-                        <span class="time_date"> 11:01 AM    |    June 9    <a class="mx-1" href="#"><span data-feather="map-pin"></span></a><a class="mr-1" href="#"><span data-feather="edit"></span></a><a class="mr-1" href="#"><span data-feather="save"></span></a><a href="#"><span data-feather="trash"></span></a></span>
-                      </div>
-                    </div>
-
-                    <div class="received_msg ml-1">
-                      <div class="received_withd_msg">
-                        Abed:
-                        <p>(Citazione di un film)</p>
-                        <span class="time_date"> 11:01 AM    |    Yesterday    <a href="#"><span data-feather="map-pin"></span></span></a></span>
-                      </div>
-                    </div>
-
-                    <div class="outgoing_msg">
-                      <div class="sent_msg">
-                        <p>Abed, nessuno capisce le tue citazioni!</p>
-                        <span class="time_date"> 11:01 AM    |    Today    <a class="mx-1" href="#"><span data-feather="map-pin"></span></a><a class="mr-1"  href="#"><span data-feather="edit"></span></a><a class="mr-1"  href="#"><span data-feather="save"></span></a><a href="#"><span data-feather="trash"></span></a></span> 
-                      </div>
-                    </div>
-
-                    <div class="received_msg ml-1">
-                      <div class="received_withd_msg">
-                        Dean:
-                        <p>Oggi a Greendale ci sarà una sfida a Paintball!</p>
-                        <span class="time_date"> 11:01 AM    |    Today</span>
-                        <a class="d-flex align-items-center mb-2" href="#">
-                          <span data-feather="paperclip" class="mr-2"></span> Locandina Paintball 2018
-                        </a>
-                      </div>
-                    </div>
+                    <% @messages.each do |message| %>
+                      <% if message.user_id == current_user.id %>
+                        <div class="outgoing_msg">
+                          <div class="sent_msg">
+                            <p><%= message.text %></p>
+                            <span class="time_date"> 11:01 AM    |    June 9    <a class="mx-1" href="#"><span data-feather="bookmark"></span></a><a class="mr-1" href="#"><span data-feather="edit"></span></a><a class="mr-1" href="#"><span data-feather="save"></span></a><a href="#"><span data-feather="trash"></span></a></span>
+                            <a class="d-flex align-items-center mb-2" href="#">
+                              <span data-feather="paperclip" class="mr-2"></span> Locandina Paintball 2018
+                            </a>
+                          </div>
+                        </div>
+                      <% else %>
+                        <div class="received_msg ml-1">
+                          <div class="received_withd_msg">
+                            <%= message.user.name %>:
+                            <p><%= message.text %></p>
+                            <span class="time_date"> 11:01 AM    |    June 9    <a href="#"><span data-feather="bookmark"></span></span></a></span>
+                          </div>
+                        </div>
+                      <% end %>
+                    <% end %>
 
                   </div>
                 </div>
@@ -452,61 +401,33 @@
                   <div class="mb-2">
 
                     <div class="container px-2">
-                      <div class="row row-striped">
-                        <div class="col-4 text-center">
-                          <div class="">
-                            <h1 class="display-5"><span class="badge badge-secondary rounded-0">8</span></h1>
-                            <h4>AGO</h4>
+
+                      <% @events.each do |event| %>
+                        <div class="row row-striped">
+                          <div class="col-3 text-center pr-0">
+                            <div class="">
+                              <h1 class="display-5"><span class="badge badge-secondary rounded-0"><%= event.start_time.strftime("%-d") %></span></h1>
+                              <h4><%= event.start_time.strftime("%^b") %></h4>
+                            </div>
+                          </div>
+                          <div class="col-9 pl-0">
+                            <!--
+                            <h4 class="text-uppercase"><strong>Evento</strong></h4>
+                            -->
+                            <ul class="list-inline">
+                              <li class="list-inline-item text-secondary font-075"><i class="fa fa-calendar-o" aria-hidden="true"></i><%= event.start_time.strftime("%A") %></li>
+                              <li class="list-inline-item text-secondary font-075"><i class="fa fa-clock-o" aria-hidden="true"></i><%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %></li>
+                              <li class="list-inline-item text-secondary font-075"><i class="fa fa-location-arrow" aria-hidden="true"></i><%= event.place %></li>
+                            </ul>
+                            <p><%= event.description %></p>
                           </div>
                         </div>
-                        <div class="col-8 pl-0">
-                          <h4 class="text-uppercase"><strong>6 Stagioni!</strong></h4>
-                          <ul class="list-inline">
-                            <li class="list-inline-item text-secondary font-075"><i class="fa fa-calendar-o" aria-hidden="true"></i> Mercoledì</li>
-                            <li class="list-inline-item text-secondary font-075"><i class="fa fa-clock-o" aria-hidden="true"></i> 12:30 PM - 2:00 PM</li>
-                            <li class="list-inline-item text-secondary font-075"><i class="fa fa-location-arrow" aria-hidden="true"></i>Biblioteca</li>
-                          </ul>
-                          <p>Recap delle 6 stagioni, prima del film!</p>
-                        </div>
-                      </div>
-                      <div class="row row-striped">
-                        <div class="col-4 text-center">
-                          <div class="">
-                            <h1 class="display-5"><span class="badge badge-secondary rounded-0">9</span></h1>
-                            <h4 >AGO</h4>
-                          </div>
-                        </div>
-                        <div class="col-8 pl-0">
-                          <h4 class="text-uppercase"><strong>Nuovo film</strong></h4>
-                          <ul class="list-inline">
-                            <li class="list-inline-item text-secondary font-075"><i class="fa fa-calendar-o" aria-hidden="true"></i> Giovedì</li>
-                            <li class="list-inline-item text-secondary font-075"><i class="fa fa-clock-o" aria-hidden="true"></i> 2:30 PM - 4:00 PM</li>
-                            <li class="list-inline-item text-secondary font-075"><i class="fa fa-location-arrow" aria-hidden="true"></i>Biblioteca</li>
-                          </ul>
-                          <p>Tutti pronti che si gira il film!</p>
-                        </div>
-                      </div>
-                      <div class="row row-striped">
-                        <div class="col-4 text-center">
-                          <div class="">
-                            <h1 class="display-5"><span class="badge badge-secondary rounded-0">9</span></h1>
-                            <h4>AGO</h4>
-                          </div>
-                        </div>
-                        <div class="col-8 pl-0">
-                          <h4 class="text-uppercase"><strong>Nuovo film</strong></h4>
-                          <ul class="list-inline">
-                            <li class="list-inline-item text-secondary font-075"><i class="fa fa-calendar-o" aria-hidden="true"></i> Giovedì</li>
-                            <li class="list-inline-item text-secondary font-075"><i class="fa fa-clock-o" aria-hidden="true"></i> 2:30 PM - 4:00 PM</li>
-                            <li class="list-inline-item text-secondary font-075"><i class="fa fa-location-arrow" aria-hidden="true"></i>Biblioteca</li>
-                          </ul>
-                          <p>Tutti pronti che si gira il film!</p>
-                        </div>
-                      </div>
+                      <% end %>
+
                     </div>
 
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-right p-2 mt-2 mb-1 text-muted add-group-sticky mx-0">
-                      <a class="d-flex align-items-center text-muted " href="#">
+                      <a class="d-flex align-items-center text-muted " href="/groups/<%= @group.uuid %>/events/new">
                         <span data-feather="plus-circle" class="mr-2"></span> Crea Nuovo Evento 
                       </a>
                     </h6>
