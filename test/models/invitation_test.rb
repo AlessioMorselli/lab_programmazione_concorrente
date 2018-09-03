@@ -14,6 +14,11 @@ class InvitationTest < ActiveSupport::TestCase
     assert @invitation.save
   end
 
+  test "should not save if expiration_date is before now" do
+    @invitation.expiration_date = Time.now - 1.hour
+    assert_not @invitation.save
+  end
+
   test "should not save if the couple user_id, group_id is not unique (even if user_id is nil)" do
     inv1 = invitations(:invito_ninja_giorgio)
     inv2 = invitations(:invito_ninja_giovanni)
@@ -22,16 +27,20 @@ class InvitationTest < ActiveSupport::TestCase
 
     inv1.user_id = @user.id
     inv1.group_id = @group.id
+    inv1.expiration_date = nil
     assert inv1.save
     inv2.user_id = @user.id
     inv2.group_id = @group.id
+    inv2.expiration_date = nil
     assert_not inv2.save
 
     inv3.user_id = nil
     inv3.group_id = @group.id
+    inv3.expiration_date = nil
     assert inv3.save
     inv4.user_id = nil
     inv4.group_id = @group.id
+    inv4.expiration_date = nil
     assert_not inv4.save
   end
 
@@ -40,10 +49,10 @@ class InvitationTest < ActiveSupport::TestCase
     assert @invitation.url_string
   end
 
-  test "expired should return if the expiration_date was passed" do
+  test "is_expired should return if the expiration_date was passed" do
     @invitation.expiration_date = 1.week.ago
     @invitation.save
-    assert @invitation.expired?
+    assert @invitation.is_expired?
   end
 
   test "accept should add the user to the group and not destroy the invitation if the invitation is for everyone and it's not expired" do
@@ -79,4 +88,28 @@ class InvitationTest < ActiveSupport::TestCase
     assert_not @invitation.accept(user)
   end
 
+  test "not_expired should return invitations where expiration date is not passed or is null" do
+    invitations = Invitation.not_expired
+    assert invitations.where("expiration_date > ?", Time.now).count > 0
+    assert invitations.where("expiration_date IS NULL").count > 0
+    assert_equal 0, invitations.where("expiration_date < ?", Time.now).count
+  end
+
+  test "save should delete the existing invitation if it's expired and create a new one" do
+    assert @invitation.save
+    @invitation.update_attribute(:expiration_date, Time.now-1.hour)
+    new_invitation = Invitation.new(group_id: @group.id, user_id: @user.id, expiration_date: Time.now+1.hour)
+    assert new_invitation.save
+    assert_equal 1, Invitation.where(group_id: @group.id).where(user_id: @user.id).count
+    assert_equal (Time.now+1.hour).utc.to_a, new_invitation.expiration_date.to_a
+  end
+
+  test "save should not create a new invitation if there is already one not expired" do
+    assert @invitation.save
+    @invitation.update_attribute(:expiration_date, Time.now+1.hour)
+    new_invitation = Invitation.new(group_id: @group.id, user_id: @user.id, expiration_date: Time.now+2.hours)
+    assert_not new_invitation.save
+    assert_equal 1, Invitation.where(group_id: @group.id).where(user_id: @user.id).count
+    assert_equal (Time.now+1.hour).utc.to_a, @invitation.expiration_date.to_a
+  end
 end
