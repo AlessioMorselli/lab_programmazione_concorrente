@@ -66,6 +66,7 @@ class InvitationsController < ApplicationController
         else
             flash.now[:danger] = "Qualcosa è andato storto e l'invito non è andato a buon fine!"
             # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
+            redirect_to groups_path
         end
     end
 

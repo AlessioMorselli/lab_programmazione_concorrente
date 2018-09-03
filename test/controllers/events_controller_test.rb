@@ -86,6 +86,8 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
     get new_group_event_path(group_uuid: @group.uuid)
     assert_response :success
+
+    assert_select "form[id='new_event']", count: 1
   end
 
   test "should create a new event" do
@@ -95,6 +97,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       post group_events_path(group_uuid: @group.uuid), params: { event: {
         start_time: DateTime.now + 1.hours,
         end_time: DateTime.now + 3.hours,
+        name: "Studio Programmazione concorrente",
         place: "Aula studio - Secondo piano",
         description: "2 ore di studio di programmazione concorrente",
         group_id: @group.id
@@ -112,6 +115,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       post group_events_path(group_uuid: @group.uuid), params: { event: {
         start_time: DateTime.now - 1.hours,
         end_time: DateTime.now + 3.hours,
+        name: "Studio Programmazione concorrente",
         place: "Aula studio - Secondo piano",
         description: "4 ore di studio di programmazione concorrente",
         group_id: @group.id
@@ -129,6 +133,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       post group_events_path(group_uuid: @group.uuid), params: { event: {
         start_time: DateTime.now + 3.hours,
         end_time: DateTime.now + 1.hours,
+        name: "Studio Programmazione concorrente",
         place: "Aula studio - Secondo piano",
         description: "-2 ore di studio di programmazione concorrente",
         group_id: @group.id
@@ -232,6 +237,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       post group_events_path(group_uuid: @group.uuid), params: { event: {
         start_time: DateTime.now + 1.hours,
         end_time: DateTime.now + 3.hours,
+        name: "Studio Programmazione concorrente",
         place: "Aula studio - Secondo piano",
         description: "2 ore di studio di programmazione concorrente",
         group_id: @group.id
@@ -317,6 +323,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       post group_events_path(group_uuid: @group.uuid), params: { event: {
         start_time: DateTime.now + 1.hours,
         end_time: DateTime.now + 3.hours,
+        name: "Studio Programmazione concorrente",
         place: "Aula studio - Secondo piano",
         description: "2 ore di studio di programmazione concorrente",
         group_id: @group.id
