@@ -26,17 +26,19 @@
         <div class="container-fluid h-100 d-flex flex-column px-2 pb-2 pt-0">
           <div class="row flex-shrink-0 d-md-none">
             <div class="col-12">
-              <%= render "user_groups_modal" %>
+              <div class="btn-toolbar justify-content-center">
+                <%= render "user_groups_modal" %>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="row flex-grow-1 mt-2">
-          <div class="col-12">
-            <div class="card card-chat shadow rounded-0 h-100">
-              <div class="card-header shadow rounded-0 text-center">Creazione Nuovo Gruppo</div>
-              <div class="card-body p-2 d-flex justify-content-center">
-                <div class="mb-2">
-                  <%= form_for @group, :html => {class: 'form-new-group'} do |f| %>
+          <div class="row flex-grow-1 mt-2">
+            <div class="col-12">
+              <div class="card card-chat shadow rounded-0 h-100">
+                <div class="card-header shadow rounded-0 text-center">Creazione Nuovo Gruppo</div>
+                <div class="card-body p-2 d-flex justify-content-center">
+                  <div class="mb-2">
+                    
+                    <%= form_for @group, :html => {class: 'form-new-group'} do |f| %>
                     <%= f.text_field :name, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: "Nome" , required: true %>
                     <%= f.number_field :max_members, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: "Massimo Nr. di Membri", id: "numberBox", value: "", required: true %>
                     <select class="form-control m-1 rounded-0 shadow-sm" id="degree">
@@ -45,17 +47,17 @@
                       <option value="<%= degree.id %>" years="<%= degree.years %>"><%= degree.name %></option>
                       <% end %>
                     </select>
-                      <div class="form-check text-center my-3">
-                        <label class="form-check-label">
-                          <%= f.check_box :private, class: "form-check-input" %>Questo Gruppo é Privato
-                        </label>
-                      </div>
-                      <%= f.submit "Crea Gruppo", :class => "btn btn-lg btn-secondary btn-block m-1 shadow-sm" %>
-                  <% end %>
+                    <div class="form-check text-center my-3">
+                      <label class="form-check-label">
+                        <%= f.check_box :private, class: "form-check-input" %>Questo Gruppo é Privato
+                      </label>
+                    </div>
+                    <%= f.submit "Crea Gruppo", :class => "btn btn-lg btn-secondary btn-block m-1 shadow-sm" %>
+                    <% end %>
 
+                  </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>

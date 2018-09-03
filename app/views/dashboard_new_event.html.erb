@@ -33,37 +33,38 @@
           <div class="row flex-shrink-0 d-xl-none">
 
             <div class="col-12">
-              <%= render "user_groups_modal" %>
-            </div>
-          </div>
-        </div>
-        <div class="row flex-grow-1 mt-2">
-
-          <div class="col-12">
-            <div class="card card-chat shadow rounded-0 h-100">
-              <div class="card-header shadow rounded-0 text-center">Creazione Nuovo Evento</div>
-              <div class="card-body p-2 d-flex justify-content-center">
-                <div class="mb-2">
-
-
-                  <form class="form-new-event">
-                    <div class="input-group date m-1 mb-1">
-                      <input type="text" class="form-control mr-1 rounded-0 shadow-sm" name="datetimes" placeholder="Inizio Evento" required>
-                      <input type="text" class="form-control rounded-0 shadow-sm" name="datetimes" placeholder="Fine Evento" required>
-                    </div>
-
-                    <label for="inputPlace" class="sr-only">Luogo</label>
-                    <input type="text" id="inputPlace" class="form-control m-1 rounded-0 shadow-sm" placeholder="Luogo" required autofocus>
-                    <label for="inputDescription" class="sr-only">Descrizione</label>
-                    <textarea rows="4" id="inputDescription" class="form-control m-1 rounded-0 shadow-sm" placeholder="Descrizione" required></textarea>
-                    <button class="btn btn-lg btn-secondary btn-block m-1 shadow-sm" type="submit">Crea Evento</button>
-                  </form>
-                </div>
+              <div class="btn-toolbar justify-content-center">
+                <%= render "user_groups_modal" %>
               </div>
-
             </div>
           </div>
+          <div class="row flex-grow-1 mt-2">
 
+            <div class="col-12">
+              <div class="card card-chat shadow rounded-0 h-100">
+                <div class="card-header shadow rounded-0 text-center">Creazione Nuovo Evento</div>
+                <div class="card-body p-2 d-flex justify-content-center">
+                  <div class="mb-2">
+
+
+                    <form class="form-new-event">
+                      <div class="input-group date m-1 mb-1">
+                        <input type="text" class="form-control mr-1 rounded-0 shadow-sm" name="datetimes" placeholder="Inizio Evento" required>
+                        <input type="text" class="form-control rounded-0 shadow-sm" name="datetimes" placeholder="Fine Evento" required>
+                      </div>
+
+                      <label for="inputPlace" class="sr-only">Luogo</label>
+                      <input type="text" id="inputPlace" class="form-control m-1 rounded-0 shadow-sm" placeholder="Luogo" required autofocus>
+                      <label for="inputDescription" class="sr-only">Descrizione</label>
+                      <textarea rows="4" id="inputDescription" class="form-control m-1 rounded-0 shadow-sm" placeholder="Descrizione" required></textarea>
+                      <button class="btn btn-lg btn-secondary btn-block m-1 shadow-sm" type="submit">Crea Evento</button>
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -99,5 +100,18 @@
         });
       });
     </script>
+
+    <script type="text/javascript">
+      $(document).ready(function (e){
+       var groupItems = $('#groups li');
+       groupItems.each(function(idx, li){
+        var group = $(li);
+        var name = group.find('a').clone().children().remove().end().text();
+        if (name.trim() === "<%= @group.name %>"){
+          group.find('a').addClass("active");
+        }
+      });
+     });
+   </script>
   </body>
   </html>

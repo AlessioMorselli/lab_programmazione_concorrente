@@ -11,6 +11,7 @@
 
   <%= stylesheet_link_tag "dashboard" %>
 
+  <%= csrf_meta_tag %>
 </head>
 
 <body class="bg-light">
@@ -34,132 +35,10 @@
 
             <div class="col-12">
               <div class="btn-toolbar justify-content-center">
-                <button class="btn btn-sm btn-outline-secondary dropdown-toggle shadow-sm d-md-none" data-target="#groupsModal" data-toggle="modal">
-                  <span data-feather="users"></span>
-                  Gruppi
-                </button>
-
-                <div class="modal fade" tabindex="-1" role="dialog" id="groupsModal">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content rounded-0">
-                      <div class="modal-header shadow">
-                        <h5 class="modal-title">Gruppi</h5>
-                        <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <ul class="nav flex-column nav-scroll">
-                          <li>
-                            <a class="nav-link text-primary" href="#">
-                              <span data-feather="users"></span>
-                              Spagnolo 1
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Fisica 1
-                            </a>
-                          </li>
-                          <li>
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Spagnolo 1
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Fisica 1
-                            </a>
-                          </li>
-                          <li>
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Spagnolo 1
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Fisica 1
-                            </a>
-                          </li>
-                          <li>
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Spagnolo 1
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Fisica 1
-                            </a>
-                          </li>
-                          <li>
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Spagnolo 1
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Fisica 1
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Fisica 1
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Fisica 1
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Fisica 1
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Spagnolo 1
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Fisica 1
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">
-                              <span data-feather="users"></span>
-                              Fisica 1
-                            </a>
-                          </li>
-                        </ul>
-
-                        <h6 class="sidebar-heading d-flex justify-content-between align-items-right px-3 mt-4 mb-1 text-muted">
-                          <a class="d-flex align-items-center text-muted " href="#" style="font-size: 0.75rem; text-transform: uppercase;">
-                            <span data-feather="plus-circle" class="mr-2"></span> Crea Nuovo Gruppo
-                          </a>
-                        </h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <%= render "user_groups_modal" %>
 
                 <button class="btn btn-sm btn-outline-secondary dropdown-toggle shadow-sm" data-target="#boardModal" data-toggle="modal">
-                  <span data-feather="map-pin"></span>
+                  <span data-feather="bookmark"></span>
                   Bacheca
                 </button>
 
@@ -313,6 +192,9 @@
                   <div class="mb-2">
 
                     <div class="msg_history">
+                      <% if @messages.to_a.size == 0 %>
+                        <p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
+                      <% end %>
                       <% @messages.pinned.each do |pinned| %>
                         <div class="incoming_msg_flagged ml-1">
                           <div class="incoming_msg_img_flagged"> <%= pinned.user.name %>: </div>
@@ -327,7 +209,7 @@
                               <% else %>
                                 <% date = pinned.updated_at.strftime("%B %-d") %>
                               <% end %>
-                              <span class="time_date"> <%= time %>    |    <%= date %>  <a href="#"><span data-feather="trash"></span></a></span>
+                              <span class="time_date"> <%= time %>    |    <%= date %>  <a class="unbookmark_message" message-id="<%= pinned.id %>" href="#"><span data-feather="x"></span></a></span>
                               <!--
                               <a class="d-flex align-items-center" href="#">
                                 <span data-feather="paperclip" class="mr-2"></span> Locandina Paintball 2018
@@ -350,25 +232,48 @@
               <div class="card card-chat shadow rounded-0 h-100">
                 <div class="card-header shadow rounded-0 text-center">Chat</div>
                 <div class="card-body p-2">
-                  <div class="mb-2">
+                  <div id="messages" class="mb-2">
 
-                    <% @messages.each do |message| %>
+                    <% if @messages.to_a.size == 0 %>
+                      <p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
+                    <% end %>
+
+                    <% @messages.reverse_order.each do |message| %>
+                      <% time = message.updated_at.strftime("%I:%M %p") %>
+                      <% if message.updated_at.strftime("%d/%m/%Y").to_s.eql? Time.now.strftime("%d/%m/%Y").to_s %>
+                        <% date = "Today" %>
+                      <% elsif message.updated_at.strftime("%d/%m/%Y").to_s.eql? (Time.now - 1.days).strftime("%d/%m/%Y").to_s %>
+                        <% date = "Yesterday" %>
+                      <% else %>
+                        <% date = message.updated_at.strftime("%B %-d") %>
+                      <% end %>
                       <% if message.user_id == current_user.id %>
-                        <div class="outgoing_msg">
+                        <div class="outgoing_msg my-2">
                           <div class="sent_msg">
-                            <p><%= message.text %></p>
-                            <span class="time_date"> 11:01 AM    |    June 9    <a class="mx-1" href="#"><span data-feather="bookmark"></span></a><a class="mr-1" href="#"><span data-feather="edit"></span></a><a class="mr-1" href="#"><span data-feather="save"></span></a><a href="#"><span data-feather="trash"></span></a></span>
+                            <p id="message_body" message-id="<%= message.id %>"><span><%= message.text %></span></p>
+                            <span class="time_date"> <%= time %>    |    <%= date %>
+                              <a class="edit_message mx-1" message-id="<%= message.id %>" href="#"><span data-feather="edit"></span></a>
+                              <a class="save_message mr-1 d-none" message-id="<%= message.id %>" href="#"><span data-feather="save"></span></a>
+                              <a class="delete_message mr-1" message-id="<%= message.id %>" href="#"><span data-feather="trash"></span></a>
+                              <% if (message.pinned == false) %>
+                                <a class="bookmark_message" message-id="<%= message.id %>" href="#"><span data-feather="bookmark"></span></a>
+                              <% end %>
+                            </span>
                             <a class="d-flex align-items-center mb-2" href="#">
                               <span data-feather="paperclip" class="mr-2"></span> Locandina Paintball 2018
                             </a>
                           </div>
                         </div>
                       <% else %>
-                        <div class="received_msg ml-1">
+                        <div class="received_msg ml-1 my-2">
                           <div class="received_withd_msg">
                             <%= message.user.name %>:
                             <p><%= message.text %></p>
-                            <span class="time_date"> 11:01 AM    |    June 9    <a href="#"><span data-feather="bookmark"></span></span></a></span>
+                            <span class="time_date"> <%= time %>    |    <%= date %>    
+                              <% if (message.pinned == false) %>
+                                <a class="bookmark_message" message-id="<%= message.id %>" href="#"><span data-feather="bookmark"></span></a>
+                              <% end %>
+                            </span>
                           </div>
                         </div>
                       <% end %>
@@ -381,12 +286,12 @@
                     <div class="row">
                       <div class="col-8 px-1">
                         <div class="input_msg_write">
-                          <input class="write_msg" placeholder="Scrivi un messaggio" type="text">
+                          <input id="send_message" class="write_msg" placeholder="Scrivi un messaggio" type="text">
                         </div>
                       </div>
                       <div class="col-4 px-1 text-right my-auto">
                         <button class="msg_btn shadow-sm" type="button"><span data-feather="paperclip"></span></button>
-                        <button class="msg_btn shadow-sm" type="button"><span data-feather="send"></span></button>
+                        <button id="send_button" class="msg_btn shadow-sm" type="button"><span data-feather="send"></span></button>
                       </div>
                     </div>
                   </div>
@@ -402,6 +307,10 @@
 
                     <div class="container px-2">
 
+                      <% if @events.to_a.size == 0 %>
+                        <p class="p-2 text-center">Al momento non sono presenti eventi.</p>
+                      <% end %>
+
                       <% @events.each do |event| %>
                         <div class="row row-striped">
                           <div class="col-3 text-center pr-0">
@@ -411,9 +320,6 @@
                             </div>
                           </div>
                           <div class="col-9 pl-0">
-                            <!--
-                            <h4 class="text-uppercase"><strong>Evento</strong></h4>
-                            -->
                             <ul class="list-inline">
                               <li class="list-inline-item text-secondary font-075"><i class="fa fa-calendar-o" aria-hidden="true"></i><%= event.start_time.strftime("%A") %></li>
                               <li class="list-inline-item text-secondary font-075"><i class="fa fa-clock-o" aria-hidden="true"></i><%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %></li>
@@ -426,7 +332,7 @@
 
                     </div>
 
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-right p-2 mt-2 mb-1 text-muted add-group-sticky mx-0">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-right ml-2 p-2 mt-2 mb-1 text-muted add-group-sticky mx-0">
                       <a class="d-flex align-items-center text-muted " href="/groups/<%= @group.uuid %>/events/new">
                         <span data-feather="plus-circle" class="mr-2"></span> Crea Nuovo Evento 
                       </a>
@@ -465,6 +371,151 @@
         }
       });
      });
+   </script>
+
+   <script type="text/javascript">
+    $(document).ready(function (e){
+      $('#send_button').click(function (){
+        var message_text = $('#send_message').val();
+        var form_data = {message: {text: message_text, group_id: <%= @group.id %>, user_id: <%= current_user.id %>}};
+
+        $.ajax({
+          url: "<%= group_messages_path(group_uuid: @group.uuid) %>",
+          type: "POST",
+          data: form_data,
+          headers: {
+            'X-Transaction': 'POST Example',
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function (data, text_status, jqXHR){
+            //placeholder
+            location.reload();
+          },
+          error: function (jqXHR, text_status, error_thrown){
+
+          }
+        });
+      });
+    });
+   </script>
+
+   <script type="text/javascript">
+    $(document).ready(function (e){
+      $('.delete_message').click(function (){
+        var message_id = $(this).attr('message-id');
+
+        $.ajax({
+          url: "<%= group_messages_path(group_uuid: @group.uuid) %>" + '/' + message_id,
+          type: "DELETE",
+          headers: {
+            'X-Transaction': 'POST Example',
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function (data, text_status, jqXHR){
+            //placeholder
+            location.reload();
+          },
+          error: function (jqXHR, text_status, error_thrown){
+
+          }
+        });
+      });
+    });
+   </script>
+
+   <script type="text/javascript">
+    $(document).ready(function (e){
+      $('.edit_message').click(function (){
+        var message_id = $(this).attr('message-id');
+        $(this).addClass('d-none');
+        $('.save_message[message-id="' + message_id + '"]').removeClass('d-none');
+        var message_text = $('#message_body[message-id="' + message_id + '"] span').text();
+        $('#message_body[message-id="' + message_id + '"] span').replaceWith(function (){
+          return '<input type="text" class="text-white" style="width: 100%; background-color: transparent; border: none">';
+        });
+        var message_body_input = $('#message_body[message-id="' + message_id + '"] input' );
+        message_body_input.val(message_text);
+        message_body_input.select();
+      });
+    });
+   </script>
+
+   <script type="text/javascript">
+    $(document).ready(function (e){
+      $('.save_message').click(function (){
+        var message_id = $(this).attr('message-id');
+        $(this).addClass('d-none');
+        $('.edit_message[message-id="' + message_id + '"]').removeClass('d-none');
+        var message_text = $('#message_body[message-id="' + message_id + '"] input').val();
+
+        $.ajax({
+          url: "<%= group_messages_path(group_uuid: @group.uuid) %>" + '/' + message_id,
+          type: "PATCH",
+          data: {message: {text: message_text}},
+          headers: {
+            'X-Transaction': 'POST Example',
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function (data, text_status, jqXHR){
+            //placeholder
+            location.reload();
+          },
+          error: function (jqXHR, text_status, error_thrown){
+
+          }
+        });
+      });
+    });
+   </script>
+
+   <script type="text/javascript">
+    $(document).ready(function (e){
+      $('.bookmark_message').click(function (){
+        var message_id = $(this).attr('message-id');
+
+        $.ajax({
+          url: "<%= group_messages_path(group_uuid: @group.uuid) %>" + '/' + message_id + '/pin',
+          type: "PATCH",
+          data: {message: {pinned: true}},
+          headers: {
+            'X-Transaction': 'POST Example',
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function (data, text_status, jqXHR){
+            //placeholder
+            location.reload();
+          },
+          error: function (jqXHR, text_status, error_thrown){
+
+          }
+        });
+      });
+    });
+   </script>
+
+   <script type="text/javascript">
+    $(document).ready(function (e){
+      $('.unbookmark_message').click(function (){
+        var message_id = $(this).attr('message-id');
+
+        $.ajax({
+          url: "<%= group_messages_path(group_uuid: @group.uuid) %>" + '/' + message_id + '/pin',
+          type: "PATCH",
+          data: {message: {pinned: false}},
+          headers: {
+            'X-Transaction': 'POST Example',
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function (data, text_status, jqXHR){
+            //placeholder
+            location.reload();
+          },
+          error: function (jqXHR, text_status, error_thrown){
+
+          }
+        });
+      });
+    });
    </script>
  </body>
  </html>
