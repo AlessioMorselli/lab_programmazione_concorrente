@@ -12,8 +12,8 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     @member = users(:aldo) # membro non admin di @group
   end
 
-### TEST PER UN UTENTE LOGGATO ###
-  test "should index every user's invitation" do
+### TEST PER UN UTENTE LOGGATO E INVITATO ###
+  test "should index every user's invitation (not expired)" do
     log_in_as @user
 
     get user_invitations_path(@user)
@@ -21,6 +21,19 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     # Giorgio è stato invitato ai ninja
     assert_equal 1, assigns(:invitations).length
+  end
+
+  test "should index every user's invitation (expired)" do
+    @invitation.update_attribute(:expiration_date, DateTime.now - 1.day)
+    @invitation.reload
+
+    log_in_as @user
+
+    get user_invitations_path(@user)
+    assert_response :success
+
+    # Giorgio è stato invitato ai ninja, ma l'invito è scaduto
+    assert_equal 0, assigns(:invitations).length
   end
 
   test "should show choices for an invitation" do
@@ -40,6 +53,22 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to group_path(uuid: @group.uuid)
+  end
+
+  test "should not accept a private invitation if it's expired" do
+    @invitation.update_attribute(:expiration_date, DateTime.now - 1.day)
+    @invitation.reload
+
+    log_in_as @user
+
+    assert_difference('Invitation.count', 0) do
+      assert_difference('Membership.count', 0) do
+        post group_accept_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
+      end
+    end
+
+    assert_redirected_to groups_path
+    assert_not flash.empty?
   end
 
   test "should refuse a private invitation" do
@@ -66,6 +95,24 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to group_path(uuid: @group.uuid)
+  end
+
+  test "should not accept a public invitation if it's expired" do
+    # Creo un invito pubblico scaduto a @group, in quanto non esiste nei casi di test
+    @public_invitation = Invitation.create!(group_id: @group.id, user_id: nil,
+                                            expiration_date: DateTime.now - 1.day)
+    @public_invitation.reload
+
+    log_in_as @user
+
+    assert_difference('Invitation.count', 0) do
+      assert_difference('Membership.count', 0) do
+        post group_accept_invitation_path(group_uuid: @group.uuid, url_string: @public_invitation.url_string)
+      end
+    end
+
+    assert_redirected_to groups_path
+    assert_not flash.empty?
   end
 
   test "should refuse a public invitation" do
@@ -268,6 +315,76 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Invitation.count', -1) do
       delete group_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
     end
+  end
+
+  test "should update existing public invitation if it's expired" do
+    # Creo un invito scaduto
+    @public_invitation = Invitation.create!(group_id: @group.id, user_id: nil,
+                                            expiration_date: DateTime.now - 1.day)
+
+    log_in_as @admin
+
+    assert_difference('Invitation.count', 0) do
+      post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
+        group_id: @group.id,
+        user_id: nil,
+        expiration_date: DateTime.now + 1.month
+        }
+      }
+    end
+    @public_invitation.reload
+
+    assert_equal DateTime.now + 1.month, @public_invitation.expiration_date
+  end
+
+  test "should update existing private invitation if it's expired" do
+    # Creo un invito scaduto
+    @public_invitation = Invitation.create!(group_id: @group.id, user_id: @other_user.id,
+                                            expiration_date: DateTime.now - 1.day)
+
+    log_in_as @admin
+
+    assert_difference('Invitation.count', 0) do
+      post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
+        group_id: @group.id,
+        user_id: @other_user.id,
+        expiration_date: DateTime.now + 1.month
+        }
+      }
+    end
+    @public_invitation.reload
+
+    assert_equal DateTime.now + 1.month, @public_invitation.expiration_date
+  end
+
+  test "should not create a new public invitation with expiration date before now" do
+    log_in_as @admin
+
+    assert_difference('Invitation.count', 0) do
+      post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
+        group_id: @group.id,
+        user_id: nil,
+        expiration_date: DateTime.now - 1.day
+        }
+      }
+    end
+  
+    assert_not flash.empty?
+  end
+
+  test "should not create a new private invitation with expiration date before now" do
+    log_in_as @admin
+
+    assert_difference('Invitation.count', 0) do
+      post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
+        group_id: @group.id,
+        user_id: other_user.id,
+        expiration_date: DateTime.now - 1.day
+        }
+      }
+    end
+  
+    assert_not flash.empty?
   end
 
 ### TEST PER UN UTENTE MEMBRO NON AMMINISTRATORE ###

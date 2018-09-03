@@ -27,7 +27,10 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     # A questi si aggiungono i 2 gruppi ufficiali dei corsi di ingegneria magistrale
     assert_equal 1 + 2, assigns(:groups).length
 
-    # assert_template :public_groups_list
+    assert_select "a[href=?]", landing_path, count: 0
+    assert_select "a[href=?]", login_path, count: 0
+    assert_select "a[href=?]", signup_path, count: 0
+    assert_select "a[href=?]", logout_path, minimum: 1
   end
 
   test "should index searched groups (private, name)" do
@@ -38,6 +41,11 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     # Vi è un solo gruppo denominato "pirati", ma è privato, non deve risultare
     assert_equal 0, assigns(:groups).length
+
+    assert_select "a[href=?]", landing_path, count: 0
+    assert_select "a[href=?]", login_path, count: 0
+    assert_select "a[href=?]", signup_path, count: 0
+    assert_select "a[href=?]", logout_path, minimum: 1
   end
 
   test "should index searched groups (public, name)" do
@@ -48,6 +56,11 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     # Vi è un solo gruppo denominato "samurai"
     assert_equal 1, assigns(:groups).length
+
+    assert_select "a[href=?]", landing_path, count: 0
+    assert_select "a[href=?]", login_path, count: 0
+    assert_select "a[href=?]", signup_path, count: 0
+    assert_select "a[href=?]", logout_path, minimum: 1
   end
 
   test "should index searched groups (course)" do
@@ -59,6 +72,11 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     # Vi sono due gruppi che studia meccatronica, ma uno è privato
     # A questo si aggiunge il gruppo ufficiale di meccatronica
     assert_equal 1 + 1, assigns(:groups).length
+
+    assert_select "a[href=?]", landing_path, count: 0
+    assert_select "a[href=?]", login_path, count: 0
+    assert_select "a[href=?]", signup_path, count: 0
+    assert_select "a[href=?]", logout_path, minimum: 1
   end
 
   test "should index searched groups (course) with query as array" do
@@ -70,6 +88,11 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     # Vi sono due gruppi che studia meccatronica, ma uno è privato
     # A questo si aggiunge il gruppo ufficiale di meccatronica
     assert_equal 1 + 1, assigns(:groups).length
+
+    assert_select "a[href=?]", landing_path, count: 0
+    assert_select "a[href=?]", login_path, count: 0
+    assert_select "a[href=?]", signup_path, count: 0
+    assert_select "a[href=?]", logout_path, minimum: 1
   end
 
   test "should show a group chat" do
@@ -88,6 +111,11 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 3, assigns(:events).length
     # I membri dei cavalieri sono 4
     assert_equal 4, assigns(:memberships).length
+
+    assert_select "a[href=?]", groups_path, minimum: 1
+    assert_select "a[href=?]", logout_path, minimum: 1
+    assert_select "form[id='new_message']", count: 1 # Form per inviare un messaggio
+    # TODO: assert_select da aggiungere: inviare un messaggio
   end
 
   test "should show a form to create a new group" do
@@ -95,6 +123,8 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     get new_group_path
     assert_response :success
+
+    assert_select "form[id='new_group']", count: 1
   end
 
   test "should create a new group with a super admin member" do
@@ -263,6 +293,9 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     get edit_group_path(uuid: @group.uuid)
     assert_response :success
+
+    # TODO: mettere form per editare un gruppo
+    # assert_select "form[id='new_group']", count: 1
   end
 
   test "should update a group if logged user is super admin" do 

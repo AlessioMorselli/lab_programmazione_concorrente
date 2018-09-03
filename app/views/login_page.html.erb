@@ -16,7 +16,7 @@
   <%= f.email_field :email, class: 'form-control rounded-0', placeholder: "Indirizzo email" %>
   <%= f.password_field :password, class: 'form-control rounded-0', placeholder: "Password" %>
   <label class="text-white">
-    <%= check_box_tag "remember-me" %> Ricordami
+    <%= f.check_box :remember_me %> Ricordami
   </label>
   <%= f.submit "Entra", class: 'btn btn-lg btn-secondary btn-block rounded-0 shadow' %>
   <% end %>
