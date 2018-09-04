@@ -44,6 +44,8 @@ class MessagesController < ApplicationController
     def create
         # Il messaggio viene salvato nel db e visualizzato sulla chat
         @message = Message.new(message_params)
+        @message.group = @group
+        @message.user = current_user
         if !params[:attachment].blank?
             incoming_file = params[:attachment]
             @attachment = Attachment.new
@@ -55,7 +57,6 @@ class MessagesController < ApplicationController
             flash.now[:danger] = 'Il messaggio non è stato inviato'
             # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
-
     end
 
     # PUT/PATCH group_message_path(group_uuid: group.uuid, id: message.id)
@@ -108,7 +109,7 @@ class MessagesController < ApplicationController
     end
 
     def message_params
-        params.require(:message).permit(:text, :attachment_id, :group_id, :user_id)
+        params.require(:message).permit(:text, :attachment_id)
     end
 
     def attachment_params

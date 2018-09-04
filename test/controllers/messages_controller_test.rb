@@ -64,9 +64,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Message.count') do
       post group_messages_path(group_uuid: @group.uuid), params: {
         message: {
-          text: "Messaggio di prova",
-          group_id: @group.id,
-          user_id: @user.id
+          text: "Messaggio di prova"#,
+          # group_id: @group.id,
+          # user_id: @user.id
         },
         attachment: nil
       }
@@ -79,9 +79,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Message.count') do
       post group_messages_path(group_uuid: @group.uuid), params: {
         message: {
-          text: "Messaggio di prova",
-          group_id: @group.id,
-          user_id: @user.id
+          text: "Messaggio di prova"#,
+          # group_id: @group.id,
+          # user_id: @user.id
         },
         attachment: fixture_file_upload('files/test_image.jpg','image/jpeg')
       }
@@ -95,9 +95,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
       post group_messages_path(group_uuid: @group.uuid), params: {
         message: {
           # TODO: se uno non mette niente in una barra di ricerca, è nil o "" che viene passato?
-          text: "",
-          group_id: @group.id,
-          user_id: @user.id
+          text: ""#,
+          # group_id: @group.id,
+          # user_id: @user.id
         },
         attachment: nil
       }
@@ -111,9 +111,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
       post group_messages_path(group_uuid: @group.uuid), params: {
         message: {
           # TODO: se uno non mette niente in una barra di ricerca, è nil o "" che viene passato?
-          text: "",
-          group_id: @group.id,
-          user_id: @user.id
+          text: ""#,
+          # group_id: @group.id,
+          # user_id: @user.id
         },
         attachment: fixture_file_upload('files/test_image.jpg','image/jpeg')
       }
@@ -206,9 +206,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Message.count', 0) do
       post group_messages_path(group_uuid: @group.uuid), params: {
         message: {
-          text: "Messaggio di prova",
-          group_id: @group.id,
-          user_id: @user.id
+          text: "Messaggio di prova"#,
+          # group_id: @group.id,
+          # user_id: @user.id
         },
         attachment: nil
       }
@@ -294,9 +294,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Message.count', 0) do
       post group_messages_path(group_uuid: @group.uuid), params: {
         message: {
-          text: "Messaggio di prova",
-          group_id: @group.id,
-          user_id: @user.id
+          text: "Messaggio di prova"#,
+          # group_id: @group.id,
+          # user_id: @user.id
         },
         attachment: nil
       }

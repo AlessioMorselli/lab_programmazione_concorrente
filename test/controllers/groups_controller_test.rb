@@ -114,7 +114,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "a[href=?]", groups_path, minimum: 1
     assert_select "a[href=?]", logout_path, minimum: 1
-    assert_select "form[id='new_message']", count: 1 # Form per inviare un messaggio
+    assert_select "input[id='send_message']", count: 1 # Form per inviare un messaggio
     # TODO: assert_select da aggiungere: inviare un messaggio
   end
 

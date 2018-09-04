@@ -5,7 +5,7 @@ messaggio_luigi_pirati_<%= n %>:
   pinned: false
   group: pirati
   user: luigi
-  created_at: <%= DateTime.now.to_s %>
+  created_at: <%= (DateTime.now - Random.rand(59).minutes).to_s %>
   updated_at: <%= DateTime.now.to_s %>
 <% end %>
 
@@ -16,7 +16,7 @@ messaggio_giorgio_pirati_<%= n %>:
   pinned: false
   group: pirati
   user: giorgio
-  created_at: <%= DateTime.now.to_s %>
+  created_at: <%= (DateTime.now - Random.rand(59).minutes).to_s %>
   updated_at: <%= DateTime.now.to_s %>
 <% end %>
 
@@ -26,7 +26,7 @@ messaggio_pinnato_luigi_pirati_1:
   pinned: true
   group: pirati
   user: luigi
-  created_at: <%= DateTime.now.to_s %>
+  created_at: <%= (DateTime.now - Random.rand(59).minutes).to_s %>
   updated_at: <%= DateTime.now.to_s %>
 
 <% 3.times do |n| %>
@@ -36,7 +36,7 @@ messaggio_giorgio_samurai_<%= n %>:
   pinned: false
   group: samurai
   user: giorgio
-  created_at: <%= DateTime.now.to_s %>
+  created_at: <%= (DateTime.now - Random.rand(59).minutes).to_s %>
   updated_at: <%= DateTime.now.to_s %>
 <% end %>
 
@@ -46,7 +46,7 @@ messaggio_pinnato_giorgio_samurai_1:
   pinned: true
   group: samurai
   user: giorgio
-  created_at: <%= DateTime.now.to_s %>
+  created_at: <%= (DateTime.now - Random.rand(59).minutes).to_s %>
   updated_at: <%= DateTime.now.to_s %>
 
 <% 2.times do |n| %>
@@ -56,7 +56,7 @@ messaggio_giovanni_samurai_<%= n %>:
   pinned: false
   group: samurai
   user: giovanni
-  created_at: <%= DateTime.now.to_s %>
+  created_at: <%= (DateTime.now - Random.rand(59).minutes).to_s %>
   updated_at: <%= DateTime.now.to_s %>
 <% end %>
 
@@ -66,7 +66,7 @@ messaggio_allegato_giacomo_samurai_1:
   pinned: true
   group: samurai
   user: giacomo
-  created_at: <%= DateTime.now.to_s %>
+  created_at: <%= (DateTime.now - Random.rand(59).minutes).to_s %>
   updated_at: <%= DateTime.now.to_s %>
 
   # Per ragioni di testing, sono stati inviati due ore fa
@@ -88,7 +88,7 @@ messaggio_giacomo_cavalieri_<%= n %>:
   pinned: false
   group: cavalieri
   user: giacomo
-  created_at: <%= DateTime.now.to_s %>
+  created_at: <%= (DateTime.now - Random.rand(59).minutes).to_s %>
   updated_at: <%= DateTime.now.to_s %>
 <% end %>
 
@@ -99,7 +99,7 @@ messaggio_pinnato_giacomo_cavalieri_<%= n %>:
   pinned: true
   group: cavalieri
   user: giacomo
-  created_at: <%= DateTime.now.to_s %>
+  created_at: <%= (DateTime.now - Random.rand(59).minutes).to_s %>
   updated_at: <%= DateTime.now.to_s %>
 <% end %>
 
@@ -132,7 +132,7 @@ messaggio_allegato_mario_cavalieri_1:
   pinned: false
   group: cavalieri
   user: mario
-  created_at: <%= DateTime.now.to_s %>
+  created_at: <%= (DateTime.now - Random.rand(59).minutes).to_s %>
   updated_at: <%= DateTime.now.to_s %>
 
 <% 3.times do |n| %>
@@ -142,7 +142,7 @@ messaggio_mario_ninja_<%= n %>:
   pinned: false
   group: ninja
   user: mario
-  created_at: <%= DateTime.now.to_s %>
+  created_at: <%= (DateTime.now - Random.rand(59).minutes).to_s %>
   updated_at: <%= DateTime.now.to_s %>
 <% end %>
 
@@ -162,7 +162,7 @@ messaggio_aldo_ninja_<%= n %>:
   pinned: false
   group: ninja
   user: aldo
-  created_at: <%= DateTime.now.to_s %>
+  created_at: <%= (DateTime.now - Random.rand(59).minutes).to_s %>
   updated_at: <%= DateTime.now.to_s %>
 <% end %>
 
@@ -173,6 +173,6 @@ messaggio_giacomo_ninja_<%= n %>:
   pinned: false
   group: ninja
   user: giacomo
-  created_at: <%= DateTime.now.to_s %>
+  created_at: <%= (DateTime.now - Random.rand(59).minutes).to_s %>
   updated_at: <%= DateTime.now.to_s %>
 <% end %>

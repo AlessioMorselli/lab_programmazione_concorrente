@@ -34,7 +34,7 @@ class SessionController < ApplicationController
     # GET logout_path
     def destroy
         # Esegue il log out di un utente
-        forget(current_user)
+        forget current_user if logged_in?
         log_out if logged_in?
         redirect_to login_path
     end
