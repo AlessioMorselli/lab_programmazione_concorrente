@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     def new
         # Visualizza la form per l'iscrizione al sito
         @user = User.new
-        render json: @user
+        render file: "app/views/signup_page"
     end
 
     # POST signup_path
