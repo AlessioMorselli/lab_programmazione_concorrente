@@ -10,6 +10,20 @@ class DegreeTest < ActiveSupport::TestCase
     end
   end
 
+  test "should not save if name is not supplied" do
+    assert_not Degree.new(years: 2).save
+  end
+
+  test "should not save if years is not supplied" do
+    assert_not Degree.new(name: "fake degree").save
+  end
+
+  test "should not save if name is not unique" do
+    name = "fake_degree"
+    Degree.new(name: name, years: 2).save!
+    assert_not Degree.new(name: name, years: 3).save
+  end
+
   test "groups should return all degrees_courses groups if no year is passed as argument" do
     group_ids = @degree.groups.ids
     degree_course_group_ids = @degree.degrees_courses.to_a.map {|degree_course| degree_course.group_id}
@@ -23,7 +37,7 @@ class DegreeTest < ActiveSupport::TestCase
     assert_equal degree_course_group_ids.sort, group_ids.sort
   end
 
-  test "courses returns courses of a specific year if a year is passed as argument" do
+  test "courses.year should return courses of a specific year if a year is passed as argument" do
     degree = degrees(:ingegneria_informatica)
     year = 1
     courses = degree.courses.year year

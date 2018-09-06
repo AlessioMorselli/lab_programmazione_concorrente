@@ -10,7 +10,7 @@ class Event < ApplicationRecord
 
     after_create :create_repeated_events
 
-    def start_time_is_not_before_today
+    private def start_time_is_not_before_today
         return false if start_time.nil?
 
         if start_time < Time.now
@@ -18,7 +18,7 @@ class Event < ApplicationRecord
         end
     end
 
-    def end_time_is_after_start_time
+    private def end_time_is_after_start_time
         return false if start_time.nil? || end_time.nil?
 
         if end_time < start_time
@@ -26,7 +26,7 @@ class Event < ApplicationRecord
         end
     end
 
-    def end_time_is_same_day_as_start_time
+    private def end_time_is_same_day_as_start_time
         return false if start_time.nil? || end_time.nil?
 
         if end_time > start_time.end_of_day
@@ -34,8 +34,10 @@ class Event < ApplicationRecord
         end
     end
 
-    def create_repeated_events
-        if self.repeated && self.repeated_for
+    # chiamato dopo la creazione di un evento
+    # crea un numero di eventi uguale a repeated_for, a distanza di tempo uguale a repeated
+    private def create_repeated_events
+        if self.repeated.present? && self.repeated_for.present?
             self.transaction do
                 tot_time = repeated
                 n = 1
@@ -53,11 +55,12 @@ class Event < ApplicationRecord
         end
     end
 
+
     # restituisce gli eventi compresi nel prossimo tempo dato come parametro,
     # di default restituisce gli eventi inclusi nella prossima settimana
     def self.next(time = 1.week)
         where(start_time: Time.now.beginning_of_day..(Time.now+time))
-        .where("end_time > ?", Time.now)
+            .where("end_time > ?", Time.now)
     end
 
     # restituisce la durata dell'evento nel formato HH:MM:SS

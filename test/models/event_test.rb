@@ -58,7 +58,7 @@ class EventTest < ActiveSupport::TestCase
     assert_not @event.save
   end
 
-  test "should not save if start_time is less than today" do
+  test "should not save if start_time is less than now" do
     @event.start_time = Time.now - 1.hour
     assert_not @event.save
   end
@@ -69,7 +69,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test "should not save if end time is in a different day than start time" do
-    @event.end_time = @event.start_time + 1.day
+    @event.end_time = (@event.start_time + 1.day).beginning_of_day + 1.hour
     assert_not @event.save
   end
 
@@ -80,7 +80,7 @@ class EventTest < ActiveSupport::TestCase
 
   test "next should return events in the next week if no argument is passed" do
     group = Group.new(name: "fake group")
-    assert group.save
+    group.save!
     group.events << @events_this_week
     group.events << @events_next_week
 
@@ -89,22 +89,22 @@ class EventTest < ActiveSupport::TestCase
 
   test "next should return events in the next hour, including events not finished, if 1.hour is passed as argument" do
     group = Group.new(name: "fake group")
-    assert group.save
+    group.save!
     group.events << @events_this_hour
     group.events << @events_this_week
 
     assert_equal @events_this_hour.size, group.events.next(1.hour).count
   end
 
-  test "after create should create repeated events if repeated is supplied" do
+  test "after create should create repeated events if repeated and repeated_for are supplied" do
     event = Event.new(repeated: 7.day, repeated_for: 10, name: "evento con nome unico", start_time: Time.now+1.hour, end_time: Time.now + 2.hours, place: "Aula 20", description: "Generic description", group_id: @group.id)
-    assert event.save
+    event.save!
     assert_equal event.repeated_for, Event.where("name = ?", event.name).count
   end
 
   test "after create should not create repeated events if repeated is not supplied" do
     @event.name = "evento con un nome unico"
-    assert @event.save
+    @event.save!
     assert 1, Event.where("name = ?", @event.name).count
   end
 

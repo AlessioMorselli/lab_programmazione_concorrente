@@ -5,7 +5,7 @@ class Attachment < ApplicationRecord
         write_attribute("name", sanitize_filename(new_name))
     end
 
-    def sanitize_filename(filename)
+    private def sanitize_filename(filename)
         if filename != nil
             just_filename = File.basename(filename)
             just_filename.gsub(/[^\w\.\-]/, '_')

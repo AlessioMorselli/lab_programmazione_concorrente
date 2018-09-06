@@ -25,24 +25,14 @@ class User < ApplicationRecord
 
     before_create :create_confirm_digest
 
-
+    # restituisce i corsi dell'utente, corto per user.degree.courses
     def courses
         degree.courses
     end
 
+    # restituisce gli eventi dei gruppi di cui fa parte l'utente
     def events
         Event.where(group_id: groups.ids)
-    end
-
-    # restituisce l'hash di una stringa 
-    def User.digest(string)
-        cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-        BCrypt::Password.create(string, cost: cost)
-    end
-
-    # restituisce un token
-    def User.new_token
-        SecureRandom.urlsafe_base64
     end
 
     # Remembers a user in the database for use in persistent sessions.
@@ -58,7 +48,8 @@ class User < ApplicationRecord
         BCrypt::Password.new(digest).is_password?(token)
     end
 
-    # Returns true if a password reset has expired.
+    # restituisce true se il password reset è scaduto,
+    # il password reset ha una durata di 2 ore
     def password_reset_expired?
         reset_sent_at < 2.hours.ago
     end
@@ -92,16 +83,30 @@ class User < ApplicationRecord
         UserMailer.password_reset(self).deliver_now
     end
 
-
+    # restituisce i gruppi suggeriti all'utente
+    # sono esclusi i gruppi privati e i gruppi di cui l'utente fa gia parte
     def suggested_groups
         Group.is_public.distinct.joins("JOIN students ON students.user_id = #{self.id}")
-            .joins("JOIN degrees ON degrees.id = students.degree_id")
-            .joins("JOIN degrees_courses ON degrees_courses.degree_id = degrees.id")
+            .joins("JOIN degrees_courses ON degrees_courses.degree_id = students.degree_id")
             .where("groups.course_id = degrees_courses.course_id")
             .without_user(self)
     end
 
+    # crea un nuovo gruppo con l'utente come super_admin
     def create_group(group)
         return group.save_with_admin(self);
+    end
+
+
+
+    # restituisce l'hash di una stringa 
+    def User.digest(string)
+        cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+        BCrypt::Password.create(string, cost: cost)
+    end
+
+    # restituisce un token
+    def User.new_token
+        SecureRandom.urlsafe_base64
     end
 end

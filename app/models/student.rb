@@ -6,8 +6,8 @@ class Student < ApplicationRecord
     validates_presence_of :year
     validate :year_is_less_than_degree_years
 
-    def year_is_less_than_degree_years
-        if year.present? && year > Degree.find(degree_id).years
+    private def year_is_less_than_degree_years
+        if degree.present? && year.present? && year > Degree.find(degree_id).years
             errors.add(:year, "must be less than degree years")
         end
     end

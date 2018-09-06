@@ -7,6 +7,10 @@ class CourseTest < ActiveSupport::TestCase
     #
   end
 
+  test "should not save if the name of the course is not supplied" do
+    assert_not Course.new.save
+  end
+
   test "should not save if the the name of the course is not unique" do
     course = Course.new(name: courses(:informatica).name)
     assert_not course.save
