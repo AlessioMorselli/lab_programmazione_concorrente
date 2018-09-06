@@ -144,6 +144,26 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
   end
 
+  test "should create new repeated events" do
+    log_in_as @user
+
+    assert_difference('Event.count', 4) do
+      post group_events_path(group_uuid: @group.uuid), params: { event: {
+        start_time: DateTime.now + 1.hours,
+        end_time: DateTime.now + 3.hours,
+        name: "Studio Programmazione concorrente",
+        place: "Aula studio - Secondo piano",
+        description: "2 ore di studio di programmazione concorrente",
+        group_id: @group.id,
+        repeated: 1.week,
+        repeated_for: 4
+        }
+      }
+    end
+   
+    assert_redirected_to group_events_path(group_uuid: @group.uuid)
+  end
+
   test "should show form to edit an event" do
     log_in_as @user
 

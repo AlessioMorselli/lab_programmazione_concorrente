@@ -70,6 +70,8 @@ class EventsController < ApplicationController
     def create
         # Salva nel db un nuovo evento
         @event = Event.new(event_params)
+        @event.repeated = params[:event][:repeated].to_i
+        @event.repeated_for = params[:event][:repeated_for].to_i
 
         if @event.save
             redirect_to group_events_path(group_uuid: @group.uuid)

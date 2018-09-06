@@ -25,7 +25,8 @@ class UsersController < ApplicationController
     def create
         # Salva nel database un nuovo utente
         @user = User.new(user_params)
-        if @user.save!
+        @user.student = Student.new(student_params)
+        if @user.save
             # log_in @user
             # redirect_to groups_path
             @user.send_confirm_email
@@ -48,7 +49,7 @@ class UsersController < ApplicationController
     # PUT/PATCH user_path(user)
     def update
         # Aggiorna le informazioni su un utente
-        if @user.update!(user_params)
+        if @user.update(user_params)
             flash[:success] = 'Le tue informazioni sono state aggiornate'
             redirect_to groups_path
         else
@@ -87,5 +88,9 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password)
+    end
+
+    def student_params
+        params.require(:user).permit(:degree_id, :year)
     end
 end

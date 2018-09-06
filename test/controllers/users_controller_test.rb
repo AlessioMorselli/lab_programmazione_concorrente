@@ -14,14 +14,16 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should register a new user" do
     assert_difference('User.count') do
-      post signup_path, params: { user: {
-        name: "CoolName",
-        password: "CoolPassword",
-        email: "cool.email@cool.it",
-        degree_id: 1,
-        year: 2
+      assert_difference('Student.count') do
+        post signup_path, params: { user: {
+          name: "CoolName",
+          password: "CoolPassword",
+          email: "cool.email@cool.it",
+          degree_id: 1,
+          year: 2
+          }
         }
-      }
+      end
     end
    
     assert_not flash.empty?
