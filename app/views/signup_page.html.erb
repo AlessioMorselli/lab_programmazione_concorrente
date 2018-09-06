@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Benvenuti su Unife Study Groups</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <%= stylesheet_link_tag "login_page" %>
+</head>
+
+<body class="text-center">
+  <%= form_for(@user, url: signup_path, html: {class: 'form-signin'}) do |f| %>
+    <h1 class="h3 mb-3 font-weight-normal text-white">Registrati</h1>
+    <%= f.email_field :email, class: 'form-control rounded-0', placeholder: "Indirizzo email", required: true %>
+    <%= f.text_field :name, class: 'form-control rounded-0', placeholder: "Username", required: true %>
+    <%= f.password_field :password, class: 'form-control rounded-0', placeholder: "Password", required: true %>
+    <%= f.password_field :password_confirmation, class: 'form-control rounded-0', placeholder: "Conferma password", required: true %>
+    <%= f.fields_for :student_attributes do |s| %>
+      <div class="form-row mb-0">
+        <div class="col-8">
+          <%= s.select :degree_id, options_for_select(Degree.all.map{|d| [d.name, d.id, {:years => d.years}]}), {prompt: "Corso di Studio"}, {class: "form-control rounded-0"} %>
+        </div>
+        <div class="col-4">
+          <%= s.select :year, options_for_select([]),{prompt: "Anno"}, {class: "form-control rounded-0"} %>
+        </div>
+      </div>
+    <% end %>
+    <%= f.submit "Registrati", class: 'btn btn-lg btn-secondary btn-block rounded-0 shadow' %>
+  <% end %>
+</body>
+
+<script>
+  window.addEventListener("load", onSelectDegree)
+  document.getElementById("user_student_attributes_degree_id").addEventListener("change", onSelectDegree);
+
+  function onSelectDegree() {
+    let degreeSelect = document.getElementById("user_student_attributes_degree_id");
+    let degreeYearSelect = document.getElementById("user_student_attributes_year");
+    degreeYearSelect.innerHTML = "";
+    if (degreeSelect.value) {
+      let years = degreeSelect.options[degreeSelect.selectedIndex].getAttribute("years");
+      for(let i=1; i<=years; i++) {
+        let option = document.createElement("option");
+        option.value = i;
+        option.innerText = i;
+        degreeYearSelect.appendChild(option);
+      }
+    } else {
+      let option = document.createElement("option");
+      option.value = "";
+      option.innerText = "Anno";
+      degreeYearSelect.appendChild(option);
+    }
+  }
+</script>
+</html>

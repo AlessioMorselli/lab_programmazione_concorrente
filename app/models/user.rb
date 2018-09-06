@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
     has_one :student
     has_one :degree, through: :student
+    accepts_nested_attributes_for :student
 
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }
