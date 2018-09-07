@@ -109,7 +109,7 @@ class MessagesController < ApplicationController
     end
 
     def message_params
-        params.require(:message).permit(:text, :attachment_id)
+        params.require(:message).permit(:text)
     end
 
     def attachment_params

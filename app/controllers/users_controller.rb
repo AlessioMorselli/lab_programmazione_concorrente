@@ -25,7 +25,6 @@ class UsersController < ApplicationController
     def create
         # Salva nel database un nuovo utente
         @user = User.new(user_params)
-        @user.student = Student.new(student_params)
         if @user.save
             # log_in @user
             # redirect_to groups_path
@@ -83,14 +82,11 @@ class UsersController < ApplicationController
 
     private
     def set_user
-      @user = User.find(params[:id])
+        @user = User.find(params[:id])
     end
 
     def user_params
-      params.require(:user).permit(:name, :email, :password)
-    end
-
-    def student_params
-        params.require(:user).permit(:degree_id, :year)
+        params.require(:user).permit(:name, :email, :password, :password_confirmation,
+                                        student_attributes: [:degree_id, :year])
     end
 end

@@ -18,16 +18,37 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         post signup_path, params: { user: {
           name: "CoolName",
           password: "CoolPassword",
+          password_confirmation: "CoolPassword",
           email: "cool.email@cool.it",
-          degree_id: 1,
-          year: 2
+          student_attributes: {
+            degree_id: 1,
+            year: 2
           }
-        }
+        }}
       end
     end
    
     assert_not flash.empty?
     assert_redirected_to landing_path
+  end
+
+  test "should not register a new user with a wrong password confirm" do
+    assert_difference('User.count', 0) do
+      assert_difference('Student.count', 0) do
+        post signup_path, params: { user: {
+          name: "CoolName",
+          password: "CoolPassword",
+          password_confirmation: "WrongPassword",
+          email: "cool.email@cool.it",
+          student_attributes: {
+            degree_id: 1,
+            year: 2
+          }
+        }}
+      end
+    end
+   
+    assert_not flash.empty?
   end
 
 ### TEST PER UN UTENTE LOGGATO ###
