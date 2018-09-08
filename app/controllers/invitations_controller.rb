@@ -1,6 +1,6 @@
 class InvitationsController < ApplicationController
     before_action :set_invitation, only: [:show, :destroy, :accept, :refuse]
-    before_action :set_group, only: [:new, :create, :destroy]
+    before_action :set_group, only: [:new, :create, :destroy, :accept]
     before_action :logged_in_user
     before_action only: [:index] do
         correct_user params[:user_id]
@@ -56,7 +56,6 @@ class InvitationsController < ApplicationController
         # L'azione ha quindi 2 effetti:
         #   - l'utente è aggiunto come membro del gruppo
         #   - l'invito perde di validità (se è destinato ad un utente specifico)
-        @group = @invitation.group
 
         if @invitation.accept(current_user)
             # Quando un utente si aggiunge ad un gruppo, setto l'ultimo messaggio letto a quelli

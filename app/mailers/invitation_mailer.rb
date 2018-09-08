@@ -1,6 +1,4 @@
-class InvitationMailer < ActionMailer::Base
-    default :from => "unife.community@unife.study.groups.it"
-
+class InvitationMailer < ApplicationMailer
     def invite_to_group(invitation)
         @invitation = invitation
         @user = @invitation.user
