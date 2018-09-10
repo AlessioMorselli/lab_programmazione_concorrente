@@ -5,6 +5,13 @@ class Group < ApplicationRecord
     scope :with_user, -> (user) { where(id: user.group_ids) }
     scope :without_user, -> (user) { where.not(id: user.group_ids) }
 
+    def max_members=(value)
+        super(value.blank? ? -1 : value)
+    end
+    def private=(value)
+        super(value.blank? ? false : value)
+    end
+
     ### RELATIONS ###
     belongs_to :course, optional: true
 
