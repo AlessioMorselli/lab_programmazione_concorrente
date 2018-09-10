@@ -16,6 +16,10 @@ class ConfirmAccountsController < ApplicationController
 
     private
     def set_user
-        @user = User.find_by(email: params[:email])
+        begin
+            @user = User.find_by(email: params[:email]) or not_found
+        rescue ActionController::RoutingError
+            render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+        end
     end
 end

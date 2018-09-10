@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
     before_action :set_event, only: [:show, :edit, :update, :destroy]
-    before_action :set_group
+    before_action :set_group, except: [:user_index]
     before_action :logged_in_user
     before_action only: [:user_index, :show] do
         correct_user params[:user_id]
@@ -108,11 +108,19 @@ class EventsController < ApplicationController
 
     private
     def set_event
-        @event = Event.find(params[:id])
+        begin
+            @event = Event.find(params[:id]) or not_found
+        rescue ActionController::RoutingError
+            render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+        end
     end
 
     def set_group
-        @group = Group.find_by_uuid(params[:group_uuid])
+        begin
+            @group = Group.find_by_uuid(params[:group_uuid]) or not_found
+        rescue ActionController::RoutingError
+            render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+        end
     end
 
     def event_params

@@ -82,7 +82,11 @@ class UsersController < ApplicationController
 
     private
     def set_user
-        @user = User.find(params[:id])
+        begin
+            @user = User.find(params[:id]) or not_found
+        rescue ActionController::RoutingError
+            render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+        end
     end
 
     def user_params

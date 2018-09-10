@@ -12,7 +12,11 @@ class DegreesController < ApplicationController
 
     private
     def set_degree
-      @degree = Degree.find(params[:id])
+      begin
+        @degree = Degree.find(params[:id]) or not_found
+      rescue ActionController::RoutingError
+        render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+      end
     end
 
     def degree_params

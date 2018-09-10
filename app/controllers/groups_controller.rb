@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
     before_action only: [:edit, :update, :destroy] do
         is_super_admin_in @group
     end
+    before_action
 
     # GET groups_path
     def index
@@ -94,10 +95,14 @@ class GroupsController < ApplicationController
 
     private
     def set_group
-      @group = Group.find_by_uuid(params[:uuid])
+        begin
+            @group = Group.find_by_uuid(params[:uuid]) or not_found
+        rescue ActionController::RoutingError
+            render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+        end
     end
 
     def group_params
-      params.require(:group).permit(:name, :max_members, :private, :course_id, :description)
+        params.require(:group).permit(:name, :max_members, :private, :course_id, :description)
     end
 end

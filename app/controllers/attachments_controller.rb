@@ -32,15 +32,27 @@ class AttachmentsController < ApplicationController
 
     private
     def set_attachment
-        @attachment = Attachment.find(params[:id])
+        begin
+            @attachment = Attachment.find(params[:id]) or not_found
+        rescue ActionController::RoutingError
+            render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+        end
     end
 
     def set_message
-        @message = Message.find(params[:message_id])
+        begin
+            @message = Message.find(params[:message_id]) or not_found
+        rescue ActionController::RoutingError
+            render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+        end
     end
 
     def set_group
-        @group = Group.find_by_uuid(params[:group_uuid])
+        begin
+            @group = Group.find_by_uuid(params[:group_uuid]) or not_found
+        rescue ActionController::RoutingError
+            render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+        end
     end
 
     def attachment_params
