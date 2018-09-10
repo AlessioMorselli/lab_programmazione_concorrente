@@ -11,22 +11,36 @@
 </head>
 
 <body class="text-center">
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= form_for(@user, url: signup_path, html: {class: 'form-signin'}) do |f| %>
     <h1 class="h3 mb-3 font-weight-normal text-white">Registrati</h1>
     <%= f.email_field :email, class: 'form-control rounded-0', placeholder: "Indirizzo email", required: true %>
     <%= f.text_field :name, class: 'form-control rounded-0', placeholder: "Username", required: true %>
     <%= f.password_field :password, class: 'form-control rounded-0', placeholder: "Password", required: true %>
     <%= f.password_field :password_confirmation, class: 'form-control rounded-0', placeholder: "Conferma password", required: true %>
+    <div style="height: 10px;"></div>
     <%= f.fields_for :student_attributes do |s| %>
       <div class="form-row mb-0">
-        <div class="col-8">
+        <div class="col-8 pr-0">
           <%= s.select :degree_id, options_for_select(Degree.all.map{|d| [d.name, d.id, {:years => d.years}]}), {prompt: "Corso di Studio"}, {class: "form-control rounded-0"} %>
         </div>
-        <div class="col-4">
+        <div class="col-4 pl-0">
           <%= s.select :year, options_for_select([]),{prompt: "Anno"}, {class: "form-control rounded-0"} %>
         </div>
       </div>
     <% end %>
+    <div style="height: 10px;"></div>
     <%= f.submit "Registrati", class: 'btn btn-lg btn-secondary btn-block rounded-0 shadow' %>
   <% end %>
 </body>

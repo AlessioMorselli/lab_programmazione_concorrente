@@ -11,6 +11,18 @@
 </head>
 
 <body class="text-center">
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
   <%= form_for(:session, url: login_path, html: {class: 'form-signin'}) do |f| %>
   <h1 class="h3 mb-3 font-weight-normal text-white">Login</h1>
   <%= f.email_field :email, class: 'form-control rounded-0', placeholder: "Indirizzo email" %>
