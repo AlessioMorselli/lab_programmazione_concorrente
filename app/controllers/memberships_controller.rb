@@ -75,12 +75,20 @@ class MembershipsController < ApplicationController
 
   private
   def set_membership
-    @user = User.find(params[:user_id])
-    @membership = Membership.get_one(@user, @group)
+    begin
+      @user = User.find(params[:user_id]) or not_found
+      @membership = Membership.get_one(@user, @group) or not_found
+    rescue ActionController::RoutingError
+      render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+    end
   end
 
   def set_group
-    @group = Group.find_by_uuid(params[:group_uuid])
+    begin
+      @group = Group.find_by_uuid(params[:group_uuid]) or not_found
+    rescue ActionController::RoutingError
+      render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+    end
   end
 
   def membership_params
