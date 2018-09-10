@@ -21,7 +21,7 @@ degree_list.each do |degree|
     degree["years"].each do |year|
         year["courses"].each do |course|
             c = Course.find_or_create_by!(name: course["name"])
-            g = Group.create!(name: "#{degree["name"]}: #{course["name"]}", course_id: c.id) # manca la descrizione ecc
+            g = Group.create!(name: "#{degree["name"]}: #{course["name"]} (Anno #{year["year"]})", course_id: c.id, private: true, description: "Gruppo ufficiale del corso: #{course["name"]} (Anno #{year["year"]})")
             DegreeCourse.create!(degree_id: d.id, course_id: c.id, year: year["year"], group_id: g.id)
         end
     end
