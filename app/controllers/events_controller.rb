@@ -2,10 +2,10 @@ class EventsController < ApplicationController
     before_action :set_event, only: [:show, :edit, :update, :destroy]
     before_action :set_group, except: [:user_index]
     before_action :logged_in_user
-    before_action only: [:user_index, :show] do
+    before_action only: [:user_index] do
         correct_user params[:user_id]
     end
-    before_action only: [:index] do
+    before_action only: [:index, :show] do
         is_member_in @group
     end
     before_action only: [:new, :create, :edit, :update, :destroy] do
@@ -53,7 +53,7 @@ class EventsController < ApplicationController
         render json: @events
     end
 
-    # GET user_event_path(user, event)
+    # GET group_event_path(group_uuid: group.uuid, id: event.id)
     def show
         # Mostra la descrizione di un evento (magari su una finestrella)
         render json: @event

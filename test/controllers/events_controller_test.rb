@@ -77,7 +77,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test "should show a single event" do
     log_in_as @user
 
-    get user_event_path(@user, @event)
+    get group_event_path(group_uuid: @group.uuid, id: @event.id)
     assert_response :success
   end
 
@@ -239,7 +239,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not show a single event if not logged in" do
-    get user_event_path(@user, @event)
+    get group_event_path(group_uuid: @group.uuid, id: @event.id)
 
     assert_redirected_to login_path
     assert_not flash.empty?
@@ -308,20 +308,20 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
   end
 
-  test "should not show a single event if logged user is not correct" do
-    log_in_as @other_user
-
-    get user_event_path(@user, @event)
-    
-    assert_redirected_to groups_path
-    assert_not flash.empty?
-  end
-
 ### TEST PER UN UTENTE NON MEMBRO ###
   test "should not index every group event if logged user is not member" do
     log_in_as @non_member
 
     get group_events_path(group_uuid: @group.uuid)
+    
+    assert_redirected_to groups_path
+    assert_not flash.empty?
+  end
+
+  test "should not show a single event if logged user is not member" do
+    log_in_as @non_member
+
+    get group_event_path(group_uuid: @group.uuid, id: @event.id)
     
     assert_redirected_to groups_path
     assert_not flash.empty?

@@ -1,7 +1,6 @@
-require "application_system_test_case"
 require "test_helper"
  
-class SystemTest < ApplicationSystemTestCase
+class SystemTest < ActionDispatch::IntegrationTest
     # Test generale del sistema! Proviamo a fare un giro dell'applicazione
     def setup
         ActionMailer::Base.deliveries.clear

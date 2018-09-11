@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   ### URL RESTFUL ###
   resources :groups, param: :uuid do
-    resources :events, except: [:show]
+    resources :events
     resources :memberships, only: [:index, :destroy], param: :user_id
     resources :messages, except: [:show, :new, :edit] do
       resources :attachments, only: [:destroy]
@@ -13,7 +13,6 @@ Rails.application.routes.draw do
     resources :courses, only: [:index]
   end
   resources :users, except: [:new, :create, :show] do
-    resources :events, only: [:show]
     resources :invitations, only: [:index]
   end
   resources :confirm_accounts, only: [:edit]

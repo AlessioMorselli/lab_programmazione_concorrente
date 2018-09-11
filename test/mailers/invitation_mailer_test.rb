@@ -12,7 +12,7 @@ class InvitationMailerTest < ActionMailer::TestCase
             email.deliver_now
         end
 
-        assert_equal ['unife.community@unife.study.groups.it'], email.from
+        assert_equal ['noreply@unife.study.groups.it'], email.from
         assert_equal ['giovanni@unife.it'], email.to
         assert_equal 'Sei stato invitato al gruppo ninja', email.subject
     end
