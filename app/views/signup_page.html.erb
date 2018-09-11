@@ -12,7 +12,7 @@
 
 <body class="text-center">
 
-  <% if @user.errors.any? %>
+  <% if @user && @user.errors.any? %>
     <div id="error_explanation">
       <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
       <ul>

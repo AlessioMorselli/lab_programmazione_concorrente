@@ -3,7 +3,7 @@ class Student < ApplicationRecord
     belongs_to :degree
 
     validates_uniqueness_of :user_id
-    validates_presence_of :degree_id, :user_id, :year
+    validates_presence_of :year
     validate :year_is_less_than_degree_years
 
     before_validation :overwrite_existing_student
