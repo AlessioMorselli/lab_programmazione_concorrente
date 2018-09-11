@@ -1,16 +1,13 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<% content_for :title do %>
+  Unife Study Groups - Registrati
+<% end %>
 
-  <title>Benvenuti su Unife Study Groups</title>
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<% content_for :head do %>
   <%= stylesheet_link_tag "login_page" %>
-</head>
+<% end %>
 
-<body class="text-center">
+<div class="container h-100">
+  <div class="row align-items-center align-self-center h-100 text-center">
 
   <% if @user && @user.errors.any? %>
     <div id="error_explanation">
@@ -43,7 +40,8 @@
     <div style="height: 10px;"></div>
     <%= f.submit "Registrati", class: 'btn btn-lg btn-secondary btn-block rounded-0 shadow' %>
   <% end %>
-</body>
+  </div>
+</div>
 
 <script>
   window.addEventListener("load", onSelectDegree)
@@ -69,4 +67,3 @@
     }
   }
 </script>
-</html>

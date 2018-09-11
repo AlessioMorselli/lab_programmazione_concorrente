@@ -1,0 +1,35 @@
+                    <div class="msg_history">
+                      <% if @messages.pinned.to_a.size == 0 %>
+                        <p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
+                      <% end %>
+                      <% @messages.pinned.each do |pinned| %>
+                        <div class="incoming_msg_flagged ml-1">
+                          <div class="incoming_msg_img_flagged"> <%= pinned.user.name %>: </div>
+                          <div class="received_msg_flagged">
+                            <div class="received_withd_msg_flagged">
+                              <p><%= pinned.text %></p>
+                              <% time = pinned.updated_at.strftime("%I:%M %p") %>
+                              <% if pinned.updated_at.strftime("%d/%m/%Y").to_s.eql? Time.now.strftime("%d/%m/%Y").to_s %>
+                                <% date = "Today" %>
+                              <% elsif pinned.updated_at.strftime("%d/%m/%Y").to_s.eql? (Time.now - 1.days).strftime("%d/%m/%Y").to_s %>
+                                <% date = "Yesterday" %>
+                              <% else %>
+                                <% date = pinned.updated_at.strftime("%B %-d") %>
+                              <% end %>
+                              <span class="time_date"> <%= time %>    |    <%= date %>  <a class="unbookmark_message" message-id="<%= pinned.id %>" href="#">
+                                <% if (@group.admins.include? current_user) %>
+                                <span data-feather="x"></span>
+                                <% end %>
+                              </a></span>
+                              <!--
+                              <a class="d-flex align-items-center" href="#">
+                                <span data-feather="paperclip" class="mr-2"></span> Locandina Paintball 2018
+                              </a>
+                              -->
+                            </div>
+                          </div>
+                        </div>
+                        <hr/>
+                      <% end %>
+
+                    </div>

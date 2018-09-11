@@ -1,19 +1,15 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<% content_for :title do %>
+  <%= @group.name %> - Nuovo Evento
+<% end %>
 
-  <title>Unife Study Groups</title>
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+<% content_for :head do %>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
   <%= stylesheet_link_tag "dashboard" %>
-</head>
 
-<body class="bg-light">
+<% end %>
+
+<div class="bg-light h-100">
   <%= render "nav" %>
   
   <div class="container-fluid main-container">
@@ -46,16 +42,25 @@
                 <div class="card-body p-2 d-flex justify-content-center">
                   <div class="mb-2">
 
+                    <%= form_for @event, url: group_events_path, html: {class: 'form-new-event', method: 'post', id: 'event_form'} do |f| %>
+                      <div class="input-group date m-1 mb-1">
+                        <%= f.text_field :start_time, class: 'form-control mr-1 rounded-0 shadow-sm', id: 'datetimes', placeholder: 'Inizio Evento', required: true %>
+                        <%= f.text_field :end_time, class: 'form-control rounded-0 shadow-sm', id: 'datetimes', placeholder: 'Fine Evento', required: true %>
+                      </div>
+
+                      <%= f.text_field :place, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Luogo', required: true, autofocus: true %>
+                      <%= f.text_area :description, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Descrizione', required: true %>
+                      <%= f.submit "Crea Evento", class: 'btn btn-lg btn-secondary btn-block m-1 shadow-sm' %>
+                    <% end %>
+
 
                     <form class="form-new-event">
                       <div class="input-group date m-1 mb-1">
-                        <input type="text" class="form-control mr-1 rounded-0 shadow-sm" name="datetimes" placeholder="Inizio Evento" required>
-                        <input type="text" class="form-control rounded-0 shadow-sm" name="datetimes" placeholder="Fine Evento" required>
+                        <input type="text" class="form-control mr-1 rounded-0 shadow-sm" id="datetimes" placeholder="Inizio Evento" required>
+                        <input type="text" class="form-control rounded-0 shadow-sm" id="datetimes" placeholder="Fine Evento" required>
                       </div>
 
-                      <label for="inputPlace" class="sr-only">Luogo</label>
                       <input type="text" id="inputPlace" class="form-control m-1 rounded-0 shadow-sm" placeholder="Luogo" required autofocus>
-                      <label for="inputDescription" class="sr-only">Descrizione</label>
                       <textarea rows="4" id="inputDescription" class="form-control m-1 rounded-0 shadow-sm" placeholder="Descrizione" required></textarea>
                       <button class="btn btn-lg btn-secondary btn-block m-1 shadow-sm" type="submit">Crea Evento</button>
                     </form>
@@ -68,6 +73,7 @@
         </div>
       </div>
     </div>
+</div>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -84,18 +90,19 @@
 
     <script>
       $(function() {
-        $('input[name="datetimes"]').daterangepicker({
+        $('input[id="datetimes"]').daterangepicker({
           timePicker: true,
+          timePicker24Hour: true,
           singleDatePicker: true,
           autoUpdateInput: false,
           locale: {
             cancelLabel: 'Clear',
           }
         });
-        $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
+        $('input[id="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
           $(this).val(picker.startDate.format('DD/MM hh:mm A'));
         });
-        $('input[name="datetimes"]').on('cancel.daterangepicker', function(ev, picker) {
+        $('input[id="datetimes"]').on('cancel.daterangepicker', function(ev, picker) {
           $(this).val('');
         });
       });
@@ -113,5 +120,13 @@
       });
      });
    </script>
-  </body>
-  </html>
+
+   <script type="text/javascript">
+     $(document).ready(function (e){
+      $('#event_form').submit(function (e){
+        e.preventDefault();
+        var start_time = $(this).find('div').first().children('input[name="event[start_time]"]').val();
+        var end_time = $(this).find('div').first().children('input[name="event[end_time]"]').val();
+      });
+     });
+   </script>

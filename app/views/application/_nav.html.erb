@@ -1,11 +1,12 @@
   <nav class="navbar navbar-dark bg-dark p-1 shadow">
-    <a class="navbar-brand col-sm-12 col-md-3 mr-0 text-center col-lg-2" href="/groups">Unife Study Groups</a>
-    <form class="col-9 col-sm-10 col-md-7 col-lg-9" type="POST" action="/groups">
-      <input class="form-control form-control-dark text-center text-md-left" type="text" placeholder="Cerca gruppi" aria-label="Search" name="query">
-    </form>
+    <%= link_to "Unife Study Groups", groups_path, class: "navbar-brand col-sm-12 col-md-3 mr-0 text-center col-lg-2" %>
+
+    <%= form_tag(groups_path, {class: "col-9 col-sm-10 col-md-7 col-lg-9", method: 'GET'}) do %>
+      <%= text_field_tag :query, nil, class: "form-control form-control-dark text-center text-md-left", placeholder: "Cerca gruppi" %>
+    <% end %>
     <ul class="navbar-nav align-items-center col-3 col-sm-2 col-md-2 col-lg-1 px-3">
       <li class="nav-item text-nowrap">
-        <a class="nav-link" href="/logout">Logout</a>
+        <%= link_to "Logout", logout_path, class: "nav-link" %>
       </li>
     </ul>
   </nav>

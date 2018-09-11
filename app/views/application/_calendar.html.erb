@@ -1,0 +1,22 @@
+                      <% if @events.to_a.size == 0 %>
+                        <p class="p-2 text-center">Al momento non sono presenti eventi.</p>
+                      <% end %>
+
+                      <% @events.each do |event| %>
+                        <div class="row row-striped">
+                          <div class="col-3 text-center pr-0">
+                            <div class="">
+                              <h1 class="display-5"><span class="badge badge-secondary rounded-0"><%= event.start_time.strftime("%-d") %></span></h1>
+                              <h4><%= event.start_time.strftime("%^b") %></h4>
+                            </div>
+                          </div>
+                          <div class="col-9 pl-0">
+                            <ul class="list-inline">
+                              <li class="list-inline-item text-secondary font-075"><i class="fa fa-calendar-o" aria-hidden="true"></i><%= event.start_time.strftime("%A") %></li>
+                              <li class="list-inline-item text-secondary font-075"><i class="fa fa-clock-o" aria-hidden="true"></i><%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %></li>
+                              <li class="list-inline-item text-secondary font-075"><i class="fa fa-location-arrow" aria-hidden="true"></i><%= event.place %></li>
+                            </ul>
+                            <p><%= event.description %></p>
+                          </div>
+                        </div>
+                      <% end %>
