@@ -1,0 +1,26 @@
+.flash-messages {
+    color: white;
+    width: 100%;
+}
+
+.flash-messages > * {
+    width: 100%;
+    padding: 4px;
+    margin: 0px;
+}
+
+.flash-messages .error {
+    border: 1px solid red;
+}
+
+.flash-messages .danger {
+    border: 1px solid red;
+}
+
+.flash-messages .info {
+    border: 1px solid gray;
+}
+
+.flash-messages .success {
+    border: 1px solid greenyellow;
+}
