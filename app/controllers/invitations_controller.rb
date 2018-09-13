@@ -13,7 +13,7 @@ class InvitationsController < ApplicationController
     def index
         # Visualizza tutte gli inviti in sospeso da parte di un utente
         @invitations = @user.invitations.not_expired
-        render json: @invitations
+        render file: "app/views/invitations/index"
     end
 
     # GET group_invitation_path(group_uuid: group.uuid, url_string: invitation.url_string)
