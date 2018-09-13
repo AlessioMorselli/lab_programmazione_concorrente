@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     # GET edit_user_path(user)
     def edit
         # Visualizza la form per modificare le informazioni di un utente
-        render json: @user
+        render file: "app/views/user/edit"
     end
 
     # PUT/PATCH user_path(user)
