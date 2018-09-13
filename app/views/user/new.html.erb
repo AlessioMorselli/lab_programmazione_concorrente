@@ -10,6 +10,6 @@
   <div class="row align-items-center align-self-center h-100 text-center flex-column">
 
     <%= render partial: "flash_messages" %>
-    <%= render partial: "user/form", locals: {user: @user, url: signup_path} %>
+    <%= render partial: "user/form", locals: {user: @user, url: signup_path, class_name: "form-signin"} %>
   </div>
 </div>

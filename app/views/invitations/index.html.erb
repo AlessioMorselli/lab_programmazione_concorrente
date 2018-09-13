@@ -1,0 +1,97 @@
+<% content_for :title do %>
+  <%= @current_user.name %> - Inviti
+<% end %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "dashboard" %>
+
+<% end %>
+
+<div class="bg-light h-100">
+  <%= render "nav" %>
+  
+  <div class="container-fluid main-container">
+    <div class="row h-100">
+      <div class="col-md-3 col-lg-2 col-xl-2 h-100 d-none d-md-block pl-2 py-2 pr-0">
+        <%= render "user_groups" %>
+      </div>
+      <div class="col-md-9 col-lg-10 h-100 p-2">
+        <div class="container-fluid h-100 d-flex flex-column px-2 pb-2 pt-0">
+          <div class="row flex-shrink-0">
+            <div class="col-12 d-md-none">
+              <h3 class="text-center">
+                <%= @current_user.name %>
+              </h3>
+            </div>
+          </div>
+          <div class="row flex-shrink-0 d-xl-none">
+
+            <div class="col-12">
+              <div class="btn-toolbar justify-content-center">
+                <%= render "user_groups_modal" %>
+              </div>
+            </div>
+          </div>
+          <div class="row flex-grow-1 mt-2">
+
+            <div class="col-12">
+              <div class="card card-chat shadow rounded-0 h-100">
+                <div class="card-header shadow rounded-0 text-center">Inviti</div>
+                <div class="card-body p-2">
+                  <div class="mb-2">
+                    <% id_num = 0 %>
+                    <% @invitations.each do |invitation| %>
+                      <% id_num = id_num + 1 %>
+
+                      <div class="card shadow-sm">
+                        <div class="card-body group-name-body d-flex justify-content-between">
+                          <a class="align-self-center text-secondary nounderline" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>"><span data-feather="mail"></span>  <%= invitation.group.name %></a>
+                          <div class="text-secondary align-self-center ml-2"></div>
+                          <a class="text-right col-1 nounderline" href="<%=group_accept_invitation_path(invitation.group.uuid, invitation.url_string)%>" style="width: 100px; color: green;"><span data-feather="check"></span> Accetta</a>
+                          <a class="text-right col-1 nounderline" href="<%=group_refuse_invitation_path(invitation.group.uuid, invitation.url_string)%>" style="width: 100px; color: red;"><span data-feather="x"></span> Rifiuta</a>
+                          <%= link_to "Profile", group_refuse_invitation_path(invitation.group.uuid, invitation.url_string), method: :post %>
+                        </div>
+                      </div>
+
+                      <div class="modal fade" id="infoModal<%= id_num %>" tabindex="-1" role="dialog" aria-labelledby="infoModal<%= id_num %>" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content rounded-0">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalCenterTitle"><%= invitation.group.name %></h5>
+                              <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <b>Nr. Membri:</b> <%= invitation.group.members.count %><br>
+                              <b>Descrizione:</b> 
+                              <%= invitation.group.description.blank? ? "Nessuna descrizione disponibile." : invitation.group.description %>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <% end %>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+  feather.replace()
+</script>

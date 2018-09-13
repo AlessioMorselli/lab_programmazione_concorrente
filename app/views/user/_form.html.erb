@@ -1,0 +1,54 @@
+<%= form_for(user, url: url, html: {class: class_name}) do |f| %>
+    <h1 class="h3 mb-3 font-weight-normal text-white">Registrati</h1>
+    <%= f.email_field :email, class: 'form-control rounded-0', placeholder: "Indirizzo email", required: true, title: user.errors[:email].join(', ') %>
+    <%= f.text_field :name, class: 'form-control rounded-0', placeholder: "Username", required: true, title: user.errors[:name].join(', ') %>
+
+    <%= f.password_field :password, class: 'form-control rounded-0', placeholder: "Password", title: user.errors[:password].join(', ') %>
+    <%= f.password_field :password_confirmation, class: 'form-control rounded-0', placeholder: "Conferma password", title: user.errors[:password].join(', ') %>
+    <%= f.password_field :current_password, class: 'form-control rounded-0', placeholder: "Password attuale", title: user.errors[:password].join(', ') unless user.new_record? %>
+    <div style="height: 10px;"></div>
+    <%= f.fields_for :student_attributes do |s| %>
+      <div class="form-row mb-0">
+        <div class="col-8 pr-0">
+          <%= s.select :degree_id, options_for_select(Degree.all.map{|d| [d.name, d.id, {:years => d.years}]}), {prompt: "Corso di Studio"}, {class: "form-control rounded-0"} %>
+        </div>
+        <div class="col-4 pl-0">
+          <%= s.select :year, options_for_select([]),{prompt: "Anno"}, {class: "form-control rounded-0"} %>
+        </div>
+      </div>
+    <% end %>
+    <div style="height: 10px;"></div>
+    <%= f.submit "Registrati", class: 'btn btn-lg btn-secondary btn-block rounded-0 shadow' %>
+
+<% end %>
+
+<script>
+  window.addEventListener("load", onSelectDegree)
+  document.getElementById("user_student_attributes_degree_id").addEventListener("change", onSelectDegree);
+
+  <% if !user.new_record? && user.student != nil %>
+    document.getElementById("user_student_attributes_degree_id").value = <%= user.student.degree_id %>
+    document.getElementById("user_student_attributes_year").value = <%= user.student.year %>
+  <% end %>
+
+  function onSelectDegree() {
+    let degreeSelect = document.getElementById("user_student_attributes_degree_id");
+    let degreeYearSelect = document.getElementById("user_student_attributes_year");
+
+    degreeYearSelect.innerHTML = "";
+    if (degreeSelect.value) {
+      let years = degreeSelect.options[degreeSelect.selectedIndex].getAttribute("years");
+      for(let i=1; i<=years; i++) {
+        let option = document.createElement("option");
+        option.value = i;
+        option.innerText = i;
+        degreeYearSelect.appendChild(option);
+      }
+    } else {
+      let option = document.createElement("option");
+      option.value = "";
+      option.innerText = "Anno";
+      degreeYearSelect.appendChild(option);
+    }
+  }
+</script>
