@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     # PUT/PATCH user_path(user)
     def update
         # Aggiorna le informazioni su un utente
-        if @user.update(user_params)
+        if @user.update(edit_user_params)
             flash[:success] = 'Le tue informazioni sono state aggiornate'
             redirect_to groups_path
         else
@@ -91,6 +91,11 @@ class UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(:name, :email, :password, :password_confirmation,
+                                        student_attributes: [:degree_id, :year])
+    end
+    
+    def edit_user_params
+        params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password,
                                         student_attributes: [:degree_id, :year])
     end
 end
