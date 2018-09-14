@@ -10,9 +10,9 @@ class User < ApplicationRecord
 
     has_many :invitations, :dependent => :delete_all
 
-    has_one :student
+    has_one :student, :dependent => :destroy
     has_one :degree, through: :student
-    accepts_nested_attributes_for :student
+    accepts_nested_attributes_for :student, :allow_destroy => true
 
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }
