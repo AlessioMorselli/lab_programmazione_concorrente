@@ -15,7 +15,7 @@ class User < ApplicationRecord
     accepts_nested_attributes_for :student, :allow_destroy => true
 
     has_secure_password
-    validates :password, presence: true, length: { minimum: 6 }
+    validates :password, presence: true, length: { minimum: 6 }, unless: lambda {!self.new_record? && self.password.blank?}
 
     validates :name, presence: true, length: {minimum: 3, maximum: 50 }, uniqueness: true
 
