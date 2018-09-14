@@ -31,7 +31,6 @@ class UsersController < ApplicationController
             @user.send_confirm_email
             flash[:info] = "Per piacere, controlla la tua casella di posta elettronica e 
                                 conferma il tuo indirizzo email prima di continuare!"
-            # TODO: metti la ridirezione corretta
             redirect_to landing_path
         else
             flash.now[:error] = "Ooooppss, qualcosa è andato storto!"
@@ -48,13 +47,17 @@ class UsersController < ApplicationController
     # PUT/PATCH user_path(user)
     def update
         # Aggiorna le informazioni su un utente
-        if @user.update(edit_user_params)
+        if(!edit_user_params[:password].blank? && !@user.authenticate(edit_user_params[:current_password]))
+            flash.now[:error] = "La tua password corrente è sbagliata e non puoi aggiornarla"
+            render file: "app/views/user/edit"
+        # elsif edit_user_params[:password].blank?
+        #     edit_user_params[:password] = edit_user_params[:current_password]
+        elsif @user.update!(edit_user_params.except(:current_password))
             flash[:success] = 'Le tue informazioni sono state aggiornate'
             redirect_to groups_path
         else
             flash.now[:error] = "Ooooppss, qualcosa è andato storto!"
-            # TODO: metti il template corrispondente alla modifica di un utente
-            # render file: "app/views/edit_user_page"
+            render file: "app/views/user/edit"
         end
     end
 

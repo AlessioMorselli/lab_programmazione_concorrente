@@ -59,20 +59,69 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should update a user" do
+  test "should update a user without new password" do
     log_in_as @user
     
     patch user_path(@user), params: { user: {
       name: "NewName",
-      # TODO: Perchè devo mettere la password? Problemi con le fixture?
-      password: "ciaone"
+      password: "",
+      password_confirmation: "",
+      current_password: "ciaone",
+      email: @user.email,
+      student_attributes: {
+        degree_id: @user.student.degree_id,
+        year: @user.student.year + 1
       }
-    }
-  
-    assert_redirected_to groups_path
+    }}
 
     @user.reload
     assert_equal "NewName", @user.name
+    assert_not BCrypt::Password.new(@user.password_digest).is_password?("ciaone")
+    assert_equal 2, @user.student.year
+
+    assert_redirected_to groups_path
+  end
+
+  test "should update a user with new password" do
+    log_in_as @user
+    
+    patch user_path(@user), params: { user: {
+      name: "NewName",
+      password: "NewPassword",
+      password_confirmation: "NewPassword",
+      current_password: "ciaone",
+      email: @user.email,
+      student_attributes: {
+        degree_id: @user.student.degree_id,
+        year: @user.student.year
+      }
+    }}
+
+    @user.reload
+    assert_equal "NewName", @user.name
+    assert BCrypt::Password.new(@user.password_digest).is_password?("NewPassword")
+
+    assert_redirected_to groups_path
+  end
+
+  test "should not update a user with wrong current password" do
+    log_in_as @user
+    
+    patch user_path(@user), params: { user: {
+      name: "NewName",
+      password: "NewPassword",
+      password_confirmation: "NewPassword",
+      current_password: "WrongPassword",
+      email: @user.email,
+      student_attributes: {
+        degree_id: @user.student.degree_id,
+        year: @user.student.year
+      }
+    }}
+
+    @user.reload
+    assert_equal "luigi", @user.name
+    assert_not BCrypt::Password.new(@user.password_digest).is_password?("NewPassword")
   end
 
   # test "should destroy a user" do
