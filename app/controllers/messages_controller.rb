@@ -46,8 +46,8 @@ class MessagesController < ApplicationController
         @message = Message.new(message_params)
         @message.group = @group
         @message.user = current_user
-        if !params[:attachment].blank?
-            incoming_file = params[:attachment]
+        if !attachment_params[:attachment].blank?
+            incoming_file = attachment_params[:attachment]
             @attachment = Attachment.new
             @attachment.name = incoming_file.original_filename
             @attachment.mime_type = incoming_file.content_type
@@ -55,7 +55,6 @@ class MessagesController < ApplicationController
         end
         if !@message.save_with_attachment(@attachment)
             flash.now[:danger] = 'Il messaggio non è stato inviato'
-            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
     end
 
@@ -64,7 +63,6 @@ class MessagesController < ApplicationController
         # Modifica il testo di un messaggio
         if !@message.update(message_params)
             flash.now[:danger] = 'Il messaggio non è stato modificato'
-            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
         end
     end
 
@@ -117,18 +115,10 @@ class MessagesController < ApplicationController
     end
 
     def message_params
-        begin
-            params.require(:message).permit(:text) or not_found
-        rescue ActionController::RoutingError
-            render file: "#{Rails.root}/public/404", layout: false, status: :not_found
-        end
+        params.require(:message).permit(:text)
     end
 
     def attachment_params
-        begin
-            params.require(:attachment).permit(:name, :mime_type, :data) or not_found
-        rescue ActionController::RoutingError
-            render file: "#{Rails.root}/public/404", layout: false, status: :not_found
-        end
+        params.require(:message).permit(:attachment)
     end
 end

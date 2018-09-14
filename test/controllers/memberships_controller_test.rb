@@ -36,6 +36,17 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
     assert_empty cookies[@user.id.to_s + @group.uuid]
   end
 
+  test "should not add user to public group if it is already member" do
+    log_in_as @user
+
+    assert_difference("Membership.count", 0) do
+      post group_memberships_path(group_uuid: @group.uuid)
+    end
+
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert flash.empty?
+  end
+
 ### TEST PER UN UTENTE NON LOGGATO ###
   test "should not index every group member if not logged in" do
     get group_memberships_path(group_uuid: @group.uuid)
@@ -72,6 +83,17 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
     get group_memberships_path(group_uuid: @group.uuid)
     
     assert_redirected_to groups_path
+    assert_not flash.empty?
+  end
+
+  test "should add user to public group" do
+    log_in_as @non_member
+
+    assert_difference("Membership.count", 1) do
+      post group_memberships_path(group_uuid: @group.uuid)
+    end
+
+    assert_redirected_to group_path(uuid: @group.uuid)
     assert_not flash.empty?
   end
 

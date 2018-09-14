@@ -76,7 +76,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     @user.reload
     assert_equal "NewName", @user.name
-    assert_not BCrypt::Password.new(@user.password_digest).is_password?("ciaone")
+    assert BCrypt::Password.new(@user.password_digest).is_password?("ciaone")
     assert_equal 2, @user.student.year
 
     assert_redirected_to groups_path

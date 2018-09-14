@@ -65,11 +65,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
       assert_difference('Attachment.count', 0) do
         post group_messages_path(group_uuid: @group.uuid), params: {
           message: {
-            text: "Messaggio di prova"#,
-            # group_id: @group.id,
-            # user_id: @user.id
-          },
-          attachment: nil
+            text: "Messaggio di prova",
+            attachment: ""
+          }
         }
       end
     end
@@ -82,11 +80,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
       assert_difference('Attachment.count') do
         post group_messages_path(group_uuid: @group.uuid), params: {
           message: {
-            text: "Messaggio di prova"#,
-            # group_id: @group.id,
-            # user_id: @user.id
-          },
-          attachment: fixture_file_upload('files/test_image.jpg','image/jpeg')
+            text: "Messaggio di prova",
+            attachment: fixture_file_upload('files/test_image.jpg','image/jpeg')
+          }
         }
       end
     end
@@ -99,12 +95,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
       assert_difference('Attachment.count', 0) do
         post group_messages_path(group_uuid: @group.uuid), params: {
           message: {
-            # TODO: se uno non mette niente in una barra di ricerca, è nil o "" che viene passato?
-            text: ""#,
-            # group_id: @group.id,
-            # user_id: @user.id
-          },
-          attachment: nil
+            text: "",
+            attachment: ""
+          }
         }
       end
     end
@@ -117,12 +110,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
       assert_difference('Attachment.count') do
         post group_messages_path(group_uuid: @group.uuid), params: {
           message: {
-            # TODO: se uno non mette niente in una barra di ricerca, è nil o "" che viene passato?
-            text: ""#,
-            # group_id: @group.id,
-            # user_id: @user.id
-          },
-          attachment: fixture_file_upload('files/test_image.jpg','image/jpeg')
+            text: "",
+            attachment: fixture_file_upload('files/test_image.jpg','image/jpeg')
+          }
         }
       end
     end
@@ -214,11 +204,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Message.count', 0) do
       post group_messages_path(group_uuid: @group.uuid), params: {
         message: {
-          text: "Messaggio di prova"#,
-          # group_id: @group.id,
-          # user_id: @user.id
-        },
-        attachment: nil
+          text: "Messaggio di prova",
+          attachment: ""
+        }
       }
     end
 
@@ -302,11 +290,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Message.count', 0) do
       post group_messages_path(group_uuid: @group.uuid), params: {
         message: {
-          text: "Messaggio di prova"#,
-          # group_id: @group.id,
-          # user_id: @user.id
-        },
-        attachment: nil
+          text: "Messaggio di prova",
+          attachment: ""
+        }
       }
     end
 

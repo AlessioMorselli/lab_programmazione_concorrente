@@ -19,16 +19,33 @@ class MembershipsController < ApplicationController
     is_super_admin_in @group
   end
 
-  # GET group_memberships(group_uuid: group.uuid)
+  # GET group_memberships_path(group_uuid: group.uuid)
   def index
     # Recupera tutti i membri di un gruppo, in modo da poter visualizzare chi fa parte di un gruppo
     # e chi è online in quel momento (forse, adesso vediamo)
     @members = @group.memberships
 
-    render json: @members
+    render file: "app/views/memberships/index"
   end
 
-  # DELETE group_memberships(group_uuid: group.uuid, user_id: user.id)
+  # POST group_memberships_path(group_uuid: group.uuid)
+  def create
+    # Il link viene usato in ingresso ad un gruppo pubblico di cui non si è membri
+    if !@group.members.include? current_user
+      @membership = Membership.new(group: @group, user: current_user)
+      if @membership.save
+        flash[:success] = "Benvenuto nel gruppo " + @group.name + "!"
+        redirect_to group_path(uuid: @group.uuid)
+      else
+        flash[:error] = "Qualcosa è andato storto e non siamo riusciti a farti accedere al gruppo " + @group.name
+        redirect_to groups_path
+      end
+    else
+      redirect_to group_path(uuid: @group.uuid)
+    end
+  end
+
+  # DELETE group_membership_path(group_uuid: group.uuid, user_id: user.id)
   def destroy
     # Toglie un utente da un gruppo
     @group.members.delete(@user)
@@ -43,7 +60,7 @@ class MembershipsController < ApplicationController
     end
   end
 
-  # PUT/PATCH group_set_admin_path(group_uuid: group.uuid, user_id: user.id)
+  # PATCH group_set_admin_path(group_uuid: group.uuid, user_id: user.id)
   def set_admin
     # Rende un utente amministratore e gli rimuove il titolo, se lo è già
     @membership.admin = !@membership.admin
@@ -61,7 +78,7 @@ class MembershipsController < ApplicationController
     redirect_to group_path(uuid: @group.uuid)
   end
 
-  # PUT/PATCH group_set_super_admin_path(group_uuid: group.uuid, user_id: user.id)
+  # PATCH group_set_super_admin_path(group_uuid: group.uuid, user_id: user.id)
   def set_super_admin
     # Trasferisce il titolo di super admin dal super admin attuale ad un altro membro del gruppo
     if @group.change_super_admin(@user)

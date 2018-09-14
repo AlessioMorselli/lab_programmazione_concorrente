@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   ### URL RESTFUL ###
   resources :groups, param: :uuid do
     resources :events
-    resources :memberships, only: [:index, :destroy], param: :user_id
+    resources :memberships, only: [:index, :create, :destroy], param: :user_id
     resources :messages, except: [:show, :new, :edit] do
       resources :attachments, only: [:destroy]
     end
