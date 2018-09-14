@@ -97,7 +97,9 @@ class User < ApplicationRecord
         return group.save_with_admin(self);
     end
 
-
+    def self.find_by_email_or_name(email_or_name)
+        return User.where('name LIKE :query OR email LIKE :query', query: "%#{email_or_name}%").first
+    end
 
     # restituisce l'hash di una stringa 
     def User.digest(string)
