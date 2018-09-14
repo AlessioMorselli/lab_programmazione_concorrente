@@ -18,7 +18,7 @@ class Student < ApplicationRecord
 
     private def overwrite_existing_student
         current_student = Student.where(user_id: user_id).first
-        if current_student != nil
+        if current_student != nil && (current_student.degree_id != degree_id || current_student.year != year)
             current_student.destroy
         end
     end

@@ -47,9 +47,12 @@
                         <div class="card-body group-name-body d-flex justify-content-between">
                           <a class="align-self-center text-secondary nounderline" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>"><span data-feather="mail"></span>  <%= invitation.group.name %></a>
                           <div class="text-secondary align-self-center ml-2"></div>
-                          <a class="text-right col-1 nounderline" href="<%=group_accept_invitation_path(invitation.group.uuid, invitation.url_string)%>" style="width: 100px; color: green;"><span data-feather="check"></span> Accetta</a>
-                          <a class="text-right col-1 nounderline" href="<%=group_refuse_invitation_path(invitation.group.uuid, invitation.url_string)%>" style="width: 100px; color: red;"><span data-feather="x"></span> Rifiuta</a>
-                          <%= link_to "Profile", group_refuse_invitation_path(invitation.group.uuid, invitation.url_string), method: :post %>
+                          <%= link_to(group_accept_invitation_path(invitation.group.uuid, invitation.url_string), class: "text-right col-1 nounderline text-success", method: :post) do %>
+                            <span data-feather="check"></span> Accetta
+                          <% end %>
+                          <%= link_to(group_refuse_invitation_path(invitation.group.uuid, invitation.url_string), class: "text-right col-1 nounderline text-danger", data: {method: :post, confirm: 'Sicuro?'} ) do %>
+                            <span data-feather="x"></span> Rifiuta
+                          <% end %>
                         </div>
                       </div>
 
