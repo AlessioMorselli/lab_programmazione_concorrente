@@ -5,6 +5,7 @@ class Student < ApplicationRecord
     validates_uniqueness_of :user_id
     validates_presence_of :year
     validate :year_is_less_than_degree_years
+    validates :year, numericality: { only_integer: true, greater_than: 0 }
 
     before_validation :overwrite_existing_student
     before_destroy :delete_membership_to_official_groups

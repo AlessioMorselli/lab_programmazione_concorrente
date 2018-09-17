@@ -29,6 +29,8 @@ class Group < ApplicationRecord
 
     ### VALIDATION ###
     validates :name, presence: true
+    validates_length_of :name, minimum: 3, maximum: 250
+    validates_length_of :description, maximum: 1000, allow_blank: true
     
     validates :max_members, numericality: { only_integer: true, greater_than_or_equal_to: -1, other_than: 0 }
     validate :max_members_is_greater_than_number_of_members

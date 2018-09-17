@@ -148,9 +148,9 @@ class GroupTest < ActiveSupport::TestCase
     groups = [
       group_1 = Group.new(name: "da trovare", course_id: course_1.id),
       group_2 = Group.new(name: "da trovare", course_id: course_2.id),
-      group_3 = Group.new(name: "no", course_id: course_3.id),
-      group_4 = Group.new(name: "no", course_id: course_4.id),
-      group_5 = Group.new(name: "no", course_id: course_5.id),
+      group_3 = Group.new(name: "_no", course_id: course_3.id),
+      group_4 = Group.new(name: "_no", course_id: course_4.id),
+      group_5 = Group.new(name: "_no", course_id: course_5.id),
     ]
 
     groups.each { |g| g.save }

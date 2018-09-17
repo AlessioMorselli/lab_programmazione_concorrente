@@ -9,6 +9,7 @@ class Message < ApplicationRecord
     belongs_to :attachment, optional: true, dependent: :destroy
 
     validate :text_or_attachment_must_be_present
+    validates_length_of :text, maximum: 1000, allow_blank: true
 
     private def text_or_attachment_must_be_present
         unless text.present? || attachment_id.present?

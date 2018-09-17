@@ -8,6 +8,10 @@ class Event < ApplicationRecord
     validate :end_time_is_after_start_time
     validate :end_time_is_same_day_as_start_time
 
+    validates_length_of :name, minimum: 3, maximum: 250
+    validates_length_of :place, maximum: 250, allow_blank: true
+    validates_length_of :description, maximum: 1000, allow_blank: true
+
     after_create :create_repeated_events
 
     private def start_time_is_not_before_today
