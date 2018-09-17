@@ -285,7 +285,7 @@ Custom media queries
 }
 
 .sidebar-heading {
-  font-size: .75rem;
+  font-size: .70rem;
   text-transform: uppercase;
 }
 
@@ -329,3 +329,11 @@ Custom media queries
   text-decoration: none !important;
 }
 
+.h-50 {
+  height: 50% !important;
+}
+
+.dropdown-menu .dropdown-item:active {
+  background: #ebebeb;
+  color: black;
+}

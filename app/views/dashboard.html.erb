@@ -14,10 +14,10 @@
   
   <div class="container-fluid main-container">
     <div class="row h-100">
-      <div class="col-md-3 col-lg-2 col-xl-2 h-100 d-none d-md-block pl-2 py-2 pr-0">
+      <div class="col-md-3 col-lg-3 col-xl-2 h-100 d-none d-md-block pl-2 py-2 pr-0">
         <%= render "user_groups" %>
       </div>
-      <div class="col-md-9 col-lg-10 h-100 p-2">
+      <div class="col-md-9 col-lg-9 col-xl-10 h-100 p-2">
         <div class="container-fluid h-100 d-flex flex-column px-2 pb-2 pt-0">
           <div class="row flex-shrink-0 d-md-none">
             <div class="col-12">
@@ -83,6 +83,36 @@
                     </div>
                   </div>
                 </div>
+
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle shadow-sm d-md-none" data-target="#membersModal" data-toggle="modal">
+                  <span data-feather="user"></span>
+                  Membri 
+                </button>
+
+                <div class="modal fade" tabindex="-1" role="dialog" id="membersModal">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content rounded-0">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Membri di questo gruppo</h5>
+                        <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <ul class="nav flex-column nav-scroll">
+                        <% @group.members.each do |member| %>
+                        <li class="nav-item">
+                          <a class="nav-link text-secondary" href="#">
+                            <span data-feather="user"></span>
+                            <%= member.name %>
+                          </a>
+                        </li>
+                        <% end %>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -143,7 +173,7 @@
                           <div class="received_withd_msg">
                             <b><%= message.user.name %></b>:
                             <p class="mt-1"><%= message.text %></p>
-                            <span class="time_date"> <%= time %>    |    <%= date %>    
+                            <span class="time_date"> <%= time %>    |    <%= date %> <%= (message.updated_at.to_s.eql? message.created_at.to_s) ? nil : "*" %>  
                               <% if (message.pinned == false and @group.admins.include? current_user) %>
                                 <a class="bookmark_message text-secondary" message-id="<%= message.id %>" href="#"><span data-feather="bookmark"></span></a>
                               <% end %>

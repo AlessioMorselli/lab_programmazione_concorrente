@@ -47,7 +47,7 @@
                           <a class="align-self-center text-secondary nounderline" href="/groups/<%= group.uuid %>"><span data-feather="users"></span>  <%= group.name %></a>
                           <div class="text-secondary align-self-center ml-2"><span data-feather="chevron-right"></span></div>
                           <div class="flex-grow-1">
-                            <a class="align-self-center ml-2 nounderline" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>"><span data-feather="info"></span>  Info</a>
+                            <a class="align-self-center ml-2 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>"><span data-feather="info"></span>  Info</a>
                           </div>
                           <% if group.members.exists?(current_user.id) %>
                           <a class="text-right text-success nounderline" href="#"><span data-feather="check-circle"></span> Iscritto</a>
