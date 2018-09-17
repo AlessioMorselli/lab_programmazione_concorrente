@@ -4,7 +4,7 @@
                       <% end %>
                       <% @messages.pinned.each do |pinned| %>
                         <div class="incoming_msg_flagged ml-1">
-                          <div class="incoming_msg_img_flagged"> <%= pinned.user.name %>: </div>
+                          <div class="incoming_msg_img_flagged"> <b><%= pinned.user.name %></b>: </div>
                           <div class="received_msg_flagged">
                             <div class="received_withd_msg_flagged">
                               <p><%= pinned.text %></p>
@@ -16,7 +16,7 @@
                               <% else %>
                                 <% date = pinned.updated_at.strftime("%B %-d") %>
                               <% end %>
-                              <span class="time_date"> <%= time %>    |    <%= date %>  <a class="unbookmark_message" message-id="<%= pinned.id %>" href="#">
+                              <span class="time_date"> <%= time %>    |    <%= date %>  <a class="unbookmark_message text-danger" message-id="<%= pinned.id %>" href="#">
                                 <% if (@group.admins.include? current_user) %>
                                 <span data-feather="x"></span>
                                 <% end %>

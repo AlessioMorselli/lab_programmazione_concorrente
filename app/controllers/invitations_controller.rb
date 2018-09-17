@@ -27,7 +27,7 @@ class InvitationsController < ApplicationController
     def new
         # Visualizza la form per invitare un utente ad un gruppo
         @invitation = Invitation.new
-        render json: @invitation
+        render file: "app/views/invitations/new"
     end
 
     # POST group_invitations_path(group_uuid: group.uuid)

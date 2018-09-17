@@ -9,11 +9,11 @@
     <div style="height: 10px;"></div>
     <%= f.fields_for :student_attributes do |s| %>
       <div class="form-row mb-0">
-        <div class="col-8 pr-0">
+        <div class="col-9 pr-0">
           <%= s.select :degree_id, options_for_select(Degree.all.map{|d| [d.name, d.id, {:years => d.years}]}), {prompt: "Corso di Studio"}, {class: "form-control rounded-0"} %>
         </div>
-        <div class="col-4 pl-0">
-          <%= s.select :year, options_for_select([]),{prompt: "Anno"}, {class: "form-control rounded-0"} %>
+        <div class="col-3 pl-0">
+          <%= s.select :year, options_for_select([]),{prompt: "AA"}, {class: "form-control rounded-0"} %>
         </div>
       </div>
     <% end %>
@@ -47,7 +47,7 @@
     } else {
       let option = document.createElement("option");
       option.value = "";
-      option.innerText = "Anno";
+      option.innerText = "AA";
       degreeYearSelect.appendChild(option);
     }
   }

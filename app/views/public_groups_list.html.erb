@@ -31,7 +31,7 @@
 
             <div class="col-12">
               <div class="card card-chat shadow rounded-0 h-100">
-                <div class="card-header shadow rounded-0 text-center">Lista Gruppi Pubblici</div>
+                <div class="card-header rounded-0 text-center">Lista Gruppi Pubblici</div>
                 <div class="card-body p-2">
                   <div class="mb-2">
                     <% id_num = 0 %>
@@ -46,11 +46,13 @@
                         <div class="card-body group-name-body d-flex justify-content-between">
                           <a class="align-self-center text-secondary nounderline" href="/groups/<%= group.uuid %>"><span data-feather="users"></span>  <%= group.name %></a>
                           <div class="text-secondary align-self-center ml-2"><span data-feather="chevron-right"></span></div>
-                          <a class="align-self-center ml-2 nounderline" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>"><span data-feather="info"></span>  Info</a>
+                          <div class="flex-grow-1">
+                            <a class="align-self-center ml-2 nounderline" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>"><span data-feather="info"></span>  Info</a>
+                          </div>
                           <% if group.members.exists?(current_user.id) %>
-                          <a class="flex-grow-1 text-right text-success nounderline" href="#"><span data-feather="check-circle"></span> Iscritto</a>
+                          <a class="text-right text-success nounderline" href="#"><span data-feather="check-circle"></span> Iscritto</a>
                           <% else %>
-                          <a class="flex-grow-1 text-right nounderline" href="#" style="width: 100px"><span data-feather="circle"></span> Iscriviti</a>
+                          <%= link_to '<span data-feather="circle"></span> Iscriviti'.html_safe, group_memberships_path(group.uuid), method: :post, data: {confirm: "Confermi la tua partecipazione al gruppo '" + group.name + "'?"}, class: "text-right nounderline", style: "width: 100px"%>
                           <% end %>
                         </div>
                       </div>
@@ -90,15 +92,3 @@
     </div>
 
 </div>
-
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-      feather.replace()
-    </script>

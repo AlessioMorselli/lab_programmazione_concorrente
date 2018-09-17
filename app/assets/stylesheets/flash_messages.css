@@ -9,12 +9,8 @@
     margin: 0px;
 }
 
-.flash-messages .error {
-    border: 1px solid red;
-}
-
 .flash-messages .danger {
-    border: 1px solid red;
+    background-color: #ff000080;
 }
 
 .flash-messages .info {

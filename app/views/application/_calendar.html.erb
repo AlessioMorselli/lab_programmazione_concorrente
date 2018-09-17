@@ -4,17 +4,18 @@
 
                       <% @events.each do |event| %>
                         <div class="row row-striped">
-                          <div class="col-3 text-center pr-0">
+                          <div class="col-4 text-center pr-0 align-self-center">
                             <div class="">
                               <h1 class="display-5"><span class="badge badge-secondary rounded-0"><%= event.start_time.strftime("%-d") %></span></h1>
                               <h4><%= event.start_time.strftime("%^b") %></h4>
                             </div>
                           </div>
-                          <div class="col-9 pl-0">
+                          <div class="col-8 pl-0 pr-4">
+                            <h4><%= event.name %></h4>
                             <ul class="list-inline">
                               <li class="list-inline-item text-secondary font-075"><i class="fa fa-calendar-o" aria-hidden="true"></i><%= event.start_time.strftime("%A") %></li>
                               <li class="list-inline-item text-secondary font-075"><i class="fa fa-clock-o" aria-hidden="true"></i><%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %></li>
-                              <li class="list-inline-item text-secondary font-075"><i class="fa fa-location-arrow" aria-hidden="true"></i><%= event.place %></li>
+                              <li class="list-inline-item text-secondary font-075"><i class="fa fa-location-arrow" aria-hidden="true"></i>Luogo: <%= event.place %></li>
                             </ul>
                             <p><%= event.description %></p>
                           </div>

@@ -1,8 +1,16 @@
         <div class="container-fluid h-100 d-flex flex-column pl-2 py-2 pr-0">
           <div class="row flex-grow-1">
             <div class="col-12">
+              <% if @group %>
+                <% if @group.members.count(:all) != 0 %>
+                <div class="card card-chat shadow rounded-0" style="height: 50%">
+                <% else %>
+                <div class="card card-chat shadow rounded-0 h-100">
+                <% end %>
+              <% else %>
               <div class="card card-chat shadow rounded-0 h-100">
-                <div class="card-header shadow rounded-0 text-center">
+              <% end %>              
+                <div class="card-header rounded-0 text-center">
                   Gruppi in cui sei membro
                 </div>
                 <div class="card-body p-2">
@@ -18,14 +26,50 @@
                       <% end %>
                     </ul>
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-right p-2 mt-2 mb-1 text-muted add-group-sticky">
-                      <a class="d-flex align-items-center text-muted " href="/groups/new">
-                        <span data-feather="plus-circle" class="mr-2"></span> Crea Nuovo Gruppo
-                      </a>
+                      <div class="row">
+                        <div class="col">
+                          <% if @group %>
+                          <% if @group.members.count(:all) != 0 %>
+                          <%= link_to '<span data-feather="log-out" class="mr-2"></span> Abbandona Gruppo'.html_safe, group_membership_path(@group.uuid, current_user.id), method: :delete, data: {confirm: "Confermi di voler abbandonare il gruppo '" + @group.name + "'?"}, class: "d-flex align-items-center text-muted nounderline mb-2" %>
+                          <a class="d-flex align-items-center text-muted nounderline mb-2" href="#">
+                            <span data-feather="settings" class="mr-2"></span> Modifica Gruppo
+                          </a>
+                          <% end %>
+                          <% end %>
+                          <a class="d-flex align-items-center text-muted nounderline" href="/groups/new">
+                            <span data-feather="plus-circle" class="mr-2"></span> Crea Nuovo Gruppo
+                          </a>
+                        </div>
+                      </div>
                     </h6>
                   </div>
                 </div>
 
               </div>
+              <% if @group %>
+                <% if @group.members.count(:all) != 0 %>
+                <div class="card card-chat shadow rounded-0" style="height: 50%">
+                  <div class="card-header rounded-0 text-center">
+                    Membri di questo gruppo 
+                  </div>
+                  <div class="card-body p-2">
+                    <div class="mb-2">
+                      <ul class="nav flex-column sidebar" id="groups">
+                        <% @group.members.each do |member| %>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">
+                            <span data-feather="user"></span>
+                            <%= member.name %>
+                          </a>
+                        </li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>
