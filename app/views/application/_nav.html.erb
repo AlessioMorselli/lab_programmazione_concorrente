@@ -1,29 +1,31 @@
   <nav class="navbar navbar-dark bg-dark p-1 shadow">
     <%= link_to "Unife Study Groups", groups_path, class: "navbar-brand col-sm-12 col-md-3 mr-0 text-center col-lg-3 col-xl-2" %>
 
-    <%= form_tag(groups_path, {class: "col-9 col-sm-9 col-md-7 col-lg-7 col-xl-9", method: 'GET'}) do %>
+    <%= form_tag(groups_path, {class: "col-8 col-sm-9 col-md-7 col-lg-7 col-xl-9", method: 'GET'}) do %>
       <%= text_field_tag :query, nil, class: "form-control form-control-dark text-center text-md-left", placeholder: "Cerca gruppi" %>
     <% end %>
-  <div class="text-center col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1 px-3">
-    <div class="dropdown">
-      <a class="text-white dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span data-feather="user"></span> <%= current_user.name %>
-      </a>
-      <div class="dropdown-menu dropdown-menu-right rounded-0" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">
-          <div class="row">
-            <div class="col-6">
-          Inviti
-            </div>
-            <div class="col-6 text-right">
-          <span class="badge badge-secondary"><%= current_user.invitations.not_expired.count %></span>
-            </div>
+  <div class="text-center col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1 px-3">
+      <div class="dropdown">
+        <a class="text-white dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="truncate-string-100">
+            <span data-feather="user"></span> <%= current_user.name %>
           </div>
         </a>
-        <a class="dropdown-item" href="#">Account</a>
-        <hr/>
-        <%= link_to "Logout", logout_path, class: "dropdown-item" %>
+        <div class="dropdown-menu dropdown-menu-right rounded-0" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">
+            <div class="row">
+              <div class="col-6">
+            Inviti
+              </div>
+              <div class="col-6 text-right">
+            <span class="badge badge-secondary"><%= current_user.invitations.not_expired.count %></span>
+              </div>
+            </div>
+          </a>
+          <a class="dropdown-item" href="#">Account</a>
+          <hr/>
+          <%= link_to "Logout", logout_path, class: "dropdown-item" %>
+        </div>
       </div>
-    </div>
   </div>
   </nav>

@@ -129,6 +129,7 @@ Custom media queries
 .card-body {
   height: 0;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .group-name-body {
@@ -336,4 +337,11 @@ Custom media queries
 .dropdown-menu .dropdown-item:active {
   background: #ebebeb;
   color: black;
+}
+
+.truncate-string-100 {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

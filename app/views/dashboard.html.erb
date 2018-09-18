@@ -84,35 +84,7 @@
                   </div>
                 </div>
 
-                <button class="btn btn-sm btn-outline-secondary dropdown-toggle shadow-sm d-md-none" data-target="#membersModal" data-toggle="modal">
-                  <span data-feather="user"></span>
-                  Membri 
-                </button>
-
-                <div class="modal fade" tabindex="-1" role="dialog" id="membersModal">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content rounded-0">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Membri di questo gruppo</h5>
-                        <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <ul class="nav flex-column nav-scroll">
-                        <% @group.members.each do |member| %>
-                        <li class="nav-item">
-                          <a class="nav-link text-secondary" href="#">
-                            <span data-feather="user"></span>
-                            <%= member.name %>
-                          </a>
-                        </li>
-                        <% end %>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <%= render 'group_members_modal' %>
               </div>
             </div>
           </div>
@@ -217,7 +189,7 @@
                     </div>
 
                     <% if (@group.admins.include? current_user) %>
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-right ml-2 p-2 mt-2 mb-1 text-muted add-group-sticky mx-0">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-right p-3 mt-2 mb-1 text-muted add-group-sticky mx-0">
                       <div class="row">
                         <div class="col">
                           <a class="d-flex align-items-center text-muted nounderline mb-2" href="#">
