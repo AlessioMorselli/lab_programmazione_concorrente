@@ -21,7 +21,7 @@
         <div class="container-fluid h-100 d-flex flex-column px-2 pb-2 pt-0">
           <div class="row flex-shrink-0 d-md-none">
             <div class="col-12">
-              <h3 class="text-center">
+              <h3 class="text-center truncate-string-100">
                 <%= @group.name %>
               </h3>
             </div>
@@ -32,7 +32,7 @@
               <div class="btn-toolbar justify-content-center">
                 <%= render "user_groups_modal" %>
 
-                <button class="btn btn-sm btn-outline-secondary dropdown-toggle shadow-sm" data-target="#boardModal" data-toggle="modal">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle shadow-sm" data-target="#boardModal" data-toggle="modal" style="width: 110px; margin-left: -1px; margin-top: -1px">
                   <span data-feather="bookmark"></span>
                   Bacheca
                 </button>
@@ -53,7 +53,7 @@
                   </div>
                 </div>
 
-                <button class="btn btn-sm btn-outline-secondary dropdown-toggle shadow-sm" data-target="#calendarModal" data-toggle="modal">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle shadow-sm" data-target="#calendarModal" data-toggle="modal" style="width: 110px; margin-left: -1px; margin-top: -1px">
                   <span data-feather="calendar"></span>
                   Calendario
                 </button>
@@ -126,8 +126,8 @@
                           <div class="sent_msg">
                             <p id="message_body" message-id="<%= message.id %>"><span><%= message.text %></span></p>
                             <span class="time_date"> <%= time %>    |    <%= date %> <%= (message.updated_at.to_s.eql? message.created_at.to_s) ? nil : "*" %>
-                              <a class="edit_message text-secondary mx-1" message-id="<%= message.id %>" href="#"><span data-feather="edit"></span></a>
-                              <a class="save_message mr-1 d-none text-success" message-id="<%= message.id %>" href="#"><span data-feather="save"></span></a>
+                              <a class="edit_message text-secondary ml-2" message-id="<%= message.id %>" href="#"><span data-feather="edit"></span></a>
+                              <a class="save_message ml-2 d-none text-success" message-id="<%= message.id %>" href="#"><span data-feather="save"></span></a>
                               <% if (message.pinned == false and @group.admins.include? current_user ) %>
                                 <a class="bookmark_message text-secondary mr-1" message-id="<%= message.id %>" href="#"><span data-feather="bookmark"></span></a>
                               <% end %>

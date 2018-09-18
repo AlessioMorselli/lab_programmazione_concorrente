@@ -16,7 +16,7 @@
                               <% else %>
                                 <% date = pinned.updated_at.strftime("%B %-d") %>
                               <% end %>
-                              <span class="time_date"> <%= time %>    |    <%= date %>  <a class="unbookmark_message text-danger" message-id="<%= pinned.id %>" href="#">
+                              <span class="time_date"> <%= time %>    |    <%= date %>  <a class="unbookmark_message text-danger ml-1" message-id="<%= pinned.id %>" href="#">
                                 <% if (@group.admins.include? current_user) %>
                                 <span data-feather="x"></span>
                                 <% end %>

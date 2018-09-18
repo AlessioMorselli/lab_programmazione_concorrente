@@ -14,11 +14,11 @@
   <div class="container-fluid main-container">
     <div class="row h-100">
 
-      <div class="col-md-3 col-lg-2 col-xl-2 h-100 d-none d-md-block pl-2 py-2 pr-0">
+      <div class="col-md-3 col-lg-3 col-xl-2 h-100 d-none d-md-block pl-2 py-2 pr-0">
         <%= render "user_groups" %>
       </div>
 
-      <div class="col-md-9 col-lg-10 h-100 p-2">
+      <div class="col-12 col-md-9 col-lg-9 col-xl-10 h-100 p-2">
         <div class="container-fluid h-100 d-flex flex-column px-2 pb-2 pt-0">
           <div class="row flex-shrink-0 d-md-none">
             <div class="col-12">
@@ -39,20 +39,19 @@
                     <% id_num = id_num + 1 %>
 
                     <% if id_num != 1 %>
-                    <div class="card shadow-sm mt-2">
+                    <div class="card shadow-sm mt-2 rounded-0">
                       <% else %>
-                      <div class="card shadow-sm">
+                      <div class="card shadow-sm rounded-0">
                         <% end %>
                         <div class="card-body group-name-body d-flex justify-content-between">
-                          <a class="align-self-center text-secondary nounderline" href="/groups/<%= group.uuid %>"><span data-feather="users"></span>  <%= group.name %></a>
-                          <div class="text-secondary align-self-center ml-2"><span data-feather="chevron-right"></span></div>
-                          <div class="flex-grow-1">
-                            <a class="align-self-center ml-2 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>"><span data-feather="info"></span>  Info</a>
-                          </div>
+                          <a class="align-self-center text-secondary nounderline flex-grow-1 truncate-string-25" href="/groups/<%= group.uuid %>"><span data-feather="users"></span>  <%= group.name %></a>
+                          <a class="align-self-center mx-3 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>">
+                            <span data-feather="info"></span>  Info
+                          </a>
                           <% if group.members.exists?(current_user.id) %>
-                          <a class="text-right text-success nounderline" href="#"><span data-feather="check-circle"></span> Iscritto</a>
+                          <a class="text-left text-success nounderline" href="#"><span data-feather="check-circle"></span> Iscritto</a>
                           <% else %>
-                          <%= link_to '<span data-feather="circle"></span> Iscriviti'.html_safe, group_memberships_path(group.uuid), method: :post, data: {confirm: "Confermi la tua partecipazione al gruppo '" + group.name + "'?"}, class: "text-right nounderline", style: "width: 100px"%>
+                          <%= link_to '<span data-feather="circle"></span> Iscriviti'.html_safe, group_memberships_path(group.uuid), method: :post, data: {confirm: "Confermi la tua partecipazione al gruppo '" + group.name + "'?"}, class: "text-left nounderline "%>
                           <% end %>
                         </div>
                       </div>
@@ -61,7 +60,7 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                           <div class="modal-content rounded-0">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalCenterTitle"><%= group.name %></h5>
+                              <h5 class="modal-title truncate-string-100" id="exampleModalCenterTitle"><%= group.name %></h5>
                               <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>

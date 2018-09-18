@@ -5,7 +5,7 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                               <div class="modal-content rounded-0">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalCenterTitle"><%= @group.name %></h5>
+                                  <h5 class="modal-title truncate-string-100" id="exampleModalCenterTitle"><%= @group.name %></h5>
                                   <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
@@ -76,7 +76,7 @@
                       <ul class="nav flex-column sidebar" id="members">
                         <% @group.members.each do |member| %>
                         <li class="nav-item" style="max-width: 100%; display: inline-block;">
-                          <a class="nav-link truncate-string-100" href="#">
+                          <a class="nav-link truncate-string-100">
                             <span data-feather="user"></span>
                             <%= member.name %> 
                           </a>

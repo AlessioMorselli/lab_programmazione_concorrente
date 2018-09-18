@@ -277,7 +277,7 @@ Custom media queries
 }
 
 .sidebar .nav-link.active {
-  color: #007bff;
+  color: black;
 }
 
 .sidebar .nav-link:hover .feather,
@@ -340,7 +340,28 @@ Custom media queries
 }
 
 .truncate-string-100 {
-  max-width: 100%;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-string-80 {
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-string-40 {
+  width: 40%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-string-25 {
+  width: 25%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

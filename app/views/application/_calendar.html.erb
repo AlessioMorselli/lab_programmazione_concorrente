@@ -15,7 +15,7 @@
                             <ul class="list-inline">
                               <li class="list-inline-item text-secondary font-075"><i class="fa fa-calendar-o" aria-hidden="true"></i><%= event.start_time.strftime("%A") %></li>
                               <li class="list-inline-item text-secondary font-075"><i class="fa fa-clock-o" aria-hidden="true"></i><%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %></li>
-                              <li class="list-inline-item text-secondary font-075"><i class="fa fa-location-arrow" aria-hidden="true"></i>Luogo: <%= event.place %></li>
+                              <li class="list-inline-item text-secondary font-075 truncate-string-100"><i class="fa fa-location-arrow" aria-hidden="true"></i>Luogo: <%= event.place %></li>
                             </ul>
                             <p><%= event.description %></p>
                           </div>
