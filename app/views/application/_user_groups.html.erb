@@ -90,6 +90,8 @@
                             <% if @group %>
                             <% if @group.members.count(:all) != 0 %>
 
+                            <%= link_to '<span data-feather="user-plus" class="mr-2"></span> Nuovo Invito'.html_safe, new_group_invitation_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline mb-2" %>
+
                             <a class="d-flex align-items-center text-muted nounderline mb-2" href="#" data-toggle="modal" data-target="#infoGroupModal">
                               <span data-feather="info" class="mr-2"></span> Informazioni Gruppo
                             </a>
@@ -99,6 +101,10 @@
                             </a>
 
                             <%= link_to '<span data-feather="log-out" class="mr-2"></span> Abbandona Gruppo'.html_safe, group_membership_path(@group.uuid, current_user.id), method: :delete, data: {confirm: "Confermi di voler abbandonare il gruppo '" + @group.name + "'?"}, class: "d-flex align-items-center text-muted nounderline mb-2" %>
+
+                            <a class="d-flex align-items-center text-muted nounderline mb-2" href="#">
+                              <span data-feather="trash" class="mr-2"></span> Elimina Gruppo
+                            </a>
 
                             <% end %>
                             <% end %>

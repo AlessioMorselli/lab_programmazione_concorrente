@@ -47,3 +47,10 @@ input[type="checkbox"]{
   border: 1px solid red;
   box-shadow: 0 0 0 .2rem rgba(255, 0, 0, 0.3);
 }
+
+.truncate-string-100 {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
