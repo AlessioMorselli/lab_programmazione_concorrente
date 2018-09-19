@@ -52,6 +52,8 @@
                       <%= f.text_field :place, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Luogo', required: true %>
                       <%= f.text_area :description, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Descrizione', required: true %>
                       <%= f.hidden_field :group_id, value: @group.id %>
+                      <%= f.select(:repeated, [['Ogni Giorno', 1], ['Ogni 7 Giorni', 7], ['Ogni 30 Giorni', 30]], {include_blank: 'Scegli la periodicità...'}, {class: 'form-control m-1 rounded-0 shadow-sm'}) %>
+                      <%= f.select(:repeated_for, [['2', 2], ['3', 3]], {include_blank: 'Scegli il numero di ripetizioni...'}, {class: 'form-control m-1 rounded-0 shadow-sm'}) %>
                       <%= f.submit "Crea Evento", class: 'btn btn-lg btn-secondary btn-block m-1 shadow-sm' %>
                     <% end %>
                   </div>
