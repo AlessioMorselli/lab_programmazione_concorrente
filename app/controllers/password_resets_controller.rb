@@ -5,7 +5,6 @@ class PasswordResetsController < ApplicationController
 
   # GET new_password_reset_path
   def new
-    # TODO: metti il template corrispondente
     render file: "app/views/reset_password"
   end
 
@@ -20,14 +19,12 @@ class PasswordResetsController < ApplicationController
       redirect_to new_password_reset_path
     else
       flash.now[:error] = "Indirizzo email non trovato"
-      # TODO: metti il template corrispondente
       render file: "app/views/reset_password"
     end
   end
 
   # GET edit_password_reset_path(user.reset_token, email: user.email)
   def edit
-    # TODO: metti il template corrispondente
     render file: "app/views/new_password"
   end
 
@@ -38,8 +35,7 @@ class PasswordResetsController < ApplicationController
       flash[:success] = "La tua password è stata aggiornata! Cerca di non dimenticarla stavolta!"
       redirect_to groups_path
     else
-      # TODO: metti il template corrispondente
-      render file: "app/views/login_page"
+      render file: "app/views/new_password"
     end
   end
 
@@ -55,7 +51,7 @@ class PasswordResetsController < ApplicationController
   def is_valid_user
     unless @user && @user.confirmed? && @user.authenticated?(:reset, params[:id])
       flash[:error] = "Errore durante il reset della password"
-      redirect_to landing_path
+      redirect_to new_password_reset_path
     end
   end
 

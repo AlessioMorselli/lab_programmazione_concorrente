@@ -32,7 +32,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
 
     # Ora verifico la ridirezione a landing_path
     assert_not flash.empty?
-    assert_redirected_to landing_path
+    assert_redirected_to new_password_reset_path
 
     # Dal form di reset
     user = assigns(:user)
