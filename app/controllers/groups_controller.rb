@@ -62,15 +62,15 @@ class GroupsController < ApplicationController
             @group.reload
             redirect_to group_path(uuid: @group.uuid)
         else
-            flash.now[:danger] = 'Le informazioni inserite non sono valide'
-            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
+            flash.now[:error] = 'Le informazioni inserite non sono valide'
+            render file: 'app/views/dashboard_new_group'
         end
     end
 
     # GET edit_group_path(uuid: group.uuid)
     def edit
         # Visualizza la form per modificare un nuovo gruppo
-        render json: @group
+        render file: 'app/views/dashboard_new_group' # TODO: metti il template corretto
     end
 
     # PUT/PATCH group_path(uuid: group.uuid)
@@ -79,8 +79,8 @@ class GroupsController < ApplicationController
         if @group.update(group_params)
             redirect_to group_path(uuid: @group.uuid)
         else
-            flash.now[:danger] = 'Le informazioni del gruppo non sono state aggiornate'
-            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
+            flash.now[:error] = 'Le informazioni del gruppo non sono state aggiornate'
+            render file: 'app/views/dashboard_new_group' # TODO: metti il template corretto
         end
     end
 

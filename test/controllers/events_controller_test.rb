@@ -105,7 +105,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       }
     end
    
-    assert_redirected_to group_events_path(group_uuid: @group.uuid)
+    assert_redirected_to group_path(uuid: @group.uuid)
   end
 
   test "should not create a new event with start time before now" do
@@ -155,13 +155,13 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
         place: "Aula studio - Secondo piano",
         description: "2 ore di studio di programmazione concorrente",
         group_id: @group.id,
-        repeated: 1.week,
+        repeated: 7,
         repeated_for: 4
         }
       }
     end
    
-    assert_redirected_to group_events_path(group_uuid: @group.uuid)
+    assert_redirected_to group_path(uuid: @group.uuid)
   end
 
   test "should show form to edit an event" do
@@ -178,7 +178,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       event: { place: "Aula studio - Secondo piano" }
     }
   
-    assert_redirected_to group_events_path(group_uuid: @group.uuid)
+    assert_redirected_to group_path(uuid: @group.uuid)
     @event.reload
     assert_equal "Aula studio - Secondo piano", @event.place
   end
@@ -220,7 +220,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       delete group_event_path(group_uuid: @group.uuid, id: @event.id)
     end
     
-    assert_redirected_to group_events_path(group_uuid: @group.uuid)
+    assert_redirected_to group_path(uuid: @group.uuid)
   end
 
 ### TEST PER UTENTE NON LOGGATO ###

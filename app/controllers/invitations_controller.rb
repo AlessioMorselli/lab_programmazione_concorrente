@@ -39,8 +39,8 @@ class InvitationsController < ApplicationController
             InvitationMailer.invite_to_group(@invitation) if @invitation.is_private?
             redirect_to group_path(uuid: @invitation.group.uuid)
         else
-            flash.now[:danger] = 'Le informazioni inserite non sono corrette'
-            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
+            flash.now[:error] = 'Le informazioni inserite non sono corrette'
+            render file: "app/views/invitations/new"
         end
     end
 
@@ -63,7 +63,7 @@ class InvitationsController < ApplicationController
             set_last_message_read(@group, DateTime.now - 1.days)
             redirect_to group_path(uuid: @group.uuid)
         else
-            flash.now[:danger] = "Qualcosa è andato storto e l'invito non è andato a buon fine!"
+            flash.now[:error] = "Qualcosa è andato storto e l'invito non è andato a buon fine!"
             # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
             redirect_to groups_path
         end

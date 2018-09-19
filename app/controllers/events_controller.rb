@@ -70,31 +70,31 @@ class EventsController < ApplicationController
     def create
         # Salva nel db un nuovo evento
         @event = Event.new(event_params)
-        @event.repeated = params[:event][:repeated].to_i
+        @event.repeated = params[:event][:repeated].to_i.days
         @event.repeated_for = params[:event][:repeated_for].to_i
 
         if @event.save
-            redirect_to group_events_path(group_uuid: @group.uuid)
+            redirect_to group_path(uuid: @group.uuid)
         else
-            flash.now[:danger] = 'Le informazioni inserite non sono valide'
-            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine
+            flash.now[:error] = 'Le informazioni inserite non sono valide'
+            render file: 'app/views/dashboard_new_event'
         end
     end
 
     # GET edit_group_event_path(group_uuid: group.uuid, id: event.id)
     def edit
         # Mostra la form per modificare un evento
-        render json: @event
+        render file: 'app/views/dashboard_new_event'
     end
 
     # PUT/PATCH group_event_path(group_uuid: group.uuid, id: event.id)
     def update
         # Salva nel db le modifiche ad un evento
         if @event.update(event_params)
-            redirect_to group_events_path(group_uuid: @group.uuid)
+            redirect_to group_path(uuid: @group.uuid)
         else
-            flash.now[:danger] = "Le informazioni dell'evento non sono state aggiornate"
-            # TODO: che faccio se c'è qualcosa che non va? Devo testare meglio quando saranno presenti le pagine            
+            flash.now[:error] = "Le informazioni dell'evento non sono state aggiornate"
+            render file: 'app/views/dashboard_new_event'            
         end
     end
 
@@ -103,7 +103,7 @@ class EventsController < ApplicationController
         # Elimina un evento
         @event.destroy
 
-        redirect_to group_events_path(group_uuid: @group.uuid)
+        redirect_to group_path(uuid: @group.uuid)
     end
 
     private

@@ -3,7 +3,6 @@ class SessionController < ApplicationController
     def new
         # Visualizza la form per permettere il log in
         unless logged_in?
-            # TODO: da cambiare con quello vero
             render file: 'app/views/login_page'
         else
             flash[:info] = "Sei già loggato"
@@ -26,7 +25,7 @@ class SessionController < ApplicationController
                 redirect_to landing_path
             end
         else
-            flash.now[:danger] = 'Email e/o password sbagliate'
+            flash.now[:error] = 'Email e/o password sbagliate'
             render file: 'app/views/login_page'
         end
     end
@@ -42,7 +41,6 @@ class SessionController < ApplicationController
     # GET landing_path
     def landing
         # unless logged_in?
-            # TODO: da cambiare con quello vero
             render file: 'app/views/landing_page'
         # else
         #     flash[:info] = "Sei già loggato"

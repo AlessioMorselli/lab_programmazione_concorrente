@@ -9,7 +9,7 @@ class ConfirmAccountsController < ApplicationController
             flash[:success] = "Account attivato!"
             redirect_to groups_path
         else
-            flash[:danger] = "Link di attivazione non valido"
+            flash[:error] = "Link di attivazione non valido"
             redirect_to landing_path
         end
     end

@@ -19,7 +19,7 @@ class AttachmentsController < ApplicationController
         if @message.destroy_attachment
             flash[:success] = "L'allegato è stato eliminato"
         else
-            flash[:danger] = "L'allegato non è stato eliminato"
+            flash[:error] = "L'allegato non è stato eliminato"
         end
         redirect_to group_path(uuid: @group.uuid)
     end

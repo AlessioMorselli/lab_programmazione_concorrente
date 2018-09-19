@@ -54,7 +54,7 @@ class MessagesController < ApplicationController
             @attachment.data = incoming_file.read
         end
         if !@message.save_with_attachment(@attachment)
-            flash.now[:danger] = 'Il messaggio non è stato inviato'
+            flash.now[:error] = 'Il messaggio non è stato inviato'
         end
     end
 
@@ -62,7 +62,7 @@ class MessagesController < ApplicationController
     def update
         # Modifica il testo di un messaggio
         if !@message.update(message_params)
-            flash.now[:danger] = 'Il messaggio non è stato modificato'
+            flash.now[:error] = 'Il messaggio non è stato modificato'
         end
     end
 
@@ -89,7 +89,7 @@ class MessagesController < ApplicationController
             flash.now[:success] = "Il messaggio è stato " +
                 (@message.pinned ? "aggiunto alla" : "tolto dalla") +
                 " bacheca."
-        else flash.now[:danger] = "Il messaggio non è stato " +
+        else flash.now[:error] = "Il messaggio non è stato " +
             (@message.pinned ? "aggiunto alla" : "tolto dalla") +
             " bacheca."
         end

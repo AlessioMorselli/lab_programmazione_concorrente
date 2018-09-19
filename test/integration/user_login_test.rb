@@ -7,9 +7,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
 
     test "should not login with invalid information" do
         get login_path
-        # assert_template file: 'app/views/login_page.html.erb' # TODO: sistema con il template corrispondente
         post login_path, params: { session: { email: "", password: "" } }
-        # assert_template file: 'app/views/login_page.html.erb' # TODO: sistema con il template corrispondente
         assert_not flash.empty?
     end
 
@@ -32,7 +30,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
         assert_redirected_to groups_path
         assert is_logged_in?
         follow_redirect!
-        # assert_template file: 'app/views/public_groups_list.html.erb' # TODO: sistema con il template corrispondente
+
         # assert_select "a[href=?]", login_path, count: 0
         # assert_select "a[href=?]", signup_path, count: 0
         # assert_select "a[href=?]", logout_path

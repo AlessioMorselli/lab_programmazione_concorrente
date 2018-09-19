@@ -12,7 +12,7 @@ class MembershipsController < ApplicationController
     is_admin_in @group
   end
   before_action only: [:destroy], if: -> {@group.admins.include? @user} do
-    flash[:danger] = "L'utente selezionato è un amministratore e non può essere rimosso"
+    flash[:error] = "L'utente selezionato è un amministratore e non può essere rimosso"
     redirect_to group_path(uuid: @group.uuid)
   end
   before_action only: [:set_admin, :set_super_admin] do
@@ -70,7 +70,7 @@ class MembershipsController < ApplicationController
       (@membership.admin ? "aggiunto agli" : "tolto dagli") +
       " amministratori del gruppo."
     else
-      flash[:danger] = "L'utente #{@user.name} non è stato " +
+      flash[:error] = "L'utente #{@user.name} non è stato " +
       (@membership.admin ? "aggiunto agli" : "tolto dagli") +
       " amministratori del gruppo."
     end
@@ -84,7 +84,7 @@ class MembershipsController < ApplicationController
     if @group.change_super_admin(@user)
       flash[:success] = "Il regno di #{@user.name} ha inizio, dopo l'abdicazione di #{current_user.name}"
     else
-      flash[:danger] = "L'utente #{@user.name} non è stato nominato super amministratore. Ritenta."
+      flash[:error] = "L'utente #{@user.name} non è stato nominato super amministratore. Ritenta."
     end
 
     redirect_to group_path(uuid: @group.uuid)

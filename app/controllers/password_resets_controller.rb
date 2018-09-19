@@ -19,19 +19,19 @@ class PasswordResetsController < ApplicationController
       flash[:info] = "Abbiamo inviato una mail contenente la procedura per resettare la tua password."
       redirect_to landing_path
     else
-      flash.now[:danger] = "Indirizzo email non trovato"
+      flash.now[:error] = "Indirizzo email non trovato"
       # TODO: metti il template corrispondente
       render file: "app/views/login_page"
     end
   end
 
-  # GET edit_password_reset_path(user.password_token, email: user.email)
+  # GET edit_password_reset_path(user.reset_token, email: user.email)
   def edit
     # TODO: metti il template corrispondente
     render file: "app/views/login_page"
   end
 
-  # PUT/PATCH password_reset_path(user.password_token, email: user.email)
+  # PUT/PATCH password_reset_path(user.reset_token, email: user.email)
   def update
     if @user.update_attributes(user_params)
       log_in @user
@@ -54,7 +54,7 @@ class PasswordResetsController < ApplicationController
 
   def is_valid_user
     unless @user && @user.confirmed? && @user.authenticated?(:reset, params[:id])
-      flash[:danger] = "Errore durante il reset della password"
+      flash[:error] = "Errore durante il reset della password"
       redirect_to landing_path
     end
   end
@@ -62,7 +62,7 @@ class PasswordResetsController < ApplicationController
   # Controlla che il reset sia ancora valido
   def check_expiration
     if @user.password_reset_expired?
-      flash[:danger] = "Il link di reset è scaduto! Se vuoi ancora resettare la password, inviane un'altra!"
+      flash[:error] = "Il link di reset è scaduto! Se vuoi ancora resettare la password, inviane un'altra!"
       redirect_to new_password_reset_path
     end
   end
