@@ -1,7 +1,33 @@
 <% if !flash.empty? %>
-  <div class="flash-messages row">
     <% flash.each do |key, value| %>
-      <p class="<%= key %>"><%= value %></p>
+      <% if key == 'danger' %>
+        <div class="alert alert-warning alert-dismissible fade show my-2 rounded-0 shadow-sm text-center" role="alert">
+          <%= value %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% elsif key == 'error' %>
+        <div class="alert alert-danger alert-dismissible fade show my-2 rounded-0 shadow-sm text-center" role="alert">
+          <%= value %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% elsif key == 'info' %>
+        <div class="alert alert-secondary alert-dismissible fade show my-2 rounded-0 shadow-sm text-center" role="alert">
+          <%= value %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% elsif key == 'success' %>
+        <div class="alert alert-success alert-dismissible fade show my-2 rounded-0 shadow-sm text-center" role="alert">
+          <%= value %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <% end %>
     <% end %>
-  </div>
-<% end %>
+  <% end %>

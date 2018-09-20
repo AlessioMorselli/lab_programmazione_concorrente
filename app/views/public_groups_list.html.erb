@@ -12,6 +12,7 @@
   <%= render "nav" %>
 
   <div class="container-fluid main-container">
+
     <div class="row h-100">
 
       <div class="col-md-3 col-lg-3 col-xl-2 h-100 d-none d-md-block pl-2 py-2 pr-0">
@@ -20,6 +21,8 @@
 
       <div class="col-12 col-md-9 col-lg-9 col-xl-10 h-100 p-2">
         <div class="container-fluid h-100 d-flex flex-column px-2 pb-2 pt-0">
+          <%= render "flash_messages" %>
+          
           <div class="row flex-shrink-0 d-md-none">
             <div class="col-12">
               <div class="btn-toolbar justify-content-center d-xl-none">
@@ -31,7 +34,7 @@
 
             <div class="col-12">
               <div class="card card-chat shadow rounded-0 h-100">
-                <div class="card-header rounded-0 text-center">Lista Gruppi Pubblici</div>
+                <div class="card-header rounded-0 text-center font-075">Lista Gruppi Pubblici</div>
                 <div class="card-body p-2">
                   <div class="mb-2">
                     <% id_num = 0 %>

@@ -101,7 +101,7 @@ module SessionHelper
     # Verifica che l'utente loggato sia un membro del gruppo
     def is_member_in(group)
         unless group.members.include? current_user
-            flash[:danger] = "Devi essere un membro per accedere ad gruppo e alle sue informazioni"
+            flash[:danger] = "Devi essere un membro per accedere ad un gruppo ed alle sue informazioni"
             redirect_to groups_path
         end
     end

@@ -10,13 +10,17 @@
 }
 
 .flash-messages .danger {
-    background-color: #ff000080;
+    background-color: yellow;
+}
+
+.flash-messages .error {
+    background-color: red;
 }
 
 .flash-messages .info {
-    background-color: #80808080;
+    background-color: grey;
 }
 
 .flash-messages .success {
-    border: 1px solid greenyellow;
+    background-color: green;
 }

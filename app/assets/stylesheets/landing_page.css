@@ -34,10 +34,14 @@ body {
   display: -ms-flexbox;
   display: flex;
   color: #fff;
-  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+  /* text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5); */
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
     background:url(comm-nice.jpg) no-repeat center;
     background-size: cover;
+}
+
+.nice-text-shadow {
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
 }
 
 .cover-container {
