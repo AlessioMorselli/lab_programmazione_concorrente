@@ -129,7 +129,7 @@
                               <a class="edit_message text-secondary ml-2" message-id="<%= message.id %>" href="#"><span data-feather="edit"></span></a>
                               <a class="save_message ml-2 d-none text-success" message-id="<%= message.id %>" href="#"><span data-feather="save"></span></a>
                               <% if (message.pinned == false and @group.admins.include? current_user ) %>
-                                <a class="bookmark_message text-secondary mr-1" message-id="<%= message.id %>" href="#"><span data-feather="bookmark"></span></a>
+                                <a class="bookmark_message text-secondary" message-id="<%= message.id %>" href="#"><span data-feather="bookmark"></span></a>
                               <% end %>
                               <a class="delete_message text-danger" message-id="<%= message.id %>" href="#"><span data-feather="trash"></span></a>
                             </span>

@@ -75,11 +75,19 @@
                     <div class="mb-2">
                       <ul class="nav flex-column sidebar" id="members">
                         <% @group.members.each do |member| %>
-                        <li class="nav-item" style="max-width: 100%; display: inline-block;">
-                          <a class="nav-link truncate-string-100">
+                        <li class="nav-item pb-2 mx-2" style="max-width: 100%; display: inline-block; border-bottom: 1px solid rgba(0,0,0,.1)">
+                          <a class="nav-link truncate-string-100 pl-0 <%= (current_user.eql? member) ? "active" : nil %>">
                             <span data-feather="user"></span>
-                            <%= member.name %> 
+                            <%= member.name %>
                           </a>
+                            <% if @group.super_admin.eql? member %>
+                              <span data-feather="award" class="text-warning mr-1"></span>
+                            <% end %>
+                            <% if !@group.super_admin.eql? member and @group.admins.include? member %>
+                              <span data-feather="award" class="text-secondary mr-1"></span>
+                            <% end %>
+                            <span data-feather="info" class="text-info mr-1"></span>
+                            <span data-feather="user-minus" class="text-danger"></span>
                         </li>
                         <% end %>
                       </ul>
