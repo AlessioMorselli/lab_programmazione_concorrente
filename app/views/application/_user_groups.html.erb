@@ -44,7 +44,7 @@
                     <ul class="nav flex-column sidebar" id="groups">
                       <% current_user.groups.each do |group| %>
                       <li class="nav-item" style="max-width: 100%">
-                        <a class="nav-link truncate-string-100" href="/groups/<%= group.uuid %>">
+                        <a class="nav-link truncate-string-100 <%= (@group.eql? group) ? 'active' : nil %>" href="/groups/<%= group.uuid %>">
                           <span data-feather="users"></span>
                           <%= group.name %>
                         </a>
@@ -76,18 +76,52 @@
                       <ul class="nav flex-column sidebar" id="members">
                         <% @group.members.each do |member| %>
                         <li class="nav-item pb-2 mx-2" style="max-width: 100%; display: inline-block; border-bottom: 1px solid rgba(0,0,0,.1)">
-                          <a class="nav-link truncate-string-100 pl-0 <%= (current_user.eql? member) ? "active" : nil %>">
+                          <a class="nav-link truncate-string-100 pl-0 <%= (current_user.eql? member) ? 'active' : nil %>">
                             <span data-feather="user"></span>
                             <%= member.name %>
                           </a>
                             <% if @group.super_admin.eql? member %>
-                              <span data-feather="award" class="text-warning mr-1"></span>
+                              <span data-feather="award" class="text-warning mr-1" data-toggle="tooltip" title="Super Admin"></span>
                             <% end %>
                             <% if !@group.super_admin.eql? member and @group.admins.include? member %>
-                              <span data-feather="award" class="text-secondary mr-1"></span>
+                              <% if @group.super_admin.eql? current_user %>
+                                <%= link_to "<span data-feather='award' class='text-secondary mr-1' title='Rendi Super Admin' data-toggle='tooltip'></span>".html_safe, group_set_super_admin_path(@group.uuid, member.id), method: :patch, data: {confirm: "Confermi di voler far diventare '" + member.name + "' il nuovo Super Admin?"} %>
+                              <% else %>
+                                <span data-feather="award" class="text-secondary mr-1" title="Admin" data-toggle="tooltip"></span>
+                              <% end %>
                             <% end %>
-                            <span data-feather="info" class="text-info mr-1"></span>
-                            <span data-feather="user-minus" class="text-danger"></span>
+
+                            <% if @group.super_admin.eql? current_user and !(current_user.eql? member) and !(@group.admins.include? member)%>
+                              <%= link_to "<span data-feather='award' class='text-primary mr-1' data-toggle='tooltip' title='Rendi Admin'></span>".html_safe, group_set_admin_path(@group.uuid, member.id), method: :patch, data: {confirm: "Confermi di voler far diventare '" + member.name + "' Admin di questo gruppo?"} %>
+                            <% end %>
+
+                            <a data-toggle="tooltip" title="Info">
+                              <span data-feather="info" class="text-info mr-1" data-toggle="modal" data-target="#infoUserModal<%= member.id %>"></span>
+                            </a>
+
+                            <div class="modal fade" id="infoUserModal<%= member.id %>" tabindex="-1" role="dialog">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content rounded-0">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title truncate-string-100" id="exampleModalCenterTitle"><%= member.name %></h5>
+                                    <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <b>Roba:</b> Altra roba<br>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <% if @group.admins.include? current_user and !(current_user.eql? member) and !(@group.admins.include? member)%>
+                              <%= link_to "<span data-feather='user-minus' class='text-danger' data-toggle='tooltip' title='Caccia Utente'></span>".html_safe, group_membership_path(@group.uuid, member.id), method: :delete, data: {confirm: "Confermi di voler cacciare '" + member.name + "' da questo gruppo?"} %>
+                            <% end %>
                         </li>
                         <% end %>
                       </ul>
