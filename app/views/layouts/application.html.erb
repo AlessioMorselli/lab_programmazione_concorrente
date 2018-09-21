@@ -32,6 +32,12 @@
       feather.replace()
     </script>
 
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+
     <%= yield :scripts %>
 </body>
 </html>
