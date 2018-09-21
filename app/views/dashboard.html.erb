@@ -160,30 +160,18 @@
                 </div>
                 <div class="type_msg">
                   <div class="container-fluid">
-                  <!--
-                    <div class="row">
-                      <div class="col-8 px-1">
-                        <div class="input_msg_write">
-                          <input id="send_message" class="write_msg" placeholder="Scrivi un messaggio..." type="text">
-                        </div>
-                      </div>
-                      <div class="col-4 px-1 text-right my-auto">
-                        <input type="file" id="attachment" style="display: none">
-                        <button id="attachment_button" class="msg_btn shadow-sm" type="button"><span data-feather="paperclip"></span></button>
-                        <button id="send_button" class="c" type="button"><span data-feather="send"></span></button>
-                      </div>
-                    </div>
-                  -->
-                  <%= form_for(:message, url: group_messages_path(@group.uuid), remote: true, html: {id: "new_message"}) do |f| %>
+                  <%= form_for(:message, url: group_messages_path(@group.uuid), remote: true, html: {id: "message_form"}) do |f| %>
                     <div class="row">
                       <div class="col-8 px-1">
                         <div class="input_msg_write">
                           <%= f.text_field :text, class: 'write_msg', placeholder: "Scrivi un messaggio..." %>
                         </div>
                       </div>
+                      <%= f.file_field :attachment, id: "attachment", style: "display: none" %>
                       <div class="col-4 px-1 text-right my-auto">
-                        <%= f.file_field :attachment %>
-                        <%= f.submit("Invia", class: 'c') %>
+                        <input type="file" id="attachment" style="display: none">
+                        <button id="attachment_button" class="msg_btn shadow-sm" type="button"><span data-feather="paperclip"></span></button>
+                        <button id="send_button" class="msg_btn shadow-sm" type="submit"><span data-feather="send"></span></button>
                       </div>
                     </div>
                   <% end %>
@@ -236,39 +224,6 @@
 
       $('#messages .msg:last-child').get(0).scrollIntoView();
      });
-   </script>
-
-   <script type="text/javascript">
-    $(document).ready(function (e){
-      $('#send_button').click(function (){
-        var message_text = $('#send_message').val();
-        var file = $('#attachment')[0].files[0];
-
-        var form_data = {message: {text: message_text}, attachment: file};
-
-        console.log(file);
-
-        $.ajax({
-          url: "<%= group_messages_path(group_uuid: @group.uuid) %>",
-          type: "POST",
-          data: form_data,
-       contentType: false,
-       enctype: 'multipart/form-data',
-       processData: false,
-          headers: {
-            'X-Transaction': 'POST Example',
-            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-          },
-          success: function (data, text_status, jqXHR){
-            //placeholder
-            location.reload();
-          },
-          error: function (jqXHR, text_status, error_thrown){
-
-          }
-        });
-      });
-    });
    </script>
 
    <script type="text/javascript">
@@ -404,16 +359,17 @@
         $('.input_msg_write').append('<a class="d-flex align-items-center mb-2" href="#"><span data-feather="paperclip" class="mr-2"></span> ' + file.name + '</a>');
         feather.replace();
       });
+
      });
    </script>
 
-   <script>
-    $(document).ready(() => {
-      $("#new_message").on("ajax:success", (event) => {
-        [data, status, xhr] = event.detail
-        $("#new_message").append xhr.responseText
-      }).on("ajax:error", (event) => $("#new_message").append "<p>ERROR</p>")
-    })
+  <script type="text/javascript">
+    $(document).ready(function (e){
+      $("#message_form").on("ajax:success", function (event){
+        location.reload();
+      });
+    });
    </script>
+
 
 <% end %>
