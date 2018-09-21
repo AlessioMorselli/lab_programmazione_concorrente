@@ -159,6 +159,7 @@
                 </div>
                 <div class="type_msg">
                   <div class="container-fluid">
+                  <!--
                     <div class="row">
                       <div class="col-8 px-1">
                         <div class="input_msg_write">
@@ -168,9 +169,23 @@
                       <div class="col-4 px-1 text-right my-auto">
                         <input type="file" id="attachment" style="display: none">
                         <button id="attachment_button" class="msg_btn shadow-sm" type="button"><span data-feather="paperclip"></span></button>
-                        <button id="send_button" class="msg_btn shadow-sm" type="button"><span data-feather="send"></span></button>
+                        <button id="send_button" class="c" type="button"><span data-feather="send"></span></button>
                       </div>
                     </div>
+                  -->
+                  <%= form_for(:message, url: group_messages_path(@group.uuid), remote: true, html: {id: "new_message"}) do |f| %>
+                    <div class="row">
+                      <div class="col-8 px-1">
+                        <div class="input_msg_write">
+                          <%= f.text_field :text, class: 'write_msg', placeholder: "Scrivi un messaggio..." %>
+                        </div>
+                      </div>
+                      <div class="col-4 px-1 text-right my-auto">
+                        <%= f.file_field :attachment %>
+                        <%= f.submit("Invia", class: 'c') %>
+                      </div>
+                    </div>
+                  <% end %>
                   </div>
                 </div>
               </div>
@@ -397,6 +412,15 @@
         feather.replace();
       });
      });
+   </script>
+
+   <script>
+    $(document).ready(() => {
+      $("#new_message").on("ajax:success", (event) => {
+        [data, status, xhr] = event.detail
+        $("#new_message").append xhr.responseText
+      }).on("ajax:error", (event) => $("#new_message").append "<p>ERROR</p>")
+    })
    </script>
 
 <% end %>
