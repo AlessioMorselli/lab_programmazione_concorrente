@@ -164,7 +164,7 @@
                     <div class="row">
                       <div class="col-8 px-1">
                         <div class="input_msg_write">
-                          <%= f.text_field :text, class: 'write_msg', placeholder: "Scrivi un messaggio..." %>
+                          <%= f.text_field :text, class: 'write_msg', placeholder: "Scrivi un messaggio...", id: 'message_text' %>
                         </div>
                       </div>
                       <%= f.file_field :attachment, id: "attachment", style: "display: none" %>
@@ -222,7 +222,11 @@
     <script type="text/javascript">
       $(document).ready(function (e){
 
-      $('#messages .msg:last-child').get(0).scrollIntoView();
+      var last_message = $('#messages .msg:last-child');
+
+      if (last_message.length){
+        last_message.get(0).scrollIntoView();
+      }
      });
    </script>
 
@@ -365,6 +369,16 @@
 
   <script type="text/javascript">
     $(document).ready(function (e){
+      $('#message_text').val("");
+      $('#attachment').val("");
+      
+      $('#send_button').prop('disabled', true);
+      $('#message_text').keyup(function() {
+        if ($(this).val() != ''){
+          $('#send_button').prop('disabled', false);
+        }
+      });
+
       $("#message_form").on("ajax:success", function (event){
         location.reload();
       });
