@@ -41,7 +41,7 @@ class GroupsController < ApplicationController
         @events = @group.events.next
         @memberships = @group.memberships
 
-        render file: "app/view/dashboard"
+        render file: "app/views/groups/show"
     end
 
     # GET new_group_path
