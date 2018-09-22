@@ -133,21 +133,25 @@
                             <% if @group %>
                             <% if @group.members.count(:all) != 0 %>
 
-                            <%= link_to '<span data-feather="user-plus" class="mr-2"></span> Nuovo Invito'.html_safe, new_group_invitation_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline mb-2" %>
+                            <% if @group.admins.include? current_user %>
+                              <%= link_to '<span data-feather="user-plus" class="mr-2"></span> Nuovo Invito'.html_safe, new_group_invitation_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline mb-2" %>
+                            <% end %>
 
                             <a class="d-flex align-items-center text-muted nounderline mb-2" href="#" data-toggle="modal" data-target="#infoGroupModal">
                               <span data-feather="info" class="mr-2"></span> Informazioni Gruppo
                             </a>
 
-                            <a class="d-flex align-items-center text-muted nounderline mb-2" href="#">
-                              <span data-feather="settings" class="mr-2"></span> Modifica Gruppo
-                            </a>
+                            <% if @group.super_admin.eql? current_user %>
+                              <%= link_to '<span data-feather="edit" class="mr-2"></span> Modifica Gruppo'.html_safe, edit_group_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline mb-2" %>
+                            <% end %>
 
-                            <%= link_to '<span data-feather="log-out" class="mr-2"></span> Abbandona Gruppo'.html_safe, group_membership_path(@group.uuid, current_user.id), method: :delete, data: {confirm: "Confermi di voler abbandonare il gruppo '" + @group.name + "'?"}, class: "d-flex align-items-center text-muted nounderline mb-2" %>
+                            <% if !@group.super_admin.eql? current_user %>
+                              <%= link_to '<span data-feather="log-out" class="mr-2"></span> Abbandona Gruppo'.html_safe, group_membership_path(@group.uuid, current_user.id), method: :delete, data: {confirm: "Confermi di voler abbandonare il gruppo '" + @group.name + "'?"}, class: "d-flex align-items-center text-muted nounderline mb-2" %>
+                            <% end %>
 
-                            <a class="d-flex align-items-center text-muted nounderline mb-2" href="#">
-                              <span data-feather="trash" class="mr-2"></span> Elimina Gruppo
-                            </a>
+                            <% if @group.super_admin.eql? current_user %>
+                              <%= link_to '<span data-feather="trash" class="mr-2"></span> Elimina Gruppo'.html_safe, group_path(@group.uuid), method: :delete, data: {confirm: "Confermi di voler eliminare il gruppo '" + @group.name + "'?"}, class: "d-flex align-items-center text-muted nounderline mb-2" %>
+                            <% end %>
 
                             <% end %>
                             <% end %>

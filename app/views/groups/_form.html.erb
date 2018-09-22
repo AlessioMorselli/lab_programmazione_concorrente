@@ -1,0 +1,17 @@
+                    <%= form_for(:group, url: url, html: {class: 'form-new-group'}, method: m) do |f| %>
+                    <%= f.text_field :name, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: "Nome" , required: true %>
+                    <%= f.number_field :max_members, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: "Massimo Nr. di Membri", id: "numberBox" %>
+                    <select class="form-control m-1 rounded-0 shadow-sm" id="degree">
+                      <option selected>Scegli il Corso di Studio (opzionale)...</option>
+                      <% @degrees.each do |degree| %>
+                        <option value="<%= degree.id %>" years="<%= degree.years %>"><%= degree.name %></option>
+                      <% end %>
+                    </select>
+                    <%= f.text_area :description, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: "Descrizione", rows: 4 %>
+                    <div class="form-check text-center my-3">
+                      <label class="form-check-label">
+                        <%= f.check_box :private, class: "form-check-input" %>Questo Gruppo é Privato
+                      </label>
+                    </div>
+                    <%= f.submit "Salva Gruppo", :class => "btn btn-lg btn-secondary btn-block m-1 shadow-sm" %>
+                    <% end %>

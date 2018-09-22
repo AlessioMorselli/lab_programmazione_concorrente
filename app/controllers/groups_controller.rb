@@ -26,7 +26,7 @@ class GroupsController < ApplicationController
                                                     # interessare all'utente loggato
         end
 
-        render file: 'app/views/public_groups_list'
+        render "index"
     end
 
     # GET group_path(uuid: group.uuid)
@@ -41,7 +41,7 @@ class GroupsController < ApplicationController
         @events = @group.events.next
         @memberships = @group.memberships
 
-        render file: 'app/views/dashboard'
+        render file: "app/view/dashboard"
     end
 
     # GET new_group_path
@@ -49,7 +49,7 @@ class GroupsController < ApplicationController
         # Visualizza la form per creare un nuovo gruppo
         @degrees = Degree.all # Servono in fase di selezione del corso che studierà il gruppo studio
         @group = Group.new
-        render file: 'app/views/dashboard_new_group'
+        render "new"
     end
 
     # POST groups_path
@@ -63,14 +63,15 @@ class GroupsController < ApplicationController
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:error] = 'Le informazioni inserite non sono valide'
-            render file: 'app/views/dashboard_new_group'
+            render "new"
         end
     end
 
     # GET edit_group_path(uuid: group.uuid)
     def edit
         # Visualizza la form per modificare un nuovo gruppo
-        render file: 'app/views/dashboard_new_group' # TODO: metti il template corretto
+        @degrees = Degree.all
+        render "edit"
     end
 
     # PUT/PATCH group_path(uuid: group.uuid)
@@ -80,7 +81,7 @@ class GroupsController < ApplicationController
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:error] = 'Le informazioni del gruppo non sono state aggiornate'
-            render file: 'app/views/dashboard_new_group' # TODO: metti il template corretto
+            render "edit"
         end
     end
 
