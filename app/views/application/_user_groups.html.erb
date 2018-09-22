@@ -109,7 +109,7 @@
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                    <b>Corso di Studio:</b> <%= member.degree.name %><br>
+                                    <b>Corso di Studio:</b> <%= member.degree ? member.degree.name : "Nessuno" %><br>
                                     <b>Indirizzo Email:</b> <%= member.email %><br>
                                   </div>
                                   <div class="modal-footer">
