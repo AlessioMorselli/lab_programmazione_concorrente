@@ -39,17 +39,17 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
 
     # Primo tentativo: sbaglio la mail
     get edit_password_reset_path(user.reset_token, email: "")
-    assert_redirected_to landing_path
+    assert_redirected_to new_password_reset_path
 
     # Secondo tentativo: sono un utente non confermato
     user.toggle!(:confirmed)
     get edit_password_reset_path(user.reset_token, email: user.email)
-    assert_redirected_to landing_path
+    assert_redirected_to new_password_reset_path
     user.toggle!(:confirmed)
 
     # Terzo tentativo: mail corretta, ma token errato
     get edit_password_reset_path('token sbagliato', email: user.email)
-    assert_redirected_to landing_path
+    assert_redirected_to new_password_reset_path
 
     # Quarto tentativo: finalmente ce la faccio!
     get edit_password_reset_path(user.reset_token, email: user.email)
