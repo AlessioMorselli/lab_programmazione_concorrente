@@ -1,0 +1,40 @@
+<% time = message.updated_at.strftime("%I:%M %p") %>
+<% if message.updated_at.strftime("%d/%m/%Y").to_s.eql? Time.now.strftime("%d/%m/%Y").to_s %>
+<% date = "Today" %>
+<% elsif message.updated_at.strftime("%d/%m/%Y").to_s.eql? (Time.now - 1.days).strftime("%d/%m/%Y").to_s %>
+<% date = "Yesterday" %>
+<% else %>
+<% date = message.updated_at.strftime("%B %-d") %>
+<% end %>
+<% if message.user_id == current_user.id %>
+    <div class="outgoing_msg my-3 msg">
+        <div class="sent_msg">
+        <p id="message_body" message-id="<%= message.id %>"><span><%= message.text %></span></p>
+        <span class="time_date"> <%= time %>    |    <%= date %> <%= (message.updated_at.to_s.eql? message.created_at.to_s) ? nil : "*" %>
+            <a class="edit_message text-secondary ml-2" message-id="<%= message.id %>" href="#"><span data-feather="edit"></span></a>
+            <a class="save_message ml-2 d-none text-success" message-id="<%= message.id %>" href="#"><span data-feather="save"></span></a>
+            <% if (message.pinned == false and group.admins.include? current_user ) %>
+            <a class="bookmark_message text-secondary" message-id="<%= message.id %>" href="#"><span data-feather="bookmark"></span></a>
+            <% end %>
+            <a class="delete_message text-danger" message-id="<%= message.id %>" href="#"><span data-feather="trash"></span></a>
+        </span>
+        <% if !message.attachment.nil? %>
+        <a class="d-flex align-items-center mb-2" href="<%= group_message_attachment_download_path(group_uuid: group.uuid, message_id: message.id, id: message.attachment.id) %>">
+            <span data-feather="paperclip" class="mr-2"></span> <%= message.attachment.name %>
+        </a>
+        <% end %>
+        </div>
+    </div>
+<% else %>
+    <div class="received_msg ml-1 my-1 msg">
+        <div class="received_withd_msg">
+        <b><%= message.user.name %></b>:
+        <p class="mt-1"><%= message.text %></p>
+        <span class="time_date"> <%= time %>    |    <%= date %> <%= (message.updated_at.to_s.eql? message.created_at.to_s) ? nil : "*" %>  
+            <% if (message.pinned == false and group.admins.include? current_user) %>
+            <a class="bookmark_message text-secondary" message-id="<%= message.id %>" href="#"><span data-feather="bookmark"></span></a>
+            <% end %>
+        </span>
+        </div>
+    </div>
+<% end %>

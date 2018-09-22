@@ -53,8 +53,14 @@ class MessagesController < ApplicationController
             @attachment.mime_type = incoming_file.content_type
             @attachment.data = incoming_file.read
         end
-        if !@message.save_with_attachment(@attachment)
-            flash.now[:error] = 'Il messaggio non è stato inviato'
+
+        respond_to do |format|
+            if @message.save_with_attachment(@attachment)
+                format.html { render partial: 'messages/show', locals: {message: @message, group: @group} }
+            else
+                format.json { render :json => { :error => 'Il messaggio non è stato inviato' }, status: 422 }
+                #flash.now[:error] = 'Il messaggio non è stato inviato'
+            end
         end
     end
 
