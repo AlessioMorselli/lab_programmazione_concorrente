@@ -1,11 +1,11 @@
 <% content_for :title do %>
-  <%= @group.name %> - Dashboard
+<%= @group.name %> - Dashboard
 <% end %>
 
 <% content_for :head do %>
-  <%= stylesheet_link_tag "dashboard" %>
+<%= stylesheet_link_tag "dashboard" %>
 
-  <%= csrf_meta_tag %>
+<%= csrf_meta_tag %>
 <% end %>
 
 
@@ -71,7 +71,13 @@
                       <div class="modal-body">
                         <div class="container px-1">
                           <div class="calendar-modal-scroll">
-                            <%= render "calendar" %>
+                            <% if @events.to_a.size == 0 %>
+                            <p class="pt-4 p-2 text-center">Al momento non sono presenti eventi per questa settimana.</p>
+                            <% end %>
+
+                            <% @events.each do |event| %>
+                            <%= render partial: "events/show", locals: {event: event, group: @group} %>
+                            <% end %>
                           </div>
 
                           <% if @group.events.to_a.length > 0 or @group.admins.include? current_user %>
@@ -124,18 +130,18 @@
                   <div id="messages" class="mb-2">
 
                     <% if @messages.to_a.size == 0 %>
-                      <p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
+                    <p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
                     <% end %>
 
                     <% @messages.reverse_order.each do |message| %>
-                      <%= render partial: "messages/show", locals: {message: message, group: @group}%>
+                    <%= render partial: "messages/show", locals: {message: message, group: @group}%>
                     <% end %>
 
                   </div>
                 </div>
                 <div class="type_msg">
                   <div class="container-fluid">
-                  <%= form_for(:message, url: group_messages_path(@group.uuid), remote: true, html: {id: "message_form"}) do |f| %>
+                    <%= form_for(:message, url: group_messages_path(@group.uuid), remote: true, html: {id: "message_form"}) do |f| %>
                     <div class="row">
                       <div class="col-8 px-1">
                         <div class="input_msg_write">
@@ -149,7 +155,7 @@
                         <button id="send_button" class="msg_btn shadow-sm" type="submit"><span data-feather="send"></span></button>
                       </div>
                     </div>
-                  <% end %>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -162,9 +168,13 @@
                   <div class="mb-2">
 
                     <div class="container px-2">
+                      <% if @events.to_a.size == 0 %>
+                      <p class="pt-4 p-2 text-center">Al momento non sono presenti eventi per questa settimana.</p>
+                      <% end %>
 
-                      <%= render "calendar" %>
-
+                      <% @events.each do |event| %>
+                      <%= render partial: "events/show", locals: {event: event, group: @group} %>
+                      <% end %>
                     </div>
 
                     <% if @group.events.to_a.length > 0 or @group.admins.include? current_user %>
@@ -194,22 +204,22 @@
       </div>
     </div>
 
- </div>
+  </div>
 
-<% content_for :scripts do %>
+  <% content_for :scripts do %>
 
-    <script type="text/javascript">
-      $(document).ready(function (e){
+  <script type="text/javascript">
+    $(document).ready(function (e){
 
       var last_message = $('#messages .msg:last-child');
 
       if (last_message.length){
         last_message.get(0).scrollIntoView();
       }
-     });
-   </script>
+    });
+  </script>
 
-   <script type="text/javascript">
+  <script type="text/javascript">
     $(document).ready(function (e){
       $('#messages').on("click",'.delete_message', function (){
         var message_id = $(this).attr('message-id');
@@ -231,9 +241,9 @@
         });
       });
     });
-   </script>
+  </script>
 
-   <script type="text/javascript">
+  <script type="text/javascript">
     $(document).ready(function (e){
       $('#messages').on('click', '.edit_message', function (){
         var message_id = $(this).attr('message-id');
@@ -248,9 +258,9 @@
         message_body_input.select();
       });
     });
-   </script>
+  </script>
 
-   <script type="text/javascript">
+  <script type="text/javascript">
     $(document).ready(function (e){
       $('#messages').on('click', '.save_message', function (){
         var message_id = $(this).attr('message-id');
@@ -276,9 +286,9 @@
         });
       });
     });
-   </script>
+  </script>
 
-   <script type="text/javascript">
+  <script type="text/javascript">
     $(document).ready(function (e){
       $('#messages').on('click', '.bookmark_message', function (){
         var message_id = $(this).attr('message-id');
@@ -301,9 +311,9 @@
         });
       });
     });
-   </script>
+  </script>
 
-   <script type="text/javascript">
+  <script type="text/javascript">
     $(document).ready(function (e){
       $('.unbookmark_message').on('click', function (){
         var message_id = $(this).attr('message-id');
@@ -326,60 +336,60 @@
         });
       });
     });
-   </script>
-
-   <script type="text/javascript">
-     $(document).ready(function (e){
-      $('#attachment_button').click(function() {
-        $('#attachment').click();
-      });
-      $('#attachment').change(function (){
-        var file = $(this)[0].files[0];
-        var att = $('.input_msg_write').find('a');
-        if(att.length !== 0){
-          att.remove();
-        }
-        $('.input_msg_write').append('<a class="d-flex align-items-center mb-2" href="#"><span data-feather="paperclip" class="mr-2"></span> ' + file.name + '</a>');
-        feather.replace();
-      });
-
-     });
-   </script>
+  </script>
 
   <script type="text/javascript">
-    $(document).ready(function (e){
-      $('#message_text').val("");
-      $('#attachment').val("");
-      
-      $('#send_button').prop('disabled', true);
-      $('#message_text').keyup(function() {
-        if ($(this).val() != ''){
-          $('#send_button').prop('disabled', false);
-        }
-      });
-
-      $("#message_form").on("ajax:success", function (event){
-        let messages = $("#messages");
-        let new_message = $(event.detail[2].response);
-        if (messages.find("> p").length > 0) {
-          messages.html("");
-        }
-        messages.append(new_message);
-        feather.replace();
-        new_message.get(0).scrollIntoView();
-        $("#message_form").get(0).reset();
-        var att = $('.input_msg_write').find('a');
-        if(att.length !== 0){ att.remove(); }
-        var prev_err = $('.input_msg_write').find('small');
-        if(prev_err.length !== 0){ prev_err.remove(); }
-      }).on("ajax:error", (event) => {
-        let err = event.detail[0].error;
-        var prev_err = $('.input_msg_write').find('small');
-        if(prev_err.length !== 0){ prev_err.remove(); }
-        $('.input_msg_write').prepend('<small class="text-danger">'+err+'</small>');
-      });
+   $(document).ready(function (e){
+    $('#attachment_button').click(function() {
+      $('#attachment').click();
     });
-   </script>
+    $('#attachment').change(function (){
+      var file = $(this)[0].files[0];
+      var att = $('.input_msg_write').find('a');
+      if(att.length !== 0){
+        att.remove();
+      }
+      $('.input_msg_write').append('<a class="d-flex align-items-center mb-2" href="#"><span data-feather="paperclip" class="mr-2"></span> ' + file.name + '</a>');
+      feather.replace();
+    });
+
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function (e){
+    $('#message_text').val("");
+    $('#attachment').val("");
+
+    $('#send_button').prop('disabled', true);
+    $('#message_text').keyup(function() {
+      if ($(this).val() != ''){
+        $('#send_button').prop('disabled', false);
+      }
+    });
+
+    $("#message_form").on("ajax:success", function (event){
+      let messages = $("#messages");
+      let new_message = $(event.detail[2].response);
+      if (messages.find("> p").length > 0) {
+        messages.html("");
+      }
+      messages.append(new_message);
+      feather.replace();
+      new_message.get(0).scrollIntoView();
+      $("#message_form").get(0).reset();
+      var att = $('.input_msg_write').find('a');
+      if(att.length !== 0){ att.remove(); }
+      var prev_err = $('.input_msg_write').find('small');
+      if(prev_err.length !== 0){ prev_err.remove(); }
+    }).on("ajax:error", (event) => {
+      let err = event.detail[0].error;
+      var prev_err = $('.input_msg_write').find('small');
+      if(prev_err.length !== 0){ prev_err.remove(); }
+      $('.input_msg_write').prepend('<small class="text-danger">'+err+'</small>');
+    });
+  });
+</script>
 
 
 <% end %>
