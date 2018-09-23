@@ -63,7 +63,7 @@ class EventsController < ApplicationController
     def new
         # Mostra la form per creare un evento
         @event = Event.new
-        render file: 'app/views/dashboard_new_event'
+        render "new"
     end
 
     # POST group_events_path(group_uuid: group.uuid)
@@ -84,7 +84,7 @@ class EventsController < ApplicationController
     # GET edit_group_event_path(group_uuid: group.uuid, id: event.id)
     def edit
         # Mostra la form per modificare un evento
-        render file: 'app/views/dashboard_new_event'
+        render "edit"
     end
 
     # PUT/PATCH group_event_path(group_uuid: group.uuid, id: event.id)

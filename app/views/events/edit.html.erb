@@ -43,19 +43,7 @@
                 <div class="card-header rounded-0 text-center font-075">Creazione Nuovo Evento</div>
                 <div class="card-body p-2 d-flex justify-content-center">
                   <div class="mb-2">
-                    <%= form_for @event, url: group_events_path, html: {class: 'form-new-event', method: 'post', id: 'event_form'} do |f| %>
-                      <div class="input-group date m-1 mb-1">
-                        <%= f.text_field :start_time, class: 'form-control mr-1 rounded-0 shadow-sm', id: 'datetimes', placeholder: 'Inizio Evento', required: true %>
-                        <%= f.text_field :end_time, class: 'form-control rounded-0 shadow-sm', id: 'datetimes', placeholder: 'Fine Evento', required: true %>
-                      </div>
-                      <%= f.text_field :name, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Nome', required: true, autofocus: true %>
-                      <%= f.text_field :place, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Luogo', required: true %>
-                      <%= f.text_area :description, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Descrizione', required: true %>
-                      <%= f.hidden_field :group_id, value: @group.id %>
-                      <%= f.select(:repeated, [['Ogni Giorno', 1], ['Ogni 7 Giorni', 7], ['Ogni 30 Giorni', 30]], {include_blank: 'Scegli la periodicità...'}, {class: 'form-control m-1 rounded-0 shadow-sm'}) %>
-                      <%= f.select(:repeated_for, [['2', 2], ['3', 3]], {include_blank: 'Scegli il numero di ripetizioni...'}, {class: 'form-control m-1 rounded-0 shadow-sm'}) %>
-                      <%= f.submit "Salva Evento", class: 'btn btn-lg btn-secondary btn-block m-1 shadow-sm' %>
-                    <% end %>
+                    <%= render partial: "events/form", locals: {url: group_event_path(@group.uuid, @event.id), m: "patch", submit_label: "Salva Evento"} %>
                   </div>
                 </div>
 

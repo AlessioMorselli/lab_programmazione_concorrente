@@ -74,11 +74,25 @@
                             <%= render "calendar" %>
                           </div>
 
+                          <% if @group.events.to_a.length > 0 or @group.admins.include? current_user %>
+                          
                           <h6 class="sidebar-heading d-flex justify-content-between align-items-right px-3 mt-4 mb-1 text-muted">
-                            <a class="d-flex align-items-center text-muted " href="/groups/<%= @group.uuid %>/events/new" style="font-size: 0.75rem; text-transform: uppercase;">
-                              <span data-feather="plus-circle" class="mr-2"></span> Crea Nuovo Evento
-                            </a>
+                            <div class="row">
+                              <div class="col">
+                                <% if @group.events.size > 0 %>
+                                <a class="d-flex align-items-center text-muted nounderline mb-2" href="#">
+                                  <span data-feather="server" class="mr-2"></span> Mostra tutti gli Eventi 
+                                </a>
+                                <% end %>
+                                <% if (@group.admins.include? current_user) %>
+                                <%= link_to "<span data-feather='plus-circle' class='mr-2'></span> Crea Nuovo Evento ".html_safe, new_group_event_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline" %>
+                                <% end %>
+                              </div>
+                            </div>
                           </h6>
+
+                          <% end %>
+
                         </div>
                       </div>
                     </div>

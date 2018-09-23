@@ -16,7 +16,7 @@
                         <ul class="nav flex-column nav-scroll">
                          <% current_user.groups.each do |group| %>
                          <li class="nav-item">
-                          <a class="nav-link text-secondary" href="/groups/<%= group.uuid %>">
+                          <a class="nav-link text-secondary" href="<%= group_path(group.uuid) %>">
                             <span data-feather="users"></span>
                             <%= truncate(group.name, length: 10) %>
                           </a>

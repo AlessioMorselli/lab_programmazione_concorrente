@@ -80,89 +80,11 @@
                     <div class="mb-2">
                       <ul class="nav flex-column sidebar" id="members">
                         <% @group.members.each do |member| %>
-                        <li class="nav-item pb-2 mx-2" style="max-width: 100%; display: inline-block; border-bottom: 1px solid rgba(0,0,0,.1)">
-                          <a class="nav-link truncate-string-100 pl-0 <%= (current_user.eql? member) ? 'active' : nil %>">
-                            <span data-feather="user"></span>
-                            <%= member.name %>
-                          </a>
-                            <% if @group.super_admin.eql? member %>
-                              <span data-feather="award" class="text-warning mr-1" data-toggle="tooltip" title="Super Admin"></span>
-                            <% end %>
-                            <% if !@group.super_admin.eql? member and @group.admins.include? member %>
-                              <% if @group.super_admin.eql? current_user %>
-                                <%= link_to "<span data-feather='award' class='text-secondary mr-1' title='Rendi Super Admin' data-toggle='tooltip'></span>".html_safe, group_set_super_admin_path(@group.uuid, member.id), method: :patch, data: {confirm: "Confermi di voler far diventare '" + member.name + "' il nuovo Super Admin?"} %>
-                              <% else %>
-                                <span data-feather="award" class="text-secondary mr-1" title="Admin" data-toggle="tooltip"></span>
-                              <% end %>
-                            <% end %>
-
-                            <% if @group.super_admin.eql? current_user and !(current_user.eql? member) and !(@group.admins.include? member)%>
-                              <%= link_to "<span data-feather='award' class='text-primary mr-1' data-toggle='tooltip' title='Rendi Admin'></span>".html_safe, group_set_admin_path(@group.uuid, member.id), method: :patch, data: {confirm: "Confermi di voler far diventare '" + member.name + "' Admin di questo gruppo?"} %>
-                            <% end %>
-
-                            <a data-toggle="tooltip" title="Info">
-                              <span data-feather="info" class="text-info mr-1" data-toggle="modal" data-target="#infoUserModal<%= member.id %>"></span>
-                            </a>
-
-                            <div class="modal fade" id="infoUserModal<%= member.id %>" tabindex="-1" role="dialog">
-                              <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content rounded-0">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title truncate-string-100" id="exampleModalCenterTitle"><%= member.name %></h5>
-                                    <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <b>Corso di Studio:</b> <%= member.degree ? member.degree.name : "Nessuno" %><br>
-                                    <b>Indirizzo Email:</b> <%= member.email %><br>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-
-                            <% if @group.admins.include? current_user and !(current_user.eql? member) and !(@group.admins.include? member)%>
-                              <%= link_to "<span data-feather='user-minus' class='text-danger' data-toggle='tooltip' title='Caccia Utente'></span>".html_safe, group_membership_path(@group.uuid, member.id), method: :delete, data: {confirm: "Confermi di voler cacciare '" + member.name + "' da questo gruppo?"} %>
-                            <% end %>
-                        </li>
+                          <%= render partial: "member", locals: {member: member, group: @group} %>
                         <% end %>
                       </ul>
                       <h6 class="sidebar-heading d-flex justify-content-between align-items-right p-2 mt-2 mb-1 text-muted add-group-sticky">
-                        <div class="row">
-                          <div class="col">
-
-                            <% if @group %>
-                            <% if @group.members.count(:all) != 0 %>
-                            
-                            <a class="d-flex align-items-center text-muted nounderline mb-2" href="#" data-toggle="modal" data-target="#infoGroupModal">
-                              <span data-feather="info" class="mr-2"></span> Informazioni Gruppo
-                            </a>
-
-                            <% if @group.admins.include? current_user %>
-                              <%= link_to '<span data-feather="user-plus" class="mr-2"></span> Nuovo Invito'.html_safe, new_group_invitation_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline mb-2" %>
-                            <% end %>
-
-
-                            <% if @group.super_admin.eql? current_user %>
-                              <%= link_to '<span data-feather="edit" class="mr-2"></span> Modifica Gruppo'.html_safe, edit_group_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline mb-2" %>
-                            <% end %>
-
-                            <% if !@group.super_admin.eql? current_user %>
-                              <%= link_to '<span data-feather="log-out" class="mr-2"></span> Abbandona Gruppo'.html_safe, group_membership_path(@group.uuid, current_user.id), method: :delete, data: {confirm: "Confermi di voler abbandonare il gruppo '" + @group.name + "'?"}, class: "d-flex align-items-center text-muted nounderline mb-2" %>
-                            <% end %>
-
-                            <% if @group.super_admin.eql? current_user %>
-                              <%= link_to '<span data-feather="trash" class="mr-2"></span> Elimina Gruppo'.html_safe, group_path(@group.uuid), method: :delete, data: {confirm: "Confermi di voler eliminare il gruppo '" + @group.name + "'?"}, class: "d-flex align-items-center text-muted nounderline mb-2" %>
-                            <% end %>
-
-                            <% end %>
-                            <% end %>
-                          </div>
-                        </div>
+                        <%= render partial: "group_functions", locals: {group: @group} %>
                       </h6>
                     </div>
                   </div>
