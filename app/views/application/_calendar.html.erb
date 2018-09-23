@@ -1,10 +1,10 @@
                       <% if @events.to_a.size == 0 %>
-                        <p class="p-2 text-center">Al momento non sono presenti eventi.</p>
+                        <p class="pt-4 p-2 text-center">Al momento non sono presenti eventi per questa settimana.</p>
                       <% end %>
 
                       <% @events.each do |event| %>
                         <div class="row row-striped">
-                          <div class="col-5 text-center pr-0 align-self-center">
+                          <div class="col-5 text-center align-self-center">
                             <div class="">
                               <h1 class="display-5"><span class="badge badge-secondary rounded-0"><%= event.start_time.strftime("%-d") %></span></h1>
                               <h4><%= event.start_time.strftime("%^b") %></h4>
@@ -14,10 +14,16 @@
                             <h4><%= event.name %></h4>
                             <ul class="list-inline">
                               <li class="list-inline-item text-secondary font-075"><i class="fa fa-calendar-o" aria-hidden="true"></i><%= event.start_time.strftime("%A") %></li>
-                              <li class="list-inline-item text-secondary font-075"><i class="fa fa-clock-o" aria-hidden="true"></i><%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %></li>
+                              <li class="list-inline-item text-secondary font-075"><i class="fa fa-clock-o" aria-hidden="true"></i><%= event.start_time.strftime("%H:%M") %> - <%= event.end_time.strftime("%H:%M") %></li>
                               <li class="list-inline-item text-secondary font-075 truncate-string-100"><i class="fa fa-location-arrow" aria-hidden="true"></i>Luogo: <%= event.place %></li>
                             </ul>
                             <p><%= event.description %></p>
+
+                            <% if @group.admins.include? current_user %>
+                              <%= link_to "<span data-feather='edit'></span>".html_safe, edit_group_event_path(@group.uuid, event.id), class: "delete_message text-secondary" %>
+
+                              <%= link_to "<span data-feather='trash'></span>".html_safe, group_event_path(@group.uuid, event.id), method: :delete, data: {confirm: "Confermi di voler eliminare questo evento?"}, class: "delete_message text-danger" %>
+                            <% end %>
                           </div>
                         </div>
                       <% end %>

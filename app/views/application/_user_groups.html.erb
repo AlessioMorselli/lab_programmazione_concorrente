@@ -12,6 +12,11 @@
                                 </div>
                                 <div class="modal-body">
                                   <b>Nr. Membri:</b> <%= @group.members.count %><br>
+
+                                  <% if @group.course %>
+                                    <b>Insegnamento:</b> <%= @group.course.name %><br>
+                                  <% end %>
+
                                   <b>Descrizione:</b> 
                                   <%= @group.description.blank? ? "Nessuna descrizione disponibile." : @group.description %>
                                 </div>
@@ -132,14 +137,15 @@
 
                             <% if @group %>
                             <% if @group.members.count(:all) != 0 %>
+                            
+                            <a class="d-flex align-items-center text-muted nounderline mb-2" href="#" data-toggle="modal" data-target="#infoGroupModal">
+                              <span data-feather="info" class="mr-2"></span> Informazioni Gruppo
+                            </a>
 
                             <% if @group.admins.include? current_user %>
                               <%= link_to '<span data-feather="user-plus" class="mr-2"></span> Nuovo Invito'.html_safe, new_group_invitation_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline mb-2" %>
                             <% end %>
 
-                            <a class="d-flex align-items-center text-muted nounderline mb-2" href="#" data-toggle="modal" data-target="#infoGroupModal">
-                              <span data-feather="info" class="mr-2"></span> Informazioni Gruppo
-                            </a>
 
                             <% if @group.super_admin.eql? current_user %>
                               <%= link_to '<span data-feather="edit" class="mr-2"></span> Modifica Gruppo'.html_safe, edit_group_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline mb-2" %>
