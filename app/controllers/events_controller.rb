@@ -15,9 +15,12 @@ class EventsController < ApplicationController
     # GET group_events_path(group_uuid: group.uuid)
     def index
         # Visualizza tutti gli eventi di un gruppo
+        # Per restituire tutti gli eventi, passare un params 'all'
+        if !params['all'].nil?
+            @events = @group.events.all
         # Uso il parametro 'up_to' per stabilire da quando devo recuperare gli eventi
         # Esempio di parametro valido: (2.months).to_s
-        if params['up_to'].nil?
+        elsif params['up_to'].nil?
             @events = @group.events.next
         else
             # Controllo che non sia un array! Mi serve un solo parametro
@@ -29,16 +32,23 @@ class EventsController < ApplicationController
             @events = @group.events.next(up_to)
         end
         
-        render json: @events
+        respond_to do |format|
+            format.html { render partial: 'events/index', locals: {events: @events, group: @group} }
+        end
+
+        # render json: @events
     end
 
 
     # GET user_events_path(user)
     def user_index
         # Visualizza tutti gli eventi dei gruppi di cui fa parte l'utente
+        # Per restituire tutti gli eventi, passare un params 'all'
+        if !params['all'].nil?
+            @events = @user.events.all
         # Uso il parametro 'up_to' per stabilire da quando devo recuperare gli eventi
         # Esempio di parametro valido: (2.months).to_s
-        if params['up_to'].nil?
+        elsif params['up_to'].nil?
             @events = @user.events.next
         else
             # Controllo che non sia un array! Mi serve un solo parametro
@@ -49,8 +59,12 @@ class EventsController < ApplicationController
             up_to = up_to.to_i
             @events = @user.events.next(up_to)
         end
+
+        respond_to do |format|
+            format.html { render partial: 'events/index', locals: {events: @events, user: @user} }
+        end
         
-        render json: @events
+        # render json: @events
     end
 
     # GET group_event_path(group_uuid: group.uuid, id: event.id)
@@ -77,7 +91,7 @@ class EventsController < ApplicationController
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:error] = 'Le informazioni inserite non sono valide'
-            render file: 'app/views/dashboard_new_event'
+            render "new"
         end
     end
 
@@ -94,7 +108,7 @@ class EventsController < ApplicationController
             redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:error] = "Le informazioni dell'evento non sono state aggiornate"
-            render file: 'app/views/dashboard_new_event'            
+            render "edit"            
         end
     end
 
