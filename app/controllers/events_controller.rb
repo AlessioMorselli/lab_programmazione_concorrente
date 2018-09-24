@@ -17,7 +17,7 @@ class EventsController < ApplicationController
         # Visualizza tutti gli eventi di un gruppo
         # Per restituire tutti gli eventi, passare un params 'all'
         if !params['all'].nil?
-            @events = @group.events.all
+            @events = @group.events.next(100.years)
         # Uso il parametro 'up_to' per stabilire da quando devo recuperare gli eventi
         # Esempio di parametro valido: (2.months).to_s
         elsif params['up_to'].nil?
@@ -45,7 +45,7 @@ class EventsController < ApplicationController
         # Visualizza tutti gli eventi dei gruppi di cui fa parte l'utente
         # Per restituire tutti gli eventi, passare un params 'all'
         if !params['all'].nil?
-            @events = @user.events.all
+            @events = @user.events.next(100.years)
         # Uso il parametro 'up_to' per stabilire da quando devo recuperare gli eventi
         # Esempio di parametro valido: (2.months).to_s
         elsif params['up_to'].nil?
