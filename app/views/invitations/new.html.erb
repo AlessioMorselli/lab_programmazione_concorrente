@@ -46,9 +46,8 @@
                       
                       <%= form_for(@invitation, url: group_invitations_path, html: {class: "form-new-event"}) do |f| %>
                         <h1 class="h3 mb-3 font-weight-normal text-white">Nuovo invito</h1>
-                        <%= f.text_field :user_id, class: 'form-control rounded-0', placeholder: "Indirizzo email o nome dell'utente (lascia questo campo vuoto se vuoi creare un invito pubblico)", title: @invitation.errors[:user].join(', ') %>
+                        <%= f.text_field :user, class: 'form-control rounded-0', placeholder: "Indirizzo email o nome dell'utente (lascia questo campo vuoto se vuoi creare un invito pubblico)", title: @invitation.errors[:user].join(', ') %>
                         <%= f.text_field :expiration_date, id: "datetimes", class: "form-control mr-1 rounded-0 shadow-sm", placeholder: "Data di scadenza (lascia questo campo vuoto se non vuoi mettere una scadenza)", title: @invitation.errors[:expiration_date].join(', ')%>
-                        <%= f.hidden_field :group_id, value: @group.id %>
 
                         <%= f.submit "Crea invito", class: 'btn btn-lg btn-secondary btn-block rounded-0 shadow' %>
                       <% end %>

@@ -51,12 +51,17 @@
                       <div class="card shadow-sm rounded-0">
                         <% end %>
                         <div class="card-body group-name-body d-flex justify-content-between">
-                          <a class="align-self-center text-secondary nounderline flex-grow-1 truncate-string-25" href="/groups/<%= group.uuid %>"><span data-feather="users"></span>  <%= group.name %></a>
+                          <a class="align-self-center text-secondary nounderline flex-grow-1 truncate-string-25" href="<%= group_path(group.uuid) %>" title="<%= group.name %>"><span data-feather="users" class="mr-1"></span>  <%= group.name %></a>
                           <a class="align-self-center mx-3 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>">
                             <span data-feather="info"></span>  Info
                           </a>
                           <% if group.members.exists?(current_user.id) %>
+                          <% if group.super_admin.eql? current_user %>
                           <a class="text-left text-success nounderline" href="#"><span data-feather="check-circle"></span> Iscritto</a>
+                          <% else %>
+                            <a class="text-left text-success nounderline subscribed" href="#" id="<%= group.id %>"><span data-feather="check-circle"></span> Iscritto</a>
+                            <%= link_to "<span data-feather='x-circle'></span> Disiscriviti".html_safe, group_membership_path(group.uuid, current_user.id), method: 'delete', class: "text-left text-danger nounderline d-none unsubscribe", id: group.id %>
+                          <% end %>
                           <% else %>
                           <%= link_to '<span data-feather="circle"></span> Iscriviti'.html_safe, group_memberships_path(group.uuid), method: :post, data: {confirm: "Confermi la tua partecipazione al gruppo '" + group.name + "'?"}, class: "text-left nounderline "%>
                           <% end %>
@@ -98,3 +103,20 @@
     </div>
 
 </div>
+
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.subscribed').mouseenter(function() {
+        var id = $(this).attr('id');
+        $('.subscribed[id=' + id + ']').addClass('d-none');
+        $('.unsubscribe[id=' + id + ']').removeClass('d-none');
+      });
+      $('.unsubscribe').mouseleave(function() {
+        var id = $(this).attr('id');
+        $('.subscribed[id=' + id + ']').removeClass('d-none');
+        $('.unsubscribe[id=' + id + ']').addClass('d-none');
+      });
+    });
+  </script>
+<% end %>

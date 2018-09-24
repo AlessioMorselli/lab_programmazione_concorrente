@@ -29,7 +29,7 @@
 
             <div class="col-12">
               <div class="card card-chat shadow rounded-0 h-100">
-                <div class="card-header rounded-0 text-center">Inviti</div>
+                <div class="card-header rounded-0 text-center font-075">Inviti</div>
                 <div class="card-body p-2">
                   <div class="mb-2">
                     <% if @invitations.count == 0 %>
@@ -40,14 +40,20 @@
                     <% @invitations.each do |invitation| %>
                       <% id_num = id_num + 1 %>
 
-                      <div class="card shadow-sm">
+                    <% if id_num != 1 %>
+                      <div class="card shadow-sm mt-2 rounded-0">
+                    <% else %>
+                      <div class="card shadow-sm rounded-0">
+                    <% end %>                    
                         <div class="card-body group-name-body d-flex justify-content-between">
-                          <a class="align-self-center text-secondary nounderline" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>"><span data-feather="mail"></span>  <%= invitation.group.name %></a>
-                          <div class="text-secondary align-self-center ml-2"></div>
-                          <%= link_to(group_accept_invitation_path(invitation.group.uuid, invitation.url_string), class: "text-right col-1 nounderline text-success", method: :post) do %>
+                          <a class="align-self-center text-secondary nounderline flex-grow-1 truncate-string-25" href="#" title="<%= invitation.group.name %>"><span data-feather="mail" class="mr-1"></span>  <%= invitation.group.name %></a>
+                          <a class="align-self-center mr-3 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>">
+                            <span data-feather="info"></span>  Info
+                          </a>
+                          <%= link_to(group_accept_invitation_path(invitation.group.uuid, invitation.url_string), class: "align-self-center mr-3 nounderline text-success", method: :post) do %>
                             <span data-feather="check"></span> Accetta
                           <% end %>
-                          <%= link_to(group_refuse_invitation_path(invitation.group.uuid, invitation.url_string), class: "text-right col-1 nounderline text-danger", data: {method: :post, confirm: 'Sicuro?'} ) do %>
+                          <%= link_to(group_refuse_invitation_path(invitation.group.uuid, invitation.url_string), class: "text-left text-danger nounderline", data: {method: :post, confirm: 'Sicuro?'} ) do %>
                             <span data-feather="x"></span> Rifiuta
                           <% end %>
                         </div>
@@ -57,7 +63,7 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                           <div class="modal-content rounded-0">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalCenterTitle"><%= invitation.group.name %></h5>
+                              <h5 title="<%= invitation.group.name %>" class="modal-title truncate-string-100" id="exampleModalCenterTitle"><%= invitation.group.name %></h5>
                               <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>

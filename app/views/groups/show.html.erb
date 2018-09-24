@@ -22,7 +22,7 @@
           <%= render "flash_messages" %>
           <div class="row flex-shrink-0 d-md-none">
             <div class="col-12">
-              <h3 class="text-center truncate-string-100">
+              <h3 class="text-center truncate-string-100" title="<%= @group.name %>">
                 <%= @group.name %>
               </h3>
             </div>
@@ -79,11 +79,13 @@
                       <div class="modal-body">
                         <div class="container px-1">
                           <div class="calendar-modal-scroll">
-                            <% if @events.to_a.size == 0 %>
-                            <p class="pt-4 p-2 text-center">Al momento non sono presenti eventi per questa settimana.</p>
-                            <% end %>
+                            <div class="events_container">
+                              <% if @events.to_a.size == 0 %>
+                              <p class="pt-4 p-2 text-center">Al momento non sono presenti eventi per questa settimana.</p>
+                              <% end %>
 
-                            <%= render partial: "events/index", locals: {events: @events, group: @group} %>
+                              <%= render partial: "events/index", locals: {events: @events, group: @group} %>
+                            </div>
                           </div>
 
                           <% if @group.events.to_a.length > 0 or @group.admins.include? current_user %>
@@ -92,7 +94,7 @@
                             <div class="row">
                               <div class="col">
                                 <% if @group.events.size > 0 %>
-                                <a class="d-flex align-items-center text-muted nounderline mb-2" href="#">
+                                <a class="d-flex align-items-center text-muted nounderline mb-2 show_all_events" href="#">
                                   <span data-feather="server" class="mr-2"></span> Mostra tutti gli Eventi 
                                 </a>
                                 <% end %>
@@ -179,7 +181,7 @@
                 <div class="card-body pt-0 pb-2 px-0" style="overflow-x: hidden;">
                   <div class="mb-2">
 
-                    <div class="container px-2" id="events_container">
+                    <div class="container px-2 events_container">
                       <% if @events.to_a.size == 0 %>
                       <p class="pt-4 p-2 text-center">Al momento non sono presenti eventi per questa settimana.</p>
                       <% end %>
@@ -193,7 +195,7 @@
                       <div class="row">
                         <div class="col">
                           <% if @group.events.size > 0 %>
-                          <a class="d-flex align-items-center text-muted nounderline mb-2" href="#" id="show_all_events">
+                          <a class="d-flex align-items-center text-muted nounderline mb-2 show_all_events" href="#">
                             <span data-feather="server" class="mr-2"></span> Mostra tutti gli Eventi 
                           </a>
                           <% end %>
@@ -410,7 +412,7 @@
 
   <script type="text/javascript">
     $(document).ready(function (e) {
-      $('#show_all_events').click(function() {
+      $('.show_all_events').click(function() {
         $.ajax({
           url: "<%= group_events_path(group_uuid: @group.uuid) %>",
           type: "GET",
@@ -420,8 +422,8 @@
             'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
           },
           success: function (data, text_status, jqXHR){
-            $('#events_container').empty();
-            $('#events_container').append(data);
+            $('.events_container').empty();
+            $('.events_container').append(data);
             feather.replace();
           },
           error: function (jqXHR, text_status, error_thrown){

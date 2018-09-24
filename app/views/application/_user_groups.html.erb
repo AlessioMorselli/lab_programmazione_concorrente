@@ -49,8 +49,8 @@
                     <ul class="nav flex-column sidebar" id="groups">
                       <% current_user.groups.each do |group| %>
                       <li class="nav-item" style="max-width: 100%">
-                        <a title="<%= group.name %>" class="nav-link truncate-string-100 <%= (@group.eql? group) ? 'active' : nil %>" href="/groups/<%= group.uuid %>">
-                          <span data-feather="users"></span>
+                        <a title="<%= group.name %>" class="nav-link truncate-string-100 <%= (@group.eql? group) ? 'active' : nil %>" href="<%= group_path(group.uuid) %>">
+                          <span data-feather="users" class="mr-1"></span>
                           <%= group.name %>
                         </a>
                       </li>

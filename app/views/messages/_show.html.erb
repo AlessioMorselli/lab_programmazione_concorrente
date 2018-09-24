@@ -31,8 +31,13 @@
         <b><%= message.user.name %></b>:
         <p class="mt-1"><%= message.text %></p>
         <span class="time_date"> <%= time %>    |    <%= date %> <%= (message.updated_at.to_s.eql? message.created_at.to_s) ? nil : "*" %>  
+            
             <% if (message.pinned == false and group.admins.include? current_user) %>
             <a class="bookmark_message text-secondary" href="#"><span data-feather="bookmark"></span></a>
+            <% end %>
+
+            <% if @group.admins.include? current_user %>
+                <a class="delete_message text-danger" message-id="<%= message.id %>" href="#"><span data-feather="trash"></span></a>
             <% end %>
         </span>
         <% if !message.attachment.nil? %>

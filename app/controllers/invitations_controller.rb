@@ -103,10 +103,10 @@ class InvitationsController < ApplicationController
 
     def set_user
         @wrong = false
-        if params[:invitation][:user_email].blank?
+        if params[:invitation][:user].blank?
             @user = nil
         elsif
-            unless @user = User.find_by_email(params[:invitation][:user_email])
+            unless @user = User.find_by_email(params[:invitation][:user])
                 flash.now[:error] = "L'utente indicato non esiste"
                 redirect_to new_group_invitation_path(group_uuid: @group.uuid)
             end
@@ -114,6 +114,6 @@ class InvitationsController < ApplicationController
     end
 
     def invitation_params
-        params.require(:invitation).permit(:expiration_date)
+        params.require(:invitation).permit(:expiration_date, :user)
     end
 end

@@ -1,5 +1,5 @@
                         <li class="nav-item pb-2 mx-2" style="max-width: 100%; display: inline-block; border-bottom: 1px solid rgba(0,0,0,.1)">
-                          <a class="nav-link truncate-string-100 pl-0 <%= (current_user.eql? member) ? 'active' : nil %>">
+                          <a class="nav-link truncate-string-100 pl-0 <%= (current_user.eql? member) ? 'active' : nil %>" title="<%= member.name %>">
                             <span data-feather="user"></span>
                             <%= member.name %>
                           </a>
