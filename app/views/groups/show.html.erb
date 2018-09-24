@@ -363,14 +363,15 @@
       if(att.length !== 0){
         att.remove();
       }
-      $('.input_msg_write').append('<a class="d-flex align-items-center mb-2" href="#" id="att"><span data-feather="paperclip" class="mr-2"></span> ' + file.name + '</a><a id="clear_attachment" href="#"><span data-feather="x" class="ml-2" ></span></a>');
+      $('.input_msg_write').append('<div class="d-flex align-items-center mb-2" id="attachment_section"><a href="#"><span data-feather="paperclip" class="mr-2"></span> ' + file.name + '</a><a id="clear_attachment" href="#"><span data-feather="x" class="ml-2" ></span></a></div>');
       feather.replace();
+      $('#clear_attachment').click(function() {
+        console.log('clicked');
+        $('#attachment').val('');
+        $('#attachment_section').remove();
+      });
     });
 
-    $('#clear_attachment').click(function() {
-      console.log('clicked');
-      $('#att').remove();
-    });
 
   });
 </script>
