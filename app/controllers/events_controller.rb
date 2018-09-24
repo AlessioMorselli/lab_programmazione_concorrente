@@ -33,7 +33,9 @@ class EventsController < ApplicationController
         end
         
         respond_to do |format|
-            format.html { render partial: 'events/index', locals: {events: @events, group: @group} }
+            format.html { 
+                render partial: 'events/index', locals: {events: @events, group: @group}
+            }
         end
 
         # render json: @events

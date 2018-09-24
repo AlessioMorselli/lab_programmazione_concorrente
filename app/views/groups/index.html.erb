@@ -37,6 +37,10 @@
                 <div class="card-header rounded-0 text-center font-075">Lista Gruppi Pubblici</div>
                 <div class="card-body p-2">
                   <div class="mb-2">
+                    <% if @groups.is_public.size == 0 %>
+                      <p class="pt-4 p-2 text-center">Non sono presenti gruppi pubblici suggeriti.</p>
+                    <% end %>
+
                     <% id_num = 0 %>
                     <% @groups.is_public.each do |group| %>
                     <% id_num = id_num + 1 %>

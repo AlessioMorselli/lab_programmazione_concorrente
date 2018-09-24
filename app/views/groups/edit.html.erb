@@ -33,7 +33,7 @@
                 <div class="card-header rounded-0 text-center font-075">Modifica Gruppo</div>
                 <div class="card-body p-2 d-flex justify-content-center">
                   <div class="mb-2">
-                    <%= render partial: 'groups/form', locals: {url: group_path(@group.uuid), m: 'patch'} %>
+                    <%= render partial: 'groups/form', locals: {url: group_path(@group.uuid), m: 'patch', max_members: @group.max_members} %>
                   </div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
                     <%= form_for(:group, url: url, html: {class: 'form-new-group', id: 'new_group'}, method: m) do |f| %>
                     <%= f.text_field :name, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: "Nome" , required: true %>
-                    <%= f.number_field :max_members, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: "Massimo Nr. di Membri", id: "numberBox" %>
+                    <%= f.number_field :max_members, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: "Massimo Nr. di Membri", id: "numberBox", value: max_members %>
                     <select class="form-control m-1 rounded-0 shadow-sm" id="degree">
                       <option selected>Scegli il Corso di Studio (opzionale)...</option>
                       <% @degrees.each do |degree| %>

@@ -7,7 +7,7 @@
 <% date = message.updated_at.strftime("%B %-d") %>
 <% end %>
 <% if message.user_id == current_user.id %>
-    <div class="outgoing_msg my-3 msg">
+    <div class="outgoing_msg my-3 msg" message-id="<%= message.id %>" >
         <div class="sent_msg">
         <p id="message_body" message-id="<%= message.id %>"><span><%= message.text %></span></p>
         <span class="time_date"> <%= time %>    |    <%= date %> <%= (message.updated_at.to_s.eql? message.created_at.to_s) ? nil : "*" %>
@@ -26,13 +26,13 @@
         </div>
     </div>
 <% else %>
-    <div class="received_msg ml-1 my-1 msg">
+    <div class="received_msg ml-1 my-1 msg" message-id="<%= message.id %>" >
         <div class="received_withd_msg">
         <b><%= message.user.name %></b>:
         <p class="mt-1"><%= message.text %></p>
         <span class="time_date"> <%= time %>    |    <%= date %> <%= (message.updated_at.to_s.eql? message.created_at.to_s) ? nil : "*" %>  
             <% if (message.pinned == false and group.admins.include? current_user) %>
-            <a class="bookmark_message text-secondary" message-id="<%= message.id %>" href="#"><span data-feather="bookmark"></span></a>
+            <a class="bookmark_message text-secondary" href="#"><span data-feather="bookmark"></span></a>
             <% end %>
         </span>
         <% if !message.attachment.nil? %>
