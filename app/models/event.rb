@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+    default_scope { order(start_time: :asc) }
+
     attr_accessor :repeated, :repeated_for
 
     belongs_to :group

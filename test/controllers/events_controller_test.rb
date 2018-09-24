@@ -87,7 +87,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     get new_group_event_path(group_uuid: @group.uuid)
     assert_response :success
 
-    assert_select "form[id='new_event']", count: 1
+    assert_select "form[id='event_form']", count: 1
   end
 
   test "should create a new event" do

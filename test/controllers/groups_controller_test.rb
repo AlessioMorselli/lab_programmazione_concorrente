@@ -114,7 +114,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "a[href=?]", groups_path, minimum: 1
     assert_select "a[href=?]", logout_path, minimum: 1
-    assert_select "input[id='send_message']", count: 1 # Form per inviare un messaggio
+    assert_select "input[id='message_text']", count: 1 # Form per inviare un messaggio
     # TODO: assert_select da aggiungere: inviare un messaggio
   end
 
@@ -312,6 +312,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   test "should not update a group with zero max members" do
     log_in_as @super_admin
 
+    @degrees = Degree.all
     max_members = @group.max_members
     patch group_path(uuid: @group.uuid), params: { group: { max_members: 0 } }
 

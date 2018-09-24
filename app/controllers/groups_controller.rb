@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
     before_action only: [:edit, :update, :destroy] do
         is_super_admin_in @group
     end
-    before_action
+    before_action :set_degrees, only: [:new, :create, :edit, :update]
 
     # GET groups_path
     def index
@@ -47,7 +47,6 @@ class GroupsController < ApplicationController
     # GET new_group_path
     def new
         # Visualizza la form per creare un nuovo gruppo
-        @degrees = Degree.all # Servono in fase di selezione del corso che studierà il gruppo studio
         @group = Group.new
         render "new"
     end
@@ -70,7 +69,6 @@ class GroupsController < ApplicationController
     # GET edit_group_path(uuid: group.uuid)
     def edit
         # Visualizza la form per modificare un nuovo gruppo
-        @degrees = Degree.all
         render "edit"
     end
 
@@ -105,5 +103,9 @@ class GroupsController < ApplicationController
 
     def group_params
         params.require(:group).permit(:name, :max_members, :private, :course_id, :description)
+    end
+
+    def set_degrees
+        @degrees = Degree.all
     end
 end
