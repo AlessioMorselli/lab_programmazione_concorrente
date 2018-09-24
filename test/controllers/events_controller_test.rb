@@ -41,6 +41,17 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     # Il gruppo dei pirati ha due eventi entro i 2 mesi
     assert_equal 2, assigns(:events).length
   end
+  
+  test "should index every group event from today" do
+    log_in_as @user
+
+    get group_events_path(group_uuid: @group.uuid),
+        params: {all: ""}
+    assert_response :success
+
+    # Il gruppo dei pirati ha tre eventi da oggi
+    assert_equal 3, assigns(:events).length
+  end
 
   test "should index every user's groups event of the next 7 days" do
     log_in_as @user
@@ -72,6 +83,17 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
     # Giorgio ha tre eventi entro i 2 mesi
     assert_equal 3, assigns(:events).length
+  end
+
+  test "should index every user's groups event from today" do
+    log_in_as @user
+
+    get user_events_path(@user),
+        params: {all: ""}
+    assert_response :success
+
+    # Giorgio ha quattro eventi da oggi
+    assert_equal 4, assigns(:events).length
   end
 
   test "should show a single event" do

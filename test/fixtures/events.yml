@@ -21,6 +21,16 @@ evento_pirati_2:
   created_at: <%= DateTime.now.to_s %>
   updated_at: <%= DateTime.now.to_s %>
 
+evento_pirati_3:
+  name: evento
+  start_time: <%= (st + 1.year).to_s %>
+  end_time: <%= (et + 1.year).to_s %>
+  place: Aula pirati
+  description: Evento pirati 3
+  group: pirati
+  created_at: <%= DateTime.now.to_s %>
+  updated_at: <%= DateTime.now.to_s %>
+
 evento_samurai_1:
   name: evento
   start_time: <%= st.to_s %>

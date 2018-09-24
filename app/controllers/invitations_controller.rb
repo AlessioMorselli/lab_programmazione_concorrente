@@ -1,6 +1,7 @@
 class InvitationsController < ApplicationController
     before_action :set_invitation, only: [:show, :destroy, :accept, :refuse]
     before_action :set_group, only: [:new, :create, :destroy, :accept]
+    before_action :set_user, only: [:create]
     before_action :logged_in_user
     before_action only: [:index] do
         correct_user params[:user_id]
@@ -13,7 +14,7 @@ class InvitationsController < ApplicationController
     def index
         # Visualizza tutte gli inviti in sospeso da parte di un utente
         @invitations = @user.invitations.not_expired
-        render file: "app/views/invitations/index"
+        render "index"
     end
 
     # GET group_invitation_path(group_uuid: group.uuid, url_string: invitation.url_string)
@@ -27,20 +28,22 @@ class InvitationsController < ApplicationController
     def new
         # Visualizza la form per invitare un utente ad un gruppo
         @invitation = Invitation.new
-        render file: "app/views/invitations/new"
+        render "new"
     end
 
     # POST group_invitations_path(group_uuid: group.uuid)
     def create
         # Salva l'invito nel db
         @invitation = Invitation.new(invitation_params)
+        @invitation.group = @group
+        @invitation.user = @user
         if @invitation.save
             @invitation.reload
             InvitationMailer.invite_to_group(@invitation) if @invitation.is_private?
             redirect_to group_path(uuid: @invitation.group.uuid)
         else
             flash.now[:error] = 'Le informazioni inserite non sono corrette'
-            render file: "app/views/invitations/new"
+            render "new"
         end
     end
 
@@ -98,7 +101,19 @@ class InvitationsController < ApplicationController
         end
     end
 
+    def set_user
+        @wrong = false
+        if params[:invitation][:user_email].blank?
+            @user = nil
+        elsif
+            unless @user = User.find_by_email(params[:invitation][:user_email])
+                flash.now[:error] = "L'utente indicato non esiste"
+                redirect_to new_group_invitation_path(group_uuid: @group.uuid)
+            end
+        end
+    end
+
     def invitation_params
-        params.require(:invitation).permit(:user_id, :group_id, :expiration_date)
+        params.require(:invitation).permit(:expiration_date)
     end
 end
