@@ -1,8 +1,3 @@
-                    <div class="msg_history">
-                      <% if @messages.pinned.to_a.size == 0 %>
-                        <p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
-                      <% end %>
-                      <% @messages.pinned.each do |pinned| %>
                         <div class="incoming_msg_flagged ml-1">
                           <div class="incoming_msg_img_flagged"> <b><%= pinned.user.name %></b>: </div>
                           <div class="received_msg_flagged">
@@ -21,15 +16,11 @@
                                 <span data-feather="x"></span>
                                 <% end %>
                               </a></span>
-                              <!--
-                              <a class="d-flex align-items-center" href="#">
-                                <span data-feather="paperclip" class="mr-2"></span> Locandina Paintball 2018
-                              </a>
-                              -->
+						        <% if !pinned.attachment.nil? %>
+						        <a class="d-flex align-items-center mt-2" href="<%= group_message_attachment_download_path(group_uuid: group.uuid, message_id: pinned.id, id: pinned.attachment.id) %>">
+						            <span data-feather="paperclip" class="mr-2"></span> <%= pinned.attachment.name %>
+						        </a>
+						        <% end %>
                             </div>
                           </div>
                         </div>
-                        <hr/>
-                      <% end %>
-
-                    </div>
