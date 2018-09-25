@@ -1,21 +1,31 @@
 class InvitationsController < ApplicationController
     before_action :set_invitation, only: [:show, :destroy, :accept, :refuse]
-    before_action :set_group, only: [:new, :create, :destroy, :accept]
+    # before_action :set_group, only: [:index], unless: -> {params[:group_uuid].nil?}
+    before_action :set_group, only: [:index, :new, :create, :destroy, :accept], unless: -> {params[:group_uuid].nil?}
     before_action :set_user, only: [:create]
     before_action :logged_in_user
     before_action only: [:index] do
-        correct_user params[:user_id]
+        correct_user params[:user_id] unless params[:user_id].nil?
     end
-    before_action only: [:new, :create, :destroy] do
+    before_action only: [:index, :new, :create, :destroy], unless: -> {params[:group_uuid].nil?} do
         is_admin_in @group
     end
 
     # GET user_invitations_path(user)
+    # GET group_invitations_path(group_uuid: group.uuid)
     def index
-        # Visualizza tutte gli inviti in sospeso da parte di un utente
-        @invitations = @user.invitations.not_expired
-        render "index"
+        if params[:user_id]
+            # Visualizza tutte gli inviti in sospeso da parte di un utente
+            @invitations = @user.invitations.not_expired
+            render "index"
+        elsif params[:group_uuid]
+            # Lista degli inviti di un gruppo
+            @invitations = @group.invitations
+            render "group_index"
+        end
     end
+
+    
 
     # GET group_invitation_path(group_uuid: group.uuid, url_string: invitation.url_string)
     def show
@@ -41,7 +51,7 @@ class InvitationsController < ApplicationController
             flash[:success] = 'Invito creato!'
             @invitation.reload
             InvitationMailer.invite_to_group(@invitation) if @invitation.is_private?
-            redirect_to group_path(uuid: @group.uuid)
+            redirect_to group_invitations_path(uuid: @group.uuid)
         else
             flash.now[:error] = 'Le informazioni inserite non sono corrette'
             render "new"
@@ -52,6 +62,8 @@ class InvitationsController < ApplicationController
     def destroy
         # Un amministratore del gruppo cancella l'invito (il link non sarà quindi più valido)
         @invitation.destroy
+        flash[:success] = "Invito cancellato"
+        redirect_to group_invitations_path(group_uuid: @group.uuid)
     end
 
     # POST group_accept_invitation_path(group_uuid: group.uuid, url_string: invitation.url_string)

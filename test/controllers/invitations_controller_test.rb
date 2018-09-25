@@ -244,6 +244,16 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
 ### TEST PER UN UTENTE AMMINISTRATORE ###
+  test "should index every group invitation" do
+    log_in_as @admin
+
+    get group_invitations_path(group_uuid: @group.uuid)
+    assert_response :success
+
+    # Nel gruppo ninja ci sono 2 inviti
+    assert_equal 2, assigns(:invitations).length
+  end
+
   test "should show a form to create a new invitation" do
     log_in_as @admin
 
@@ -401,6 +411,15 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
 ### TEST PER UN UTENTE MEMBRO NON AMMINISTRATORE ###
+  test "should index every group invitation if logged user is not admin" do
+    log_in_as @member
+
+    get group_invitations_path(group_uuid: @group.uuid)
+    
+    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_not flash.empty?
+  end
+
   test "should not show a form to create a new invitation if logged user is not admin" do
     log_in_as @member
 

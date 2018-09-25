@@ -1,0 +1,99 @@
+<% content_for :title do %>
+  <%= @group.name %> - Inviti
+<% end %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "dashboard" %>
+
+<% end %>
+
+<div class="bg-light h-100">
+  <%= render "nav" %>
+  
+  <div class="container-fluid main-container">
+    <div class="row h-100">
+      <div class="col-md-3 col-lg-3 col-xl-2 h-100 d-none d-md-block pl-2 py-2 pr-0">
+        <%= render "user_groups" %>
+      </div>
+      <div class="col-md-9 col-lg-9 col-xl-10 h-100 p-2">
+        <div class="container-fluid h-100 d-flex flex-column px-2 pb-2 pt-0">
+          <%= render partial: "flash_messages" %>
+
+          <div class="row flex-shrink-0 d-xl-none">
+
+            <div class="col-12">
+              <div class="btn-toolbar justify-content-center">
+                <%= render "user_groups_modal" %>
+              </div>
+            </div>
+          </div>
+          <div class="row flex-grow-1 mt-2">
+
+            <div class="col-12">
+              <div class="card card-chat shadow rounded-0 h-100">
+                <div class="card-header rounded-0 text-center font-075">Inviti</div>
+                <div class="card-body p-2">
+                  <div class="mb-2">
+                    <% if @invitations.count == 0 %>
+                      <p class="p-2 text-center">Al momento non sono presenti inviti.</p>
+                    <% end %>
+
+                    <% id_num = 0 %>
+                    <% @invitations.each do |invitation| %>
+                      <% id_num = id_num + 1 %>
+
+                    <% if id_num != 1 %>
+                      <div class="card shadow-sm mt-2 rounded-0">
+                    <% else %>
+                      <div class="card shadow-sm rounded-0">
+                    <% end %>                    
+                        <div class="card-body group-name-body d-flex justify-content-between">
+                          <% if invitation.user %>
+                            <a class="align-self-center text-secondary nounderline flex-grow-1 truncate-string-25" href="#" title="<%= invitation.user.name %>"><span data-feather="user" class="mr-1"></span>  <%= invitation.user.name %></a>
+                          <% else %>
+                            <a class="align-self-center text-secondary nounderline flex-grow-1 truncate-string-25" href="#" title="Invito pubblico"><span data-feather="mail" class="mr-1"></span>  Invito pubblico </a>
+                          <% end %>
+                          <% if invitation.is_expired? %>
+                            <a class="align-self-center text-danger nounderline flex-grow-1 truncate-string-25" href="#" title="Scaduto"><span data-feather="alert-triangle" class="mr-1"></span>Scaduto</a>
+                          <% end %>
+                          <a class="align-self-center mr-3 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>">
+                            <span data-feather="info"></span> Info
+                          </a>
+                          <%= link_to(group_invitation_path(invitation.group.uuid, invitation.url_string), class: "text-left text-danger nounderline", data: {method: :delete, confirm: 'Sicuro?'} ) do %>
+                            <span data-feather="x"></span> Cancella
+                          <% end %>
+                        </div>
+                      </div>
+
+                      <div class="modal fade" id="infoModal<%= id_num %>" tabindex="-1" role="dialog" aria-labelledby="infoModal<%= id_num %>" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content rounded-0">
+                            <div class="modal-header">
+                              <h5 title="Invito <%= invitation.user ? "a " + invitation.user.name : "pubblico" %>" class="modal-title truncate-string-100" id="exampleModalCenterTitle">Invito <%= invitation.user ? "a " + invitation.user.name : "pubblico"%></h5>
+                              <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <b>Scade il:</b> <%= invitation.expiration_date ? invitation.expiration_date.strftime("%d/%m/%Y - %H:%M").to_s : "Nessuna data di scadenza" %><br>
+                              <b>Link:</b> 
+                              <%= group_invitation_url(invitation.group.uuid, invitation.url_string) %>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <% end %>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

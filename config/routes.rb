@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :messages, except: [:show, :new, :edit] do
       resources :attachments, only: [:destroy]
     end
-    resources :invitations, only: [:show, :new, :create, :destroy], param: :url_string
+    resources :invitations, only: [:index, :show, :new, :create, :destroy], param: :url_string
   end
   resources :degrees_courses, only: [:index]
   resources :degrees, only: [:show] do
@@ -55,4 +55,6 @@ Rails.application.routes.draw do
       to: 'memberships#set_super_admin', as: 'group_set_super_admin'
   # put     '/groups/:group_uuid/memberships/:user_id/super_admin',
   #     to: 'memberships#set_super_admin', as: 'group_set_super_admin'
+
+  # Lista degli inviti di tutti 
 end
