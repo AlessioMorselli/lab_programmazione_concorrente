@@ -79,7 +79,7 @@
           }
         });
         $('input[id="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
-          $(this).val(picker.startDate.format('DD/MM hh:mm A'));
+          $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm:ss'));
         });
         $('input[id="datetimes"]').on('cancel.daterangepicker', function(ev, picker) {
           $(this).val('');

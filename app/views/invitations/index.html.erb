@@ -46,7 +46,9 @@
                       <div class="card shadow-sm rounded-0">
                     <% end %>                    
                         <div class="card-body group-name-body d-flex justify-content-between">
-                          <a class="align-self-center text-secondary nounderline flex-grow-1 truncate-string-25" href="#" title="<%= invitation.group.name %>"><span data-feather="mail" class="mr-1"></span>  <%= invitation.group.name %></a>
+                          <a class="align-self-center text-secondary nounderline flex-grow-1 truncate-string-25" href="#" title="<%= invitation.group.name %>"><span data-feather="mail" class="mr-1"></span> 
+                            <%= invitation.group.name %> 
+                          </a>
                           <a class="align-self-center mr-3 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>">
                             <span data-feather="info"></span>  Info
                           </a>
@@ -69,6 +71,7 @@
                               </button>
                             </div>
                             <div class="modal-body">
+                              <b>Scade il:</b> <%= invitation.expiration_date ? invitation.expiration_date.strftime("%d/%m/%Y - %H:%M").to_s : "Nessuna data di scadenza" %><br/>
                               <b>Nr. Membri:</b> <%= invitation.group.members.count %><br>
                               <b>Descrizione:</b> 
                               <%= invitation.group.description.blank? ? "Nessuna descrizione disponibile." : invitation.group.description %>
