@@ -38,9 +38,10 @@ class InvitationsController < ApplicationController
         @invitation.group = @group
         @invitation.user = @user
         if @invitation.save
+            flash[:success] = 'Invito creato!'
             @invitation.reload
             InvitationMailer.invite_to_group(@invitation) if @invitation.is_private?
-            redirect_to group_path(uuid: @invitation.group.uuid)
+            redirect_to group_path(uuid: @group.uuid)
         else
             flash.now[:error] = 'Le informazioni inserite non sono corrette'
             render "new"
@@ -102,18 +103,17 @@ class InvitationsController < ApplicationController
     end
 
     def set_user
-        @wrong = false
         if params[:invitation][:user].blank?
             @user = nil
         elsif
-            unless @user = User.find_by_email(params[:invitation][:user])
-                flash.now[:error] = "L'utente indicato non esiste"
+            unless @user = User.find_by_email_or_name(params[:invitation][:user])
+                flash[:error] = "L'utente indicato non esiste"
                 redirect_to new_group_invitation_path(group_uuid: @group.uuid)
             end
         end
     end
 
     def invitation_params
-        params.require(:invitation).permit(:expiration_date, :user)
+        params.require(:invitation).permit(:expiration_date)
     end
 end

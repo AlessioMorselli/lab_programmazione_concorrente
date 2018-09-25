@@ -155,7 +155,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   test "should not create a new private invitation if not logged in" do
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
-        user_email: @other_user.email,
+        user: @other_user.email,
         expiration_date: ""
         }
       }
@@ -168,7 +168,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   test "should not create a new public invitation if not logged in" do
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
-        user_email: "",
+        user: "",
         expiration_date: ""
         }
       }
@@ -256,7 +256,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count') do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
-        user_email: @other_user.email,
+        user: @other_user.email,
         expiration_date: ""
         }
       }
@@ -270,7 +270,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
-        user_email: @user.email,
+        user: @user.email,
         expiration_date: ""
         }
       }
@@ -284,7 +284,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
-        user_email: "wrong email",
+        user: "wrong email",
         expiration_date: ""
         }
       }
@@ -298,7 +298,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count') do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
-        user_email: "",
+        user: "",
         expiration_date: ""
         }
       }
@@ -315,7 +315,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
-        user_email: "",
+        user: "",
         expiration_date: ""
         }
       }
@@ -342,7 +342,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
-        user_email: "",
+        user: "",
         expiration_date: DateTime.now + 1.month
         }
       }
@@ -362,7 +362,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
-        user_email: @other_user.email,
+        user: @other_user.email,
         expiration_date: DateTime.now + 1.month
         }
       }
@@ -377,7 +377,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
-        user_email: "",
+        user: "",
         expiration_date: DateTime.now - 1.day
         }
       }
@@ -391,7 +391,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
-        user_email: @other_user.email,
+        user: @other_user.email,
         expiration_date: DateTime.now - 1.day
         }
       }
@@ -414,7 +414,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
-        user_email: @other_user.email,
+        user: @other_user.email,
         expiration_date: ""
         }
       }
@@ -429,7 +429,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Invitation.count', 0) do
       post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
-        user_email: "",
+        user: "",
         expiration_date: ""
         }
       }
