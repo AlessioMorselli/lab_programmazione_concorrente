@@ -1,39 +1,24 @@
 <% content_for :title do %>
-  Unife Study Groups - Registrati
+Unife Study Groups - Registrati
 <% end %>
 
 <% content_for :head do %>
-  <%= stylesheet_link_tag "landing_page" %>
-  <%= stylesheet_link_tag "login_page" %>
+<%= stylesheet_link_tag "landing_page" %>
+<%= stylesheet_link_tag "login_page" %>
 <% end %>
 
-<div class="text-center" style="width: 100%">
-  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <header class="masthead mb-auto nice-text-shadow">
-      <div class="inner">
-        <h3 class="masthead-brand"><%= link_to "Unife Study Groups", landing_path, class: "nounderline" %></h3>
-        <nav class="nav nav-masthead justify-content-center">
-          <%= link_to "Benvenuto", landing_path, class: "nav-link" %>
-          <%= link_to "Login", login_path, class: "nav-link" %>
-          <%= link_to "Registrati", signup_path, class: "nav-link active" %>
-        </nav>
-      </div>
-    </header>
+<% content_for :style do %>
+  #signup_link {color: #fff; border-bottom-color: #fff}
+<% end %>
 
-    <main role="main" class="inner cover">
+<main role="main" class="inner cover">
 	<div class="container h-100">
-	  <div class="row align-items-center align-self-center h-100 text-center flex-column">
+   <div class="row align-items-center align-self-center h-100 text-center flex-column">
 
-	    <%= render partial: "flash_messages" %>
-	    <%= render partial: "user/form", locals: {user: @user, url: signup_path, class_name: "form-signin"} %>
-	  </div>
-	</div>
-    </main>
+     <%= render partial: "flash_messages" %>
+     <%= render partial: "user/form", locals: {user: @user, url: signup_path, class_name: "form-signin"} %>
+   </div>
+ </div>
+</main>
 
-    <footer class="mastfoot mt-auto">
-    </footer>
-  </div>
-
-
-</div>  
 

@@ -1,4 +1,5 @@
 class InvitationsController < ApplicationController
+    layout "main"
     before_action :set_invitation, only: [:show, :destroy, :accept, :refuse]
     # before_action :set_group, only: [:index], unless: -> {params[:group_uuid].nil?}
     before_action :set_group, only: [:index, :new, :create, :destroy, :accept], unless: -> {params[:group_uuid].nil?}

@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+    layout "main"
     before_action :set_event, only: [:show, :edit, :update, :destroy]
     before_action :set_group, except: [:user_index]
     before_action :logged_in_user

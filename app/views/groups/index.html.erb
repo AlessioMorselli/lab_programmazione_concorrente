@@ -1,122 +1,102 @@
 <% content_for :title do %>
-  Unife Study Groups - Gruppi Pubblici
+Unife Study Groups - Gruppi Pubblici
 <% end %>
 
 <% content_for :head do %>
-  <%= stylesheet_link_tag "dashboard" %>
+<%= stylesheet_link_tag "dashboard" %>
 
-  <%= csrf_meta_tag %>
+<%= csrf_meta_tag %>
 <% end %>
 
-<div class="bg-light h-100">
-  <%= render "nav" %>
+<div class="row flex-shrink-0 d-md-none">
+  <div class="col-12">
+    <div class="btn-toolbar justify-content-center d-xl-none">
+      <%= render "user_groups_modal" %>
+    </div>
+  </div>
+</div>
+<div class="row flex-grow-1 mt-2">
 
-  <div class="container-fluid main-container">
+  <div class="col-12">
+    <div class="card card-chat shadow rounded-0 h-100">
+      <div class="card-header rounded-0 text-center font-075">Lista Gruppi Pubblici</div>
+      <div class="card-body p-2">
+        <div class="mb-2">
+          <% if @groups.is_public.size == 0 %>
+          <p class="pt-4 p-2 text-center">Non sono presenti gruppi pubblici suggeriti.</p>
+          <% end %>
 
-    <div class="row h-100">
+          <% id_num = 0 %>
+          <% @groups.is_public.each do |group| %>
+          <% id_num = id_num + 1 %>
 
-      <div class="col-md-3 col-lg-3 col-xl-2 h-100 d-none d-md-block pl-2 py-2 pr-0">
-        <%= render "user_groups" %>
-      </div>
-
-      <div class="col-12 col-md-9 col-lg-9 col-xl-10 h-100 p-2">
-        <div class="container-fluid h-100 d-flex flex-column px-2 pb-2 pt-0">
-          <%= render "flash_messages" %>
-          
-          <div class="row flex-shrink-0 d-md-none">
-            <div class="col-12">
-              <div class="btn-toolbar justify-content-center d-xl-none">
-                <%= render "user_groups_modal" %>
+          <% if id_num != 1 %>
+          <div class="card shadow-sm mt-2 rounded-0">
+            <% else %>
+            <div class="card shadow-sm rounded-0">
+              <% end %>
+              <div class="card-body group-name-body d-flex justify-content-between">
+                <a class="align-self-center text-secondary nounderline flex-grow-1 truncate-string-25" href="<%= group_path(group.uuid) %>" title="<%= group.name %>"><span data-feather="users" class="mr-1"></span>  <%= group.name %></a>
+                <a class="align-self-center mx-3 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>">
+                  <span data-feather="info"></span>  Info
+                </a>
+                <% if group.members.exists?(current_user.id) %>
+                <% if group.super_admin.eql? current_user %>
+                <a class="text-left text-success nounderline" href="#"><span data-feather="check-circle"></span> Iscritto</a>
+                <% else %>
+                <a class="text-left text-success nounderline subscribed" href="#" id="<%= group.id %>"><span data-feather="check-circle"></span> Iscritto</a>
+                <%= link_to "<span data-feather='x-circle'></span> Disiscriviti".html_safe, group_membership_path(group.uuid, current_user.id), method: 'delete', class: "text-left text-danger nounderline d-none unsubscribe", id: group.id %>
+                <% end %>
+                <% else %>
+                <%= link_to '<span data-feather="circle"></span> Iscriviti'.html_safe, group_memberships_path(group.uuid), method: :post, data: {confirm: "Confermi la tua partecipazione al gruppo '" + group.name + "'?"}, class: "text-left nounderline "%>
+                <% end %>
               </div>
             </div>
-          </div>
-          <div class="row flex-grow-1 mt-2">
 
-            <div class="col-12">
-              <div class="card card-chat shadow rounded-0 h-100">
-                <div class="card-header rounded-0 text-center font-075">Lista Gruppi Pubblici</div>
-                <div class="card-body p-2">
-                  <div class="mb-2">
-                    <% if @groups.is_public.size == 0 %>
-                      <p class="pt-4 p-2 text-center">Non sono presenti gruppi pubblici suggeriti.</p>
-                    <% end %>
-
-                    <% id_num = 0 %>
-                    <% @groups.is_public.each do |group| %>
-                    <% id_num = id_num + 1 %>
-
-                    <% if id_num != 1 %>
-                    <div class="card shadow-sm mt-2 rounded-0">
-                      <% else %>
-                      <div class="card shadow-sm rounded-0">
-                        <% end %>
-                        <div class="card-body group-name-body d-flex justify-content-between">
-                          <a class="align-self-center text-secondary nounderline flex-grow-1 truncate-string-25" href="<%= group_path(group.uuid) %>" title="<%= group.name %>"><span data-feather="users" class="mr-1"></span>  <%= group.name %></a>
-                          <a class="align-self-center mx-3 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>">
-                            <span data-feather="info"></span>  Info
-                          </a>
-                          <% if group.members.exists?(current_user.id) %>
-                          <% if group.super_admin.eql? current_user %>
-                          <a class="text-left text-success nounderline" href="#"><span data-feather="check-circle"></span> Iscritto</a>
-                          <% else %>
-                            <a class="text-left text-success nounderline subscribed" href="#" id="<%= group.id %>"><span data-feather="check-circle"></span> Iscritto</a>
-                            <%= link_to "<span data-feather='x-circle'></span> Disiscriviti".html_safe, group_membership_path(group.uuid, current_user.id), method: 'delete', class: "text-left text-danger nounderline d-none unsubscribe", id: group.id %>
-                          <% end %>
-                          <% else %>
-                          <%= link_to '<span data-feather="circle"></span> Iscriviti'.html_safe, group_memberships_path(group.uuid), method: :post, data: {confirm: "Confermi la tua partecipazione al gruppo '" + group.name + "'?"}, class: "text-left nounderline "%>
-                          <% end %>
-                        </div>
-                      </div>
-
-                      <div class="modal fade" id="infoModal<%= id_num %>" tabindex="-1" role="dialog" aria-labelledby="infoModal<%= id_num %>" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                          <div class="modal-content rounded-0">
-                            <div class="modal-header">
-                              <h5 class="modal-title truncate-string-100" id="exampleModalCenterTitle"><%= group.name %></h5>
-                              <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <b>Nr. Membri:</b> <%= group.members.count %><br>
-                              <b>Descrizione:</b> 
-                              <%= group.description.blank? ? "Nessuna descrizione disponibile." : group.description %>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <% end %>
-
-                    </div>
+            <div class="modal fade" id="infoModal<%= id_num %>" tabindex="-1" role="dialog" aria-labelledby="infoModal<%= id_num %>" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content rounded-0">
+                  <div class="modal-header">
+                    <h5 class="modal-title truncate-string-100" id="exampleModalCenterTitle"><%= group.name %></h5>
+                    <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
-
+                  <div class="modal-body">
+                    <b>Nr. Membri:</b> <%= group.members.count %><br>
+                    <b>Descrizione:</b> 
+                    <%= group.description.blank? ? "Nessuna descrizione disponibile." : group.description %>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
                 </div>
               </div>
-
             </div>
+            <% end %>
+
           </div>
         </div>
+
       </div>
     </div>
 
+  </div>
 </div>
 
 <% content_for :scripts do %>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('.subscribed').mouseenter(function() {
-        var id = $(this).attr('id');
-        $('.subscribed[id=' + id + ']').addClass('d-none');
-        $('.unsubscribe[id=' + id + ']').removeClass('d-none');
-      });
-      $('.unsubscribe').mouseleave(function() {
-        var id = $(this).attr('id');
-        $('.subscribed[id=' + id + ']').removeClass('d-none');
-        $('.unsubscribe[id=' + id + ']').addClass('d-none');
-      });
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.subscribed').mouseenter(function() {
+      var id = $(this).attr('id');
+      $('.subscribed[id=' + id + ']').addClass('d-none');
+      $('.unsubscribe[id=' + id + ']').removeClass('d-none');
     });
-  </script>
+    $('.unsubscribe').mouseleave(function() {
+      var id = $(this).attr('id');
+      $('.subscribed[id=' + id + ']').removeClass('d-none');
+      $('.unsubscribe[id=' + id + ']').addClass('d-none');
+    });
+  });
+</script>
 <% end %>

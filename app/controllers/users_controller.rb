@@ -41,7 +41,8 @@ class UsersController < ApplicationController
     # GET edit_user_path(user)
     def edit
         # Visualizza la form per modificare le informazioni di un utente
-        render file: "app/views/user/edit"
+
+        render file: "app/views/user/edit", layout: "main"
     end
 
     # PUT/PATCH user_path(user)

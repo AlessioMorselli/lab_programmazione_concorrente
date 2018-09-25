@@ -15,10 +15,30 @@
 
   <%= yield :head %>
 
+  <style><%= yield :style %></style>
+
 </head>
 <body>
 
-    <%= yield %>
+    <div class="text-center" style="width: 100%">
+      <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto nice-text-shadow">
+          <div class="inner">
+            <h3 class="masthead-brand"><%= link_to "Unife Study Groups", landing_path, class: "nounderline" %></h3>
+            <nav class="nav nav-masthead justify-content-center">
+              <%= link_to "Benvenuto", landing_path, class: "nav-link", id: "landing_link" %>
+              <%= link_to "Login", login_path, class: "nav-link", id: "login_link" %>
+              <%= link_to "Registrati", signup_path, class: "nav-link", id: "signup_link" %>
+            </nav>
+          </div>
+        </header>
+
+        <%= yield %>
+
+        <footer class="mastfoot mt-auto">
+        </footer>
+      </div>
+    </div>  
 
     <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"

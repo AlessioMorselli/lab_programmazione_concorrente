@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+    layout "main"
     before_action :set_group, only: [:show, :edit, :update, :destroy]
     before_action :logged_in_user
     before_action only: [:show] do

@@ -9,370 +9,355 @@
 <% end %>
 
 
-<div class="bg-light h-100">
-  <%= render "nav" %>
-  
-  <div class="container-fluid main-container">
-    <div class="row h-100">
-      <div class="col-md-3 col-lg-3 col-xl-2 h-100 d-none d-md-block pl-2 py-2 pr-0">
-        <%= render "user_groups" %>
-      </div>
-      <div class="col-md-9 col-lg-9 col-xl-10 h-100 p-2">
-        <div class="container-fluid h-100 d-flex flex-column px-2 pb-2 pt-0">
-          <%= render "flash_messages" %>
-          <div class="row flex-shrink-0 d-md-none">
-            <div class="col-12">
-              <h3 class="text-center truncate-string-100" title="<%= @group.name %>">
-                <%= @group.name %>
-              </h3>
+<div class="row flex-shrink-0 d-md-none">
+  <div class="col-12">
+    <h3 class="text-center truncate-string-100" title="<%= @group.name %>">
+      <%= @group.name %>
+    </h3>
+  </div>
+</div>
+<div class="row flex-shrink-0 d-xl-none">
+  <div class="col-12">
+    <div class="btn-toolbar justify-content-center">
+      <%= render "user_groups_modal" %>
+
+      <button class="btn btn-sm btn-outline-secondary dropdown-toggle shadow-sm" data-target="#boardModal" data-toggle="modal" style="width: 110px; margin-left: -1px; margin-top: -1px">
+        <span data-feather="bookmark"></span>
+        Bacheca
+      </button>
+
+      <div class="modal fade" tabindex="-1" role="dialog" id="boardModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content rounded-0">
+            <div class="modal-header">
+              <h5 class="modal-title">Bacheca</h5>
+              <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-          </div>
-          <div class="row flex-shrink-0 d-xl-none">
-
-            <div class="col-12">
-              <div class="btn-toolbar justify-content-center">
-                <%= render "user_groups_modal" %>
-
-                <button class="btn btn-sm btn-outline-secondary dropdown-toggle shadow-sm" data-target="#boardModal" data-toggle="modal" style="width: 110px; margin-left: -1px; margin-top: -1px">
-                  <span data-feather="bookmark"></span>
-                  Bacheca
-                </button>
-
-                <div class="modal fade" tabindex="-1" role="dialog" id="boardModal">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content rounded-0">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Bacheca</h5>
-                        <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body modal-body-scroll">
-                        <div class="msg_history">
-                          <% if @messages.pinned.to_a.size == 0 %>
-                          <p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
-                          <% end %>
-                          <% @messages.pinned.each do |pinned| %>
-                          <%= render partial: "messages/pinned", locals: {group: @group, pinned: pinned} %>
-                          <hr/>
-                          <% end %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <button class="btn btn-sm btn-outline-secondary dropdown-toggle shadow-sm" data-target="#calendarModal" data-toggle="modal" style="width: 110px; margin-left: -1px; margin-top: -1px">
-                  <span data-feather="calendar"></span>
-                  Calendario
-                </button>
-
-                <div class="modal fade" tabindex="-1" role="dialog" id="calendarModal">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content rounded-0">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Calendario Eventi</h5>
-                        <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="container px-1">
-                          <div class="calendar-modal-scroll">
-                            <div class="events_container">
-                              <% if @events.to_a.size == 0 %>
-                              <p class="pt-4 p-2 text-center">Al momento non sono presenti eventi per questa settimana.</p>
-                              <% end %>
-
-                              <%= render partial: "events/index", locals: {events: @events, group: @group} %>
-                            </div>
-                          </div>
-
-                          <% if @group.events.to_a.length > 0 or @group.admins.include? current_user %>
-                          
-                          <h6 class="sidebar-heading d-flex justify-content-between align-items-right px-3 mt-4 mb-1 text-muted">
-                            <div class="row">
-                              <div class="col">
-                                <% if @group.events.size > 0 %>
-                                <a class="d-flex align-items-center text-muted nounderline mb-2 show_all_events" href="#">
-                                  <span data-feather="server" class="mr-2"></span> Mostra tutti gli Eventi 
-                                </a>
-                                <% end %>
-                                <% if (@group.admins.include? current_user) %>
-                                <%= link_to "<span data-feather='plus-circle' class='mr-2'></span> Crea Nuovo Evento ".html_safe, new_group_event_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline" %>
-                                <% end %>
-                              </div>
-                            </div>
-                          </h6>
-
-                          <% end %>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <%= render 'group_members_modal' %>
-              </div>
-            </div>
-          </div>
-          <div class="row flex-grow-1 mt-2">
-            <div class="col-12 col-xl-3 d-none d-xl-block pr-0">
-              <div class="card card-chat shadow rounded-0 h-100">
-                <div class="card-header rounded-0 text-center font-075">Bacheca</div>
-                <div class="card-body p-3">
-                  <div class="mb-2">
-                    <div class="msg_history">
-                      <% if @messages.pinned.to_a.size == 0 %>
-                      <p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
-                      <% end %>
-                      <% @messages.pinned.each do |pinned| %>
-                      <%= render partial: "messages/pinned", locals: {group: @group, pinned: pinned} %>
-                      <hr/>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-12 col-xl-6">
-              <div class="card card-chat shadow rounded-0 h-100">
-                <div class="card-header rounded-0 text-center font-075">Chat</div>
-                <div class="card-body p-3">
-                  <div id="messages" class="mb-2">
-
-                    <% if @messages.to_a.size == 0 %>
-                    <p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
-                    <% end %>
-
-                    <% @messages.reverse_order.each do |message| %>
-                    <%= render partial: "messages/show", locals: {message: message, group: @group}%>
-                    <% end %>
-
-                  </div>
-                </div>
-                <div class="type_msg">
-                  <div class="container-fluid">
-                    <%= form_for(:message, url: group_messages_path(@group.uuid), remote: true, html: {id: "message_form"}) do |f| %>
-                    <div class="row">
-                      <div class="col-8 px-1">
-                        <div class="input_msg_write">
-                          <%= f.text_field :text, class: 'write_msg', placeholder: "Scrivi un messaggio...", id: 'message_text' %>
-                        </div>
-                      </div>
-                      <%= f.file_field :attachment, id: "attachment", style: "display: none" %>
-                      <div class="col-4 px-1 text-right my-auto">
-                        <input type="file" id="attachment" style="display: none">
-                        <button id="attachment_button" class="msg_btn shadow-sm" type="button"><span data-feather="paperclip"></span></button>
-                        <button id="send_button" class="msg_btn shadow-sm" type="submit"><span data-feather="send"></span></button>
-                      </div>
-                    </div>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-12 col-xl-3 d-none d-xl-block pl-0">
-              <div class="card card-chat shadow rounded-0 h-100">
-                <div class="card-header rounded-0 text-center font-075">Calendario Eventi</div>
-                <div class="card-body pt-0 pb-2 px-0" style="overflow-x: hidden;">
-                  <div class="mb-2">
-
-                    <div class="container px-2 events_container">
-                      <% if @events.to_a.size == 0 %>
-                      <p class="pt-4 p-2 text-center">Al momento non sono presenti eventi per questa settimana.</p>
-                      <% end %>
-
-                      <%= render partial: "events/index", locals: {events: @events, group: @group} %>
-                    </div>
-
-                    <% if @group.events.to_a.length > 0 or @group.admins.include? current_user %>
-                    
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-right p-3 mt-2 mb-1 text-muted add-group-sticky mx-0">
-                      <div class="row">
-                        <div class="col">
-                          <% if @group.events.size > 0 %>
-                          <a class="d-flex align-items-center text-muted nounderline mb-2 show_all_events" href="#">
-                            <span data-feather="server" class="mr-2"></span> Mostra tutti gli Eventi 
-                          </a>
-                          <% end %>
-                          <% if (@group.admins.include? current_user) %>
-                          <%= link_to "<span data-feather='plus-circle' class='mr-2'></span> Crea Nuovo Evento ".html_safe, new_group_event_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline" %>
-                          <% end %>
-                        </div>
-                      </div>
-                    </h6>
-
-                    <% end %>
-                  </div>
-                </div>
+            <div class="modal-body modal-body-scroll">
+              <div class="msg_history">
+                <% if @messages.pinned.to_a.size == 0 %>
+                <p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
+                <% end %>
+                <% @messages.pinned.each do |pinned| %>
+                <%= render partial: "messages/pinned", locals: {group: @group, pinned: pinned} %>
+                <hr/>
+                <% end %>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
+      <button class="btn btn-sm btn-outline-secondary dropdown-toggle shadow-sm" data-target="#calendarModal" data-toggle="modal" style="width: 110px; margin-left: -1px; margin-top: -1px">
+        <span data-feather="calendar"></span>
+        Calendario
+      </button>
+
+      <div class="modal fade" tabindex="-1" role="dialog" id="calendarModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content rounded-0">
+            <div class="modal-header">
+              <h5 class="modal-title">Calendario Eventi</h5>
+              <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container px-1">
+                <div class="calendar-modal-scroll">
+                  <div class="events_container">
+                    <% if @events.to_a.size == 0 %>
+                    <p class="pt-4 p-2 text-center">Al momento non sono presenti eventi per questa settimana.</p>
+                    <% end %>
+
+                    <%= render partial: "events/index", locals: {events: @events, group: @group} %>
+                  </div>
+                </div>
+
+                <% if @group.events.to_a.length > 0 or @group.admins.include? current_user %>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-right px-3 mt-4 mb-1 text-muted">
+                  <div class="row">
+                    <div class="col">
+                      <% if @group.events.size > 0 %>
+                      <a class="d-flex align-items-center text-muted nounderline mb-2 show_all_events" href="#">
+                        <span data-feather="server" class="mr-2"></span> Mostra tutti gli Eventi 
+                      </a>
+                      <% end %>
+                      <% if (@group.admins.include? current_user) %>
+                      <%= link_to "<span data-feather='plus-circle' class='mr-2'></span> Crea Nuovo Evento ".html_safe, new_group_event_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline" %>
+                      <% end %>
+                    </div>
+                  </div>
+                </h6>
+
+                <% end %>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%= render 'group_members_modal' %>
+    </div>
+  </div>
+</div>
+
+<div class="row flex-grow-1 mt-2">
+
+  <div class="col-12 col-xl-3 d-none d-xl-block pr-0">
+    <div class="card card-chat shadow rounded-0 h-100">
+      <div class="card-header rounded-0 text-center font-075">Bacheca</div>
+      <div class="card-body p-3">
+        <div class="mb-2">
+          <div class="msg_history">
+            <% if @messages.pinned.to_a.size == 0 %>
+            <p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
+            <% end %>
+            <% @messages.pinned.each do |pinned| %>
+            <%= render partial: "messages/pinned", locals: {group: @group, pinned: pinned} %>
+            <hr/>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <% content_for :scripts do %>
+  <div class="col-12 col-xl-6">
+    <div class="card card-chat shadow rounded-0 h-100">
+      <div class="card-header rounded-0 text-center font-075">Chat</div>
+      <div class="card-body p-3">
+        <div id="messages" class="mb-2">
 
-  <script type="text/javascript">
-    $(document).ready(function (e){
+          <% if @messages.to_a.size == 0 %>
+          <p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
+          <% end %>
 
-      var last_message = $('#messages .msg:last-child');
+          <% @messages.reverse_order.each do |message| %>
+          <%= render partial: "messages/show", locals: {message: message, group: @group}%>
+          <% end %>
 
-      if (last_message.length){
-        last_message.get(0).scrollIntoView();
-      }
-    });
-  </script>
+        </div>
+      </div>
+      <div class="type_msg">
+        <div class="container-fluid">
+          <%= form_for(:message, url: group_messages_path(@group.uuid), remote: true, html: {id: "message_form"}) do |f| %>
+          <div class="row">
+            <div class="col-8 px-1">
+              <div class="input_msg_write">
+                <%= f.text_field :text, class: 'write_msg', placeholder: "Scrivi un messaggio...", id: 'message_text' %>
+              </div>
+            </div>
+            <%= f.file_field :attachment, id: "attachment", style: "display: none" %>
+            <div class="col-4 px-1 text-right my-auto">
+              <input type="file" id="attachment" style="display: none">
+              <button id="attachment_button" class="msg_btn shadow-sm" type="button"><span data-feather="paperclip"></span></button>
+              <button id="send_button" class="msg_btn shadow-sm" type="submit"><span data-feather="send"></span></button>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <script type="text/javascript">
-    $(document).ready(function (e){
-      $('#messages').on("click",'.delete_message', function (){
-        var message_id = $(this).attr('message-id');
+  <div class="col-12 col-xl-3 d-none d-xl-block pl-0">
+    <div class="card card-chat shadow rounded-0 h-100">
+      <div class="card-header rounded-0 text-center font-075">Calendario Eventi</div>
+      <div class="card-body pt-0 pb-2 px-0" style="overflow-x: hidden;">
+        <div class="mb-2">
 
-        $.ajax({
-          url: "<%= group_messages_path(group_uuid: @group.uuid) %>" + '/' + message_id,
-          type: "DELETE",
-          headers: {
-            'X-Transaction': 'POST Example',
-            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-          },
-          success: function (data, text_status, jqXHR){
-            $('#messages .msg[message-id=' + message_id + ']').remove();
-          },
-          error: function (jqXHR, text_status, error_thrown){
+          <div class="container px-2 events_container">
+            <% if @events.to_a.size == 0 %>
+            <p class="pt-4 p-2 text-center">Al momento non sono presenti eventi per questa settimana.</p>
+            <% end %>
 
-          }
-        });
-      });
-    });
-  </script>
+            <%= render partial: "events/index", locals: {events: @events, group: @group} %>
+          </div>
 
-  <script type="text/javascript">
-    $(document).ready(function (e){
-      $('#messages').on('click', '.edit_message', function (){
-        var message_id = $(this).attr('message-id');
-        $(this).addClass('d-none');
-        $('.save_message[message-id="' + message_id + '"]').removeClass('d-none');
-        var message_text = $('#message_body[message-id="' + message_id + '"] span').text();
-        $('#message_body[message-id="' + message_id + '"] span').replaceWith(function (){
-          return '<input type="text" class="text-white" style="width: 100%; background-color: transparent; border: none">';
-        });
-        var message_body_input = $('#message_body[message-id="' + message_id + '"] input' );
-        message_body_input.val(message_text);
-        message_body_input.select();
-      });
-    });
-  </script>
+          <% if @group.events.to_a.length > 0 or @group.admins.include? current_user %>
 
-  <script type="text/javascript">
-    $(document).ready(function (e){
-      $('#messages').on('click', '.save_message', function (){
-        var message_id = $(this).attr('message-id');
-        $(this).addClass('d-none');
-        $('.edit_message[message-id="' + message_id + '"]').removeClass('d-none');
-        var message_text = $('#message_body[message-id="' + message_id + '"] input').val();
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-right p-3 mt-2 mb-1 text-muted add-group-sticky mx-0">
+            <div class="row">
+              <div class="col">
+                <% if @group.events.size > 0 %>
+                <a class="d-flex align-items-center text-muted nounderline mb-2 show_all_events" href="#">
+                  <span data-feather="server" class="mr-2"></span> Mostra tutti gli Eventi 
+                </a>
+                <% end %>
+                <% if (@group.admins.include? current_user) %>
+                <%= link_to "<span data-feather='plus-circle' class='mr-2'></span> Crea Nuovo Evento ".html_safe, new_group_event_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline" %>
+                <% end %>
+              </div>
+            </div>
+          </h6>
 
-        $.ajax({
-          url: "<%= group_messages_path(group_uuid: @group.uuid) %>" + '/' + message_id,
-          type: "PATCH",
-          data: {message: {text: message_text}},
-          headers: {
-            'X-Transaction': 'POST Example',
-            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-          },
-          success: function (data, text_status, jqXHR){
-            $('#message_body[message-id="' + message_id + '"] input').addClass('d-none');
-            $('#message_body[message-id="' + message_id + '"] input').replaceWith(function (){
-              return '<span>' + message_text + '</span>';
-            });
-          },
-          error: function (jqXHR, text_status, error_thrown){
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-          }
-        });
-      });
-    });
-  </script>
+<% content_for :scripts do %>
 
-  <script type="text/javascript">
-    $(document).ready(function (e){
-      $('#messages').on('click', '.bookmark_message', function (){
-        var message_id = $(this).attr('message-id');
+<script type="text/javascript">
+  $(document).ready(function (e){
 
-        $.ajax({
-          url: "<%= group_messages_path(group_uuid: @group.uuid) %>" + '/' + message_id + '/pin',
-          type: "PATCH",
-          data: {message: {pinned: true}},
-          headers: {
-            'X-Transaction': 'POST Example',
-            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-          },
-          success: function (data, text_status, jqXHR){
-            //placeholder
-            location.reload();
-          },
-          error: function (jqXHR, text_status, error_thrown){
+    var last_message = $('#messages .msg:last-child');
 
-          }
-        });
-      });
-    });
-  </script>
-
-  <script type="text/javascript">
-    $(document).ready(function (e){
-      $('.unbookmark_message').on('click', function (){
-        var message_id = $(this).attr('message-id');
-
-        $.ajax({
-          url: "<%= group_messages_path(group_uuid: @group.uuid) %>" + '/' + message_id + '/pin',
-          type: "PATCH",
-          data: {message: {pinned: false}},
-          headers: {
-            'X-Transaction': 'POST Example',
-            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-          },
-          success: function (data, text_status, jqXHR){
-            //placeholder
-            location.reload();
-          },
-          error: function (jqXHR, text_status, error_thrown){
-
-          }
-        });
-      });
-    });
-  </script>
-
-  <script type="text/javascript">
-   $(document).ready(function (e){
-    $('#attachment_button').click(function() {
-      $('#attachment').click();
-    });
-    $('#attachment').change(function (){
-      var file = $(this)[0].files[0];
-      var att = $('.input_msg_write').find('a');
-      if(att.length !== 0){
-        att.remove();
-      }
-      $('.input_msg_write').append('<div class="d-flex align-items-center mb-2" id="attachment_section"><a href="#"><span data-feather="paperclip" class="mr-2"></span> ' + file.name + '</a><a id="clear_attachment" href="#"><span data-feather="x" class="ml-2" ></span></a></div>');
-      feather.replace();
-      $('#clear_attachment').click(function() {
-        console.log('clicked');
-        $('#attachment').val('');
-        $('#attachment_section').remove();
-      });
-    });
-
-
+    if (last_message.length){
+      last_message.get(0).scrollIntoView();
+    }
   });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function (e){
+    $('#messages').on("click",'.delete_message', function (){
+      var message_id = $(this).attr('message-id');
+
+      $.ajax({
+        url: "<%= group_messages_path(group_uuid: @group.uuid) %>" + '/' + message_id,
+        type: "DELETE",
+        headers: {
+          'X-Transaction': 'POST Example',
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (data, text_status, jqXHR){
+          $('#messages .msg[message-id=' + message_id + ']').remove();
+        },
+        error: function (jqXHR, text_status, error_thrown){
+
+        }
+      });
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function (e){
+    $('#messages').on('click', '.edit_message', function (){
+      var message_id = $(this).attr('message-id');
+      $(this).addClass('d-none');
+      $('.save_message[message-id="' + message_id + '"]').removeClass('d-none');
+      var message_text = $('#message_body[message-id="' + message_id + '"] span').text();
+      $('#message_body[message-id="' + message_id + '"] span').replaceWith(function (){
+        return '<input type="text" class="text-white" style="width: 100%; background-color: transparent; border: none">';
+      });
+      var message_body_input = $('#message_body[message-id="' + message_id + '"] input' );
+      message_body_input.val(message_text);
+      message_body_input.select();
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function (e){
+    $('#messages').on('click', '.save_message', function (){
+      var message_id = $(this).attr('message-id');
+      $(this).addClass('d-none');
+      $('.edit_message[message-id="' + message_id + '"]').removeClass('d-none');
+      var message_text = $('#message_body[message-id="' + message_id + '"] input').val();
+
+      $.ajax({
+        url: "<%= group_messages_path(group_uuid: @group.uuid) %>" + '/' + message_id,
+        type: "PATCH",
+        data: {message: {text: message_text}},
+        headers: {
+          'X-Transaction': 'POST Example',
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (data, text_status, jqXHR){
+          $('#message_body[message-id="' + message_id + '"] input').addClass('d-none');
+          $('#message_body[message-id="' + message_id + '"] input').replaceWith(function (){
+            return '<span>' + message_text + '</span>';
+          });
+        },
+        error: function (jqXHR, text_status, error_thrown){
+
+        }
+      });
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function (e){
+    $('#messages').on('click', '.bookmark_message', function (){
+      var message_id = $(this).attr('message-id');
+
+      $.ajax({
+        url: "<%= group_messages_path(group_uuid: @group.uuid) %>" + '/' + message_id + '/pin',
+        type: "PATCH",
+        data: {message: {pinned: true}},
+        headers: {
+          'X-Transaction': 'POST Example',
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (data, text_status, jqXHR){
+            //placeholder
+            location.reload();
+          },
+          error: function (jqXHR, text_status, error_thrown){
+
+          }
+        });
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function (e){
+    $('.unbookmark_message').on('click', function (){
+      var message_id = $(this).attr('message-id');
+
+      $.ajax({
+        url: "<%= group_messages_path(group_uuid: @group.uuid) %>" + '/' + message_id + '/pin',
+        type: "PATCH",
+        data: {message: {pinned: false}},
+        headers: {
+          'X-Transaction': 'POST Example',
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (data, text_status, jqXHR){
+            //placeholder
+            location.reload();
+          },
+          error: function (jqXHR, text_status, error_thrown){
+
+          }
+        });
+    });
+  });
+</script>
+
+<script type="text/javascript">
+ $(document).ready(function (e){
+  $('#attachment_button').click(function() {
+    $('#attachment').click();
+  });
+  $('#attachment').change(function (){
+    var file = $(this)[0].files[0];
+    var att = $('.input_msg_write').find('a');
+    if(att.length !== 0){
+      att.remove();
+    }
+    $('.input_msg_write').append('<div class="d-flex align-items-center mb-2" id="attachment_section"><a href="#"><span data-feather="paperclip" class="mr-2"></span> ' + file.name + '</a><a id="clear_attachment" href="#"><span data-feather="x" class="ml-2" ></span></a></div>');
+    feather.replace();
+    $('#clear_attachment').click(function() {
+      console.log('clicked');
+      $('#attachment').val('');
+      $('#attachment_section').remove();
+    });
+  });
+
+
+});
 </script>
 
 <script type="text/javascript">
@@ -410,29 +395,29 @@
   });
 </script>
 
-  <script type="text/javascript">
-    $(document).ready(function (e) {
-      $('.show_all_events').click(function() {
-        $.ajax({
-          url: "<%= group_events_path(group_uuid: @group.uuid) %>",
-          type: "GET",
-          data: {all: true},
-          headers: {
-            'X-Transaction': 'POST Example',
-            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-          },
-          success: function (data, text_status, jqXHR){
-            $('.events_container').empty();
-            $('.events_container').append(data);
-            feather.replace();
-          },
-          error: function (jqXHR, text_status, error_thrown){
+<script type="text/javascript">
+  $(document).ready(function (e) {
+    $('.show_all_events').click(function() {
+      $.ajax({
+        url: "<%= group_events_path(group_uuid: @group.uuid) %>",
+        type: "GET",
+        data: {all: true},
+        headers: {
+          'X-Transaction': 'POST Example',
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (data, text_status, jqXHR){
+          $('.events_container').empty();
+          $('.events_container').append(data);
+          feather.replace();
+        },
+        error: function (jqXHR, text_status, error_thrown){
 
-          }
-        });
+        }
       });
     });
-  </script>
+  });
+</script>
 
 
 <% end %>
