@@ -31,14 +31,14 @@
     <div class="card card-chat shadow rounded-0 h-100">
       <div class="card-header rounded-0 text-center font-075">Nuovo invito</div>
       <div class="card-body p-2 d-flex justify-content-center">
-        <div class="mb-2">
+        <div class="mb-2" style="width: 100%">
 
-          <%= form_for(@invitation, url: group_invitations_path, html: {class: "form-new-event"}) do |f| %>
+          <%= form_for(@invitation, url: group_invitations_path, html: {class: "form-new-invitation"}) do |f| %>
           <h1 class="h3 mb-3 font-weight-normal text-white">Nuovo invito</h1>
-          <%= f.text_field :user, class: 'form-control rounded-0', placeholder: "Indirizzo email o nome dell'utente (lascia questo campo vuoto se vuoi creare un invito pubblico)", title: @invitation.errors[:user].join(', ') %>
-          <%= f.text_field :expiration_date, id: "datetimes", class: "form-control mr-1 rounded-0 shadow-sm", placeholder: "Data di scadenza (lascia questo campo vuoto se non vuoi mettere una scadenza)", title: @invitation.errors[:expiration_date].join(', ')%>
+          <%= f.text_field :user, class: 'form-control rounded-0', placeholder: "Indirizzo email o nome dell'utente (lascia questo campo vuoto se vuoi creare un invito pubblico)", title: @invitation.errors[:user].join(', '), value: "" %>
+          <%= f.text_field :expiration_date, id: "datetimes", class: "form-control mr-1 rounded-0 shadow-sm", placeholder: "Data di scadenza (lascia questo campo vuoto se non vuoi mettere una scadenza)", title: @invitation.errors[:expiration_date].join(', '), value: "" %>
 
-          <%= f.submit "Crea invito", class: 'btn btn-lg btn-secondary btn-block rounded-0 shadow' %>
+          <%= f.submit "Crea invito", class: 'btn btn-lg btn-secondary btn-block rounded-0 shadow mt-2' %>
           <% end %>
         </div>
       </div>

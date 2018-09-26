@@ -305,7 +305,14 @@ Custom media queries
 }
 
 .form-new-event {
-    width: 100%;
+  width: 100%;
+  max-width: 800px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-new-invitation{
+  width: 100%;
   max-width: 800px;
   padding: 15px;
   margin: auto;
