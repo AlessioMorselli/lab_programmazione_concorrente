@@ -2,6 +2,8 @@ require 'test_helper'
 
 class InvitationsControllerTest < ActionDispatch::IntegrationTest
   def setup
+    ActionMailer::Base.deliveries.clear
+    
     @group = groups(:ninja)
     @invitation = invitations(:invito_ninja_giorgio)
     @user = users(:giorgio)
@@ -273,6 +275,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     end
   
     assert_redirected_to group_invitations_path(group_uuid: @group.uuid)
+    assert_equal 1, ActionMailer::Base.deliveries.size, "Mail non inviata"
   end
 
   test "should not create a new private invitation if an identical invitation exists" do
@@ -392,9 +395,8 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
         }
       }
     end
-    # @public_invitation.reload
 
-    # assert_equal DateTime.now + 1.month, @public_invitation.expiration_date
+    assert_equal 1, ActionMailer::Base.deliveries.size, "Mail non inviata"
   end
 
   test "should not create a new public invitation with expiration date before now" do

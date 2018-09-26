@@ -51,7 +51,7 @@ class InvitationsController < ApplicationController
         if @invitation.save
             flash[:success] = 'Invito creato!'
             @invitation.reload
-            InvitationMailer.invite_to_group(@invitation) if @invitation.is_private?
+            InvitationMailer.invite_to_group(@invitation).deliver_now if @invitation.is_private?
             redirect_to group_invitations_path(group_uuid: @group.uuid)
         else
             if @user && Invitation.find_by_user_id(@user.id)
