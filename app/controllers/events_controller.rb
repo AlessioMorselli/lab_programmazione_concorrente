@@ -42,34 +42,6 @@ class EventsController < ApplicationController
         # render json: @events
     end
 
-
-    # GET user_events_path(user)
-    def user_index
-        # Visualizza tutti gli eventi dei gruppi di cui fa parte l'utente
-        # Per restituire tutti gli eventi, passare un params 'all'
-        if !params['all'].nil?
-            @events = @user.events.next(100.years)
-        # Uso il parametro 'up_to' per stabilire da quando devo recuperare gli eventi
-        # Esempio di parametro valido: (2.months).to_s
-        elsif params['up_to'].nil?
-            @events = @user.events.next
-        else
-            # Controllo che non sia un array! Mi serve un solo parametro
-            if params['up_to'].is_a? Array
-                up_to = params['up_to'][0]
-            else up_to = params['up_to']
-            end
-            up_to = up_to.to_i
-            @events = @user.events.next(up_to)
-        end
-
-        respond_to do |format|
-            format.html { render partial: 'events/index', locals: {events: @events, user: @user} }
-        end
-        
-        # render json: @events
-    end
-
     # GET group_event_path(group_uuid: group.uuid, id: event.id)
     def show
         # Mostra la descrizione di un evento (magari su una finestrella)

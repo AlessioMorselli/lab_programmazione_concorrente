@@ -31,9 +31,6 @@ Rails.application.routes.draw do
   # Aggiunge / Toglie un messaggio dalla bacheca
   patch   '/groups/:group_uuid/messages/:id/pin',                     to: 'messages#pin_message', as: 'group_pin_message'
   # put     '/groups/:group_uuid/message/:id/pin',                      to: 'messages#pin_message', as: 'group_pin_message'
-  
-  # Lista di tutti gli eventi dell'utente
-  get     '/users/:user_id/events',                                   to: 'events#user_index', as: 'user_events'
 
   # L'utente accetta l'invito ed entra nel gruppo
   get     '/groups/:group_uuid/invitations/:url_string/accept',       to: 'invitations#accept', as: 'group_accept_invitation'
