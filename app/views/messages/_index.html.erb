@@ -1,0 +1,3 @@
+<% messages.each do |message| %>
+    <%= render partial: "messages/show", locals: {message: message, group: group}%>
+<% end %>

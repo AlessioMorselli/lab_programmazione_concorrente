@@ -1,5 +1,5 @@
 class Message < ApplicationRecord
-    default_scope { order(created_at: :desc) }
+    default_scope { order(created_at: :asc) }
     
     # restituisce i messagi nella bacheca
     scope :pinned, -> { where(pinned: true) }

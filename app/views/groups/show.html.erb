@@ -8,6 +8,7 @@
 <%= csrf_meta_tag %>
 <% end %>
 
+<div id="alert_ajax"></div>
 
 <%= render partial: "modals", locals: {groups_modal: true, board_modal: true, calendar_modal: true, members_modal: true} %>
 
@@ -57,9 +58,7 @@
           <p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
           <% end %>
 
-          <% @messages.reverse_order.each do |message| %>
-          <%= render partial: "messages/show", locals: {message: message, group: @group}%>
-          <% end %>
+          <%= render partial: "messages/index", locals: {messages: @messages, group: @group}%>
 
         </div>
       </div>
@@ -132,6 +131,19 @@
   });
 </script>
 
+<script>
+  function ajaxAlert(type, message) {
+    $("#alert_ajax").html(`
+    <div class="alert alert-${type} alert-dismissible fade show my-2 rounded-0 shadow-sm text-center" role="alert">
+      ${message}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    `);
+  }
+</script>
+
 <script type="text/javascript">
   $(document).ready(function (e){
     $('#messages').on("click",'.delete_message', function (){
@@ -156,28 +168,24 @@
 </script>
 
 <script type="text/javascript">
+
   $(document).ready(function (e){
+    var message_text_prev;
     $('#messages').on('click', '.edit_message', function (){
       var message_id = $(this).attr('message-id');
       $(this).addClass('d-none');
       $('.save_message[message-id="' + message_id + '"]').removeClass('d-none');
-      var message_text = $('#message_body[message-id="' + message_id + '"] span').text();
+      message_text_prev = $('#message_body[message-id="' + message_id + '"] span').text();
       $('#message_body[message-id="' + message_id + '"] span').replaceWith(function (){
         return '<input type="text" class="text-white" style="width: 100%; background-color: transparent; border: none">';
       });
       var message_body_input = $('#message_body[message-id="' + message_id + '"] input' );
-      message_body_input.val(message_text);
+      message_body_input.val(message_text_prev);
       message_body_input.select();
     });
-  });
-</script>
 
-<script type="text/javascript">
-  $(document).ready(function (e){
     $('#messages').on('click', '.save_message', function (){
       var message_id = $(this).attr('message-id');
-      $(this).addClass('d-none');
-      $('.edit_message[message-id="' + message_id + '"]').removeClass('d-none');
       var message_text = $('#message_body[message-id="' + message_id + '"] input').val();
 
       $.ajax({
@@ -189,13 +197,21 @@
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
         },
         success: function (data, text_status, jqXHR){
+          $('.save_message[message-id="' + message_id + '"]').addClass('d-none');
+          $('.edit_message[message-id="' + message_id + '"]').removeClass('d-none');
           $('#message_body[message-id="' + message_id + '"] input').addClass('d-none');
           $('#message_body[message-id="' + message_id + '"] input').replaceWith(function (){
             return '<span>' + message_text + '</span>';
           });
         },
         error: function (jqXHR, text_status, error_thrown){
-
+          ajaxAlert("danger", "Qualcosa è andato storto! Il messaggio non è stato modificato!");
+          $('#message_body[message-id="' + message_id + '"] input').replaceWith(function (){
+            return '<span>' + message_text_prev + '</span>';
+          });
+          $('.save_message[message-id="' + message_id + '"]').addClass('d-none');
+          $('.edit_message[message-id="' + message_id + '"]').removeClass('d-none');
+          $('#message_body[message-id="' + message_id + '"] input').addClass('d-none');
         }
       });
     });
@@ -216,11 +232,10 @@
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
         },
         success: function (data, text_status, jqXHR){
-            //placeholder
-            location.reload();
+
           },
           error: function (jqXHR, text_status, error_thrown){
-
+            alert("Qualcosa è andato storto! Il messaggio non è stato pinnato!");
           }
         });
     });
@@ -335,5 +350,29 @@
   });
 </script>
 
+<script type="text/javascript">
+function requestNewMessages() {
+  console.log("Invitata richiesta per nuovi messaggi");
+  $.ajax({
+      url: "<%= group_messages_path(group_uuid: @group.uuid) %>",
+      type: "GET",
+      data: {all: true},
+      headers: {
+        'X-Transaction': 'POST Example',
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (data, text_status, jqXHR){
+        $("#messages").append(data);
+        setTimeout(() => requestNewMessages(), 15000);
+      },
+      error: function (jqXHR, text_status, error_thrown){
+        
+      }
+    });
+}
+$(document).ready(function (e){
+  setTimeout(() => requestNewMessages(), 15000);
+});
+</script>
 
 <% end %>

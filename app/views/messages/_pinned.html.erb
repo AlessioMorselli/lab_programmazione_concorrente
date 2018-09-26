@@ -1,26 +1,26 @@
-                        <div class="incoming_msg_flagged ml-1">
-                          <div class="incoming_msg_img_flagged"> <b><%= pinned.user.name %></b>: </div>
-                          <div class="received_msg_flagged">
-                            <div class="received_withd_msg_flagged">
-                              <p><%= pinned.text %></p>
-                              <% time = pinned.updated_at.strftime("%I:%M %p") %>
-                              <% if pinned.updated_at.strftime("%d/%m/%Y").to_s.eql? Time.now.strftime("%d/%m/%Y").to_s %>
-                                <% date = "Today" %>
-                              <% elsif pinned.updated_at.strftime("%d/%m/%Y").to_s.eql? (Time.now - 1.days).strftime("%d/%m/%Y").to_s %>
-                                <% date = "Yesterday" %>
-                              <% else %>
-                                <% date = pinned.updated_at.strftime("%B %-d") %>
-                              <% end %>
-                              <span class="time_date"> <%= time %>    |    <%= date %>  <a class="unbookmark_message text-danger ml-1" message-id="<%= pinned.id %>" href="#">
-                                <% if (@group.admins.include? current_user) %>
-                                <span data-feather="x"></span>
-                                <% end %>
-                              </a></span>
-						        <% if !pinned.attachment.nil? %>
-						        <a class="d-flex align-items-center mt-2" href="<%= group_message_attachment_download_path(group_uuid: group.uuid, message_id: pinned.id, id: pinned.attachment.id) %>">
-						            <span data-feather="paperclip" class="mr-2"></span> <%= pinned.attachment.name %>
-						        </a>
-						        <% end %>
-                            </div>
-                          </div>
-                        </div>
+<div class="incoming_msg_flagged ml-1">
+  <div class="incoming_msg_img_flagged"> <b><%= pinned.user.name %></b>: </div>
+  <div class="received_msg_flagged">
+    <div class="received_withd_msg_flagged">
+      <p><%= pinned.text %></p>
+      <% time = pinned.updated_at.strftime("%I:%M %p") %>
+      <% if pinned.updated_at.strftime("%d/%m/%Y").to_s.eql? Time.now.strftime("%d/%m/%Y").to_s %>
+        <% date = "Today" %>
+      <% elsif pinned.updated_at.strftime("%d/%m/%Y").to_s.eql? (Time.now - 1.days).strftime("%d/%m/%Y").to_s %>
+        <% date = "Yesterday" %>
+      <% else %>
+        <% date = pinned.updated_at.strftime("%B %-d") %>
+      <% end %>
+      <span class="time_date"> <%= time %>    |    <%= date %>  <a class="unbookmark_message text-danger ml-1" message-id="<%= pinned.id %>" href="#">
+        <% if (@group.admins.include? current_user) %>
+        <span data-feather="x"></span>
+        <% end %>
+      </a></span>
+      <% if !pinned.attachment.nil? %>
+        <a class="d-flex align-items-center mt-2" href="<%= group_message_attachment_download_path(group_uuid: group.uuid, message_id: pinned.id, id: pinned.attachment.id) %>">
+            <span data-feather="paperclip" class="mr-2"></span> <%= pinned.attachment.name %>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</div>

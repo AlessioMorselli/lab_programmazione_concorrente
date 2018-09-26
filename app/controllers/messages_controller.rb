@@ -37,7 +37,9 @@ class MessagesController < ApplicationController
         
         set_last_message_read(@group, DateTime.now)
 
-        render json: @messages
+        respond_to do |format|
+            format.html { render partial: 'messages/index', locals: {messages: @messages, group: @group} }
+        end
     end
 
     # POST group_messages_path(group_uuid: group.uuid)
