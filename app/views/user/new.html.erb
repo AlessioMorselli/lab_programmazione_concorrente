@@ -9,6 +9,6 @@
 <div class="container h-100">
   <div class="row align-items-center align-self-center h-100 text-center flex-column">
     <%= render partial: "flash_messages" %>
-    <%= render partial: "user/form", locals: {user: @user, url: signup_path, class_name: "form-signin"} %>
+    <%= render partial: "user/form", locals: {user: @user, url: signup_path, class_name: "form-signin", submit_label: "Registrati"} %>
   </div>
 </div>

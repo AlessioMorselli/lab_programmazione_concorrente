@@ -1,3 +1,6 @@
-                      <% @events.each do |event| %>
-                      <%= render partial: "events/show", locals: {event: event, group: @group} %>
-                      <% end %>
+            <% if @events.to_a.size == 0 %>
+            <p class="pt-4 p-2 text-center">Al momento non sono presenti eventi per questa settimana.</p>
+            <% end %>
+            <% @events.each do |event| %>
+            <%= render partial: "events/show", locals: {event: event, group: @group} %>
+            <% end %>
