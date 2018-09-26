@@ -42,10 +42,10 @@
                 <a class="align-self-center mx-2 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>">
                   <span data-feather="info"></span>
                 </a>
-                <%= link_to(group_accept_invitation_path(invitation.group.uuid, invitation.url_string), class: "align-self-center mr-2 nounderline text-success", method: :post, title: "Accetta") do %>
+                <%= link_to(group_accept_invitation_path(invitation.group.uuid, invitation.url_string), class: "align-self-center mr-2 nounderline text-success", method: :get, title: "Accetta") do %>
                 <span data-feather="check"></span></span><div class="d-none d-md-block ml-1" style="float: right">Accetta</div>
                 <% end %>
-                <%= link_to(group_refuse_invitation_path(invitation.group.uuid, invitation.url_string), class: "text-left text-danger nounderline", data: {method: :post, confirm: 'Sicuro?'}, title: "Rifiuta" ) do %>
+                <%= link_to(group_refuse_invitation_path(invitation.group.uuid, invitation.url_string), class: "text-left text-danger nounderline", data: {method: :get, confirm: 'Sicuro?'}, title: "Rifiuta" ) do %>
                 <span data-feather="x"></span><div class="d-none d-md-block ml-1" style="float: right">Rifiuta</div>
                 <% end %>
               </div>
