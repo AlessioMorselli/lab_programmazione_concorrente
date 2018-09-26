@@ -31,7 +31,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
         assert_nil cookies[@user_2.id.to_s + @group.uuid]
 
         # Accetto l'invito al gruppo
-        post group_accept_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
+        get group_accept_invitation_path(group_uuid: @group.uuid, url_string: @invitation.url_string)
 
         # Verifico che i cookie siano impostati a default
         assert_equal (DateTime.now - 1.days).to_s, cookies[@user_2.id.to_s + @group.uuid]
