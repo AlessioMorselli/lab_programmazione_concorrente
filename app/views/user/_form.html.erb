@@ -6,9 +6,8 @@
     <%= f.password_field :password, class: 'form-control rounded-0', placeholder: "Password", title: user.errors[:password].join(', ') %>
     <%= f.password_field :password_confirmation, class: 'form-control rounded-0', placeholder: "Conferma password", title: user.errors[:password].join(', ') %>
     <%= f.password_field :current_password, class: 'form-control rounded-0', placeholder: "Password attuale", title: user.errors[:password].join(', ') unless user.new_record? %>
-    <div style="height: 10px;"></div>
     <%= f.fields_for :student_attributes do |s| %>
-      <div class="form-row mb-0">
+      <div class="form-row mb-0 mt-2">
         <div class="col-9 pr-0">
           <%= s.select :degree_id, options_for_select(Degree.all.map{|d| [d.name, d.id, {:years => d.years}]}), {prompt: "Corso di Studio"}, {class: "form-control rounded-0"} %>
         </div>
@@ -17,8 +16,7 @@
         </div>
       </div>
     <% end %>
-    <div style="height: 10px;"></div>
-    <%= f.submit submit_label, class: 'btn btn-lg btn-secondary btn-block rounded-0 ' %>
+    <%= f.submit submit_label, class: 'btn btn-lg btn-secondary btn-block rounded-0 mt-2' %>
 
 <% end %>
 
