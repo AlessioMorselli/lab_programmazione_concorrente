@@ -232,10 +232,10 @@
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
         },
         success: function (data, text_status, jqXHR){
-
+            location.reload();
           },
           error: function (jqXHR, text_status, error_thrown){
-            alert("Qualcosa è andato storto! Il messaggio non è stato pinnato!");
+
           }
         });
     });
@@ -319,9 +319,7 @@
       if(prev_err.length !== 0){ prev_err.remove(); }
     }).on("ajax:error", (event) => {
       let err = event.detail[0].error;
-      var prev_err = $('.input_msg_write').find('small');
-      if(prev_err.length !== 0){ prev_err.remove(); }
-      $('.input_msg_write').prepend('<small class="text-danger">'+err+'</small>');
+      ajaxAlert("danger", err);
     });
   });
 </script>
@@ -364,7 +362,7 @@ function requestNewMessages() {
       success: function (data, text_status, jqXHR){
         $("#messages").append(data);
         feather.replace();
-        setTimeout(() => requestNewMessages(), 15000);
+        setTimeout(() => requestNewMessages(), 1000);
       },
       error: function (jqXHR, text_status, error_thrown){
         
@@ -372,7 +370,7 @@ function requestNewMessages() {
     });
 }
 $(document).ready(function (e){
-  setTimeout(() => requestNewMessages(), 15000);
+  setTimeout(() => requestNewMessages(), 1000);
 });
 </script>
 
