@@ -39,14 +39,14 @@
                 <a class="align-self-center text-secondary nounderline flex-grow-1 truncate-string-25" href="#" title="<%= invitation.group.name %>"><span data-feather="mail" class="mr-1"></span> 
                   <%= invitation.group.name %> 
                 </a>
-                <a class="align-self-center mr-3 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>">
-                  <span data-feather="info"></span>  Info
+                <a class="align-self-center mx-2 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>">
+                  <span data-feather="info"></span>
                 </a>
-                <%= link_to(group_accept_invitation_path(invitation.group.uuid, invitation.url_string), class: "align-self-center mr-3 nounderline text-success", method: :post) do %>
-                <span data-feather="check"></span> Accetta
+                <%= link_to(group_accept_invitation_path(invitation.group.uuid, invitation.url_string), class: "align-self-center mr-2 nounderline text-success", method: :post, title: "Accetta") do %>
+                <span data-feather="check"></span></span><div class="d-none d-md-block ml-1" style="float: right">Accetta</div>
                 <% end %>
-                <%= link_to(group_refuse_invitation_path(invitation.group.uuid, invitation.url_string), class: "text-left text-danger nounderline", data: {method: :post, confirm: 'Sicuro?'} ) do %>
-                <span data-feather="x"></span> Rifiuta
+                <%= link_to(group_refuse_invitation_path(invitation.group.uuid, invitation.url_string), class: "text-left text-danger nounderline", data: {method: :post, confirm: 'Sicuro?'}, title: "Rifiuta" ) do %>
+                <span data-feather="x"></span><div class="d-none d-md-block ml-1" style="float: right">Rifiuta</div>
                 <% end %>
               </div>
             </div>
