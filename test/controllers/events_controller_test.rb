@@ -53,49 +53,6 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 3, assigns(:events).length
   end
 
-  test "should index every user's groups event of the next 7 days" do
-    log_in_as @user
-
-    get user_events_path(@user)
-    assert_response :success
-
-    # Giorgio ha due eventi entro i 7 giorni
-    assert_equal 2, assigns(:events).length
-  end
-
-  test "should index every user's groups event of the next 2 months" do
-    log_in_as @user
-
-    get user_events_path(@user),
-        params: {up_to: (2.months).to_s}
-    assert_response :success
-
-    # Giorgio ha tre eventi entro i 2 mesi
-    assert_equal 3, assigns(:events).length
-  end
-
-  test "should index every user's groups event of the next 2 months with up_to as array" do
-    log_in_as @user
-
-    get user_events_path(@user),
-        params: {up_to: [(2.months).to_s, "dato in più"]}
-    assert_response :success
-
-    # Giorgio ha tre eventi entro i 2 mesi
-    assert_equal 3, assigns(:events).length
-  end
-
-  test "should index every user's groups event from today" do
-    log_in_as @user
-
-    get user_events_path(@user),
-        params: {all: ""}
-    assert_response :success
-
-    # Giorgio ha quattro eventi da oggi
-    assert_equal 4, assigns(:events).length
-  end
-
   test "should show a single event" do
     log_in_as @user
 
@@ -253,13 +210,6 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
   end
 
-  test "should not index every user's groups event if not logged in" do
-    get user_events_path(@user)
-    
-    assert_redirected_to login_path
-    assert_not flash.empty?
-  end
-
   test "should not show a single event if not logged in" do
     get group_event_path(group_uuid: @group.uuid, id: @event.id)
 
@@ -317,16 +267,6 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     end
     
     assert_redirected_to login_path
-    assert_not flash.empty?
-  end
-
-### TEST PER UN UTENTE NON CORRETTO ###
-  test "should not index every user's groups event if logged user is not the correct user" do
-    log_in_as @other_user
-
-    get user_events_path(@user)
-    
-    assert_redirected_to groups_path
     assert_not flash.empty?
   end
 
