@@ -1,0 +1,202 @@
+<% if @group %>
+
+<% if @group.members %>
+<% @group.members.each do |member| %>
+<div class="modal fade" id="infoUserModal<%= member.id %>" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content rounded-0">
+			<div class="modal-header">
+				<h5 class="modal-title truncate-string-100" id="exampleModalCenterTitle"><%= member.name %></h5>
+				<button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<b>Corso di Studio:</b> <%= member.degree ? member.degree.name : "Nessuno" %><br>
+				<b>Indirizzo Email:</b> <%= member.email %><br>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>
+<% end %>
+
+<% if @group.members.count(:all) != 0 %>
+<div class="modal fade" id="infoGroupModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content rounded-0">
+			<div class="modal-header">
+				<h5 class="modal-title truncate-string-100" id="exampleModalCenterTitle"><%= @group.name %></h5>
+				<button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<b>Nr. Membri:</b> <%= @group.members.count %><br>
+
+				<% if @group.course %>
+				<b>Insegnamento:</b> <%= @group.course.name %><br>
+				<% end %>
+
+				<b>Descrizione:</b> 
+				<%= @group.description.blank? ? "Nessuna descrizione disponibile." : @group.description %>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>
+<% end %>
+
+<% if groups_modal == true %>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="groupsModal">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content rounded-0">
+			<div class="modal-header">
+				<h5 class="modal-title">Gruppi a cui sei iscritto</h5>
+				<button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<ul class="nav flex-column nav-scroll">
+					<% current_user.groups.each do |group| %>
+					<li class="nav-item">
+						<a class="nav-link text-secondary" href="<%= group_path(group.uuid) %>" title="<%= group.name %>">
+							<span data-feather="users" class="mr-1"></span>
+							<%= truncate(group.name, length: 25) %>
+						</a>
+					</li>
+					<% end %> 
+				</ul>
+			</div>
+
+			<h6 class="sidebar-heading d-flex justify-content-between align-items-right px-3 mt-4 mb-3 ml-2 text-muted">
+				<a class="d-flex align-items-center text-muted " href="/groups/new" style="font-size: 0.75rem; text-transform: uppercase;">
+					<span data-feather="plus-circle" class="mr-2"></span> Crea Nuovo Gruppo
+				</a>
+			</h6>
+		</div>
+	</div>
+</div>
+<% end %>
+
+<% if board_modal == true %>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="boardModal">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content rounded-0">
+			<div class="modal-header">
+				<h5 class="modal-title">Bacheca</h5>
+				<button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body modal-body-scroll">
+				<div class="msg_history">
+					<% if @messages.pinned.to_a.size == 0 %>
+					<p class="p-2 text-center">Al momento non sono presenti messaggi.</p>
+					<% end %>
+					<% @messages.pinned.each do |pinned| %>
+					<%= render partial: "messages/pinned", locals: {group: @group, pinned: pinned} %>
+					<hr/>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>
+
+<% if calendar_modal == true %>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="calendarModal">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content rounded-0">
+			<div class="modal-header">
+				<h5 class="modal-title">Calendario Eventi</h5>
+				<button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="container px-1">
+					<div class="calendar-modal-scroll">
+						<div class="events_container">
+							<% if @events.to_a.size == 0 %>
+							<p class="pt-4 p-2 text-center">Al momento non sono presenti eventi per questa settimana.</p>
+							<% end %>
+
+							<%= render partial: "events/index", locals: {events: @events, group: @group} %>
+						</div>
+					</div>
+
+					<% if @group.events.to_a.length > 0 or @group.admins.include? current_user %>
+
+					<h6 class="sidebar-heading d-flex justify-content-between align-items-right px-3 mt-4 mb-1 text-muted">
+						<div class="row">
+							<div class="col">
+								<% if @group.events.size > 0 %>
+								<a class="d-flex align-items-center text-muted nounderline mb-2 show_all_events" href="#">
+									<span data-feather="server" class="mr-2"></span> Mostra tutti gli Eventi 
+								</a>
+								<% end %>
+								<% if (@group.admins.include? current_user) %>
+								<%= link_to "<span data-feather='plus-circle' class='mr-2'></span> Crea Nuovo Evento ".html_safe, new_group_event_path(@group.uuid), class: "d-flex align-items-center text-muted nounderline" %>
+								<% end %>
+							</div>
+						</div>
+					</h6>
+
+					<% end %>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>
+
+<% if members_modal == true %>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="membersModal" data-dismiss="modal">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content rounded-0">
+			<div class="modal-header">
+				<h5 class="modal-title">Membri di questo gruppo</h5>
+				<button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<ul class="nav flex-column nav-scroll">
+					<% @group.members.each do |member| %>
+					<%= render partial: "member", locals: {member: member, group: @group} %>
+					<% end %>
+				</ul>
+			</div>
+
+			<h6 class="sidebar-heading d-flex justify-content-between align-items-right px-3 mt-4 mb-3 ml-2 text-muted">
+				<%= render partial: "group_functions", locals: {group: @group} %>
+			</h6>
+		</div>
+	</div>
+</div>
+<% end %>
+
+
+<% content_for :scripts do %>
+<script type="text/javascript">
+	$('.modal').on('show.bs.modal', function () {
+		$('.modal').not($(this)).each(function () {
+			$(this).modal('hide');
+		});
+	});
+</script>
+<% end %>

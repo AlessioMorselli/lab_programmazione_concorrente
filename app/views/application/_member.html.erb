@@ -4,46 +4,26 @@
                             <%= member.name %>
                           </a>
                             <% if @group.super_admin.eql? member %>
-                              <span data-feather="award" class="text-warning mr-1" data-toggle="tooltip" title="Super Admin"></span>
+                              <span data-feather="award" class="text-warning mr-1" title="Super Admin"></span>
                             <% end %>
                             <% if !@group.super_admin.eql? member and @group.admins.include? member %>
                               <% if @group.super_admin.eql? current_user %>
-                                <%= link_to "<span data-feather='award' class='text-secondary mr-1' title='Rendi Super Admin' data-toggle='tooltip'></span>".html_safe, group_set_super_admin_path(@group.uuid, member.id), method: :patch, data: {confirm: "Confermi di voler far diventare '" + member.name + "' il nuovo Super Admin?"} %>
+                                <%= link_to "<span data-feather='award' class='text-secondary mr-1' title='Rendi Super Admin'></span>".html_safe, group_set_super_admin_path(@group.uuid, member.id), method: :patch, data: {confirm: "Confermi di voler far diventare '" + member.name + "' il nuovo Super Admin?"} %>
                               <% else %>
-                                <span data-feather="award" class="text-secondary mr-1" title="Admin" data-toggle="tooltip"></span>
+                                <span data-feather="award" class="text-secondary mr-1" title="Admin"></span>
                               <% end %>
                             <% end %>
 
                             <% if @group.super_admin.eql? current_user and !(current_user.eql? member) and !(@group.admins.include? member)%>
-                              <%= link_to "<span data-feather='award' class='text-primary mr-1' data-toggle='tooltip' title='Rendi Admin'></span>".html_safe, group_set_admin_path(@group.uuid, member.id), method: :patch, data: {confirm: "Confermi di voler far diventare '" + member.name + "' Admin di questo gruppo?"} %>
+                              <%= link_to "<span data-feather='award' class='text-primary mr-1' title='Rendi Admin'></span>".html_safe, group_set_admin_path(@group.uuid, member.id), method: :patch, data: {confirm: "Confermi di voler far diventare '" + member.name + "' Admin di questo gruppo?"} %>
                             <% end %>
 
-                            <a data-toggle="tooltip" title="Info">
+                            <a title="Info">
                               <span data-feather="info" class="text-info mr-1" data-toggle="modal" data-target="#infoUserModal<%= member.id %>"></span>
                             </a>
 
-                            <div class="modal fade" id="infoUserModal<%= member.id %>" tabindex="-1" role="dialog">
-                              <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content rounded-0">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title truncate-string-100" id="exampleModalCenterTitle"><%= member.name %></h5>
-                                    <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <b>Corso di Studio:</b> <%= member.degree ? member.degree.name : "Nessuno" %><br>
-                                    <b>Indirizzo Email:</b> <%= member.email %><br>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
 
                             <% if @group.admins.include? current_user and !(current_user.eql? member) and !(@group.admins.include? member)%>
-                              <%= link_to "<span data-feather='user-minus' class='text-danger' data-toggle='tooltip' title='Caccia Utente'></span>".html_safe, group_membership_path(@group.uuid, member.id), method: :delete, data: {confirm: "Confermi di voler cacciare '" + member.name + "' da questo gruppo?"} %>
+                              <%= link_to "<span data-feather='user-minus' class='text-danger' title='Caccia Utente'></span>".html_safe, group_membership_path(@group.uuid, member.id), method: :delete, data: {confirm: "Confermi di voler cacciare '" + member.name + "' da questo gruppo?"} %>
                             <% end %>
                         </li>

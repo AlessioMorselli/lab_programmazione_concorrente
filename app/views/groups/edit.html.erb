@@ -9,7 +9,7 @@ Unife Study Groups - Nuovo Gruppo
 <div class="row flex-shrink-0 d-md-none">
   <div class="col-12">
     <div class="btn-toolbar justify-content-center">
-      <%= render "user_groups_modal" %>
+      <%= render partial: "modals", locals: {groups_modal: true, board_modal: false, calendar_modal: false, members_modal: true} %>
     </div>
   </div>
 </div>
