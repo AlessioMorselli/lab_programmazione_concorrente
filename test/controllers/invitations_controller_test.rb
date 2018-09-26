@@ -272,7 +272,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
       }
     end
   
-    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_redirected_to group_invitations_path(group_uuid: @group.uuid)
   end
 
   test "should not create a new private invitation if an identical invitation exists" do
@@ -303,6 +303,21 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
   end
 
+  test "should not create a new private invitation if invited user is already member" do
+    log_in_as @admin
+
+    assert_difference('Invitation.count', 0) do
+      post group_invitations_path(group_uuid: @group.uuid), params: { invitation: {
+        user: @member.name,
+        expiration_date: ""
+        }
+      }
+    end
+  
+    assert_redirected_to new_group_invitation_path(group_uuid: @group.uuid)
+    assert_not flash.empty?
+  end
+
   test "should create a new public invitation" do
     log_in_as @admin
 
@@ -314,7 +329,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
       }
     end
   
-    assert_redirected_to group_path(uuid: @group.uuid)
+    assert_redirected_to group_invitations_path(group_uuid: @group.uuid)
   end
 
   test "should not create a new public invitation if an identical invitation exists" do

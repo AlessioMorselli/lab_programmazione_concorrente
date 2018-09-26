@@ -1,9 +1,9 @@
 class InvitationsController < ApplicationController
     layout "main"
     before_action :set_invitation, only: [:show, :destroy, :accept, :refuse]
-    # before_action :set_group, only: [:index], unless: -> {params[:group_uuid].nil?}
     before_action :set_group, only: [:index, :new, :create, :destroy, :accept], unless: -> {params[:group_uuid].nil?}
     before_action :set_user, only: [:create]
+    before_action :is_member, only: [:create]
     before_action :logged_in_user
     before_action only: [:index] do
         correct_user params[:user_id] unless params[:user_id].nil?
@@ -52,9 +52,13 @@ class InvitationsController < ApplicationController
             flash[:success] = 'Invito creato!'
             @invitation.reload
             InvitationMailer.invite_to_group(@invitation) if @invitation.is_private?
-            redirect_to group_invitations_path(uuid: @group.uuid)
+            redirect_to group_invitations_path(group_uuid: @group.uuid)
         else
-            flash.now[:error] = 'Le informazioni inserite non sono corrette'
+            if @user && Invitation.find_by_user_id(@user.id)
+                flash.now[:error] = "L'utente #{@user.name} è già stato invitato!"
+            else
+                flash.now[:error] = 'Le informazioni inserite non sono corrette'
+            end
             render "new"
         end
     end
@@ -123,6 +127,13 @@ class InvitationsController < ApplicationController
                 flash[:error] = "L'utente indicato non esiste"
                 redirect_to new_group_invitation_path(group_uuid: @group.uuid)
             end
+        end
+    end
+
+    def is_member
+        if @group.members.include? @user
+            flash[:danger] = "L'utente è già presente nel gruppo!"
+            redirect_to new_group_invitation_path(group_uuid: @group.uuid)
         end
     end
 
