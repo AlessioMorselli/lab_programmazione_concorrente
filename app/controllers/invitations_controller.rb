@@ -1,6 +1,6 @@
 class InvitationsController < ApplicationController
     layout "main"
-    before_action :set_invitation, only: [:show, :destroy, :accept, :refuse]
+    before_action :set_invitation, only: [:destroy, :accept, :refuse]
     before_action :set_group, only: [:index, :new, :create, :destroy, :accept], unless: -> {params[:group_uuid].nil?}
     before_action :set_user, only: [:create]
     before_action :is_member, only: [:create]
@@ -24,15 +24,6 @@ class InvitationsController < ApplicationController
             @invitations = @group.invitations
             render "group_index"
         end
-    end
-
-    
-
-    # GET group_invitation_path(group_uuid: group.uuid, url_string: invitation.url_string)
-    def show
-        # Mostra 2 scelte all'utente: accetta e rifiuta, rispettivamente 
-        # corrispondenti alle azioni accept e refuse
-        render json: @invitation
     end
 
     # GET new_group_invitation_path(group_uuid: group.uuid)
@@ -71,7 +62,7 @@ class InvitationsController < ApplicationController
         redirect_to group_invitations_path(group_uuid: @group.uuid)
     end
 
-    # POST group_accept_invitation_path(group_uuid: group.uuid, url_string: invitation.url_string)
+    # GET group_accept_invitation_path(group_uuid: group.uuid, url_string: invitation.url_string)
     def accept
         # L'utente a cui è stato inviato l'invito ha accettato
         # L'azione ha quindi 2 effetti:
@@ -90,7 +81,7 @@ class InvitationsController < ApplicationController
         end
     end
 
-    # POST group_refuse_invitation_path(group_uuid: group.uuid, url_string: invitation.url_string)
+    # GET group_refuse_invitation_path(group_uuid: group.uuid, url_string: invitation.url_string)
     def refuse
         # L'utente a cui è stato inviato l'invito ha rifiutato
         # L'azione ha quindi un solo effetto:

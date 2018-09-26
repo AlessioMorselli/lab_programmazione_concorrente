@@ -3,10 +3,8 @@ Rails.application.routes.draw do
   resources :groups, param: :uuid do
     resources :events
     resources :memberships, only: [:index, :create, :destroy], param: :user_id
-    resources :messages, except: [:show, :new, :edit] do
-      resources :attachments, only: [:destroy]
-    end
-    resources :invitations, only: [:index, :show, :new, :create, :destroy], param: :url_string
+    resources :messages, except: [:show, :new, :edit]
+    resources :invitations, only: [:index, :new, :create, :destroy], param: :url_string
   end
   resources :degrees_courses, only: [:index]
   resources :degrees, only: [:show] do
@@ -38,9 +36,9 @@ Rails.application.routes.draw do
   get     '/users/:user_id/events',                                   to: 'events#user_index', as: 'user_events'
 
   # L'utente accetta l'invito ed entra nel gruppo
-  post    '/groups/:group_uuid/invitations/:url_string/accept',       to: 'invitations#accept', as: 'group_accept_invitation'
+  get     '/groups/:group_uuid/invitations/:url_string/accept',       to: 'invitations#accept', as: 'group_accept_invitation'
   # L'utente rifiuta l'invito e non entra nel gruppo
-  post    '/groups/:group_uuid/invitations/:url_string/refuse',       to: 'invitations#refuse', as: 'group_refuse_invitation'
+  get     '/groups/:group_uuid/invitations/:url_string/refuse',       to: 'invitations#refuse', as: 'group_refuse_invitation'
 
   # Per scaricare l'allegato di un messaggio
   get     '/groups/:group_uuid/messages/:message_id/attachments/:id/download',
