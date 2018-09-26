@@ -6,10 +6,11 @@ Unife Study Groups - Nuovo Gruppo
 <%= stylesheet_link_tag "dashboard" %>
 <% end %>
 
+<%= render partial: "modals", locals: {groups_modal: true, board_modal: false, calendar_modal: false, members_modal: true} %>
 <div class="row flex-shrink-0 d-md-none">
   <div class="col-12">
     <div class="btn-toolbar justify-content-center">
-      <%= render partial: "modals", locals: {groups_modal: true, board_modal: false, calendar_modal: false, members_modal: true} %>
+      <%= render partial: "modal_buttons", locals: {groups_modal: true, board_modal: false, calendar_modal: false, members_modal: true} %>
     </div>
   </div>
 </div>

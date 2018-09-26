@@ -15,9 +15,6 @@
 				<b>Corso di Studio:</b> <%= member.degree ? member.degree.name : "Nessuno" %><br>
 				<b>Indirizzo Email:</b> <%= member.email %><br>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
 		</div>
 	</div>
 </div>
@@ -43,9 +40,6 @@
 
 				<b>Descrizione:</b> 
 				<%= @group.description.blank? ? "Nessuna descrizione disponibile." : @group.description %>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>

@@ -9,6 +9,7 @@
 
 <% end %>
 
+<%= render partial: "modals", locals: {groups_modal: true, board_modal: false, calendar_modal: false, members_modal: true} %>
 <div class="row flex-shrink-0">
   <div class="col-12 d-md-none">
     <h3 class="text-center">
@@ -20,7 +21,7 @@
 
   <div class="col-12">
     <div class="btn-toolbar justify-content-center">
-      <%= render partial: "modals", locals: {groups_modal: true, board_modal: false, calendar_modal: false, members_modal: true} %>
+      <%= render partial: "modal_buttons", locals: {groups_modal: true, board_modal: false, calendar_modal: false, members_modal: true} %>
     </div>
   </div>
 </div>
