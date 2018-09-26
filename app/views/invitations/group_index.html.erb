@@ -49,13 +49,13 @@
                 <a class="align-self-center text-secondary nounderline flex-grow-1 truncate-string-25" href="#" title="Invito pubblico"><span data-feather="mail" class="mr-1"></span>  Invito pubblico </a>
                 <% end %>
                 <% if invitation.is_expired? %>
-                <a class="align-self-center text-danger nounderline flex-grow-1 truncate-string-25" href="#" title="Scaduto"><span data-feather="alert-triangle" class="mr-1"></span>Scaduto</a>
+                <a class="align-self-center text-danger nounderline mr-2" href="#" title="Scaduto"><span data-feather="alert-triangle" class="mr-1"></span></a>
                 <% end %>
-                <a class="align-self-center mr-3 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>">
-                  <span data-feather="info"></span> Info
+                <a class="align-self-center mr-2 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>" title="Informazioni">
+                  <span data-feather="info"></span>
                 </a>
-                <%= link_to(group_invitation_path(invitation.group.uuid, invitation.url_string), class: "text-left text-danger nounderline", data: {method: :delete, confirm: 'Sicuro?'} ) do %>
-                <span data-feather="x"></span> Cancella
+                <%= link_to(group_invitation_path(invitation.group.uuid, invitation.url_string), class: "text-left text-danger nounderline", data: {method: :delete, confirm: 'Sicuro?'}, title: "Cancella" ) do %>
+                <span data-feather="x"></span><div class="d-none d-md-block ml-1" style="float: right">Elimina</div>
                 <% end %>
               </div>
             </div>

@@ -38,8 +38,8 @@ Unife Study Groups - Gruppi Pubblici
               <% end %>
               <div class="card-body group-name-body d-flex justify-content-between">
                 <a class="align-self-center text-secondary nounderline flex-grow-1 truncate-string-25" href="<%= group_path(group.uuid) %>" title="<%= group.name %>"><span data-feather="users" class="mr-1"></span>  <%= group.name %></a>
-                <a class="align-self-center mx-3 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>">
-                  <span data-feather="info"></span>  Info
+                <a class="align-self-center mx-2 nounderline text-info" href="#" data-toggle="modal" data-target="#infoModal<%= id_num %>", title="Informazioni">
+                  <span data-feather="info"></span>
                 </a>
                 <% if group.members.exists?(current_user.id) %>
                 <% if group.super_admin.eql? current_user %>
