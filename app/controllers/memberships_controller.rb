@@ -53,7 +53,13 @@ class MembershipsController < ApplicationController
     cookies.delete(create_last_message_key(@user, @group))
 
     if !@group.members.include? current_user
-      redirect_to groups_path
+      # Se non abbandono il gruppo dalla dashboard dello stesso, ridireziono verso l'ultima richiesta...
+      unless request.referrer == group_url(uuid: @group.uuid)
+        redirect_back(fallback_location: groups_path)
+      # Altrimenti ridireziono verso la lista di gruppi suggeriti
+      else
+        redirect_to groups_path
+      end
     else
       flash[:success] = "Membro eliminato dal gruppo"
       redirect_to group_path(uuid: @group.uuid)
