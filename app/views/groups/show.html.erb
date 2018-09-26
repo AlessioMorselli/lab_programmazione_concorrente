@@ -363,6 +363,7 @@ function requestNewMessages() {
       },
       success: function (data, text_status, jqXHR){
         $("#messages").append(data);
+        feather.replace();
         setTimeout(() => requestNewMessages(), 15000);
       },
       error: function (jqXHR, text_status, error_thrown){

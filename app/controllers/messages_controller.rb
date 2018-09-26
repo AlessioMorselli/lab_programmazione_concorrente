@@ -58,6 +58,7 @@ class MessagesController < ApplicationController
 
         respond_to do |format|
             if @message.save_with_attachment(@attachment)
+                set_last_message_read(@group, DateTime.now)
                 format.html { render partial: 'messages/show', locals: {message: @message, group: @group} }
             else
                 format.json { render :json => { :error => 'Il messaggio non è stato inviato' }, status: 422 }
