@@ -17,8 +17,8 @@
         <% end %>
       </a></span>
       <% if !pinned.attachment.nil? %>
-        <a class="d-flex align-items-center mt-2" href="<%= group_message_attachment_download_path(group_uuid: group.uuid, message_id: pinned.id, id: pinned.attachment.id) %>">
-            <span data-feather="paperclip" class="mr-2"></span> <%= pinned.attachment.name %>
+        <a title="<%= pinned.attachment.name %>" class="d-flex align-items-center mt-2" href="<%= group_message_attachment_download_path(group_uuid: group.uuid, message_id: pinned.id, id: pinned.attachment.id) %>">
+            <span data-feather="paperclip" class="mr-2"></span> <%= pinned.attachment.name.truncate(20) %>
         </a>
       <% end %>
     </div>
