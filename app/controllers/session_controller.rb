@@ -20,9 +20,9 @@ class SessionController < ApplicationController
                 params[:session][:remember_me] == '1' ? remember(user) : forget(user)
                 redirect_back_or groups_path
             else
-                flash[:warning] = 'Per piacere, attiva il tuo account seguendo le istruzioni
+                flash[:danger] = 'Per piacere, attiva il tuo account seguendo le istruzioni
                                 nella email di conferma che hai ricevuto per procedere'
-                redirect_to landing_path
+                redirect_to login_path
             end
         else
             flash.now[:error] = 'Email e/o password sbagliate'

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :degrees, only: [:show] do
     resources :courses, only: [:index]
   end
-  resources :users, except: [:new, :create, :show] do
+  resources :users, except: [:index, :new, :create, :show] do
     resources :invitations, only: [:index]
   end
   resources :confirm_accounts, only: [:edit]

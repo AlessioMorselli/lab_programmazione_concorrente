@@ -100,4 +100,8 @@ class MessageTest < ActiveSupport::TestCase
     assert message.attachment.nil?
   end
 
+  test "without_user should return all messages without the messages from the user passed as argument" do
+    messages = Message.all.without_user(@user)
+    assert messages.where(user: @user).count == 0
+  end
 end

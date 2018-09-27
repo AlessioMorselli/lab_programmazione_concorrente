@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
     before_action :set_message, only: [:edit, :update, :destroy, :pin_message]
-    before_action :logged_in_user
+    before_action :logged_in_user, except: [:index]
     before_action only: [:update] do
         correct_user @message.user_id
     end
@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
     end
     before_action :set_group
     before_action do
-        is_member_in @group
+        is_member_in @group if current_user
     end 
     before_action only: [:destroy], unless: -> {current_user? @message.user} do
         is_admin_in @group
@@ -20,11 +20,12 @@ class MessagesController < ApplicationController
 
     # GET group_messages_path(group_uuid: group.uuid)
     def index
+      if logged_in?
         # Restituisce tutti i messaggi del gruppo, a partire da una certa data e ora
         # Uso il parametro 'from' per stabilire da quando devo recuperare i messaggi
         # Si segua il formato della stringa che si ottiene da un valore di tipo DateTime
         if params['from'].nil?
-            @messages = @group.messages.recent(get_last_message_read(@group))
+            @messages = @group.messages.recent(get_last_message_read(@group)).without_user(current_user)
         else
             # Controllo che non sia un array! Mi serve un solo parametro
             if params['from'].is_a? Array
@@ -32,7 +33,7 @@ class MessagesController < ApplicationController
             else from = params['from']
             end
             from = from.to_datetime
-            @messages = @group.messages.recent(from)
+            @messages = @group.messages.recent(from).without_user(current_user)
         end
         
         set_last_message_read(@group, DateTime.now)
@@ -40,6 +41,11 @@ class MessagesController < ApplicationController
         respond_to do |format|
             format.html { render partial: 'messages/index', locals: {messages: @messages, group: @group} }
         end
+      else
+        respond_to do |format|
+          format.json { render :json => { :error => 'Non sei loggato! non puoi accedere ai messaggi' }, status: 403 }
+        end
+      end
     end
 
     # POST group_messages_path(group_uuid: group.uuid)

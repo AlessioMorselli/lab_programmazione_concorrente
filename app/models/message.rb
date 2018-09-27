@@ -3,6 +3,8 @@ class Message < ApplicationRecord
     
     # restituisce i messagi nella bacheca
     scope :pinned, -> { where(pinned: true) }
+    # restituisce i messaggi escludendo quelli dell'utente specificato
+    scope :without_user, -> (user) { where.not(user_id: user.id) }
     
     belongs_to :user
     belongs_to :group

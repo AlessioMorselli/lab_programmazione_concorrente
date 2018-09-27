@@ -5,15 +5,6 @@ class UsersController < ApplicationController
         correct_user params[:id]
     end
 
-    # TODO: da togliere
-    # GET users_path
-    def index
-        # Restituisce la lista di tutti gli utenti (solo a fine di development)
-        @users = User.all
-
-        render json: @users
-    end
-
     # GET signup_path
     def new
         # Visualizza la form per l'iscrizione al sito
