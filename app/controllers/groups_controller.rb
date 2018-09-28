@@ -90,6 +90,8 @@ class GroupsController < ApplicationController
         # con le altre tabelle (inviti, membri)
         @group.destroy
 
+        puts "Ciao"
+        flash[:success] = "Il gruppo è stato cancellato"
         redirect_to groups_path
     end
 
