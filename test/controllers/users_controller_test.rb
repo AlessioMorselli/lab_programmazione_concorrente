@@ -29,7 +29,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
    
     assert_not flash.empty?
-    assert_redirected_to landing_path
+    assert_redirected_to login_path
   end
 
   test "should not register a new user with a wrong password confirm" do

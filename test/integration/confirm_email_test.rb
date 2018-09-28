@@ -33,8 +33,8 @@ class ConfirmEmailTest < ActionDispatch::IntegrationTest
         # Verifico che esista il token di conferma e che confirmed sia false
         assert_not @user.confirmed?
 
-        # Verifico la ridirezione a landing_path
-        assert_redirected_to landing_path
+        # Verifico la ridirezione a login_path
+        assert_redirected_to login_path
 
         # Simulo il clic dell'utente sul link della mail
         get edit_confirm_account_path(@user.confirm_token, email: @user.email)
@@ -69,8 +69,8 @@ class ConfirmEmailTest < ActionDispatch::IntegrationTest
         # Verifico che esista il token di conferma e che confirmed sia false
         assert_not @user.confirmed?
 
-        # Verifico la ridirezione a landing_path
-        assert_redirected_to landing_path
+        # Verifico la ridirezione a login_path
+        assert_redirected_to login_path
 
         # Simulo il clic dell'utente sul link della mail
         get edit_confirm_account_path("token puzzone", email: @user.email)
