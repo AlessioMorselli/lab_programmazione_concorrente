@@ -33,7 +33,7 @@
         <span class="time_date"> <%= time %>    |    <%= date %> <%= (message.updated_at.to_s.eql? message.created_at.to_s) ? nil : "*" %>  
             
             <% if (message.pinned == false and group.admins.include? current_user) %>
-            <a class="bookmark_message text-secondary" href="#"><span data-feather="bookmark"></span></a>
+            <a class="bookmark_message text-secondary"  message-id="<%= message.id %>" href="#"><span data-feather="bookmark"></span></a>
             <% end %>
 
             <% if @group.admins.include? current_user %>

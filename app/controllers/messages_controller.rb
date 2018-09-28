@@ -77,6 +77,9 @@ class MessagesController < ApplicationController
         # Modifica il testo di un messaggio
         if !@message.update(message_params)
             flash.now[:error] = 'Il messaggio non è stato modificato'
+            respond_to do |format|
+                format.json { render :json => { :error => 'Il messaggio non è stato modificato' }, status: 422 }
+            end
         end
     end
 

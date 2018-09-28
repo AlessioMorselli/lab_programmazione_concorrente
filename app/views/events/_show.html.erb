@@ -10,7 +10,7 @@
                             <ul class="list-inline">
                               <li class="list-inline-item text-secondary font-075"><i class="fa fa-calendar-o" aria-hidden="true"></i><%= event.start_time.strftime("%A") %></li>
                               <li class="list-inline-item text-secondary font-075"><i class="fa fa-clock-o" aria-hidden="true"></i><%= event.start_time.strftime("%H:%M") %> - <%= event.end_time.strftime("%H:%M") %></li>
-                              <li class="list-inline-item text-secondary font-075 truncate-string-100"><i class="fa fa-location-arrow" aria-hidden="true"></i>Luogo: <%= event.place %></li>
+                              <li title="<%= event.place %>" class="list-inline-item text-secondary font-075 truncate-string-100"><i class="fa fa-location-arrow" aria-hidden="true"></i>Luogo: <%= event.place %></li>
                             </ul>
                             <p><%= event.description %></p>
 

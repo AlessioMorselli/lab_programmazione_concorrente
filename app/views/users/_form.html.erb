@@ -22,13 +22,15 @@
 
 <% content_for :scripts do %>
 <script>
-  window.addEventListener("load", onSelectDegree)
-  document.getElementById("user_student_attributes_degree_id").addEventListener("change", onSelectDegree);
+  window.addEventListener("load", () => {
+    onSelectDegree();
+    <% if !user.new_record? && user.student != nil %>
+      document.getElementById("user_student_attributes_degree_id").value = <%= user.student.degree_id %>
+      document.getElementById("user_student_attributes_year").value = <%= user.student.year %>
+    <% end %>
+  });
 
-  <% if !user.new_record? && user.student != nil %>
-    document.getElementById("user_student_attributes_degree_id").value = <%= user.student.degree_id %>
-    document.getElementById("user_student_attributes_year").value = <%= user.student.year %>
-  <% end %>
+  document.getElementById("user_student_attributes_degree_id").addEventListener("change", onSelectDegree);
 
   function onSelectDegree() {
     let degreeSelect = document.getElementById("user_student_attributes_degree_id");
