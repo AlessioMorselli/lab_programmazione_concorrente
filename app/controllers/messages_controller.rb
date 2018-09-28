@@ -87,7 +87,7 @@ class MessagesController < ApplicationController
         flash.now[:success] = 'Il messaggio è stato eliminato'
     end
 
-    # GET group_pinned_messages(group_uuid: group.uuid)
+    # GET group_pinned_messages_path(group_uuid: group.uuid)
     def pinned
         # Visualizza i messaggi pinnati di un gruppo
         @pinned_messages = @group.messages.pinned
@@ -95,7 +95,7 @@ class MessagesController < ApplicationController
         render json: @pinned_messages
     end
 
-    # PUT/PATCH group_pin_message(group_uuid: group.uuid, id: message.id)
+    # PUT/PATCH group_pin_message_path(group_uuid: group.uuid, id: message.id)
     def pin_message
         # Aggiunge un messaggio in bacheca o lo toglie, se già presente
         @message.pinned = !@message.pinned
