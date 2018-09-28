@@ -16,15 +16,6 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
   end
 
 ### TEST PER UN UTENTE LOGGATO ###
-  test "should index every group member" do
-    log_in_as @user
-
-    get group_memberships_path(group_uuid: @group.uuid)
-    assert_response :success
-
-    assert_equal 4, assigns(:members).length
-  end
-
   test "should remove logged user from group" do
     log_in_as @user
 
@@ -48,13 +39,6 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
   end
 
 ### TEST PER UN UTENTE NON LOGGATO ###
-  test "should not index every group member if not logged in" do
-    get group_memberships_path(group_uuid: @group.uuid)
-    
-    assert_redirected_to login_path
-    assert_not flash.empty?
-  end
-
   test "should not remove a user from group if not logged in" do
     assert_difference('Membership.count', 0) do
       delete group_membership_path(group_uuid: @group.uuid, user_id: @user.id)
@@ -77,15 +61,6 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
   end
 
 ### TEST PER UN UTENTE NON MEMBRO ###
-  test "should not index every group member if logged user is not a member" do
-    log_in_as @non_member
-
-    get group_memberships_path(group_uuid: @group.uuid)
-    
-    assert_redirected_to groups_path
-    assert_not flash.empty?
-  end
-
   test "should add user to public group" do
     log_in_as @non_member
 

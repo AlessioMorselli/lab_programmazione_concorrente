@@ -19,15 +19,6 @@ class MembershipsController < ApplicationController
     is_super_admin_in @group
   end
 
-  # GET group_memberships_path(group_uuid: group.uuid)
-  def index
-    # Recupera tutti i membri di un gruppo, in modo da poter visualizzare chi fa parte di un gruppo
-    # e chi è online in quel momento (forse, adesso vediamo)
-    @members = @group.memberships
-
-    render file: "app/views/memberships/index"
-  end
-
   # POST group_memberships_path(group_uuid: group.uuid)
   def create
     # Il link viene usato in ingresso ad un gruppo pubblico di cui non si è membri
