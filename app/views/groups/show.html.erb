@@ -362,7 +362,7 @@ function requestNewMessages() {
       success: function (data, text_status, jqXHR){
         $("#messages").append(data);
         feather.replace();
-        setTimeout(() => requestNewMessages(), 10000);
+        setTimeout(() => requestNewMessages(), 2000);
       },
       error: function (jqXHR, text_status, error_thrown){
         
@@ -370,7 +370,7 @@ function requestNewMessages() {
     });
 }
 $(document).ready(function (e){
-  setTimeout(() => requestNewMessages(), 10000);
+  setTimeout(() => requestNewMessages(), 2000);
 });
 </script>
 

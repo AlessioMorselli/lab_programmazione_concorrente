@@ -22,7 +22,7 @@ class UsersController < ApplicationController
             @user.send_confirm_email
             flash[:info] = "Per piacere, controlla la tua casella di posta elettronica e 
                                 conferma il tuo indirizzo email prima di continuare!"
-            redirect_to landing_path
+            redirect_to login_path
         else
             flash.now[:error] = "Ooooppss, qualcosa è andato storto!"
             render "new"
