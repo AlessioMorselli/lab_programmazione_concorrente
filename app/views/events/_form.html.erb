@@ -1,13 +1,13 @@
-                    <%= form_for @event, url: url, html: {class: 'form-new-event', method: m, id: 'event_form'} do |f| %>
-                      <div class="input-group date m-1 mb-1">
-                        <%= f.text_field :start_time, class: 'form-control mr-1 rounded-0 shadow-sm', id: 'datetimes', placeholder: 'Inizio Evento', required: true %>
-                        <%= f.text_field :end_time, class: 'form-control rounded-0 shadow-sm', id: 'datetimes', placeholder: 'Fine Evento', required: true %>
-                      </div>
-                      <%= f.text_field :name, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Nome', required: true, autofocus: true %>
-                      <%= f.text_field :place, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Luogo', required: true %>
-                      <%= f.text_area :description, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Descrizione', required: true %>
-                      <%= f.hidden_field :group_id, value: @group.id %>
-                      <%= f.select(:repeated, [['Ogni Giorno', 1], ['Ogni 7 Giorni', 7], ['Ogni 30 Giorni', 30]], {include_blank: 'Scegli la periodicità...'}, {class: 'form-control m-1 rounded-0 shadow-sm'}) %>
-                      <%= f.select(:repeated_for, [['2', 2], ['3', 3]], {include_blank: 'Scegli il numero di ripetizioni...'}, {class: 'form-control m-1 rounded-0 shadow-sm'}) %>
-                      <%= f.submit submit_label, class: 'btn btn-lg btn-secondary btn-block m-1 shadow-sm' %>
-                    <% end %>
+<%= form_for @event, url: url, html: {class: 'form-new-event', method: m, id: 'event_form'} do |f| %>
+  <div class="input-group date m-1 mb-1">
+    <%= f.text_field :start_time, class: 'form-control mr-1 rounded-0 shadow-sm', id: 'datetimes', placeholder: 'Inizio Evento', required: true %>
+    <%= f.text_field :end_time, class: 'form-control rounded-0 shadow-sm', id: 'datetimes', placeholder: 'Fine Evento', required: true %>
+  </div>
+  <%= f.text_field :name, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Nome', required: true, autofocus: true %>
+  <%= f.text_field :place, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Luogo' %>
+  <%= f.text_area :description, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Descrizione' %>
+  <%= f.hidden_field :group_id, value: @group.id %>
+  <%= f.select(:repeated, [['Ogni Giorno', 1], ['Ogni 7 Giorni', 7], ['Ogni 30 Giorni', 30]], {include_blank: 'Scegli la periodicità...'}, {class: 'form-control m-1 rounded-0 shadow-sm'}) %>
+  <%= f.number_field :repeated_for, min: 1, class: 'form-control m-1 rounded-0 shadow-sm', placeholder: 'Scegli il numero di ripetizioni...' %>
+  <%= f.submit submit_label, class: 'btn btn-lg btn-secondary btn-block m-1 shadow-sm' %>
+<% end %>
