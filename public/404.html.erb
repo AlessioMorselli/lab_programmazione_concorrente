@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Error 404</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <style>
+      /* Links */
+      a,
+      a:focus,
+      a:hover {
+        color: #8c0404;
+      }
+
+      html,
+      body {
+        height: 100%;
+        background-color: #333;
+      }
+
+      body {
+        display: -ms-flexbox;
+        display: flex;
+        color: #fff;
+        /* text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5); */
+        box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+        background-size: cover;
+      }
+
+      .nice-text-shadow {
+        text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+      }
+
+      .cover-container {
+        max-width: 42em;
+      }
+
+      .card {
+        margin: auto;
+        float: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- This file lives in public/404.html -->
+    <div class="card" style="color: #ddd; text-align: center">
+      <div class="card-header">
+        <h2><%= link_to "Unife Study Groups", groups_path %></h2>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h5 style="color: #8c0404">La pagina che stai cercando non esiste!</h5></li>
+        <li class="list-group-item"><%= link_to "Torna indietro immantinente.", groups_path %></li>
+      </ul>
+    </div>
+
+  </body>
+</html>
