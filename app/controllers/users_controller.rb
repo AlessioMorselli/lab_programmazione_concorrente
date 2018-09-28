@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     def new
         # Visualizza la form per l'iscrizione al sito
         @user = User.new
-        render file: "app/views/user/new"
+        render "new"
     end
 
     # POST signup_path
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
             redirect_to landing_path
         else
             flash.now[:error] = "Ooooppss, qualcosa è andato storto!"
-            render file: "app/views/signup_page"
+            render "new"
         end
     end
 
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     def edit
         # Visualizza la form per modificare le informazioni di un utente
 
-        render file: "app/views/user/edit", layout: "main"
+        render "edit", layout: "main"
     end
 
     # PUT/PATCH user_path(user)
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
         # Aggiorna le informazioni su un utente
         if(!edit_user_params[:password].blank? && !@user.authenticate(edit_user_params[:current_password]))
             flash.now[:error] = "La tua password corrente è sbagliata e non puoi aggiornarla"
-            render file: "app/views/user/edit"
+            render "edit"
         # elsif edit_user_params[:password].blank?
         #     edit_user_params[:password] = edit_user_params[:current_password]
         elsif @user.update!(edit_user_params.except(:current_password))
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
             redirect_to groups_path
         else
             flash.now[:error] = "Ooooppss, qualcosa è andato storto!"
-            render file: "app/views/user/edit"
+            render "edit"
         end
     end
 
