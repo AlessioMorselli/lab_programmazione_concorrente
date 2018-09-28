@@ -41,8 +41,8 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal DateTime.now.to_s, cookies[@user.id.to_s + @group.uuid]
     assert_response :success
 
-    # I messaggi dell'ultimo giorno per Giovanni nel gruppo dei cavalieri sono 14
-    assert_equal 14, assigns(:messages).length
+    # I messaggi dell'ultimo giorno per Giovanni nel gruppo dei cavalieri sono 12 (su 14 tot, 2 sono di Giovanni)
+    assert_equal 12, assigns(:messages).length
   end
 
   test "should index messages of last day with from as array" do
@@ -54,8 +54,8 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal DateTime.now.to_s, cookies[@user.id.to_s + @group.uuid]
     assert_response :success
 
-    # I messaggi dell'ultimo giorno per Giovanni nel gruppo dei cavalieri sono 14
-    assert_equal 14, assigns(:messages).length
+    # I messaggi dell'ultimo giorno per Giovanni nel gruppo dei cavalieri sono 12 (su 14 tot, 2 sono di Giovanni)
+    assert_equal 12, assigns(:messages).length
   end
 
   test "should send a message without attachment" do
@@ -93,7 +93,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   
     assert_difference('Message.count', 0) do
       assert_difference('Attachment.count', 0) do
-        post group_messages_path(group_uuid: @group.uuid), params: {
+        post group_messages_path(group_uuid: @group.uuid) + ".json", params: {
           message: {
             text: "",
             attachment: ""
@@ -194,10 +194,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 
 ### TEST PER UN UTENTE NON LOGGATO ###
   test "should not index the most recent messages if not logged in" do
-    get group_messages_path(group_uuid: @group.uuid)
+    get group_messages_path(group_uuid: @group.uuid) + ".json"
     
-    assert_redirected_to login_path
-    assert_not flash.empty?
+    assert_response :forbidden
   end
 
   test "should not send a message if not logged in" do
