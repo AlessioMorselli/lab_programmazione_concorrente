@@ -69,5 +69,7 @@
     </div>
 
 <script>
- document.getElementById("<%= @group.uuid %>").scrollIntoView(true);
+  <% if @group %>
+    document.getElementById("<%= @group.uuid %>").scrollIntoView(true);
+  <% end %>
 </script>
